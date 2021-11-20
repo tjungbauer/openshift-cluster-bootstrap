@@ -10,9 +10,17 @@ metadata:
 spec:
   destination:
     namespace: openshift-gitops
-    server: clusterlink
+    server: <KUBERNETES CLUSTER>
   project: cluster-config
   source:
-    path: components/clusterconfig/base
-    repoURL: https://github.com/tjungbauer/cluster-bootstrap
-    targetRevision: main
+    path: <GITHUB PATH>
+    repoURL: <GITHUB>
+    targetRevision: <GITHUB TARGET VERSION>
+# currently disabled, for testing let's do manually
+#  syncPolicy:
+#    automated:
+#      prune: false
+#      selfHeal: false
+  info:
+    - name: Description
+      value: 'Defines Banner in OpenShift UI'
