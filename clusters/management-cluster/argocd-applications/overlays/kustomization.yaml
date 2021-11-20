@@ -3,12 +3,9 @@ kind: Kustomization
 
 namespace: openshift-gitops
 
-commonLabels:
-  created-by: cluster-bootstrap
-  author: "Thomas_Jungbauer"
-
 resources:
-  - console-banner-app.yaml
+  - ../console-banner/base
+  - ../etcd-encryption/base
 
 patches:
   - patch: |-
