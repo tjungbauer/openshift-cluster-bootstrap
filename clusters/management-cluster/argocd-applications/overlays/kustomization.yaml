@@ -11,6 +11,7 @@ commonLabels:
 resources:
   - ../console-banner/base
   - ../etcd-encryption/base
+  - ../advanced-cluster-security/base
 
 patches:
   - patch: |-

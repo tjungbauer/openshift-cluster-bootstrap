@@ -22,4 +22,4 @@ spec:
 #      selfHeal: false
   info:
     - name: Description
-      value: 'Defines Banner in OpenShift UI'
+      value: 'Enabled ETCD Encryption... use shell script at scripts/etcd-encryption to check when the encryption is done.'
