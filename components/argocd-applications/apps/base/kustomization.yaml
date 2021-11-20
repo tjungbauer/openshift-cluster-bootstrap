@@ -1,28 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-patches:
-  - patch: |-
-      - op: replace 
-        path: /spec/destination/server
-        value: https://kubernetes.default.svc
-    target:
-      kind: Application
-  - patch: |-
-      - op: replace 
-        path: /spec/source/path
-        value: clusters/management-cluster/overlays
-    target:
-      kind: Application
-  - patch: |-
-      - op: replace 
-        path: /spec/source/targetRevision
-        value: main
-    target:
-      kind: Application
-  - patch: |-
-      - op: replace 
-        path: /spec/source/repoURL
-        value: https://github.com/tjungbauer/openshift-cluster-bootstrap
-    target:
-      kind: Application
+namespace: openshift-gitops
+
+commonLabels:
+  created-by: cluster-bootstrap
+  author: "Thomas Jungbauer"
