@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
 - ../../all
-- ../../../../../components/clusterconfig/config_advanced_cluster_operator/base
+#- ../../../../../components/clusterconfig/config_advanced_cluster_operator/base
+- ../../../../../components/clusterconfig/console-banner/base
 
 
