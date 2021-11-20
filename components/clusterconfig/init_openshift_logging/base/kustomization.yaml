@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - cluster-logging.yaml
   - cluster-log-forwarder.yaml
-  - console-link.yaml
