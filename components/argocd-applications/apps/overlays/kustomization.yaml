@@ -21,7 +21,7 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/source/targetRevision
-        value: main
+        value: main2
     target:
       kind: Application
   - patch: |-
