@@ -3,3 +3,11 @@ kind: Kustomization
 
 resources:
   - enable-etcd-encryption.yaml
+
+patches:
+  - patch: |-
+      - op: replace 
+        path: /spec/source/path
+        value: clusters/management-cluster/config/etcd-encryption/overlays
+    target:
+      kind: Application
