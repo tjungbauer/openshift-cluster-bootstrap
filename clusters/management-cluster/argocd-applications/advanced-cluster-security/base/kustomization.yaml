@@ -19,7 +19,7 @@ patches:
         values: clusters/management-cluster/config/acs-config/overlays
     target:
       kind: Application
-      #name: configure-acs
+      name: configure-acs
   - patch: |-
       - op: replace 
         path: /spec/destination/namespace
