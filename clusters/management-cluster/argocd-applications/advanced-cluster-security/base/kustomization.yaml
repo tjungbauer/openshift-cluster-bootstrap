@@ -20,6 +20,7 @@ patches:
     target:
       kind: Application
       name: configure-acs
+    path: configure-advanced-cluster-security.yaml
   - patch: |-
       - op: replace 
         path: /spec/destination/namespace
