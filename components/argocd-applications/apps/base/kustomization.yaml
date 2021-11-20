@@ -1,16 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: openshift-gitops
-
-commonLabels:
-  created-by: cluster-bootstrap
-  author: "Thomas_Jungbauer"
-
-resources:
-  - ../../base
-  - ../../../../components/argocd-applications/app-of-apps/
-
 patches:
   - patch: |-
       - op: replace 
@@ -21,7 +11,7 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/source/path
-        value: components/apps/overlays
+        value: clusters/management-cluster/overlays
     target:
       kind: Application
   - patch: |-
