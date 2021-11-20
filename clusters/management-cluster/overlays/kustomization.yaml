@@ -3,7 +3,7 @@ kind: Kustomization
 
 commonLabels:
   created-by: cluster-bootstrap
-  author: "Thomas Jungbauer"
+  author: 'Thomas Jungbauer'
   clustername: 'Management Cluster'
 
 resources:
