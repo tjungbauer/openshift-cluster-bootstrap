@@ -3,3 +3,29 @@ kind: Kustomization
 
 resources:
   - console-banner-app.yaml
+
+patches:
+  - patch: |-
+      - op: replace 
+        path: /spec/destination/server
+        value: https://kubernetes.default.svc
+    target:
+      kind: Application
+  - patch: |-
+      - op: replace 
+        path: /spec/source/path
+        value: clusters/management-cluster/config/console-banner/overlays
+    target:
+      kind: Application
+  - patch: |-
+      - op: replace 
+        path: /spec/source/targetRevision
+        value: main
+    target:
+      kind: Application
+  - patch: |-
+      - op: replace 
+        path: /spec/source/repoURL
+        value: https://github.com/tjungbauer/openshift-cluster-bootstrap
+    target:
+      kind: Application
