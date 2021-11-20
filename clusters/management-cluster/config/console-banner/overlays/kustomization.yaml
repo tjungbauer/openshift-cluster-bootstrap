@@ -7,7 +7,7 @@ commonLabels:
   clustername: 'Management_Cluster'
 
 resources:
-- ../../../../all
+- ../../all
 - ../../../../../components/clusterconfig/console-banner/base
 
 patches:
