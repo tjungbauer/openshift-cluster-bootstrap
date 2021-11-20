@@ -21,7 +21,7 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/backgroundColor
-        value: 'FF0000'
+        value: '0088ee'
     target:
       kind: ConsoleNotification
 
