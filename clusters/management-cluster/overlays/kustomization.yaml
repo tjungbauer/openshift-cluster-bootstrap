@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
 - ../../all/base
-- ../../components/clusterconfig/base
+- ../../../components/clusterconfig/base
 
 patches:
   - patch: |-
