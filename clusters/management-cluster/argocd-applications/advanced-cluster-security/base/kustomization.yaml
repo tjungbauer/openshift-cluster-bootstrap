@@ -15,7 +15,7 @@ patches:
       kind: Application
   - patch: |-
       - op: replace 
-        path: /spec/source/path
+        path: /spec/source/targetRevision
         values: clusters/management-cluster/config/acs-config/overlays
     target:
       kind: Application
