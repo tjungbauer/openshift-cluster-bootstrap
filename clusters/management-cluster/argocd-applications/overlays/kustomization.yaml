@@ -3,6 +3,11 @@ kind: Kustomization
 
 namespace: openshift-gitops
 
+commonLabels:
+  created-by: cluster-bootstrap
+  author: 'Thomas_Jungbauer'
+  clustername: 'Management_Cluster'
+
 resources:
   - ../console-banner/base
   - ../etcd-encryption/base
