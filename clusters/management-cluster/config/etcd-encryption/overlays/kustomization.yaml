@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
 - ../../all
-- ../../../../../components/clusterconfig/console-banner/base
+- ../../../../../components/clusterconfig/etcd-encryption/base

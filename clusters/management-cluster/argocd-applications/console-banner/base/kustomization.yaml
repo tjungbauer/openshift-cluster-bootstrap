@@ -8,6 +8,6 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/source/path
-        value: clusters/management-cluster/config/console-banner/overlays
+        value: /clusters/management-cluster/config/console-banner/overlays
     target:
       kind: Application
