@@ -9,7 +9,7 @@ metadata:
   name: configure-openshift-logging
 spec:
   destination:
-    namespace: <ACS NAMESPACE>
+    namespace: openshift-gitops
     server: <KUBERNETES CLUSTER>
   project: cluster-config
   source:

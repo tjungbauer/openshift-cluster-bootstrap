@@ -6,10 +6,10 @@ metadata:
     argocd.argoproj.io/sync-wave: '1'
   labels:
     gitops.ownedBy: cluster-config
-  name: configure-openshift-logging
+  name: install-logging-operator
 spec:
   destination:
-    namespace: <ACS NAMESPACE>
+    namespace: openshift-gitops
     server: <KUBERNETES CLUSTER>
   project: cluster-config
   source:
