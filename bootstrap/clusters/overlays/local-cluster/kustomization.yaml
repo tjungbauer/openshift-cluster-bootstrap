@@ -21,7 +21,7 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/source/path
-        value: components/apps/overlays
+        value: components/argocd-applications/apps/overlays
     target:
       kind: Application
   - patch: |-
