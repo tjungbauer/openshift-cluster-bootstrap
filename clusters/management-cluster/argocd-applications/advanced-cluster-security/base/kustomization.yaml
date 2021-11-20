@@ -15,11 +15,11 @@ patches:
       kind: Application
   - patch: |-
       - op: replace 
-        path: /spec/source/targetRevision
+        path: /spec/source/path
         values: clusters/management-cluster/config/acs-config/overlays
     target:
-      kind: Application
       name: configure-acs
+      kind: Application
   - patch: |-
       - op: replace 
         path: /spec/destination/namespace
