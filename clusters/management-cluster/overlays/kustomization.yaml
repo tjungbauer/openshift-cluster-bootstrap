@@ -1,6 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+commonLabels:
+  created-by: cluster-bootstrap
+  author: "Thomas Jungbauer"
+  clustername: 'Management Cluster'
+
 resources:
 - ../../all/base
 - ../../../components/clusterconfig/base
