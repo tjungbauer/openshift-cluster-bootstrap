@@ -5,3 +5,5 @@ commonLabels:
   created-by: cluster-bootstrap
   author: "Thomas Jungbauer"
 
+resources:
+  - ../../../components/clusterconfig/base
