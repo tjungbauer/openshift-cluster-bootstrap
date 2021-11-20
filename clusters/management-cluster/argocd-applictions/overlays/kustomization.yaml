@@ -8,7 +8,6 @@ commonLabels:
   author: "Thomas_Jungbauer"
 
 resources:
-  - ../base
   - console-banner-app.yaml
 
 patches:
@@ -21,7 +20,7 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/source/path
-        value: clusters/management-cluster/overlays
+        value: clusters/management-cluster/config/console-banner/overlays
     target:
       kind: Application
   - patch: |-

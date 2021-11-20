@@ -21,7 +21,7 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/source/path
-        value: components/argocd-applications/apps/overlays
+        value: clusters/management-cluster/argocd-applications/overlays
     target:
       kind: Application
   - patch: |-
