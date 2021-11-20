@@ -6,6 +6,3 @@ namespace: openshift-gitops
 commonLabels:
   created-by: cluster-bootstrap
   author: "Thomas_Jungbauer"
-
-resources:
-  - dummy.yaml
