@@ -6,7 +6,7 @@ commonLabels:
   author: "Thomas_Jungbauer"
 
 resources:
-  - ../base
+  - ../base/kustomization.yaml
   - console-banner-app.yaml
 
 patches:
