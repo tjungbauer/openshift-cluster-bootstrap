@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: '1'
   labels:
     gitops.ownedBy: cluster-config
-  name: configure-openshift-logging
+  name: configure-advanced-cluster-security
 spec:
   destination:
     namespace: <ACS NAMESPACE>
