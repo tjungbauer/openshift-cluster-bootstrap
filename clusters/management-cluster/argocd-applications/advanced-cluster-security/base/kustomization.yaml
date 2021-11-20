@@ -20,6 +20,8 @@ patches:
     target:
       name: "configure-acs"
       kind: Application
+      group: argoproj.io
+      version: v1alpha1
   - patch: |-
       - op: replace 
         path: /spec/destination/namespace
