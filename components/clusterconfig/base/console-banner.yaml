@@ -1,0 +1,9 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleNotification
+metadata:
+  name: cluster-banner
+spec:
+  text: CLUSTER_PATCHME
+  location: BannerTop 
+  color: '#FFFFFF'
+  backgroundColor: 'FF0000'
