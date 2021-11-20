@@ -3,6 +3,6 @@ kind: Kustomization
 
 commonLabels:
   created-by: cluster-bootstrap
-  author: "Thomas Jungbauer"
+  author: "Thomas_Jungbauer"
 
 
