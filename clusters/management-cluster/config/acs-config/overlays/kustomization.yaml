@@ -3,6 +3,6 @@ kind: Kustomization
 
 resources:
 - ../../all
-- ../../../../../components/clusterconfig/config_advanced_cluster_operator/overlays/default
+#- ../../../../../components/clusterconfig/config_advanced_cluster_operator/overlays/default
 
 
