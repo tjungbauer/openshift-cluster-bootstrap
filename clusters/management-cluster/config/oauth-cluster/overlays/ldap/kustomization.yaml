@@ -13,6 +13,13 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/identityProviders/0/name
+        value: htpasswd_provider
+    target:
+      kind: OAuth
+      name: cluster
+  - patch: |-
+      - op: replace 
+        path: /spec/identityProviders/0/name
         value: LDAPS
     target:
       kind: OAuth
