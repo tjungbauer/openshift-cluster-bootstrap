@@ -8,7 +8,7 @@ commonLabels:
 
 resources:
 - ../../all
-- ../../../../../components/clusterconfig/init_openshift_logging/overlays/default
+- ../../../../../components/clusterconfig/init_openshift_logging/overlays/zeroredundancy
 
 patches:
   - target:

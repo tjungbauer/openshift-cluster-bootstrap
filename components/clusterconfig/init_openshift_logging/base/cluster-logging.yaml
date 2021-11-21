@@ -18,17 +18,22 @@ spec:
   logStore:
     elasticsearch:
       nodeCount: 3
-      redundancyPolicy: SingleRedundancy
+      redundancyPolicy: <ES Redundancy>
       storage:
         size: 50G
-        storageClassName: REPLACE_ME
+        storageClassName: <STORAGE CLASS>
+      resources: 
+          limits:
+            memory: "16Gi"
+          requests:
+            memory: "16Gi"
     retentionPolicy:
       application:
         maxAge: 1d
       audit:
-        maxAge: 1d
+        maxAge: 7d
       infra:
-        maxAge: 1d
+        maxAge: 7d
     type: elasticsearch
   managementState: Managed
   visualization:
