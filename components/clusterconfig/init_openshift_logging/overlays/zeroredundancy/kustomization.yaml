@@ -12,4 +12,4 @@ patches:
     patch: |-
       - op: replace
         path: /spec/logStore/elasticsearch/redundancyPolicy
-        value: 'SingleRedundancy'
+        value: 'ZeroRedundancy'
