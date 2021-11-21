@@ -12,7 +12,7 @@ resources:
 patches:
   - patch: |-
       - op: replace 
-        path: /spec/identityProviders/0/name
+        path: /spec/identityProviders/1/name
         value: htpasswd_provider
     target:
       kind: OAuth
