@@ -18,7 +18,7 @@ patches:
         path: /spec/source/path
         value: clusters/management-cluster/config/acs-config/overlays
     target:
-      name: "configure-acs"
+      name: "configure-advanced-cluster-security"
       kind: Application
   - patch: |-
       - op: replace 
