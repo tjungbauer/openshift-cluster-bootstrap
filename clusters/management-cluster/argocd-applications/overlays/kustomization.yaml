@@ -13,6 +13,7 @@ resources:
   - ../etcd-encryption/base
   - ../advanced-cluster-security/base
   - ../openshift-logging/base
+  - ../elasticsearch/base
 
 patches:
   - patch: |-
