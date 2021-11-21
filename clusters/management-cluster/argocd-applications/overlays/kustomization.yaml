@@ -36,6 +36,6 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/project
-        value: mgmt-cluster
+        value: mgmt-cluster-cluster-config
     target:
       kind: Application
