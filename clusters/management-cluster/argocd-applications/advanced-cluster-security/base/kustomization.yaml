@@ -20,9 +20,3 @@ patches:
     target:
       name: "configure-advanced-cluster-security"
       kind: Application
-  - patch: |-
-      - op: replace 
-        path: /spec/destination/namespace
-        value: stackrox
-    target:
-      kind: Application

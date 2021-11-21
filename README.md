@@ -12,6 +12,8 @@ ACS cluster/mgmt.../advancaed-cluster-security
 
 ACS production setup
 
+applicationset --> argocd
+
 setting up:
   1. clusters/mgmt-cluster/argocd ... add new application 
   2. add apps and operators to components/apps
