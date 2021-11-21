@@ -7,7 +7,7 @@ commonLabels:
   clustername: 'Management_Cluster'
   
 resources:
-- ../../../../../all/overlays/oauth-cluster-idp/ldap
+- ../../../../all/overlays/oauth-cluster-idp/base
 
 patches:
   - patch: |-

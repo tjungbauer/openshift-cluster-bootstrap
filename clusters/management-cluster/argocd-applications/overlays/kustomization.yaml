@@ -14,7 +14,7 @@ resources:
   - ../advanced-cluster-security/base
   - ../openshift-logging/base
   - ../elasticsearch/base
-  - ../oauth-ldap/base
+  - ../oauth/base
 
 patches:
   - patch: |-
