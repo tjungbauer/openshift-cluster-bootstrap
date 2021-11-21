@@ -39,3 +39,10 @@ patches:
       - op: replace
         path: /spec/logStore/retentionPolicy/infra/maxAge
         value: '7d'
+  - target:
+      kind: ConsoleLink
+      name: kibana-public-url
+    patch: |-
+      - op: replace
+        path: /spec/logStore/retentionPolicy/infra/maxAge
+        value: 'https://kibana-openshift-logging.apps.cluster-jm9tw.jm9tw.sandbox503.opentlc.com/'
