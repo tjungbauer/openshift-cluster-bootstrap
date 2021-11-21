@@ -13,11 +13,10 @@ spec:
     path: <GITHUB PATH>
     repoURL: <GITHUB>
     targetRevision: <GITHUB TARGET VERSION>
-# currently disabled, for testing let's do manually
-#  syncPolicy:
-#    automated:
-#      prune: false
-#      selfHeal: false
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
   info:
     - name: Description
       value: 'This is the starting point for the cluster configuration, it automatically manages the deployment of initial operators, authentication, etcd encryption ...'
