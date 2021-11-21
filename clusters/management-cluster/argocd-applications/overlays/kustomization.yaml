@@ -33,3 +33,9 @@ patches:
         value: https://github.com/tjungbauer/openshift-cluster-bootstrap
     target:
       kind: Application
+  - patch: |-
+      - op: replace 
+        path: /spec/project
+        value: mgmt-cluster
+    target:
+      kind: Application

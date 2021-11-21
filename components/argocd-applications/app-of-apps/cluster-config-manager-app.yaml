@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: argocd
     server: <KUBERNETES CLUSTER>
-  project: cluster-config
+  project: <ARGOCD PROJECT>
   source:
     path: <GITHUB PATH>
     repoURL: <GITHUB>
