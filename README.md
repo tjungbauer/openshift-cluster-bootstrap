@@ -9,6 +9,12 @@ ldap & htpasswd -> secrets integration is missing
 
 ACS production setup
 
+jaeger
+kiali
+service mesh
+pipeline
+acs-pipeline-tasks
+
 applicationset --> argocd
 
 setting up:
