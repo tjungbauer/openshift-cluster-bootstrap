@@ -8,7 +8,7 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/source/path
-        value: components/apps/operator-elasticsearch/overlays/stable
+        value: clusters/management-cluster/config/elasticsearch/overlays
     target:
       name: "install-elasticsearch-operator"
       kind: Application

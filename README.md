@@ -4,7 +4,6 @@ WIP
 # install gitops 
 00-Initialize-Cluster.sh
 
-
 TODO 
 
 ACS cluster/mgmt.../advancaed-cluster-security 
@@ -12,8 +11,6 @@ ACS cluster/mgmt.../advancaed-cluster-security
  
 
 ACS production setup
-
-renaming
 
 setting up:
   1. clusters/mgmt-cluster/argocd ... add new application 
