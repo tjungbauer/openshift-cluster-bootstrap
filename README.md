@@ -24,6 +24,10 @@ clusters/management-cluster/config/oauth-cluster/overlays/ca.crt
 
 TODO 
 
+cluter-authetnciation creates: v4-0-config-user-idp-0-ca which causes argocd to be not in sync
+
+test if ldap-oaith can be disabled
+
 ACS production setup
 
 acs-pipeline-tasks
