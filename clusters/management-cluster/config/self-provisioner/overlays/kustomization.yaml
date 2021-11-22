@@ -17,9 +17,8 @@ patches:
     target:
       kind: ClusterRoleBinding
   - patch: |-
-      - op: replace 
+      - op: remove 
         path: /subjects
-        value: '{}'
     target:
       kind: ClusterRoleBinding
 
