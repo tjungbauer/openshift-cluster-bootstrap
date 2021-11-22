@@ -2,16 +2,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-#- ../../../../components/clusterconfig/authentication-identityprovider/overlays/ldap
 - ../../../../../components/clusterconfig/authentication-identityprovider/base
 
 patchesJson6902:
-  - target:
-      group: config.openshift.io
-      version: v1
-      kind: OAuth
-      name: cluster
-    path: idp-ldap.yaml
+#  - target:
+#      group: config.openshift.io
+#      version: v1
+#      kind: OAuth
+#      name: cluster
+#    path: idp-ldap.yaml
   - target:
       group: config.openshift.io
       version: v1
