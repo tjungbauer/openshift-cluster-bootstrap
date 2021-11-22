@@ -20,6 +20,7 @@ resources:
   - ../pipelines/base
   - ../servicemesh/base
   - ../self-provisioner/base
+  - ../resource-locker/base
 
 patches:
   - patch: |-
