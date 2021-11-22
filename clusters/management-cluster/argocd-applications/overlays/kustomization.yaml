@@ -15,6 +15,10 @@ resources:
   - ../openshift-logging/base
   - ../elasticsearch/base
   - ../oauth/base
+  - ../kiali/base
+  - ../jaeger/base
+  - ../pipelines/base
+  - ../servicemesh/bash
 
 patches:
   - patch: |-
