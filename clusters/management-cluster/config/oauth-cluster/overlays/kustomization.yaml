@@ -8,6 +8,7 @@ commonLabels:
   
 resources:
 - sealed-htpasswed-secret.yaml
+- sealed-ldap-bindpassword-secret.yaml
 - ../../../../all/overlays/oauth-cluster-idp/base
 
 patches:
