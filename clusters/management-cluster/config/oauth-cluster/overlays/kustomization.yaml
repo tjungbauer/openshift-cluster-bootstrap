@@ -7,6 +7,7 @@ commonLabels:
   clustername: 'Management_Cluster'
   
 resources:
+- sealed-htpasswed-secret.yaml
 - ../../../../all/overlays/oauth-cluster-idp/base
 
 patches:
