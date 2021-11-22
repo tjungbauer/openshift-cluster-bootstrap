@@ -18,7 +18,7 @@ resources:
   - ../kiali/base
   - ../jaeger/base
   - ../pipelines/base
-  - ../servicemesh/bash
+  - ../servicemesh/base
 
 patches:
   - patch: |-
