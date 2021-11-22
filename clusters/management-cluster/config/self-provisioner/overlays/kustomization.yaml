@@ -16,6 +16,9 @@ patches:
         value: false
     target:
       kind: ClusterRoleBinding
+  # syncOption in argocd application must set
+  #  syncOptions:
+  #    - Replace=true
   - patch: |-
       - op: remove 
         path: /subjects

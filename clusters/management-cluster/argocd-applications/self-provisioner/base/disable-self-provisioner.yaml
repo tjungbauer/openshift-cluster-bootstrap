@@ -16,6 +16,15 @@ spec:
     path: <GITHUB PATH>
     repoURL: <GITHUB>
     targetRevision: <GITHUB TARGET VERSION>
+  # Setting Auto-Sync here because it should be applied immedaitely
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    # must set Replace=True to remove the "subjects" block from the yaml object
+    syncOptions:
+      - Replace=true
   info:
     - name: Description
       value: ''
