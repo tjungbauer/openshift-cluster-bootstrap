@@ -10,7 +10,7 @@ patches:
         path: /spec/source/path
         value: clusters/management-cluster/config/servicemesh/overlays
     target:
-      name: "install-servicemesn-operator"
+      name: "install-servicemesh-operator"
       kind: Application
       group: argoproj.io
       version: v1alpha1
