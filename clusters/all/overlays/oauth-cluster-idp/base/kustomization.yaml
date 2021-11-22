@@ -5,12 +5,12 @@ resources:
 - ../../../../../components/clusterconfig/authentication-identityprovider/base
 
 patchesJson6902:
-#  - target:
-#      group: config.openshift.io
-#      version: v1
-#      kind: OAuth
-#      name: cluster
-#    path: idp-ldap.yaml
+  - target:
+      group: config.openshift.io
+      version: v1
+      kind: OAuth
+      name: cluster
+    path: idp-ldap.yaml
   - target:
       group: config.openshift.io
       version: v1
