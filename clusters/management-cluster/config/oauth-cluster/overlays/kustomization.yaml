@@ -29,7 +29,7 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/identityProviders/0/ldap/url
-        value: https://localhost
+        value: ldaps://localhost
     target:
       kind: OAuth
       name: cluster
