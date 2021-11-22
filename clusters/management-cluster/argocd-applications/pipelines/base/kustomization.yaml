@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - install-pipelines.yaml
+
+patches:
+  - patch: |-
+      - op: replace 
+        path: /spec/source/path
+        value: clusters/management-cluster/config/pipelines/overlays
+    target:
+      name: "install-pipelines-operator"
+      kind: Application
+      group: argoproj.io
+      version: v1alpha1

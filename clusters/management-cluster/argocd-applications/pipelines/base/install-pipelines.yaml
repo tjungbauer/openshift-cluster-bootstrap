@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-wave: '1'
+  labels:
+    gitops.ownedBy: cluster-config
+  name: install-pipelines-operator
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: <KUBERNETES CLUSTER>
+  project: cluster-config
+  source:
+    path: <GITHUB PATH>
+    repoURL: <GITHUB>
+    targetRevision: <GITHUB TARGET VERSION>
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+  info:
+    - name: Description
+      value: ''

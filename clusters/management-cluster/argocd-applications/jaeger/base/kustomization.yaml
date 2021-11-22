@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - install-jaeger.yaml
+
+patches:
+  - patch: |-
+      - op: replace 
+        path: /spec/source/path
+        value: clusters/management-cluster/config/jaeger/overlays
+    target:
+      name: "install-jaeger-operator"
+      kind: Application
+      group: argoproj.io
+      version: v1alpha1

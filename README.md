@@ -3,16 +3,10 @@ WIP
 
 TODO 
 
-remove cluster/mgmt../config/all --> also from all kustomizaton.yaml
-
 ldap & htpasswd -> secrets integration is missing
 
 ACS production setup
 
-jaeger
-kiali
-service mesh
-pipeline
 acs-pipeline-tasks
 
 applicationset --> argocd
