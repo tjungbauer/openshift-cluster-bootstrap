@@ -16,10 +16,6 @@ spec:
     path: <GITHUB PATH>
     repoURL: <GITHUB>
     targetRevision: <GITHUB TARGET VERSION>
-  syncPolicy:
-    automated:
-      prune: false
-      selfHeal: false
   info:
     - name: Description
       value: ''
