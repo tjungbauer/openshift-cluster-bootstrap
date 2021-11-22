@@ -17,7 +17,7 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/identityProviders/1/name
-        value: htpasswd_provider
+        value: HTPASSWD
     target:
       kind: OAuth
       name: cluster
