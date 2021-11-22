@@ -7,7 +7,6 @@ commonLabels:
   clustername: 'Management_Cluster'
 
 resources:
-- ../../all
 - ../../../../../components/apps/operator-elasticsearch/overlays/default
 
 patches:

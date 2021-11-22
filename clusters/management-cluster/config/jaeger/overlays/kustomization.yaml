@@ -6,3 +6,5 @@ commonLabels:
   author: 'Thomas_Jungbauer'
   clustername: 'Management_Cluster'
 
+resources:
+- ../../../../../components/apps/operator-jaeger/overlays/stable

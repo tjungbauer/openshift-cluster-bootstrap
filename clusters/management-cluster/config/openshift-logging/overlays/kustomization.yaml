@@ -7,7 +7,6 @@ commonLabels:
   clustername: 'Management_Cluster'
 
 resources:
-- ../../all
 - ../../../../../components/clusterconfig/init_openshift_logging/overlays/default
 
 patches:
