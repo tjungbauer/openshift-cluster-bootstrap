@@ -19,7 +19,7 @@ resources:
   - ../jaeger/base
   - ../pipelines/base
   - ../servicemesh/base
-  - ../self-provisionr/base
+  - ../self-provisioner/base
 
 patches:
   - patch: |-
