@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
 - resource-locker-serviceaccount.yaml
 - resource-locker-rbac.yaml
+#- resource-locker-patch.yaml
 
