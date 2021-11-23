@@ -14,9 +14,9 @@ This repository is never to be considered as finished ever, since new cluster co
 Before gitops can be used some basic setup must be done. 2 shell scripts have been prepared:
 
 1. Deploy the OpenShift GitOps operator: 
-´´´
+```
 ./00-Initialize-Cluster.sh -o=enable-cluster-admin [-d=true]
-´´´
+```
 
 The switch *-d* defines if a dry-run shall be done or not. 
 
@@ -25,18 +25,18 @@ For better overview for each cluster a new ArgoCD project will be created.
 
 NOTE: This is curretly the only ArgoCD application which will synchronize itself. 
 
-´´´
+```
 ./01-Create-App-of-Apps.sh -o=local-cluster [-d=true]
-´´´
+```
 
 The switch *-d* defines if a dry-run shall be done or not. 
 
 3. Download the Sealed Secret certificate for this specific cluster.
 
 The following script will store the certificate into ~/.bitname/
-´´´
+```
 ./scripts/sealed_secrets/get-sealed-secret-key.sh
-´´´
+```
 
 
 ## Prepare Cluster Configuration
@@ -52,7 +52,7 @@ NOTE: Sealed Secret operator and certificates must be running and available.
 
 1. Create htpasswd sealed secret: 
 
-````
+```
 echo -n 'admin:$apr1$6LA9fDGq$lJ.j5SCNOXcRvo8ihwKCJ.
 andrew:$apr1$dZPb2ECf$ercevOFO5znrynUfUj4tb/
 karla:$apr1$FQx2mX4c$eJc21GuVZWNg1ULF8I2G31
@@ -72,6 +72,81 @@ echo -n 'LDAPbindPassword-HERE' | oc create secret generic ldap-secret --dry-run
 Copy your certificate into the file: *clusters/management-cluster/config/oauth-cluster/overlays/ca.crt*
 
 ## Repository structure
+
+Currently, the following directory structure is used: 
+
+``` 
+├── 00-Initialize-Cluster.sh
+├── 01-Create-App-of-Apps.sh
+├── README.md
+├── bootstrap
+│   ├── clusters
+│   ├── openshift-gitops
+│   └── sealed-secrets
+├── clusters
+│   ├── all
+│   └── management-cluster
+│       ├── argocd-applications
+│       │   ├── advanced-cluster-security
+│       │   ├── console-banner
+│       │   ├── elasticsearch
+│       │   ├── etcd-encryption
+│       │   ├── jaeger
+│       │   ├── kiali
+│       │   ├── node-environment-setup
+│       │   ├── oauth
+│       │   ├── openshift-logging
+│       │   ├── overlays
+│       │   ├── pipelines
+│       │   ├── resource-locker
+│       │   ├── self-provisioner
+│       │   └── servicemesh
+│       └── config
+│           ├── acs-config
+│           ├── console-banner
+│           ├── elasticsearch
+│           ├── etcd-encryption
+│           ├── jaeger
+│           ├── kiali
+│           ├── node-environment-setup
+│           ├── oauth-cluster
+│           ├── openshift-logging
+│           ├── pipelines
+│           ├── resource-locker
+│           ├── self-provisioner
+│           └── servicemesh
+├── components
+│   ├── apps
+│   │   ├── operator-advanced-cluster-security
+│   │   ├── operator-elasticsearch
+│   │   ├── operator-jaeger
+│   │   ├── operator-kiali
+│   │   ├── operator-openshift-gitops
+│   │   ├── operator-openshift-logging
+│   │   ├── operator-openshift-pipelines
+│   │   ├── operator-openshift-servicemesh
+│   │   ├── operator-resource-locker
+│   │   └── operator-sealed-secrets
+│   ├── argocd-applications
+│   │   └── app-of-apps
+│   └── clusterconfig
+│       ├── authentication-identityprovider
+│       ├── console-banner
+│       ├── etcd-encryption
+│       ├── init_advanced_cluster
+│       ├── init_openshift_logging
+│       ├── node-environment-setup
+│       └── self-provisioner
+└── scripts
+    ├── etcd-encryption
+    │   └── check_encryption_status.sh
+    └── sealed_secrets
+        ├── get-sealed-secret-key.sh
+        └── replace-sealed-secrets-secret.sh
+```
+
+```bootstrap``` x
+
 
 ## Currently Supported Configurations 
 
