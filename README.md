@@ -71,6 +71,9 @@ echo -n 'LDAPbindPassword-HERE' | oc create secret generic ldap-secret --dry-run
 3. Replace ldap certificate 
 Copy your certificate into the file: *clusters/management-cluster/config/oauth-cluster/overlays/ca.crt*
 
+
+4. CosoleLinks !!
+
 ## Repository structure
 
 Currently, the following directory structure is used: 

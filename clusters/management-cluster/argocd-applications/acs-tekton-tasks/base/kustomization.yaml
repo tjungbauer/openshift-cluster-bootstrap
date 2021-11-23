@@ -8,6 +8,6 @@ patches:
   - patch: |-
       - op: replace 
         path: /spec/source/path
-        value: clusters/all/acs-tekton-tasks/base
+        value: clusters/all/overlays/acs-tekton-tasks/base
     target:
       kind: Application
