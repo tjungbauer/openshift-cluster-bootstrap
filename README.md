@@ -26,7 +26,7 @@ For better overview for each cluster a new ArgoCD project will be created.
 NOTE: This is curretly the only ArgoCD application which will synchronize itself. 
 
 ```
-./01-Create-App-of-Apps.sh -o=local-cluster [-d=true]
+./01-Create-App-of-Apps.sh -o=management-cluster [-d=true]
 ```
 
 The switch *-d* defines if a dry-run shall be done or not. 
@@ -79,13 +79,13 @@ Currently, the following directory structure is used:
 ├── 00-Initialize-Cluster.sh
 ├── 01-Create-App-of-Apps.sh
 ├── README.md
-├── bootstrap
+├── bootstrap <1>
 │   ├── clusters
 │   ├── openshift-gitops
 │   └── sealed-secrets
 ├── clusters
 │   ├── all
-│   └── management-cluster
+│   └── management-cluster <2>
 │       ├── argocd-applications
 │       │   ├── advanced-cluster-security
 │       │   ├── console-banner
@@ -145,7 +145,8 @@ Currently, the following directory structure is used:
         └── replace-sealed-secrets-secret.sh
 ```
 
-```bootstrap``` x
+<1> ```bootstrap``` is used by the 2 initializations scripts only. 
+<2> ```clusters``` holds the definition per cluster. Since every cluster might have a different configuration, each cluster will get its own directory. Here our first cluster is called *management-cluster*
 
 
 ## Currently Supported Configurations 
