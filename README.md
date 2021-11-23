@@ -15,7 +15,7 @@ Before gitops can be used some basic setup must be done. 2 shell scripts have be
 
 1. Deploy the OpenShift GitOps operator: 
 ```
-./00-Initialize-Cluster.sh -o=enable-cluster-admin [-d=true]
+./00-Initialize-Cluster.sh -o enable-cluster-admin [-d=true]
 ```
 
 The switch *-d* defines if a dry-run shall be done or not. 
@@ -26,7 +26,7 @@ For better overview for each cluster a new ArgoCD project will be created.
 NOTE: This is curretly the only ArgoCD application which will synchronize itself. 
 
 ```
-./01-Create-App-of-Apps.sh -o=management-cluster [-d=true]
+./01-Create-App-of-Apps.sh -o local-cluster [-d=true]
 ```
 
 The switch *-d* defines if a dry-run shall be done or not. 

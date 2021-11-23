@@ -16,7 +16,7 @@ spec:
   syncPolicy:
     automated:
       prune: false
-      selfHeal: enable
+      selfHeal: true
   info:
     - name: Description
       value: 'This is the starting point for the cluster configuration, it automatically manages the deployment of initial operators, authentication, etcd encryption ...'
