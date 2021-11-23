@@ -146,6 +146,7 @@ Currently, the following directory structure is used:
 ```
 
 <1> ```bootstrap``` is used by the 2 initializations scripts only. 
+
 <2> ```clusters``` holds the definition per cluster. Since every cluster might have a different configuration, each cluster will get its own directory. Here our first cluster is called *management-cluster*
 
 
