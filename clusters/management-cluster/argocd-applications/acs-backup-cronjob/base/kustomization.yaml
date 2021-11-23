@@ -17,3 +17,4 @@ patches:
         value: https://github.com/tjungbauer/stackrox-backup-cronjob
     target:
       kind: Application
+      name: configure-acs-backup-cronjob
