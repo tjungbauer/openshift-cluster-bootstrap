@@ -155,8 +155,15 @@ Currently, the following directory structure is used:
 <8> ```clusterconfig``` bases for cluster configuration used/patched by <4>\
 <9> ```scripts``` helper scripts to get sealed secret certificate or verify etcd encryption status\
 
-## Currently Supported Configurations 
+## How to add a new configuration? 
 
+Easiest way is to copy and existing configuration and modify it :)
+
+1. Add the basic cluster configuration to *components/clusterconfig*. This about the items which might need a patch. Follow kustomize principle regarding *base* and *overlays* 
+2. IF your want to deploy an operator use the folder *components/apps* instead 
+3. Create *clusters/<your cluster>/config* 
+4. Create the ArgoCD application in *clusters/<your cluster>/argocd-applications* 
+5. Add the new reference to argocd application to *clusters/<your cluster>/argocd-applications/overlays/kustomize.yaml*
 
 
 ## TODO 
@@ -168,8 +175,3 @@ test if ldap-oaith can be disabled
 acs-pipeline-tasks
 
 
-setting up:
-  1. clusters/mgmt-cluster/argocd ... add new application 
-  2. add apps and operators to components/apps
-  3. add cluster config to components/clusterconfig 
-  4. if patching for cluster is required add patching to cluster/mgmt-cluster/config
