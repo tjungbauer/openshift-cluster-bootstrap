@@ -12,7 +12,7 @@ resources:
 patches:
   - target:
       kind: ConsoleLink
-      name: kibana-public-url
+      name: acs-public-url
     patch: |-
       - op: replace
         path: /spec/href
