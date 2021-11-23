@@ -12,3 +12,4 @@ resources:
   - central.yaml
   - create-cluster-init-bundle-job.yaml
   - secured-cluster.yaml
+  - console-link.yaml

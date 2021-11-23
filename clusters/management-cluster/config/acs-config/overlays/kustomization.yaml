@@ -9,4 +9,11 @@ commonLabels:
 resources:
 - ../../../../../components/clusterconfig/init_advanced_cluster/overlays/default
 
-
+patches:
+  - target:
+      kind: ConsoleLink
+      name: kibana-public-url
+    patch: |-
+      - op: replace
+        path: /spec/href
+        value: 'https://central-stackrox.apps.cluster-xtw6s.xtw6s.sandbox955.opentlc.com/'
