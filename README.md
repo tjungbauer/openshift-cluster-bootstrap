@@ -172,6 +172,4 @@ cluter-authetnciation creates: v4-0-config-user-idp-0-ca which causes argocd to 
 
 test if ldap-oaith can be disabled
 
-acs-pipeline-tasks
-
 
