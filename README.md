@@ -147,13 +147,13 @@ Currently, the following directory structure is used:
 
 <1> ```bootstrap``` is used by the 2 initializations scripts only.\
 <2> ```clusters``` holds the definition per cluster. Since every cluster might have a different configuration, each cluster will get its own directory. Here our first cluster is called *management-cluster*\
-<3> ```argocd-applications``` create the actual applications for ArgoCD. These is what is visible on the ArgoCD UI 
-<4> ```config``` specific cluster configuration, gets set here. This is done using kustomization patches 
-<5> ```components``` basic components for the configuration. <3> and <4> are using the entities in this folder and are patching as required.  
-<6> ```app``` This folder defines additional applications which shall be installed. Currently holds all operators, which will be deployed on the OpenShit clusters 
-<7> ```argocd-application``` soley responsible for the Application of Applications 
-<8> ```clusterconfig``` bases for cluster configuration used/patched by <4>
-<9> ```scripts``` helper scripts to get sealed secret certificate or verify etcd encryption status
+<3> ```argocd-applications``` create the actual applications for ArgoCD. These is what is visible on the ArgoCD UI\ 
+<4> ```config``` specific cluster configuration, gets set here. This is done using kustomization patches\ 
+<5> ```components``` basic components for the configuration. <3> and <4> are using the entities in this folder and are patching as required.  \
+<6> ```app``` This folder defines additional applications which shall be installed. Currently holds all operators, which will be deployed on the OpenShit clusters\
+<7> ```argocd-application``` soley responsible for the Application of Applications\ 
+<8> ```clusterconfig``` bases for cluster configuration used/patched by <4>\
+<9> ```scripts``` helper scripts to get sealed secret certificate or verify etcd encryption status\
 
 ## Currently Supported Configurations 
 
