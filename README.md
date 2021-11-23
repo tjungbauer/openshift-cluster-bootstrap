@@ -28,11 +28,8 @@ cluter-authetnciation creates: v4-0-config-user-idp-0-ca which causes argocd to 
 
 test if ldap-oaith can be disabled
 
-ACS production setup
-
 acs-pipeline-tasks
 
-applicationset --> argocd
 
 setting up:
   1. clusters/mgmt-cluster/argocd ... add new application 

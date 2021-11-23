@@ -21,6 +21,7 @@ resources:
   - ../servicemesh/base
   - ../self-provisioner/base
   - ../resource-locker/base
+  - ../node-labelling/base
 
 patches:
   - patch: |-
