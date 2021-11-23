@@ -6,6 +6,6 @@ spec:
   channel: stable
   installPlanApproval: Automatic
   name: servicemeshoperator
-  source: openshift-operators
+  source: redhat-operators
   sourceNamespace: openshift-marketplace
   startingCSV: servicemeshoperator.v2.1.0
