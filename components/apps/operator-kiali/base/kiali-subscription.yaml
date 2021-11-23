@@ -9,3 +9,4 @@ spec:
   name: kiali-ossm
   source: openshift-operators
   sourceNamespace: openshift-marketplace
+
