@@ -2,8 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../basex/argocd-app.yaml
-#  - node-environment-setup-app.yaml
+  - node-environment-setup-app.yaml
 
 patches:
   - patch: |-
@@ -15,6 +14,6 @@ patches:
   - patch: |-
       - op: replace 
         path: /metadata/name
-        value: configure-node-labels2
+        value: configure-node-labels
     target:
       kind: Application
