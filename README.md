@@ -72,7 +72,12 @@ echo -n 'LDAPbindPassword-HERE' | oc create secret generic ldap-secret --dry-run
 Copy your certificate into the file: *clusters/management-cluster/config/oauth-cluster/overlays/ca.crt*
 
 
-4. CosoleLinks !!
+4. ConsoleLinks must be modified to your actual domain 
+
+Currently 2 are used, where the href must be changed accordingly: 
+
+1. ACS: clusters/managemet-cluster/config/acs-config/overlays
+2. Logging: clusters/managemet-cluster/config/openshift-logging/overlays
 
 ## Repository structure
 

@@ -44,4 +44,4 @@ patches:
     patch: |-
       - op: replace
         path: /spec/href
-        value: 'https://kibana-openshift-logging.apps.cluster-jm9tw.jm9tw.sandbox503.opentlc.com/'
+        value: 'https://kibana-openshift-logging.apps.cluster-xtw6s.xtw6s.sandbox955.opentlc.com'
