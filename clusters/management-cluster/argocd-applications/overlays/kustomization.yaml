@@ -22,6 +22,7 @@ resources:
   - ../self-provisioner/base
   - ../resource-locker/base
   - ../node-environment-setup/base
+  - ../acs-tekton-tasks/base
 
 patches:
   - patch: |-
