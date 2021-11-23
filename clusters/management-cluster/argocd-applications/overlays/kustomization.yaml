@@ -23,7 +23,7 @@ resources:
   - ../resource-locker/base
   - ../node-environment-setup/base
   - ../acs-tekton-tasks/base
-  - ../acs-backup-cronjob/base
+  - ../acs-backup-cronjob/overlays
 
 patches:
   - patch: |-
