@@ -173,6 +173,5 @@ Easiest way is to copy and existing configuration and modify it :)
 
 cluter-authetnciation creates: v4-0-config-user-idp-0-ca which causes argocd to be not in sync
 
-test if ldap-oaith can be disabled
 
 
