@@ -4,4 +4,5 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
     openshift.io/display-name: Red Hat Advanced Cluster Security
+    openshift.io/node-selector: ''
   name: stackrox
