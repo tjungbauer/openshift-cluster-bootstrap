@@ -23,7 +23,7 @@ resources:
   - ../resource-locker/base
   - ../node-environment-setup/base
   - ../acs-tekton-tasks/base
-  - ../user-defined-monitoring/base
+  - ../configure-monitoring/base
 
 patches:
   - patch: |-
