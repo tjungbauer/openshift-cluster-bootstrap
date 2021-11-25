@@ -24,6 +24,7 @@ resources:
   - ../node-environment-setup/base
   - ../acs-tekton-tasks/base
   - ../configure-monitoring/base
+  - ../quay/base
 
 patches:
   - patch: |-
