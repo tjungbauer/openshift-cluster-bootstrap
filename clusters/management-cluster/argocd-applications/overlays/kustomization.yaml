@@ -25,6 +25,7 @@ resources:
   - ../acs-tekton-tasks/base
   - ../configure-monitoring/base
   - ../quay/base
+  - ../openshift-container-storage/base
 
 patches:
   - patch: |-
