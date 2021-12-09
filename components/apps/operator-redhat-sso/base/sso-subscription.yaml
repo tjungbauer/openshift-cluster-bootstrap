@@ -2,10 +2,10 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: rhsso-operator
-  namespace: openshift-operators
+  namespace: single-sign-on
 spec:
   channel: stable
   installPlanApproval: Automatic
-  name: sso-operator
+  name: rhsso-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
