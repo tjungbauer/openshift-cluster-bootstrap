@@ -6,11 +6,8 @@ bases:
 
 patches:
   - target:
-      group: operators.coreos.com
-      version: v1alpha1
       kind: Subscription
       name: rhsso-operator
-      namespace: openshift-operators
     patch: |-
       - op: replace
         path: /spec/channel
