@@ -26,6 +26,7 @@ resources:
   - ../configure-monitoring/base
   - ../quay/base
   - ../openshift-container-storage/base
+  - ../sso/base
 
 patches:
   - patch: |-
