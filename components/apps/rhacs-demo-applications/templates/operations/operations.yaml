@@ -94,9 +94,18 @@ metadata:
   labels:
     app: puppet-master
 rules:
-- apiGroups: ["*"]
-  resources: ["*"]
-  verbs: ["get", "watch", "list"]
+  - verbs:
+      - '*'
+    apiGroups:
+      - security.openshift.io
+    resources:
+      - configmaps
+      - securitycontextconstraints
+    resourceNames:
+      - privileged
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["get", "watch", "list"]
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
