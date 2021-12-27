@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: '1'
   labels:
     gitops.ownedBy: cluster-config
-  name: install-rhacs-demos
+  name: rhacs-demo-applications
 spec:
   destination:
     namespace: openshift-gitops
