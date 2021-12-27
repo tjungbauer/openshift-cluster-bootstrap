@@ -27,6 +27,7 @@ resources:
   - ../quay/base
   - ../openshift-container-storage/base
   - ../sso/base
+  - ../rhacs-demos/base
 
 patches:
   - patch: |-
