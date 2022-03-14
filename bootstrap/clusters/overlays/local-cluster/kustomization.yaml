@@ -7,7 +7,7 @@ namePrefix: mgmt-cluster-
 
 commonLabels:
   created-by: cluster-bootstrap
-  author: "Thomas_Jungbauer"
+  author: "OpenShift Cluster Bootstrap"
 
 resources:
   - ../../base

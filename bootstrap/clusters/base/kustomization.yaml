@@ -5,7 +5,7 @@ namespace: openshift-gitops
 
 commonLabels:
   created-by: cluster-bootstrap
-  author: "Thomas Jungbauer"
+  author: "OpenShift Cluster Bootstrap"
 
 resources:
 - cluster-config-project.yaml
