@@ -1,12 +1,13 @@
+{{- with .Values.install_advanced_cluster_security }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ .Values.install_advanced_cluster_security.appsetname }}
+  name: {{ .appsetname }}
   namespace: openshift-gitops
 spec:
   generators:
-  {{- if .Values.install_advanced_cluster_security.clusterlist }}
-    {{- range .Values.install_advanced_cluster_security.clusterlist }}
+  {{- if .clusterlist }}
+    {{- range .clusterlist }}
       - clusters:
           selector:
             matchLabels:
@@ -18,18 +19,24 @@ spec:
   template:
     metadata:
       name: >-
-          {{ printf "{{ name }}-%s" .Values.install_advanced_cluster_security.appsetname}}
+          {{ printf "{{ name }}-%s" .appsetname}}
     spec:
-      project: {{ .Values.general.argocd_project }}
+{{- end }}
+{{- with .Values.general }}
+      project: {{ .argocd_project }}
       source:
-        repoURL: {{ .Values.general.source.repourl }}
-        targetRevision: {{ .Values.general.branch }}
-        path: {{ .Values.install_advanced_cluster_security.path }}
+        repoURL: {{ .source.repourl }}
+        targetRevision: {{ .branch }}
+{{- end }}
+{{- with .Values.install_advanced_cluster_security }}
+        path: {{ .path }}
       syncPolicy:
         automated:
-          prune: {{ .Values.install_advanced_cluster_security.syncpolicy_prune | default "false"  }}
-          selfHeal: {{ .Values.install_advanced_cluster_security.syncpolicy_selfheal | default "false"  }}
+          prune: {{ .syncpolicy_prune | default "false"  }}
+          selfHeal: {{ .syncpolicy_selfheal | default "false"  }}
       destination:
         server:  >-
           {{ printf "{{ server }}" }}
         namespace: default
+{{- end }}
+

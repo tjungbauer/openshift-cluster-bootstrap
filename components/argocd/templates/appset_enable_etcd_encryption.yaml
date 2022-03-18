@@ -1,12 +1,13 @@
+{{- with .Values.etcd_encryption }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ .Values.etcd_encryption.appsetname }}
+  name: {{ .appsetname }}
   namespace: openshift-gitops
 spec:
   generators:
-  {{- if .Values.etcd_encryption.clusterlist }}
-    {{- range .Values.etcd_encryption.clusterlist }}
+  {{- if .clusterlist }}
+    {{- range .clusterlist }}
       - clusters:
           selector:
             matchLabels:
@@ -18,18 +19,23 @@ spec:
   template:
     metadata:
       name: >-
-          {{ printf "{{ name }}-%s" .Values.etcd_encryption.appsetname}}
+          {{ printf "{{ name }}-%s" .appsetname}}
     spec:
-      project: {{ .Values.general.argocd_project }}
+{{- end }}
+{{- with .Values.general }}
+      project: {{ .argocd_project }}
       source:
-        repoURL: {{ .Values.general.source.repourl }}
-        targetRevision: {{ .Values.general.branch }}
-        path: {{ .Values.etcd_encryption.path }}
+        repoURL: {{ .source.repourl }}
+        targetRevision: {{ .branch }}
+{{- end }}
+{{- with .Values.etcd_encryption }}
+        path: {{ .path }}
       syncPolicy:
         automated:
-          prune: {{ .Values.etcd_encryption.syncpolicy_prune | default "false"  }}
-          selfHeal: {{ .Values.etcd_encryption.syncpolicy_selfheal | default "false"  }}
+          prune: {{ .syncpolicy_prune | default "false"  }}
+          selfHeal: {{ .syncpolicy_selfheal | default "false"  }}
       destination:
         server:  >-
           {{ printf "{{ server }}" }}
         namespace: default
+{{- end }}
