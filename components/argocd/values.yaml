@@ -8,6 +8,7 @@ etcd_encryption:
 install_advanced_cluster_security:
   appsetname: install-rhacs
   path: components/operators/advanced_cluster_security/overlays/latest
+  environment: management
 
 general:
   argocd_project: 'default'

@@ -9,7 +9,7 @@ spec:
   - clusters:
       selector:
         matchLabels:
-          type: production
+          type: {{ .Values.install_advanced_cluster_security.environment }}
   template:
     metadata:
       name: >-
