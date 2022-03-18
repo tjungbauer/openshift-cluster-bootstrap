@@ -5,8 +5,8 @@ metadata:
   namespace: openshift-gitops
 spec:
   generators:
-  {{- if .Values.install_advanced_cluster_security.clusterlist }}
-    {{- range .Values.install_advanced_cluster_security.clusterlist -}}
+  {{- if .Values.etcd_encryption.clusterlist }}
+    {{- range .Values.etcd_encryption.clusterlist -}}
       - clusters:
         selector:
           matchLabels:
@@ -14,7 +14,8 @@ spec:
     {{- end }}
   {{- else }}
     - clusters: {}
-  {{- end }}  template:
+  {{- end }}  
+  template:
     metadata:
       name: >-
           {{ printf "{{ name }}-etcd-encryption" }}
