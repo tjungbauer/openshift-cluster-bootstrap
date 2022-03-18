@@ -12,7 +12,7 @@ install_advanced_cluster_security:
   path: components/operators/advanced_cluster_security/overlays/latest
   environment: management
   clusterlist:
-    - env:  in-cl
+    - env:  management
 
 general:
   argocd_project: 'default'
