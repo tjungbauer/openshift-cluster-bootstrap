@@ -13,5 +13,5 @@ general:
   argocd_project: 'default'
   source: 
     repourl: 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
-    branch: main
+  branch: main
 
