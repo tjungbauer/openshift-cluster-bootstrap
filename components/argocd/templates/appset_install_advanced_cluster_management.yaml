@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       name: >-
-          {{ printf "{{ name }}-install-rhacm" }}
+          {{ printf "{{ name }}-install-rhacs" }}
     spec:
       project: {{ .Values.general.argocd_project }}
       source:
