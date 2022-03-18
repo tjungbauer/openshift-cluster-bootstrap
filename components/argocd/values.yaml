@@ -19,6 +19,8 @@ install_quay:
   path: components/operators/redhat-quay/overlays/stable
   clusterlist:
     - env:  management
+  syncpolicy_prune: false
+  syncpolicy_selfheal: false
 
 general:
   argocd_project: 'default'
