@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: enable-etcd-encryption
+  name: {{ .Values.etcd_encryption.appsetname }}
   namespace: openshift-gitops
 spec:
   generators:
