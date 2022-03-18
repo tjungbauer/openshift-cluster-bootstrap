@@ -15,8 +15,8 @@ spec:
       project: {{ .Values.general.argocd_project }}
       source:
         repoURL: {{ .Values.general.source.repourl }}
-        targetRevision:  >-
-          {{ printf "{{ values.revision }}" }}
+#        targetRevision:  >-
+#          {{ printf "{{ values.revision }}" }}
         path: {{ .Values.etcd_encryption.path }}
 #  syncPolicy:
 #    automated:
