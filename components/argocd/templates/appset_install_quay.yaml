@@ -25,10 +25,10 @@ spec:
         repoURL: {{ .Values.general.source.repourl }}
         targetRevision: {{ .Values.general.branch }}
         path: {{ .Values.install_quay.path }}
-  syncPolicy:
-    automated:
-      prune: {{ .Values.install_quay.syncpolicy_prune | default "false"  }}
-      selfHeal: {{ .Values.install_quay.syncpolicy_selfheal | default "false"  }}
+      syncPolicy:
+        automated:
+          prune: {{ .Values.install_quay.syncpolicy_prune | default "false"  }}
+          selfHeal: {{ .Values.install_quay.syncpolicy_selfheal | default "false"  }}
       destination:
         server:  >-
           {{ printf "{{ server }}" }}

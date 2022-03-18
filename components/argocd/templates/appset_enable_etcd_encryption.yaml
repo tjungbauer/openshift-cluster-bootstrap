@@ -25,10 +25,10 @@ spec:
         repoURL: {{ .Values.general.source.repourl }}
         targetRevision: {{ .Values.general.branch }}
         path: {{ .Values.etcd_encryption.path }}
-  syncPolicy:
-    automated:
-      prune: {{ .Values.etcd_encryption.syncpolicy_prune | default "false"  }}
-      selfHeal: {{ .Values.etcd_encryption.syncpolicy_selfheal | default "false"  }}
+      syncPolicy:
+        automated:
+          prune: {{ .Values.etcd_encryption.syncpolicy_prune | default "false"  }}
+          selfHeal: {{ .Values.etcd_encryption.syncpolicy_selfheal | default "false"  }}
       destination:
         server:  >-
           {{ printf "{{ server }}" }}
