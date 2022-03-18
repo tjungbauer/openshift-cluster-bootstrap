@@ -5,11 +5,16 @@ metadata:
   namespace: openshift-gitops
 spec:
   generators:
-    # All clusters
-  - clusters:
-      selector:
-        matchLabels:
-          type: {{ .Values.install_advanced_cluster_security.environment }}
+  {{- if .Values.install_advanced_cluster_security.clusterlist }}
+    {{- range .Values.install_advanced_cluster_security.clusterlist -}}
+      - clusters:
+        selector:
+          matchLabels:
+            env: {{ .env }}
+    {{- end }}
+  {{- else }}
+    - clusters: {}
+  {{- end }}
   template:
     metadata:
       name: >-

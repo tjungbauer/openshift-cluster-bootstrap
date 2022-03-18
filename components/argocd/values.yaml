@@ -4,11 +4,15 @@
 etcd_encryption: 
   appsetname: enable-etcd-encryption
   path: clusters/all/clusterconfig/enable-etcd-encryption 
+  clusterlist: []
+
 
 install_advanced_cluster_security:
   appsetname: install-rhacs
   path: components/operators/advanced_cluster_security/overlays/latest
   environment: management
+  clusterlist:
+    - env:  management
 
 general:
   argocd_project: 'default'
