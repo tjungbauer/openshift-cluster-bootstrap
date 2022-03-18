@@ -13,17 +13,20 @@ spec:
         revision: {{ .Values.general.source.branch }}
   template:
     metadata:
-      name: '\{\{name\}\}-etcd-encryption'
+      name: >-
+          {{ printf "{{ name }}-etcd-encryption" }}
     spec:
       project: {{ .Values.general.argocd_project }}
       source:
         repoURL: {{ .Values.general.source.repourl }}
-        targetRevision: '\{\{values.revision\}\}'
-        path: {{ .Values.etcd_enryption.path }}
+        targetRevision:  >-
+          {{ printf "{{ values.revision }}" }}
+        path: {{ .Values.etcd_encryption.path }}
 #  syncPolicy:
 #    automated:
 #      prune: false
 #      selfHeal: false
       destination:
-        server: '\{\{server\}\}'
+        server:  >-
+          {{ printf "{{ server }}" }}
         namespace: default

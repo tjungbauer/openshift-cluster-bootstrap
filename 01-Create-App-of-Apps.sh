@@ -35,8 +35,8 @@ function deploy() {
   $HELM 2>&1 >/dev/null || error "Could not execute helm binary!"
 
   printf "\nThis will create an '\(ArgoCD\) Application of Applications' which then automatically creates ArgoCD objects like ApplicationSets ad Application\n"
-  echo -e "Sleeping 10 seconds"
-  sleep 10
+  echo -e "Sleeping 3 seconds ... if you change your mind :)"
+  sleep 3
 
   $HELM upgrade --install --values ./bootstrap/init_app_of_apps/values.yaml --namespace=openshift-gitops app-of-apps ./bootstrap/init_app_of_apps
 

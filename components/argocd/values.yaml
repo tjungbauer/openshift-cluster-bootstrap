@@ -1,7 +1,7 @@
 # General values
 #
 
-etcd_enryption: 
+etcd_encryption: 
   path: clusters/all/clusterconfig/enable-etcd-encryption 
 
 general:
@@ -9,4 +9,5 @@ general:
   source: 
     repourl: 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
     branch: main
+  server: "{{server}}"
 
