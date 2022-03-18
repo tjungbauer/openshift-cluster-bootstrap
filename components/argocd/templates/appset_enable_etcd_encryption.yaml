@@ -8,9 +8,9 @@ spec:
   {{- if .Values.etcd_encryption.clusterlist }}
     {{- range .Values.etcd_encryption.clusterlist }}
       - clusters:
-        selector:
-          matchLabels:
-            env: {{ .env }}
+          selector:
+            matchLabels:
+              env: {{ .env }}
     {{- end }}
   {{- else }}
     - clusters: {}

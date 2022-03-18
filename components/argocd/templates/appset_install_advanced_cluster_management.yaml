@@ -8,9 +8,9 @@ spec:
   {{- if .Values.install_advanced_cluster_security.clusterlist }}
     {{- range .Values.install_advanced_cluster_security.clusterlist }}
       - clusters:
-        selector:
-          matchLabels:
-            env: {{ .env }}
+          selector:
+            matchLabels:
+              env: {{ .env }}
     {{- end }}
   {{- else }}
     - clusters: {}
