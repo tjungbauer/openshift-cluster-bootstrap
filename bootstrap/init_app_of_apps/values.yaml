@@ -5,4 +5,4 @@ server: https://kubernetes.default.svc
 argocd_project: 'default' 
 repourl: 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
 revision: main
-path: componenets/argocd/
+path: components/argocd/
