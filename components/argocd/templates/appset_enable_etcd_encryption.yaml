@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
   {{- if .Values.etcd_encryption.clusterlist }}
-    {{- range .Values.etcd_encryption.clusterlist -}}
+    {{- range .Values.etcd_encryption.clusterlist }}
       - clusters:
         selector:
           matchLabels:
