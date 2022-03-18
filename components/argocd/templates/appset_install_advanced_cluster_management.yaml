@@ -10,8 +10,6 @@ spec:
       selector:
         matchLabels:
           type: production
-      values:
-        revision: {{ .Values.general.branch }}
   template:
     metadata:
       name: >-
@@ -20,8 +18,7 @@ spec:
       project: {{ .Values.general.argocd_project }}
       source:
         repoURL: {{ .Values.general.source.repourl }}
-        targetRevision:  >-
-          {{ printf "{{ values.revision }}" }}
+        targetRevision: {{ .Values.general.branch }}
         path: {{ .Values.install_advanced_cluster_security.path }}
 #  syncPolicy:
 #    automated:
