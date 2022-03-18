@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
   {{- if .Values.install_advanced_cluster_security.clusterlist }}
-    {{- range .Values.install_advanced_cluster_security.clusterlist -}}
+    {{- range .Values.install_advanced_cluster_security.clusterlist }}
       - clusters:
         selector:
           matchLabels:
