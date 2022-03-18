@@ -6,11 +6,17 @@ etcd_encryption:
   path: clusters/all/clusterconfig/enable-etcd-encryption 
   clusterlist: []
 
-
 install_advanced_cluster_security:
   appsetname: install-rhacs
   path: components/operators/advanced_cluster_security/overlays/latest
-  environment: management
+  clusterlist:
+    - env:  management
+  syncpolicy_prune: true
+  syncpolicy_selfheal: true
+
+install_quay:
+  appsetname: install-quay
+  path: components/operators/redhat-quay/overlays/stable
   clusterlist:
     - env:  management
 

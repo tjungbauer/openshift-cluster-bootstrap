@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ .Values.install_advanced_cluster_security.appsetname }}
+  name: {{ .Values.install_quay.appsetname }}
   namespace: openshift-gitops
 spec:
   generators:
-  {{- if .Values.install_advanced_cluster_security.clusterlist }}
-    {{- range .Values.install_advanced_cluster_security.clusterlist }}
+  {{- if .Values.install_quay.clusterlist }}
+    {{- range .Values.install_quay.clusterlist }}
       - clusters:
           selector:
             matchLabels:
@@ -18,17 +18,17 @@ spec:
   template:
     metadata:
       name: >-
-          {{ printf "{{ name }}-%s" .Values.install_advanced_cluster_security.appsetname}}
+          {{ printf "{{ name }}-%s" .Values.install_quay.appsetname}}
     spec:
       project: {{ .Values.general.argocd_project }}
       source:
         repoURL: {{ .Values.general.source.repourl }}
         targetRevision: {{ .Values.general.branch }}
-        path: {{ .Values.install_advanced_cluster_security.path }}
+        path: {{ .Values.install_quay.path }}
   syncPolicy:
     automated:
-      prune: {{ .Values.install_advanced_cluster_security.syncpolicy_prune | default "false"  }}
-      selfHeal: {{ .Values.install_advanced_cluster_security.syncpolicy_selfheal | default "false"  }}
+      prune: {{ .Values.install_quay.syncpolicy_prune | default "false"  }}
+      selfHeal: {{ .Values.install_quay.syncpolicy_selfheal | default "false"  }}
       destination:
         server:  >-
           {{ printf "{{ server }}" }}
