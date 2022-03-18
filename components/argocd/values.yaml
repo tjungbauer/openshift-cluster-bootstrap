@@ -4,10 +4,12 @@
 etcd_encryption: 
   path: clusters/all/clusterconfig/enable-etcd-encryption 
 
+install_advanced_cluster_security:
+  path: components/operators/advanced_cluster_security/overlays/latest
+
 general:
   argocd_project: 'default'
   source: 
     repourl: 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
     branch: main
-  server: "{{server}}"
 

@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: enable-etcd-encryption
+  namespace: openshift-gitops
+spec:
+  generators:
+    # All clusters
+  - clusters:
+      selector:
+        matchLabels:
+          type: production
+      values:
+        revision: {{ .Values.general.branch }}
+  template:
+    metadata:
+      name: >-
+          {{ printf "{{ name }}-install-rhacm" }}
+    spec:
+      project: {{ .Values.general.argocd_project }}
+      source:
+        repoURL: {{ .Values.general.source.repourl }}
+        targetRevision:  >-
+          {{ printf "{{ values.revision }}" }}
+        path: {{ .Values.install_advanced_cluster_security.path }}
+#  syncPolicy:
+#    automated:
+#      prune: false
+#      selfHeal: false
+      destination:
+        server:  >-
+          {{ printf "{{ server }}" }}
+        namespace: default
