@@ -1,0 +1,12 @@
+# General values
+#
+
+etcd_enryption: 
+  path: clusters/all/clusterconfig/enable-etcd-encryption 
+
+general:
+  argocd_project: 'default'
+  source: 
+    repourl: 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
+    branch: main
+

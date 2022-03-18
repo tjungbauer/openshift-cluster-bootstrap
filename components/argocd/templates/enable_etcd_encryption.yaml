@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: enable-etcd-encryption
+  namespace: openshift-gitops
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          env: production
+      values:
+        revision: {{ .Values.general.source.branch }}
+  template:
+    metadata:
+      name: '{{name}}-etcd-encryption'
+    spec:
+      project: {{ .Values.general.argocd_project }}
+      source:
+        repoURL: {{ .Values.general.source.repourl }}
+        targetRevision: '{{values.revision}}'
+        path: {{ .Values.etcd_enryption.path }}
+#  syncPolicy:
+#    automated:
+#      prune: false
+#      selfHeal: false
+      destination:
+        server: '{{server}}'
+        namespace: default

@@ -5,33 +5,10 @@ NC='\033[0m' # No Color
 
 
 OPT_DRY_RUN='false'
-OVERLAY='default'
-KUSTOMIZE="/usr/bin/env kustomize"
-
-function showhelp() {
-    cat <<EOF
-Be sure to define at least the command line option -o
-
-The following options are known:
-
-  -o ... Defines the OVERLAY. (i.e. -o default)
-  -d ... Defines if DRY RUN is used or not (i.e. -d=false)
-EOF
-
-    exit 1
-}
+HELM="/usr/bin/env helm"
 
 while getopts ':d:o:h' 'OPTKEY'; do
     case ${OPTKEY} in
-        'd')
-            OPT_DRY_RUN='true'
-            ;;
-        'o')
-            OVERLAY=${OPTARG}
-            ;;
-        'h')
-            showhelp
-            ;;
         '?')
             echo "INVALID OPTION -- ${OPTARG}" >&2
             exit 1
@@ -47,39 +24,23 @@ while getopts ':d:o:h' 'OPTKEY'; do
     esac
 done
 
-if ${OPT_DRY_RUN}; then
-    printf "${RED}DRY RUN is enabled !!!${NC}\n"
-    DRY_RUN="--dry-run=client"
-else
-    DRY_RUN=""
-fi
-
 function error() {
     echo "$1"
     exit 1
 }
 
+# Deploy Hashicorp Vault if selected
 function deploy() {
-  $KUSTOMIZE 2>&1 >/dev/null || error "Could not execute kustomize binary!"
 
-  printf "\n${RED}Deploy GITOPS${NC}\n"
-  $KUSTOMIZE build bootstrap/clusters/overlays/"$OVERLAY" | oc apply $DRY_RUN -f -
+  $HELM 2>&1 >/dev/null || error "Could not execute helm binary!"
+
+  printf "\nThis will create an "(ArgoCD) Application of Applications" which then automatically creates ArgoCD objects like ApplicationSets ad Application\n"
+  echo -e "Sleeping 10 seconds"
+  sleep 10
+
+  $HELM upgrade --install vault bootstrap/init_app_of_apps --values values.yaml --namespace=openshift-gitops
+
 }
 
-if [ "$OVERLAY" == "default" ]; then
-
-    cat<<EOF
-This will bootstrap the GitOps operator with the "$OVERLAY" overlay.
-If this is not what you want you can specify a different overlay via
-$0 <overlay name>
-EOF
-
-    echo -e "Currently this repo supports the following overlays:\n"
-    ls -1 bootstrap/clusters/overlays/
-
-    echo -e "\nHit CTRL+C now to specify a different overlay than '$OVERLAY'"
-    echo -e "Sleeping 10 seconds"
-    sleep 10
-fi
-
 deploy
+
