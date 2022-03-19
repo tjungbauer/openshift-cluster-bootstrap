@@ -10,7 +10,7 @@ spec:
     - list:
         elements: 
         {{- range .generatorlist }}
-          - clusters: {{ .clustername }}
+          - cluster: {{ .clustername }}
             url: {{ .clusterurl }}
         {{- end }}
   {{- end }}
@@ -28,7 +28,7 @@ spec:
   template:
     metadata:
       name: >-
-          {{ printf "{{ name }}-%s" .appsetname}}
+          {{ printf "{{ cluster }}-%s" .appsetname}}
     spec:
 {{- end }}
 {{- with .Values.general }}
@@ -45,6 +45,6 @@ spec:
           selfHeal: {{ .syncpolicy_selfheal | default "false"  }}
       destination:
         server:  >-
-          {{ printf "{{ server }}" }}
+          {{ printf "{{ url }}" }}
         namespace: default
 {{- end }}

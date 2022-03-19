@@ -33,7 +33,7 @@ spec:
       syncPolicy:
         automated:
           prune: {{ .syncpolicy_prune | default "false"  }}
-          selfHeal: {{ .syncpolicy_selfheal | default "false"  }}
+          selfHeal: {{.syncpolicy_selfheal | default "false"  }}
       destination:
         server:  >-
           {{ printf "{{ server }}" }}
