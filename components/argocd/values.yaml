@@ -24,8 +24,8 @@ install_quay:
   appsetname: install-quay
   path: components/operators/redhat-quay/overlays/stable
   generatorlist:
-    - clustername:  *mgmtcluster
-      clusterurl: https://kubernetes.default.svc
+    - clustername:  management
+      clusterurl: *mgmtcluster
   syncpolicy_prune: false
   syncpolicy_selfheal: false
 
