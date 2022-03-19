@@ -9,8 +9,9 @@ etcd_encryption:
 install_advanced_cluster_security:
   appsetname: install-rhacs
   path: components/operators/advanced_cluster_security/overlays/latest
-  generatorclusters:
-    - env:  management
+  generatorlist:
+    - clustername:  management
+      clusterurl: https://kubernetes.default.svc
   syncpolicy_prune: true
   syncpolicy_selfheal: true
 
