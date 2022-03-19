@@ -7,7 +7,7 @@ metadata:
 spec:
   generators:
   {{- if .generatorlist }}
-    - lists:
+    - list:
         elements: 
         {{- range .generatorlist }}
           - clusters: {{ .clustername }}
