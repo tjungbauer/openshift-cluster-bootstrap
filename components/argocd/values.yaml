@@ -1,6 +1,9 @@
 # General values
 #
 
+mgmt-cluster:  &mgmtcluster https://kubernetes.default.svc
+production-cluster: &prodcluster https://api.ocp.ispworld.at:6443
+
 etcd_encryption: 
   appsetname: enable-etcd-encryption
   path: clusters/all/clusterconfig/enable-etcd-encryption 
@@ -11,9 +14,9 @@ install_advanced_cluster_security:
   path: components/operators/advanced_cluster_security/overlays/latest
   generatorlist:
     - clustername:  management
-      clusterurl: https://kubernetes.default.svc
+      clusterurl: *mgmtcluster
     - clustername:  production
-      clusterurl: https://api.ocp.ispworld.at:6443
+      clusterurl: *prodcluster
   syncpolicy_prune: true
   syncpolicy_selfheal: true
 
@@ -21,7 +24,7 @@ install_quay:
   appsetname: install-quay
   path: components/operators/redhat-quay/overlays/stable
   generatorlist:
-    - clustername:  management
+    - clustername:  *mgmtcluster
       clusterurl: https://kubernetes.default.svc
   syncpolicy_prune: false
   syncpolicy_selfheal: false
