@@ -12,7 +12,7 @@ install_advanced_cluster_security:
   generatorlist:
     - clustername:  management
       clusterurl: https://kubernetes.default.svc
-    - clustername:  management
+    - clustername:  production
       clusterurl: https://api.ocp.ispworld.at:6443
   syncpolicy_prune: true
   syncpolicy_selfheal: true
