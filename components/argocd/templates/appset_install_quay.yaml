@@ -6,16 +6,25 @@ metadata:
   namespace: openshift-gitops
 spec:
   generators:
-  {{- if .clusterlist }}
-    {{- range .clusterlist }}
-      - clusters:
-          selector:
-            matchLabels:
-              env: {{ .env }}
-    {{- end }}
-  {{- else }}
-    - clusters: {}
+  {{- if .generatorlist }}
+    - lists:
+        elements: 
+        {{- range .generatorlist }}
+          - clusters: {{ .clustername }}
+            url: {{ .clusterurl }}
+        {{- end }}
   {{- end }}
+# This does not work, since openshift-gitops keeps removing the label of the local ArgoCD secret
+#  {{- if .generatorclusters }}
+#    {{- range .clusters }}
+#      - clusters:
+#          selector:
+#            matchLabels:
+#              env: {{ .env }}
+#    {{- end }}
+#  {{- else }}
+#    - clusters: {}
+#  {{- end }}
   template:
     metadata:
       name: >-

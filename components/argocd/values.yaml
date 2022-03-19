@@ -4,12 +4,12 @@
 etcd_encryption: 
   appsetname: enable-etcd-encryption
   path: clusters/all/clusterconfig/enable-etcd-encryption 
-  clusterlist: []
+  generatorclusters: []
 
 install_advanced_cluster_security:
   appsetname: install-rhacs
   path: components/operators/advanced_cluster_security/overlays/latest
-  clusterlist:
+  generatorclusters:
     - env:  management
   syncpolicy_prune: true
   syncpolicy_selfheal: true
@@ -17,8 +17,9 @@ install_advanced_cluster_security:
 install_quay:
   appsetname: install-quay
   path: components/operators/redhat-quay/overlays/stable
-  clusterlist:
-    - env:  management
+  generatorlist:
+    - clustername:  management
+      clusterurl: https://kubernetes.default.svc
   syncpolicy_prune: false
   syncpolicy_selfheal: false
 
