@@ -6,7 +6,7 @@ rhacs_namespace: stackrox
 central: 
   pvc: stackrox-db
   egress: 
-    connectivityPolicy: connectivityPolicy
+    connectivityPolicy: Online
 
 consolelink:
   enabled: true 
