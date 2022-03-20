@@ -1,0 +1,13 @@
+{{- if .Values.consolelink.enabled -}}
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: {{ .Values.consolelink.name }}
+spec:
+  applicationMenu:
+    section: {{ .Values.consolelink.applicationMenu.selection }}
+    imageURL: {{ .Values.consolelink.applicationMenu.image_url }}
+  href: {{ .Values.consolelink.href }}
+  location: {{ .Values.consolelink.location }}
+  text: {{ .Values.consolelink.text }}
+{{- end -}}
