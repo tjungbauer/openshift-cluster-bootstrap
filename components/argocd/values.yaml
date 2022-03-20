@@ -22,6 +22,16 @@ install_advanced_cluster_security:
   syncpolicy_prune: true
   syncpolicy_selfheal: true
 
+init_rhacs_central:
+  appname: in-cluster-init-rhacs-central
+  server: 
+  project: default 
+  source: 
+    path: 
+    repourl: 
+    targetrevision: main 
+
+
 install_quay:
   appsetname: install-quay
   path: components/operators/redhat-quay/overlays/stable
@@ -36,4 +46,6 @@ general:
   source: 
     repourl: 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
   branch: main
+
+
 

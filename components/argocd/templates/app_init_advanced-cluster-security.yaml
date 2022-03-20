@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-wave: '1'
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  labels:
+    gitops.ownedBy: cluster-config
+  name: {{ .Values.init_rhacs_central.name }}
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: {{ .Values.init_rhacs_central.server }}
+  project: {{ .Values.init_rhacs_central.project }}
+  source:
+    path: {{ .Values.init_rhacs_central.source.path }}
+    repoURL: {{ .Values.init_rhacs_central.source.repourl }}
+    targetRevision: {{ .Values.init_rhacs_central.source.targetrevision }}
+  info:
+    - name: Description
+      value: ''
