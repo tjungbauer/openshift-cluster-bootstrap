@@ -8,6 +8,7 @@ metadata:
   labels:
     gitops.ownedBy: cluster-config
   name: {{ .Values.init_rhacs_central.appname }}
+  namespace: openshift-gitops
 spec:
   destination:
     namespace: openshift-gitops
