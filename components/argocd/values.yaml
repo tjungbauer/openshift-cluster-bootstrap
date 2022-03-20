@@ -1,6 +1,8 @@
 # General values
 #
 
+# Set cluster names ... Unfortunately the openshift-gitops operator keeps removing the secret of the in-cluster (local cluster), therefor we switch ti list generator
+# https://issues.redhat.com/browse/GITOPS-1777
 mgmt-cluster:  &mgmtcluster https://kubernetes.default.svc
 production-cluster: &prodcluster https://api.ocp.ispworld.at:6443
 
