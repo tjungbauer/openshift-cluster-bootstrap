@@ -30,8 +30,8 @@ init_rhacs_central:
   project: default 
   source: 
     path:  clusters/management-cluster/init_advanced_cluster_security/
-    repourl: &mainrepourl
-    targetrevision: &mainbranch  
+    repourl: *mainrepourl
+    targetrevision: *mainbranch  
 
 
 install_quay:
@@ -46,8 +46,8 @@ install_quay:
 general:
   argocd_project: 'default'
   source: 
-    repourl: &mainrepourl
-  branch: &mainbranch 
+    repourl: *mainrepourl
+  branch: *mainbranch 
 
 
 
