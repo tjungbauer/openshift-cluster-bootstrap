@@ -5,6 +5,8 @@
 # https://issues.redhat.com/browse/GITOPS-1777
 mgmt-cluster:  &mgmtcluster https://kubernetes.default.svc
 production-cluster: &prodcluster https://api.ocp.ispworld.at:6443
+main_repourl: &mainrepourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
+main_repobranch: &mainbranch main
 
 etcd_encryption: 
   appsetname: enable-etcd-encryption
@@ -24,12 +26,12 @@ install_advanced_cluster_security:
 
 init_rhacs_central:
   appname: in-cluster-init-rhacs-central
-  server: 
+  server: &mgmtcluster
   project: default 
   source: 
-    path: 
-    repourl: 
-    targetrevision: main 
+    path:  clusters/management-cluster/init_advanced_cluster_security/
+    repourl: &mainrepourl
+    targetrevision: &mainbranch  
 
 
 install_quay:
@@ -44,8 +46,8 @@ install_quay:
 general:
   argocd_project: 'default'
   source: 
-    repourl: 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
-  branch: main
+    repourl: &mainrepourl
+  branch: &mainbranch 
 
 
 
