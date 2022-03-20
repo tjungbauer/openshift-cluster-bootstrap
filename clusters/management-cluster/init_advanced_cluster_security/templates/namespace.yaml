@@ -5,4 +5,4 @@ metadata:
     argocd.argoproj.io/sync-wave: "0"
     openshift.io/display-name: Red Hat Advanced Cluster Security
     openshift.io/node-selector: ''
-  name: namespace: {{ .Values.rhacs_namespace }}
+  name: {{ .Values.rhacs_namespace }}
