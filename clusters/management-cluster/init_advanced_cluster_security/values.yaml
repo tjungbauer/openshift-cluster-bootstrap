@@ -11,7 +11,7 @@ central:
 consolelink:
   enabled: true 
   name: acs-public-url
-  href: 'https://console-openshift-console.apps.ocp.aws.ispworld.at'
+  href: 'https://central-stackrox.apps.ocp.aws.ispworld.at/login'
   location: ApplicationMenu
   text: Advanced Cluster Security
   applicationMenu: 
