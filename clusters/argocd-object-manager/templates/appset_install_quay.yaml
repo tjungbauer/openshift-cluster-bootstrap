@@ -30,7 +30,6 @@ spec:
       name: >-
           {{ printf "{{ cluster }}-%s" .appsetname}}
     spec:
-{{- end }}
       {{- if .generatorlist }}
       project: >-
         {{ printf "{{ cluster }}" }}
@@ -38,6 +37,7 @@ spec:
       project:  >-
           {{ printf "{{ name }}" }}
       {{- end }}
+{{- end }}
 {{- with .Values.general }}
       source:
         repoURL: {{ .source.repourl }}
