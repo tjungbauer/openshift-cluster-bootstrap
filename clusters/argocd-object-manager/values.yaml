@@ -17,9 +17,9 @@ install_advanced_cluster_security:
   appsetname: install-rhacs
   path: components/operators/advanced_cluster_security/overlays/latest
   generatorlist:
-    - clustername:  management
+    - clustername:  in-cluster
       clusterurl: *mgmtcluster
-    - clustername:  production
+    - clustername:  prod
       clusterurl: *prodcluster
   syncpolicy_prune: true
   syncpolicy_selfheal: true
@@ -37,7 +37,7 @@ install_quay:
   appsetname: install-quay
   path: components/operators/redhat-quay/overlays/stable
   generatorlist:
-    - clustername:  management
+    - clustername:  in-cluster
       clusterurl: *mgmtcluster
   syncpolicy_prune: false
   syncpolicy_selfheal: false
