@@ -45,10 +45,12 @@ spec:
 {{- end }}
 {{- with .Values.install_quay }}
         path: {{ .path }}
+      {{ if .autosync_enabled }}
       syncPolicy:
         automated:
           prune: {{ .syncpolicy_prune | default "false"  }}
           selfHeal: {{ .syncpolicy_selfheal | default "false"  }}
+      {{- end }}
       destination:
         server:  >-
           {{ printf "{{ url }}" }}

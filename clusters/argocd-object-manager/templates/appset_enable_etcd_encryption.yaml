@@ -31,10 +31,12 @@ spec:
 {{- end }}
 {{- with .Values.etcd_encryption }}
         path: {{ .path }}
+      {{ if .autosync_enabled }}
       syncPolicy:
         automated:
           prune: {{ .syncpolicy_prune | default "false"  }}
-          selfHeal: {{ .syncpolicy_selfheal | default "false"  }}
+          selfHeal: {{.syncpolicy_selfheal | default "false"  }}
+      {{- end }}
       destination:
         server:  >-
           {{ printf "{{ server }}" }}

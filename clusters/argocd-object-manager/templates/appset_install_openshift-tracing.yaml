@@ -51,10 +51,12 @@ spec:
 {{- end }}
 {{- with .Values.install_openshift_tracing }}
         path: {{ .path }}
+      {{ if .autosync_enabled }}
       syncPolicy:
         automated:
           prune: {{ .syncpolicy_prune | default "false"  }}
           selfHeal: {{.syncpolicy_selfheal | default "false"  }}
+      {{- end }}
       destination:
       {{- if .generatorlist }}
         server:  >-
