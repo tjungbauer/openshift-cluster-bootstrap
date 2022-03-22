@@ -60,7 +60,7 @@ install_openshift_servicemesh:
 
 install_openshift_tracing:
   appsetname: install-jaeger
-  path: components/operators/tracing-operator/overlays/stable
+  path: components/operators/tracing-operator-jaeger/overlays/stable
   generatorlist:
     - clustername:  in-cluster
       clusterurl: *mgmtcluster
