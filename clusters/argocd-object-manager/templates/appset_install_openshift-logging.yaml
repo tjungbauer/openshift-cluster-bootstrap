@@ -27,8 +27,13 @@ spec:
   {{- end }}
   template:
     metadata:
+      {{- if .generatorlist }}
       name: >-
           {{ printf "{{ cluster }}-%s" .appsetname}}
+      {{- else }}
+      name: >-
+          {{ printf "{{ name }}-%s" .appsetname}}
+      {{- end }}
     spec:
 {{- end }}
 {{- with .Values.general }}
@@ -44,8 +49,13 @@ spec:
           prune: {{ .syncpolicy_prune | default "false"  }}
           selfHeal: {{.syncpolicy_selfheal | default "false"  }}
       destination:
+      {{- if .generatorlist }}
         server:  >-
           {{ printf "{{ url }}" }}
+        {{- else }}
+        server:  >-
+          {{ printf "{{ server }}" }}
+        {{- end }}
         namespace: default
 {{- end }}
 
