@@ -21,8 +21,7 @@ install_advanced_cluster_security:
       clusterurl: *mgmtcluster
     - clustername:  prod
       clusterurl: *prodcluster
-  syncpolicy_prune: true
-  syncpolicy_selfheal: true
+  autosync_enabled: false # should be disabled for operators
 
 init_rhacs_central:
   appname: in-cluster-init-rhacs-central
@@ -39,8 +38,7 @@ install_quay:
   generatorlist:
     - clustername:  in-cluster
       clusterurl: *mgmtcluster
-  syncpolicy_prune: false
-  syncpolicy_selfheal: false
+  autosync_enabled: false # should be disabled for operators
 
 install_openshift_logging:
   appsetname: openshift-logging
@@ -55,8 +53,7 @@ install_openshift_servicemesh:
       clusterurl: *mgmtcluster
     - clustername:  prod
       clusterurl: *prodcluster
-  syncpolicy_prune: true
-  syncpolicy_selfheal: true
+  autosync_enabled: false # should be disabled for operators
 
 install_openshift_tracing:
   appsetname: install-jaeger
@@ -66,8 +63,7 @@ install_openshift_tracing:
       clusterurl: *mgmtcluster
     - clustername:  prod
       clusterurl: *prodcluster
-  syncpolicy_prune: true
-  syncpolicy_selfheal: true
+  autosync_enabled: false # should be disabled for operators
 
 install_kiali:
   appsetname: install-kiali
@@ -77,8 +73,7 @@ install_kiali:
       clusterurl: *mgmtcluster
     - clustername:  prod
       clusterurl: *prodcluster
-  syncpolicy_prune: true
-  syncpolicy_selfheal: true
+  autosync_enabled: false # should be disabled for operators
 
 install_elasticsearch:
   appsetname: install-elasticsearch
@@ -86,16 +81,13 @@ install_elasticsearch:
   generatorlist:
     - clustername:  in-cluster
       clusterurl: *mgmtcluster
-  syncpolicy_prune: true
-  syncpolicy_selfheal: true
+  autosync_enabled: false # should be disabled for operators
 
 install_openshift_pipelines:
   appsetname: install-openshift-pipelines
   path: components/operators/openshift-pipelines/overlays/stable
   generatorclusters: []
-  autosync_enabled: false
-  syncpolicy_prune: true
-  syncpolicy_selfheal: true
+  autosync_enabled: false # should be disabled for operators
 
 general:
   argocd_project: 'default'
