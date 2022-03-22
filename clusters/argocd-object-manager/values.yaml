@@ -89,22 +89,6 @@ install_openshift_pipelines:
   generatorclusters: []
   autosync_enabled: false # should be disabled for operators
 
-install_openshift_container_storage:
-  appsetname: install-openshift-container-storage
-  path: components/operators/openshift-container-storage/overlays/stable
-  generatorlist:
-    - clustername:  in-cluster
-      clusterurl: *mgmtcluster
-  autosync_enabled: false # should be disabled for operators
-
-install_sso:
-  appsetname: install-sso
-  path: components/operators/redhat-sso/overlays/alpha
-  generatorlist:
-    - clustername:  in-cluster
-      clusterurl: *mgmtcluster
-  autosync_enabled: false # should be disabled for operators
-
 general:
   argocd_project: 'default'
   source: 
