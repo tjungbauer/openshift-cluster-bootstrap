@@ -9,7 +9,7 @@ spec:
   {{- if .generatorlist -}}
     - list:
         elements: 
-        {{- range .generatorlist }-}
+        {{- range .generatorlist -}}
           - cluster: {{ .clustername }}
             url: {{ .clusterurl }}
         {{- end -}}
