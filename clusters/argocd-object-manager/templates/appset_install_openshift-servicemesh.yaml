@@ -13,7 +13,7 @@ spec:
           - cluster: {{ .clustername }}
             url: {{ .clusterurl }}
         {{- end }}
-  {{- end }}
+  {{- else }}
 # This does not work, since openshift-gitops keeps removing the label of the local ArgoCD secret
   {{- if .generatorclusters }}
     {{- range .clusters }}
@@ -24,6 +24,7 @@ spec:
     {{- end }}
   {{- else }}
     - clusters: {}
+  {{- end }}
   {{- end }}
   template:
     metadata:
