@@ -38,6 +38,13 @@ spec:
 {{- end }}
 {{- with .Values.general }}
       project: {{ .argocd_project }}
+      {{- if .generatorlist }}
+      project: >-
+        {{ printf "{{ cluster }}" }}
+      {{- else }}
+      project:  >-
+          {{ printf "{{ name }}" }}
+      {{- end }}
       source:
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}

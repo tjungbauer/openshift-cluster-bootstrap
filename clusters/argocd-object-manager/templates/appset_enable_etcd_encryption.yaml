@@ -23,7 +23,6 @@ spec:
     spec:
 {{- end }}
 {{- with .Values.general }}
-      #project: {{ .argocd_project }}
       project: >-
         {{ printf "{{ name }}" }}
       source:
