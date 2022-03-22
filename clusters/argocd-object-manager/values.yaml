@@ -93,7 +93,7 @@ install_openshift_pipelines:
   appsetname: install-openshift-pipelines
   path: components/operators/openshift-pipelines/overlays/stable
   generatorclusters: []
-  autosync_enabled: true
+  autosync_enabled: false
   syncpolicy_prune: true
   syncpolicy_selfheal: true
 
