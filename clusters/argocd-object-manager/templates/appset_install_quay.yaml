@@ -1,4 +1,4 @@
-{{- with .Values.install_quay -}}
+{{- with .Values.install_quay }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -9,11 +9,11 @@ spec:
   {{- if .generatorlist }}
     - list:
         elements: 
-        {{- range .generatorlist -}}
+        {{- range .generatorlist }}
           - cluster: {{ .clustername }}
             url: {{ .clusterurl }}
-        {{- end -}}
-  {{- end -}}
+        {{- end }}
+  {{- end }}
 # This does not work, since openshift-gitops keeps removing the label of the local ArgoCD secret
 #  {{- if .generatorclusters }}
 #    {{- range .clusters }}
@@ -30,20 +30,20 @@ spec:
       name: >-
           {{ printf "{{ cluster }}-%s" .appsetname}}
     spec:
-      {{- if .generatorlist -}}
+      {{- if .generatorlist }}
       project: >-
         {{ printf "{{ cluster }}" }}
-      {{- else -}}
+      {{- else }}
       project:  >-
           {{ printf "{{ name }}" }}
-      {{- end -}}
-{{- end -}}
-{{- with .Values.general -}}
+      {{- end }}
+{{- end }}
+{{- with .Values.general }}
       source:
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
-{{- end -}}
-{{- with .Values.install_quay -}}
+{{- end }}
+{{- with .Values.install_quay }}
         path: {{ .path }}
       syncPolicy:
         automated:
@@ -53,4 +53,4 @@ spec:
         server:  >-
           {{ printf "{{ url }}" }}
         namespace: default
-{{- end -}}
+{{- end }}
