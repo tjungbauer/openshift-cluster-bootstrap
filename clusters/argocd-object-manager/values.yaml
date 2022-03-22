@@ -89,6 +89,14 @@ install_elasticsearch:
   syncpolicy_prune: true
   syncpolicy_selfheal: true
 
+install_openshift_pipelines:
+  appsetname: install-openshift-pipelines
+  path: components/operators/openshift-pipelines/overlays/stable
+  generatorclusters: []
+  autosync_enabled: true
+  syncpolicy_prune: true
+  syncpolicy_selfheal: true
+
 general:
   argocd_project: 'default'
   source: 
