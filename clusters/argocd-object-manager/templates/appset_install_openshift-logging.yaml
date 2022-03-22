@@ -37,7 +37,6 @@ spec:
     spec:
 {{- end }}
 {{- with .Values.general }}
-      project: {{ .argocd_project }}
       {{- if .generatorlist }}
       project: >-
         {{ printf "{{ cluster }}" }}
