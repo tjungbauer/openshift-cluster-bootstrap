@@ -35,8 +35,6 @@ spec:
           {{ printf "{{ name }}-%s" .appsetname}}
       {{- end }}
     spec:
-{{- end }}
-{{- with .Values.general }}
       {{- if .generatorlist }}
       project: >-
         {{ printf "{{ cluster }}" }}
@@ -44,6 +42,8 @@ spec:
       project:  >-
           {{ printf "{{ name }}" }}
       {{- end }}
+{{- end }}
+{{- with .Values.general }}
       source:
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
