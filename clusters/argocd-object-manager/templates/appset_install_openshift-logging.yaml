@@ -15,16 +15,16 @@ spec:
         {{- end }}
   {{- end }}
 # This does not work, since openshift-gitops keeps removing the label of the local ArgoCD secret
-#  {{- if .generatorclusters }}
-#    {{- range .clusters }}
-#      - clusters:
-#          selector:
-#            matchLabels:
-#              env: {{ .env }}
-#    {{- end }}
-#  {{- else }}
-#    - clusters: {}
-#  {{- end }}
+  {{- if .generatorclusters }}
+    {{- range .clusters }}
+      - clusters:
+          selector:
+            matchLabels:
+              env: {{ .env }}
+    {{- end }}
+  {{- else }}
+    - clusters: {}
+  {{- end }}
   template:
     metadata:
       name: >-
