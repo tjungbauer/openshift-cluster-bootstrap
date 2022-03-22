@@ -10,7 +10,7 @@ patches:
       version: v1alpha1
       kind: Subscription
       name: elasticsearch-operator
-      namespace: openshift-operators
+      namespace: openshift-operators-redhat
     patch: |-
       - op: replace
         path: /spec/channel
