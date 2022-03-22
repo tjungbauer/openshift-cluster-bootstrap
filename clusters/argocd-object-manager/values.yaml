@@ -69,6 +69,26 @@ install_openshift_tracing:
   syncpolicy_prune: true
   syncpolicy_selfheal: true
 
+install_kiali:
+  appsetname: install-kiali
+  path: components/operators/operator-kiali/overlays/stable
+  generatorlist:
+    - clustername:  in-cluster
+      clusterurl: *mgmtcluster
+    - clustername:  prod
+      clusterurl: *prodcluster
+  syncpolicy_prune: true
+  syncpolicy_selfheal: true
+
+install_elasticsearch:
+  appsetname: install-elasticsearch
+  path: components/operators/openshift-elasticsearch/overlays/default
+  generatorlist:
+    - clustername:  in-cluster
+      clusterurl: *mgmtcluster
+  syncpolicy_prune: true
+  syncpolicy_selfheal: true
+
 general:
   argocd_project: 'default'
   source: 
