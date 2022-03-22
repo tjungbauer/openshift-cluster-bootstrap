@@ -3,7 +3,7 @@
 
 # Set cluster names ... Unfortunately the openshift-gitops operator keeps removing the secret of the in-cluster (local cluster), therefor we switch ti list generator
 # https://issues.redhat.com/browse/GITOPS-1777
-mgmt-cluster:  &mgmtcluster https://kubernetes.default.svc
+mgmt-cluster: &mgmtcluster https://kubernetes.default.svc
 production-cluster: &prodcluster https://api.ocp.ispworld.at:6443
 main_repourl: &mainrepourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
 main_repobranch: &mainbranch main
@@ -46,6 +46,17 @@ install_openshift_logging:
   appsetname: openshift-logging
   path: components/operators/openshift-logging/overlays/stable
   generatorclusters: []
+
+install_openshift_servicemesh:
+  appsetname: install-servicemesh
+  path: components/operators/openshift-servicemesh/overlays/stable
+  generatorlist:
+    - clustername:  in-cluster
+      clusterurl: *mgmtcluster
+    - clustername:  prod
+      clusterurl: *prodcluster
+  syncpolicy_prune: true
+  syncpolicy_selfheal: true
 
 general:
   argocd_project: 'default'
