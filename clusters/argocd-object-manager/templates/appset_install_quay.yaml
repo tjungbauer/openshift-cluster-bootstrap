@@ -6,7 +6,7 @@ metadata:
   namespace: openshift-gitops
 spec:
   generators:
-  {{- if .generatorlist -}}
+  {{- if .generatorlist }}
     - list:
         elements: 
         {{- range .generatorlist -}}
