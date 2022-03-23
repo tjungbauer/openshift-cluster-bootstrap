@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ocs-namespace.yaml
   - ocs-subscription.yaml
+  - ocs-operatorgroup.yaml
