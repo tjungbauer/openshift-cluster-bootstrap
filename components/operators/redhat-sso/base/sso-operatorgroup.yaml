@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: single-sign-on
+  namespace: single-sign-on
+spec:
+  targetNamespaces:
+    - single-sign-on
