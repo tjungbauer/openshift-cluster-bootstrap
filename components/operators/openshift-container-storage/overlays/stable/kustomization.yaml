@@ -9,7 +9,7 @@ patches:
       group: operators.coreos.com
       version: v1alpha1
       kind: Subscription
-      name: ocs-operator
+      name: odf-operator
       namespace: openshift-storage
     patch: |-
       - op: replace
