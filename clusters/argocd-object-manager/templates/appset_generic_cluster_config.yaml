@@ -26,13 +26,13 @@ spec:
       project: >-
         {{ printf "{{ name }}" }}
       source:
+        helm: >-
+          - {{ printf "{{ name }}-values.yaml" }}
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
 {{- end }}
 {{- with .Values.generic_clusterconfig }}
         path: {{ .path }}
-        helm: >-
-          - {{ printf "{{ name }}-values.yaml" }}
       {{ if .autosync_enabled }}
       syncPolicy:
         automated:
