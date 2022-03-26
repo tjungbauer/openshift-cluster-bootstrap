@@ -24,10 +24,10 @@ spec:
 {{- end }}
 {{- with .Values.general }}
       project: >-
-        {{ printf "{{ name }}" | b64dec}}
+        {{ printf "{{ name }}" }}
       source:
         helm: >-
-          - {{ printf "{{ name }}" }}
+          - {{ printf "{{ name }}" | b64dec }}
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
 {{- end }}
