@@ -32,7 +32,7 @@ spec:
 {{- with .Values.generic_clusterconfig }}
         path: {{ .path }}
         helm: >-
-          {{ printf "- {{ name }}-values.yaml" }}
+          - {{ printf "{{ name }}-values.yaml" }}
       {{ if .autosync_enabled }}
       syncPolicy:
         automated:
