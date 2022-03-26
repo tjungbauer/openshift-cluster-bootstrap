@@ -27,7 +27,7 @@ install_advanced_cluster_security:
   autosync_enabled: false # should be disabled for operators
 
 init_rhacs_central:
-  appname: *mgmtclustername-init-rhacs-central
+  appname: in-cluster-init-rhacs-central
   server: *mgmtcluster
   project: default 
   source: 
