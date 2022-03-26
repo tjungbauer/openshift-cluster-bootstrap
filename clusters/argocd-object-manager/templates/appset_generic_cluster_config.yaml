@@ -27,7 +27,7 @@ spec:
         {{ printf "{{ name }}" }}
       source:
         helm: >-
-          - {{ printf "{{ name }}" | b64dec }}
+          - "{{" name "}}"
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
 {{- end }}
