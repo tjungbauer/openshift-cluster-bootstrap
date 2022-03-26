@@ -26,8 +26,8 @@ spec:
       project: >-
         {{ printf "{{ name }}" }}
       source:
-        helm: >-
-          - {{ printf "{{ name }}-values.yaml" }}
+        helm: 
+          - {{ name }}-values.yaml
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
 {{- end }}
