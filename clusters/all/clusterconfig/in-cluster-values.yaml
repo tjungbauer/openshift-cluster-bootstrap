@@ -1,0 +1,8 @@
+# General values
+#
+
+console_banner:
+  text: 'MGMT Cluster'
+  location: BannerTop 
+  color: '#FFFFFF'
+  backgroundcolor: '#0088ee'

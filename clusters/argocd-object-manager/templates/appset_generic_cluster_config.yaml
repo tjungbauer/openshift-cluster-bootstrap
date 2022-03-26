@@ -1,4 +1,4 @@
-{{- with .Values.etcd_encryption }}
+{{- with .Values.generic_clusterconfig }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -29,8 +29,10 @@ spec:
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
 {{- end }}
-{{- with .Values.etcd_encryption }}
+{{- with .Values.generic_clusterconfig }}
         path: {{ .path }}
+        helm: >-
+          {{ printf "{{ name }}-values.yaml" }}
       {{ if .autosync_enabled }}
       syncPolicy:
         automated:

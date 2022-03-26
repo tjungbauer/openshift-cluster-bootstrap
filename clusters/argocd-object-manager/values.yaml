@@ -1,30 +1,33 @@
 # General values
 #
 
-# Set cluster names ... Unfortunately the openshift-gitops operator keeps removing the secret of the in-cluster (local cluster), therefor we switch ti list generator
+# Set cluster names ... Unfortunately the openshift-gitops operator keeps removing the secret of the *mgmtclustername (local cluster), therefor we switch ti list generator
 # https://issues.redhat.com/browse/GITOPS-1777
 mgmt-cluster: &mgmtcluster https://kubernetes.default.svc
+mgmt-cluster-name: &mgmtclustername in-cluster
 production-cluster: &prodcluster https://api.ocp.ispworld.at:6443
+production-cluster-name: &prodclustername prod
+
 main_repourl: &mainrepourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
 main_repobranch: &mainbranch main
 
-etcd_encryption: 
-  appsetname: enable-etcd-encryption
-  path: clusters/all/clusterconfig/enable-etcd-encryption 
+generic_clusterconfig: 
+  appsetname: generic-cluster-config
+  path: clusters/all/clusterconfig/
   generatorclusters: []
 
 install_advanced_cluster_security:
   appsetname: install-rhacs
   path: components/operators/advanced_cluster_security/overlays/latest
   generatorlist:
-    - clustername:  in-cluster
+    - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
-    - clustername:  prod
+    - clustername:  *prodclustername
       clusterurl: *prodcluster
   autosync_enabled: false # should be disabled for operators
 
 init_rhacs_central:
-  appname: in-cluster-init-rhacs-central
+  appname: *mgmtclustername-init-rhacs-central
   server: *mgmtcluster
   project: default 
   source: 
@@ -36,7 +39,7 @@ install_quay:
   appsetname: install-quay
   path: components/operators/redhat-quay/overlays/stable
   generatorlist:
-    - clustername:  in-cluster
+    - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
   autosync_enabled: false # should be disabled for operators
 
@@ -49,9 +52,9 @@ install_openshift_servicemesh:
   appsetname: install-servicemesh
   path: components/operators/openshift-servicemesh/overlays/stable
   generatorlist:
-    - clustername:  in-cluster
+    - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
-    - clustername:  prod
+    - clustername:  *prodclustername
       clusterurl: *prodcluster
   autosync_enabled: false # should be disabled for operators
 
@@ -59,9 +62,9 @@ install_openshift_tracing:
   appsetname: install-jaeger
   path: components/operators/tracing-operator-jaeger/overlays/stable
   generatorlist:
-    - clustername:  in-cluster
+    - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
-    - clustername:  prod
+    - clustername:  *prodclustername
       clusterurl: *prodcluster
   autosync_enabled: false # should be disabled for operators
 
@@ -69,9 +72,9 @@ install_kiali:
   appsetname: install-kiali
   path: components/operators/operator-kiali/overlays/stable
   generatorlist:
-    - clustername:  in-cluster
+    - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
-    - clustername:  prod
+    - clustername:  *prodclustername
       clusterurl: *prodcluster
   autosync_enabled: false # should be disabled for operators
 
@@ -79,7 +82,7 @@ install_elasticsearch:
   appsetname: install-elasticsearch
   path: components/operators/openshift-elasticsearch/overlays/default
   generatorlist:
-    - clustername:  in-cluster
+    - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
   autosync_enabled: false # should be disabled for operators
 
@@ -93,7 +96,7 @@ install_redhat_sso:
   appsetname: install-redhat-sso
   path: components/operators/redhat-sso/overlays/alpha
   generatorlist:
-    - clustername:  in-cluster
+    - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
   autosync_enabled: false # should be disabled for operators
 
@@ -101,7 +104,7 @@ install_openshift_container_storage:
   appsetname: install-openshift-container-storage
   path: components/operators/openshift-container-storage/overlays/stable
   generatorlist:
-    - clustername:  in-cluster
+    - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
   autosync_enabled: false # should be disabled for operators
 

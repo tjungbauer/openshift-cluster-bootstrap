@@ -5,6 +5,6 @@ kind: Kustomization
 namespace: resource-locker-operator
 
 resources:
-  - resource-locker-namespace.yaml
-  - resource-locker-operatorgroup.yaml
-  - resource-locker-subscription.yaml
+  - namespace.yaml
+  - operatorgroup.yaml
+  - subscription.yaml

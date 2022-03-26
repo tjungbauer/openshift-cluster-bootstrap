@@ -1,0 +1,9 @@
+# General values
+#
+
+console_banner:
+  enabled: true
+  text: 'PROD Cluster'
+  location: BannerTop 
+  color: '#FFFFFF'
+  backgroundcolor: '#FF0000'
