@@ -2,6 +2,7 @@
 #
 
 console_banner:
+  enabled: true
   text: 'MGMT Cluster'
   location: BannerTop 
   color: '#FFFFFF'
