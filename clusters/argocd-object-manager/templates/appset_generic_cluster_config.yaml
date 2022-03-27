@@ -4,6 +4,8 @@ kind: ApplicationSet
 metadata:
   name: {{ .appsetname }}
   namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   generators:
   {{- if .clusterlist }}
