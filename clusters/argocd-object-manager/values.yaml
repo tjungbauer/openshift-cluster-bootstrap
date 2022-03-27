@@ -11,6 +11,10 @@ production-cluster-name: &prodclustername prod
 main_repourl: &mainrepourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
 main_repobranch: &mainbranch main
 
+argocd_projects:
+  - *mgmtclustername
+  - *prodclustername
+
 generic_clusterconfig: 
   appsetname: generic-cluster-config
   path: clusters/all/clusterconfig/
