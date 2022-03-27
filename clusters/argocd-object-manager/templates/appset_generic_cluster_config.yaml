@@ -27,8 +27,8 @@ spec:
         {{ printf "{{ name }}" }}
       source:
         helm:
-          valueFiles: >-
-            - {{ printf "{{ name }}-values.yaml" }}
+          valueFiles:
+            - in-cluster-values.yaml
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
 {{- end }}
