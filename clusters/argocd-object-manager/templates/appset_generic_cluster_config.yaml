@@ -29,7 +29,7 @@ spec:
         {{ printf "{{ name }}" }}
       source:
         helm:
-          valueFiles: >
+          valueFiles: |-
             - {{ printf "{{ name }}" | toYaml }}
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
