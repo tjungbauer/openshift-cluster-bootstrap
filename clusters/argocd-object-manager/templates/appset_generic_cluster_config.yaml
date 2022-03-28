@@ -29,8 +29,8 @@ spec:
         {{ printf "{{ name }}" }}
       source:
         helm:
-          valueFiles: >-
-            - {{ printf "{{ name }}" }}
+          valueFiles: [>-
+            {{ printf "{{ name }}" }}]
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
 {{- end }}
