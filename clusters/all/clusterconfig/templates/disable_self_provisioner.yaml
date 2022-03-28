@@ -1,0 +1,13 @@
+{{- if .Values.etcd_encryption.enabled }}
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: self-provisioners
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: 'true'
+subjects: []
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: self-provisioner
+{{- end }}

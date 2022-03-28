@@ -11,6 +11,9 @@ console_banner:
 etcd_encryption:
   enabled: true
 
+disable_self_provisioner:
+  enabled: true
+
 config_monitoring:
   enabled: true
   enable_user_workload: 'true'
