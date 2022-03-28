@@ -5,5 +5,5 @@ console_banner:
   enabled: true
   text: 'MGMT Cluster'
   location: BannerTop 
-  color: '#FFFFFF'
+  color: "#FFFFFF"
   backgroundcolor: '#0088ee'
