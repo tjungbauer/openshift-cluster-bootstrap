@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- ../authentication-identityprovider/base
+- ../../base
 
 patchesJson6902:
   - target:
