@@ -7,3 +7,9 @@ console_banner:
   location: BannerTop 
   color: "#FFFFFF"
   backgroundcolor: '#0088ee'
+
+etcd_encryption:
+  enabled: true
+
+config_monitoring:
+  enabled: true
