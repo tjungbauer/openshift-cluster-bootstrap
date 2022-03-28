@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-wave: '1'
+  labels:
+    gitops.ownedBy: cluster-config
+  name: {{ .Values.rhacs_demo_app.appname }}
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: {{ .Values.rhacs_demo_app.server }}
+  project: {{ .Values.rhacs_demo_app.project }}
+  source:
+    path: {{ .Values.rhacs_demo_app.source.path }}
+    repoURL: {{ .Values.rhacs_demo_app.source.repourl }}
+    targetRevision: {{ .Values.rhacs_demo_app.source.targetrevision }}
+  info:
+    - name: Description
+      value: ''

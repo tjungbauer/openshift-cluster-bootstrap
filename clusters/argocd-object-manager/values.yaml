@@ -39,6 +39,15 @@ init_rhacs_central:
     repourl: *mainrepourl
     targetrevision: *mainbranch  
 
+rhacs_demo_app:
+  appname: in-cluster-rhacs_demo_app
+  server: *mgmtcluster
+  project: default 
+  source: 
+    path:  components/apps/rhacs-demo-applications/
+    repourl: *mainrepourl
+    targetrevision: *mainbranch  
+
 install_quay:
   appsetname: install-quay
   path: components/operators/redhat-quay/overlays/stable
