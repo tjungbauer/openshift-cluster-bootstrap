@@ -20,6 +20,14 @@ generic_clusterconfig:
   path: clusters/all/clusterconfig/
   generatorclusters: []
 
+install_oauth:
+  appsetname: install-oauth
+  path: clusters/all/authentication-identityprovider/overlays/default
+  generatorlist:
+    - clustername:  *mgmtclustername
+      clusterurl: *mgmtcluster
+  autosync_enabled: false # should be disabled for operators
+
 install_advanced_cluster_security:
   appsetname: install-rhacs
   path: components/operators/advanced_cluster_security/overlays/latest

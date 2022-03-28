@@ -1,0 +1,52 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: openshift-config
+
+commonLabels:
+  created-by: cluster-bootstrap
+  author: 'Thomas_Jungbauer'
+  clustername: 'Management_Cluster'
+
+resources:
+- sealed-htpasswed-secret.yaml
+- sealed-ldap-bindpassword-secret.yaml
+- ../../../../all/overlays/oauth-cluster-idp/base
+
+patches:
+  - patch: |-
+      - op: replace 
+        path: /spec/identityProviders/1/name
+        value: HTPASSWD
+    target:
+      kind: OAuth
+      name: cluster
+  - patch: |-
+      - op: replace 
+        path: /spec/identityProviders/0/name
+        value: LDAPS
+    target:
+      kind: OAuth
+      name: cluster
+  - patch: |-
+      - op: replace 
+        path: /spec/identityProviders/0/ldap/url
+        value: ldaps://localhost
+    target:
+      kind: OAuth
+      name: cluster
+  - patch: |-
+      - op: replace 
+        path: /spec/identityProviders/0/ldap/bindDN
+        value: o=example,o=com
+    target:
+      kind: OAuth
+      name: cluster
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- name: ca-config-map
+  files:
+  - ca.crt
