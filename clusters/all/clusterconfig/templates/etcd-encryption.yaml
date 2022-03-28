@@ -1,3 +1,4 @@
+{{- if .Values.etcd_encryption.enabled }}
 apiVersion: config.openshift.io/v1
 kind: APIServer
 metadata:
@@ -7,3 +8,4 @@ metadata:
 spec:
   encryption:
     type: aescbc
+{{- end }}

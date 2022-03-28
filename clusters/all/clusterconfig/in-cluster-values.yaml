@@ -13,4 +13,4 @@ etcd_encryption:
 
 config_monitoring:
   enabled: true
-  enable_user_workload: true
+  enable_user_workload: 'true'
