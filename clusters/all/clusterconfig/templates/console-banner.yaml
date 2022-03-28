@@ -6,6 +6,6 @@ metadata:
 spec:
   text: {{ .Values.console_banner.text }}
   location: {{ .Values.console_banner.location }} 
-  color: {{ .Values.console_banner.color }}
-  backgroundColor: {{ .Values.console_banner.backgroundcolor }}
+  color: "{{ .Values.console_banner.color }}"
+  backgroundColor: "{{ .Values.console_banner.backgroundcolor }}"
 {{- end }}
