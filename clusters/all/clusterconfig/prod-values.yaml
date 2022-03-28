@@ -12,4 +12,4 @@ etcd_encryption:
   enabled: true
 
 config_monitoring:
-  enabled: false
+  enabled: true
