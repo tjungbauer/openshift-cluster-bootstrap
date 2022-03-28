@@ -17,7 +17,7 @@ spec:
     {{- end }}
   {{- else }}
     - clusters: {}
-  {{- end }}  
+  {{- end }}
   template:
     metadata:
       name: >-
@@ -29,8 +29,8 @@ spec:
         {{ printf "{{ name }}" }}
       source:
         helm:
-          valueFiles: [>-
-            {{ printf "{{ name }}" }}]
+          valueFiles: 
+            - '{{ printf "{{ name }}-values.yaml" }}'
         repoURL: {{ .source.repourl }}
         targetRevision: {{ .branch }}
 {{- end }}
