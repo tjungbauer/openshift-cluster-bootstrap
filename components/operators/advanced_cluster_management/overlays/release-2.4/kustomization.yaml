@@ -9,7 +9,7 @@ resources:
 patches:
   - target:
       kind: Subscription
-      name: rhacs-operator
+      name: advanced-cluster-management
     patch: |-
       - op: replace
         path: /spec/channel
