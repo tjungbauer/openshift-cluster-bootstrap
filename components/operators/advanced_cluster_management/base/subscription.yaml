@@ -7,6 +7,6 @@ metadata:
 spec:
   channel: patch-me-in-overlays
   installPlanApproval: Automatic
-  name: r advanced-cluster-management
+  name: advanced-cluster-management
   source: redhat-operators
   sourceNamespace: openshift-marketplace
