@@ -16,3 +16,8 @@ disable_self_provisioner:
 
 config_monitoring:
   enabled: false
+
+config_logging:
+  enabled: false
+  logforward:
+    enabled: false 
