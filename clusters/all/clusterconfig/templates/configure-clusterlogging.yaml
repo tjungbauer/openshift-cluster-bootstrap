@@ -19,7 +19,7 @@ spec:
   logStore:
     elasticsearch:
       nodeCount: {{ .elasticsearch.nodecount | default '3' }}
-      redundancyPolicy: {{ .elasticsearch.redundancy_policy | default 'SingleRedundancy' }}
+      redundancyPolicy: {{ .elasticsearch.redundancy_policy | default "SingleRedundancy" }}
       storage:
         size: {{ .elasticsearch.storage.size | default '300G' }}
         storageClassName: {{ .elasticsearch.storage.class | default 'default' }}
