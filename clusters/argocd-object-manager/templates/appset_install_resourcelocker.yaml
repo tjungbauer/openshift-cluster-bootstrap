@@ -1,0 +1,72 @@
+{{- with .Values.install_resourcelocker }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: {{ .appsetname }}
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+spec:
+  generators:
+    {{- if .generatorlist }}
+      - list:
+          elements: 
+          {{- range .generatorlist }}
+            - cluster: {{ .clustername }}
+              url: {{ .clusterurl }}
+          {{- end }}
+    {{- else }}
+  # This does not work, since openshift-gitops keeps removing the label of the local ArgoCD secret
+    {{- if .generatorclusters }}
+      {{- range .clusters }}
+        - clusters:
+            selector:
+              matchLabels:
+                env: {{ .env }}
+      {{- end }}
+    {{- else }}
+      - clusters: {}
+    {{- end }}
+  {{- end }}
+  template:
+    metadata:
+      {{- if .generatorlist }}
+      name: >-
+          {{ printf "{{ cluster }}-%s" .appsetname}}
+      {{- else }}
+      name: >-
+          {{ printf "{{ name }}-%s" .appsetname}}
+      {{- end }}
+    spec:
+      {{- if .generatorlist }}
+      project: >-
+        {{ printf "{{ cluster }}" }}
+      {{- else }}
+      project:  >-
+          {{ printf "{{ name }}" }}
+      {{- end }}
+{{- end }}
+{{- with .Values.general }}
+      source:
+        repoURL: {{ .source.repourl }}
+        targetRevision: {{ .branch }}
+{{- end }}
+{{- with .Values.install_resourcelocker }}
+        path: {{ .path }}
+      {{ if .autosync_enabled }}
+      syncPolicy:
+        automated:
+          prune: {{ .syncpolicy_prune | default "false"  }}
+          selfHeal: {{.syncpolicy_selfheal | default "false"  }}
+      {{- end }}
+      destination:
+      {{- if .generatorlist }}
+        server:  >-
+          {{ printf "{{ url }}" }}
+        {{- else }}
+        server:  >-
+          {{ printf "{{ server }}" }}
+        {{- end }}
+        namespace: default
+{{- end }}
+

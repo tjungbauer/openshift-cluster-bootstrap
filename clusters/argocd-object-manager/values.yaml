@@ -129,6 +129,22 @@ install_openshift_container_storage:
       clusterurl: *mgmtcluster
   autosync_enabled: false # should be disabled for operators
 
+install_resourcelocker:
+  appsetname: install-custom-resourcelocker
+  path: components/operators/resource-locker/overlays/default
+  generatorlist:
+    - clustername:  *mgmtclustername
+      clusterurl: *mgmtcluster
+  autosync_enabled: false # should be disabled for operators
+
+install_rhacm:
+  appsetname: install-rhacm
+  path: components/operators/advanced_cluster_management/overlays/release-2.4
+  generatorlist:
+    - clustername:  *mgmtclustername
+      clusterurl: *mgmtcluster
+  autosync_enabled: false # should be disabled for operators
+
 general:
   argocd_project: 'default'
   source: 
