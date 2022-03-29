@@ -21,8 +21,8 @@ spec:
       nodeCount: {{ .elasticsearch.nodecount | default '3' }}
       redundancyPolicy: {{ .elasticsearch.redundancy_policy | default "SingleRedundancy" }}
       storage:
-        size: {{ .elasticsearch.storage.size | default '300G' }}
-        storageClassName: {{ .elasticsearch.storage.class | default 'default' }}
+        size: {{ .elasticsearch.storage.size | default "300G" }}
+        storageClassName: {{ .elasticsearch.storage.class | default "default" }}
       resources: 
           limits:
             memory: "16Gi"
@@ -30,11 +30,11 @@ spec:
             memory: "16Gi"
     retentionPolicy:
       application:
-        maxAge: {{ .retention.application_max_age | default '1d' }}
+        maxAge: {{ .retention.application_max_age | default "1d" }}
       audit:
-        maxAge: {{ .retention.audit_max_age | default '1d' }}
+        maxAge: {{ .retention.audit_max_age | default "1d" }}
       infra:
-        maxAge: {{ .retention.infra_max_age | default '1d' }}
+        maxAge: {{ .retention.infra_max_age | default "1d" }}
     type: elasticsearch
   managementState: Managed
   visualization:
