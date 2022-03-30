@@ -29,7 +29,6 @@ function error() {
     exit 1
 }
 
-# Deploy Hashicorp Vault if selected
 function deploy() {
 
   $HELM 2>&1 >/dev/null || error "Could not execute helm binary!"
