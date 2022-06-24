@@ -95,7 +95,7 @@ operators:
     namespace: rhacs-operator
     subscription:
       channel: *rhacsversion
-      approval: Automatic
+      approval: Manual
       operatorName: rhacs-operator
       source: redhat-operators
       sourceNamespace: openshift-marketplace
