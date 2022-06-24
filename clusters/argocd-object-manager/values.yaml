@@ -31,19 +31,7 @@ install_oauth:
 install_operator_collection:
   appsetname: install-operator-collection
   path: components/operators/collection
-  generatorlist:
-    - clustername:  *mgmtclustername
-      clusterurl: *mgmtcluster
-  autosync_enabled: false # should be disabled for operators
-
-install_advanced_cluster_security:
-  appsetname: install-rhacs
-  path: components/operators/advanced_cluster_security/overlays/latest
-  generatorlist:
-    - clustername:  *mgmtclustername
-      clusterurl: *mgmtcluster
-    - clustername:  *prodclustername
-      clusterurl: *prodcluster
+  generatorclusters: []
   autosync_enabled: false # should be disabled for operators
 
 init_rhacs_central:
@@ -70,55 +58,6 @@ install_quay:
   generatorlist:
     - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
-  autosync_enabled: false # should be disabled for operators
-
-install_openshift_logging:
-  appsetname: openshift-logging
-  path: components/operators/openshift-logging/overlays/stable
-  generatorclusters: []
-
-install_openshift_servicemesh:
-  appsetname: install-servicemesh
-  path: components/operators/openshift-servicemesh/overlays/stable
-  generatorlist:
-    - clustername:  *mgmtclustername
-      clusterurl: *mgmtcluster
-    - clustername:  *prodclustername
-      clusterurl: *prodcluster
-  autosync_enabled: false # should be disabled for operators
-
-install_openshift_tracing:
-  appsetname: install-jaeger
-  path: components/operators/tracing-operator-jaeger/overlays/stable
-  generatorlist:
-    - clustername:  *mgmtclustername
-      clusterurl: *mgmtcluster
-    - clustername:  *prodclustername
-      clusterurl: *prodcluster
-  autosync_enabled: false # should be disabled for operators
-
-install_kiali:
-  appsetname: install-kiali
-  path: components/operators/operator-kiali/overlays/stable
-  generatorlist:
-    - clustername:  *mgmtclustername
-      clusterurl: *mgmtcluster
-    - clustername:  *prodclustername
-      clusterurl: *prodcluster
-  autosync_enabled: false # should be disabled for operators
-
-install_elasticsearch:
-  appsetname: install-elasticsearch
-  path: components/operators/openshift-elasticsearch/overlays/default
-  generatorlist:
-    - clustername:  *mgmtclustername
-      clusterurl: *mgmtcluster
-  autosync_enabled: false # should be disabled for operators
-
-install_openshift_pipelines:
-  appsetname: install-openshift-pipelines
-  path: components/operators/openshift-pipelines/overlays/stable
-  generatorclusters: []
   autosync_enabled: false # should be disabled for operators
 
 install_redhat_sso:
