@@ -1,0 +1,55 @@
+logging:
+  # Might be needed with clusters that have an infra plane
+  # nodeSelector:
+  #   key: node-role.kubernetes.io/infra
+  #   value: ''
+  namespace: openshift-logging
+
+operators:
+  codeready-workspaces:
+    enabled: true
+    namespace: codeready-workspaces
+    subscription:
+      channel: latest
+      approval: Automatic
+      operatorName: codeready-workspaces
+      sourceName: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: true
+
+  openshift-pipelines-operator-rh:
+    enabled: true
+    namespace: openshift-operators
+    subscription:
+      channel: stable
+      approval: Automatic
+      operatorName: openshift-pipelines-operator-rh
+      sourceName: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: false
+
+  elasticsearch-operator:
+    enabled: true
+    namespace: openshift-operators-redhat
+    subscription:
+      channel: stable
+      approval: Automatic
+      operatorName: elasticsearch-operator
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: true
+
+  cluster-logging-operator:
+    enabled: true
+    namespace: openshift-logging
+    subscription:
+      channel: stable
+      approval: Automatic
+      operatorName: cluster-logging
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: true
