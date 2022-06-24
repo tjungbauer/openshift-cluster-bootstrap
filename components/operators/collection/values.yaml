@@ -5,6 +5,9 @@ logging:
   #   value: ''
   namespace: openshift-logging
 
+namespaces:
+  - name: codeready-workspaces
+
 operators:
   codeready-workspaces:
     enabled: true
