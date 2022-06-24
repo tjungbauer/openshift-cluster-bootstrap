@@ -28,6 +28,16 @@ install_oauth:
       clusterurl: *mgmtcluster
   autosync_enabled: false # should be disabled for operators
 
+install_operator_collection:
+  appsetname: install-operator-collection
+  path: components/operators/collection
+  generatorlist:
+    - clustername:  *mgmtclustername
+      clusterurl: *mgmtcluster
+    - clustername:  *prodclustername
+      clusterurl: *prodcluster
+  autosync_enabled: false # should be disabled for operators
+
 install_advanced_cluster_security:
   appsetname: install-rhacs
   path: components/operators/advanced_cluster_security/overlays/latest

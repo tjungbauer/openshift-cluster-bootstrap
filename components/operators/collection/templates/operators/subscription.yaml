@@ -7,7 +7,7 @@ metadata:
   name: {{ $key | quote }}
   namespace: {{ $value.namespace | quote }}
 spec:
-  channel: {{ $value.subscription.channel }}
+  channel: {{ $value.subscription.channel | default "stable" | quote }}
   installPlanApproval: {{ $value.subscription.approval | default "Automatic" | quote }}
   name: {{ $value.subscription.operatorName | quote }}
   source: {{ $value.subscription.sourceName | default "redhat-operators" | quote }}

@@ -1,3 +1,6 @@
+
+override-rhacs-operator-version: &rhacsversion rhacs-3.69
+
 logging:
   # Might be needed with clusters that have an infra plane
   # nodeSelector:
@@ -25,7 +28,6 @@ operators:
     enabled: true
     namespace: openshift-operators
     subscription:
-      channel: stable
       approval: Automatic
       operatorName: openshift-pipelines-operator-rh
       sourceName: redhat-operators
@@ -37,7 +39,6 @@ operators:
     enabled: true
     namespace: openshift-operators-redhat
     subscription:
-      channel: stable
       approval: Automatic
       operatorName: elasticsearch-operator
       source: redhat-operators
@@ -49,9 +50,53 @@ operators:
     enabled: true
     namespace: openshift-logging
     subscription:
-      channel: stable
       approval: Automatic
       operatorName: cluster-logging
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: true
+
+  servicemesh-operator:
+    enabled: true
+    namespace: openshift-operators
+    subscription:
+      approval: Automatic
+      operatorName: servicemeshoperator
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: false
+
+  jaeger-operator:
+    enabled: true
+    namespace: openshift-operators
+    subscription:
+      approval: Automatic
+      operatorName: jaeger-product
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: false
+
+  kiali-operator:
+    enabled: true
+    namespace: openshift-operators
+    subscription:
+      approval: Automatic
+      operatorName: kiali-ossm
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: false
+
+  rhacs-operator:
+    enabled: true
+    namespace: rhacs-operator
+    subscription:
+      channel: *rhacsversion
+      approval: Automatic
+      operatorName: rhacs-operator
       source: redhat-operators
       sourceNamespace: openshift-marketplace
     operatorgroup:
