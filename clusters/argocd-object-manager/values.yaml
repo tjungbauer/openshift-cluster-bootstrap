@@ -35,6 +35,15 @@ install_operator_collection:
   generatorclusters: []
   autosync_enabled: false # should be disabled for operators
 
+install_mgmt_operator_collection:
+  appsetname: install-mgmt-operator-collection
+  path: components/operators/collection-management-operators
+  generatorlist:
+    - clustername:  *mgmtclustername
+      clusterurl: *mgmtcluster
+  autosync_enabled: false # should be disabled for operators
+
+
 init_rhacs_central:
   appname: in-cluster-init-rhacs-central
   server: *mgmtcluster
