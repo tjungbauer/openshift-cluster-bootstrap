@@ -1,0 +1,43 @@
+
+override-rhacm-operator-version: &rhacmversion release-2.5
+
+namespaces:
+  - name: single-sign-on
+
+operators:
+  rhacm-operator:
+    enabled: true
+    namespace: open-cluster-management
+    subscription:
+      channel: *rhacmversion
+      approval: Automatic
+      operatorName: advanced-cluster-management
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: true
+
+  quay-operator:
+    enabled: true
+    namespace: openshift-operators
+    subscription:
+      channel: stable-3.7
+      approval: Automatic
+      operatorName: quay-operator
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: false
+
+  rhsso-operator:
+    enabled: true
+    namespace: single-sign-on
+    subscription:
+      channel: stable
+      approval: Automatic
+      operatorName: rhsso-operator
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: false
+
