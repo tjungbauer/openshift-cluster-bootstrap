@@ -8,6 +8,7 @@ logging:
   #   value: ''
   namespace: openshift-logging
 
+operators:
   openshift-pipelines-operator-rh:
     enabled: true
     namespace: openshift-operators
