@@ -70,41 +70,9 @@ rhacs_demo_app:
     repourl: *mainrepourl
     targetrevision: *mainbranch  
 
-install_quay:
-  appsetname: install-quay
-  path: components/operators/redhat-quay/overlays/stable
-  generatorlist:
-    - clustername:  *mgmtclustername
-      clusterurl: *mgmtcluster
-  autosync_enabled: false # should be disabled for operators
-
-install_redhat_sso:
-  appsetname: install-redhat-sso
-  path: components/operators/redhat-sso/overlays/alpha
-  generatorlist:
-    - clustername:  *mgmtclustername
-      clusterurl: *mgmtcluster
-  autosync_enabled: false # should be disabled for operators
-
 install_openshift_container_storage:
   appsetname: install-openshift-container-storage
   path: components/operators/openshift-container-storage/overlays/stable
-  generatorlist:
-    - clustername:  *mgmtclustername
-      clusterurl: *mgmtcluster
-  autosync_enabled: false # should be disabled for operators
-
-install_resourcelocker:
-  appsetname: install-custom-resourcelocker
-  path: components/operators/resource-locker/overlays/default
-  generatorlist:
-    - clustername:  *mgmtclustername
-      clusterurl: *mgmtcluster
-  autosync_enabled: false # should be disabled for operators
-
-install_rhacm:
-  appsetname: install-rhacm
-  path: components/operators/advanced_cluster_management/overlays/release-2.4
   generatorlist:
     - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
