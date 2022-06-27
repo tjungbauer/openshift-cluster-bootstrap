@@ -8,22 +8,6 @@ logging:
   #   value: ''
   namespace: openshift-logging
 
-namespaces:
-  - name: codeready-workspaces
-
-operators:
-  codeready-workspaces:
-    enabled: true
-    namespace: codeready-workspaces
-    subscription:
-      channel: latest
-      approval: Automatic
-      operatorName: codeready-workspaces
-      sourceName: redhat-operators
-      sourceNamespace: openshift-marketplace
-    operatorgroup:
-      create: true
-
   openshift-pipelines-operator-rh:
     enabled: true
     namespace: openshift-operators

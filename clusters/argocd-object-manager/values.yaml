@@ -35,12 +35,20 @@ install_operator_collection:
   generatorclusters: []
   autosync_enabled: false # should be disabled for operators
 
+# A collection of MANAGEMENT operators, installed usually on the management cluster only.
 install_mgmt_operator_collection:
   appsetname: install-mgmt-operator-collection
   path: components/operators/collection-management-operators
   generatorlist:
     - clustername:  *mgmtclustername
       clusterurl: *mgmtcluster
+  autosync_enabled: false # should be disabled for operators
+
+# A Collection of OPTIONAL operators which will be deployed on ALL clusters.
+install_optional_operator_collection:
+  appsetname: install-optional-operator-collection
+  path: components/operators/collection-optional-operators
+  generatorclusters: []
   autosync_enabled: false # should be disabled for operators
 
 
