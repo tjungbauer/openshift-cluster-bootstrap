@@ -1,3 +1,6 @@
+{{- range $key, $value := .Values.applications }}
+{{ if eq ($value.enabled | toString) "true" }}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -7,17 +10,19 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   labels:
     gitops.ownedBy: cluster-config
-  name: {{ .Values.init_rhacs_central.appname }}
+  name: {{ $key | replace "_" "-" }}
   namespace: openshift-gitops
 spec:
   destination:
     namespace: openshift-gitops
-    server: {{ .Values.init_rhacs_central.server }}
-  project: {{ .Values.init_rhacs_central.project }}
+    server: {{ .server }}
+  project: {{ .project }}
   source:
-    path: {{ .Values.init_rhacs_central.source.path }}
-    repoURL: {{ .Values.init_rhacs_central.source.repourl }}
-    targetRevision: {{ .Values.init_rhacs_central.source.targetrevision }}
+    path: {{ .source.path }}
+    repoURL: {{ .source.repourl }}
+    targetRevision: {{ .source.targetrevision }}
   info:
     - name: Description
       value: ''
+{{- end }}
+{{- end }}
