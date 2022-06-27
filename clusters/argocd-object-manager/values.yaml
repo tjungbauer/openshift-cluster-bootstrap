@@ -28,6 +28,7 @@ install_oauth:
       clusterurl: *mgmtcluster
   autosync_enabled: false # should be disabled for operators
 
+# A Collection of operators which will be deployed on ALL clusters.
 install_operator_collection:
   appsetname: install-operator-collection
   path: components/operators/collection
@@ -100,3 +101,7 @@ general:
 
 
 
+operators:
+  codeready-workspaces:
+    subscription:
+      approval: Manual
