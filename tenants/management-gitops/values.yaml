@@ -1,0 +1,14 @@
+
+namespaces:
+  - name: gitops
+
+operators:
+  gitops:
+    enabled: true
+    namespace: gitops
+    subscription:
+      channel: stable
+      approval: Automatic
+      operatorName: openshift-gitops-operator
+      sourceName: redhat-operators
+      sourceNamespace: openshift-marketplace
