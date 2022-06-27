@@ -1,14 +1,19 @@
 
-namespaces:
-  - name: gitops
-
-operators:
-  gitops:
-    enabled: true
-    namespace: gitops
-    subscription:
-      channel: stable
-      approval: Automatic
-      operatorName: openshift-gitops-operator
-      sourceName: redhat-operators
-      sourceNamespace: openshift-marketplace
+gitops_application:
+  enabled: true
+  namespace: gitops
+  rbac:
+    policy: |
+      # Access permissions
+      g, system:cluster-admins, role:admin
+      g, cluster-admins, role:admin
+    scopes: '[groups]'
+  resourceExclusions: >-
+    # resources to be excluded
+        - apiGroups:
+          - tekton.dev
+          clusters:
+          - '*'
+          kinds:
+          - TaskRun
+          - PipelineRun
