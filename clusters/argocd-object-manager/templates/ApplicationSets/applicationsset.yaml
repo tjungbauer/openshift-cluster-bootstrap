@@ -50,6 +50,11 @@ spec:
       source:
         repoURL: {{ $.Values.general.source.repourl }}
         targetRevision: {{ $.Values.general.branch }}
+        {{- if .per_cluster_helm_values }}
+        helm:
+          valueFiles: 
+            - '{{ printf "{{ name }}-values.yaml" }}'
+        {{- end }}
         path: {{ .path }}
       {{ if .autosync_enabled }}
       syncPolicy:

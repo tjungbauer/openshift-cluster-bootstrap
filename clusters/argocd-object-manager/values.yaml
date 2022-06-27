@@ -20,6 +20,7 @@ applicationsets:
     enabled: true
     appsetname: generic-cluster-config
     path: clusters/all/clusterconfig/
+    per_cluster_helm_values: true
     generatorclusters: []
 
   install_oauth:
