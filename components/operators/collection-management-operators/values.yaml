@@ -39,5 +39,5 @@ operators:
       source: redhat-operators
       sourceNamespace: openshift-marketplace
     operatorgroup:
-      create: false
+      create: true
 
