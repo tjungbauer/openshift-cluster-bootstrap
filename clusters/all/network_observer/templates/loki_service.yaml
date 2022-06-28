@@ -4,6 +4,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: loki
+  namespace: network-observability
 spec:
   selector:
     app: loki
