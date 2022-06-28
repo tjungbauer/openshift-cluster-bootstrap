@@ -31,7 +31,7 @@ applicationsets:
         clusterurl: *mgmtcluster
     autosync_enabled: false # should be disabled for operators
 
-  install_netobserv_incl_loki:
+  install_netobserv_incl_loki_techpreview:
     enabled: true
     path: clusters/all/network_observer
     generatorlist:
