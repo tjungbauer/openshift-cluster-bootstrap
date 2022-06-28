@@ -28,3 +28,15 @@ operators:
       create: true
       notownnamespace: true
 
+  netobserv:
+    enabled: true
+    namespace: openshift-operators
+    subscription:
+      channel: alpha
+      approval: Automatic
+      operatorName: netobserv-operator
+      sourceName: community-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: false
+

@@ -24,13 +24,20 @@ applicationsets:
     generatorclusters: []
 
   install_oauth:
-    appsetname: install-oauth
     enabled: true
     path: clusters/all/authentication-identityprovider/overlays/default
     generatorlist:
       - clustername:  *mgmtclustername
         clusterurl: *mgmtcluster
     autosync_enabled: false # should be disabled for operators
+
+  install_netobserv_incl_loki:
+    enabled: true
+    path: clusters/all/network_observer
+    generatorlist:
+      - clustername:  *mgmtclustername
+        clusterurl: *mgmtcluster
+    autosync_enabled: false
 
   # A Collection of operators which will be deployed on ALL clusters.
   install-operator-collection:
