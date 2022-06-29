@@ -3,6 +3,7 @@ override-rhacm-operator-version: &rhacmversion release-2.5
 
 namespaces:
   - name: single-sign-on
+  - name: openshift-cert-manager-operator
 
 operators:
   rhacm-operator:
@@ -36,6 +37,18 @@ operators:
       channel: stable
       approval: Automatic
       operatorName: rhsso-operator
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: true
+
+  openshift-cert-manager-operator:
+    enabled: true
+    namespace: openshift-cert-manager-operator
+    subscription:
+      channel: tech-preview
+      approval: Automatic
+      operatorName: openshift-cert-manager-operator
       source: redhat-operators
       sourceNamespace: openshift-marketplace
     operatorgroup:
