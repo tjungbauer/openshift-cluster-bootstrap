@@ -6,7 +6,7 @@ cluster_admin_list:
 console_banner:
   enabled: true
   text: 'MGMT Cluster'
-  location: BannerTop 
+  location: BannerTop
   color: "#FFFFFF"
   backgroundcolor: '#0088ee'
 
@@ -22,16 +22,15 @@ config_monitoring:
 
 config_logging:
   enabled: true
-  retention: 
+  retention:
     application_max_age: 1d
     audit_max_age: 7d
     infra_max_age: 1d
   elasticsearch:
     nodecount: 3
-    storage: 
+    storage:
       size: 50G
       class: gp2
     redundancy_policy: ZeroRedundancy
   logforward:
-    enabled: true 
-
+    enabled: true
