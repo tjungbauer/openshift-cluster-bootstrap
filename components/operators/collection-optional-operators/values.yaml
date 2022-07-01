@@ -1,4 +1,3 @@
----
 namespaces:
   - name: codeready-workspaces
   - name: resource-locker-operator
