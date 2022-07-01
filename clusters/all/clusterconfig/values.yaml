@@ -1,3 +1,4 @@
+---
 # Default values
 cluster_admin_list:
   - default
@@ -22,14 +23,14 @@ config_monitoring:
 config_logging:
   enabled: false
   retention:
-    application_max_age: 
-    audit_max_age: 
-    infra_max_age: 
+    application_max_age:
+    audit_max_age:
+    infra_max_age:
   elasticsearch:
-    nodecount: 
+    nodecount:
     storage:
-      size: 
-      class: 
-    redundancy_policy: 
+      size:
+      class:
+    redundancy_policy:
   logforward:
     enabled: false

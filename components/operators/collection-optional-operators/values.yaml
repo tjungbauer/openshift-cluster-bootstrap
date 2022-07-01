@@ -1,3 +1,4 @@
+---
 namespaces:
   - name: codeready-workspaces
   - name: resource-locker-operator
@@ -39,4 +40,3 @@ operators:
       sourceNamespace: openshift-marketplace
     operatorgroup:
       create: false
-

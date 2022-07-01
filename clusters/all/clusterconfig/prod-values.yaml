@@ -1,5 +1,5 @@
-# General values
-#
+---
+# General values#
 
 # these users will have admin permissions in ArgoCD == OpenShift-Gitops
 cluster_admin_list:
@@ -8,11 +8,11 @@ cluster_admin_list:
 console_banner:
   enabled: true
   text: 'PROD Cluster'
-  location: BannerTop 
+  location: BannerTop
   color: '#FFFFFF'
   backgroundcolor: '#FF0000'
 
-etcd_encryption: 
+etcd_encryption:
   enabled: true
 
 disable_self_provisioner:
@@ -24,4 +24,4 @@ config_monitoring:
 config_logging:
   enabled: false
   logforward:
-    enabled: false 
+    enabled: false

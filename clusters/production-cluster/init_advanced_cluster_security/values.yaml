@@ -1,11 +1,11 @@
+---
 # General values
 #
 
 rhacs_namespace: stackrox
 rhacs_clustername: production-cluster
 
-central: 
+central:
   pvc: stackrox-db
-  egress: 
+  egress:
     connectivityPolicy: Online
-

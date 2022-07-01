@@ -1,4 +1,4 @@
-
+---
 override-rhacs-operator-version: &rhacsversion rhacs-3.69
 
 logging:
@@ -86,5 +86,6 @@ operators:
       sourceNamespace: openshift-marketplace
     operatorgroup:
       create: true
-      # rhacs does not support to monitor own namespace, therefor the spec in the OperatorGroup must be empty
+      # rhacs does not support to monitor own namespace,
+      # therefor the spec in the OperatorGroup must be empty
       notownnamespace: true
