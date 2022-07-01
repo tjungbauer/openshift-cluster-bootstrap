@@ -136,3 +136,4 @@ NOTE: All templates start with a line like: ```{{- if .Values.etcd_encryption.en
 
 3. In the appropriate values files for the cluster, add you parameters. 
 
+
