@@ -29,7 +29,7 @@ applicationsets:
     enabled: true
     path: clusters/all/authentication-identityprovider/overlays/default
     generatorlist:
-      - clustername: *mgmtclusternam
+      - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
     autosync_enabled: false  # should be disabled for operators
 
