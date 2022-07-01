@@ -10,9 +10,8 @@ mgmt-cluster-name: &mgmtclustername in-cluster
 production-cluster: &prodcluster https://api.ocp.ispworld.at:6443
 production-cluster-name: &prodclustername prod
 
-main_repourl: &mainrepourl
-  'https://github.com/tjungbauer/openshift-cluster-bootstrap'
-main_repobranch: &mainbranch main
+repourl: &repourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
+repobranch: &branch main
 
 argocd_projects:
   - *mgmtclustername
@@ -82,8 +81,8 @@ applications:
     project: default
     source:
       path: clusters/management-cluster/init_advanced_cluster_security/
-      repourl: *mainrepourl
-      targetrevision: *mainbranch
+      repourl: *repourl
+      targetrevision: *branch
 
   in-cluster-rhacs-demo-app:
     enabled: true
@@ -91,8 +90,8 @@ applications:
     project: default
     source:
       path: components/apps/rhacs-demo-applications/
-      repourl: *mainrepourl
-      targetrevision: *mainbranch
+      repourl: *repourl
+      targetrevision: *branch
 
 install_openshift_container_storage:
   appsetname: install-openshift-container-storage
@@ -105,5 +104,5 @@ install_openshift_container_storage:
 general:
   argocd_project: 'default'
   source:
-    repourl: *mainrepourl
-  branch: *mainbranch
+    repourl: *repourl
+  branch: *branch
