@@ -1,6 +1,4 @@
-# General values
-#
-
+---
 # these users will have admin permissions in ArgoCD == OpenShift-Gitops
 cluster_admin_list:
   - admin
