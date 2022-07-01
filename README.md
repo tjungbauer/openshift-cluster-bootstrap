@@ -135,3 +135,4 @@ Both contain a list of clusters where the Applicationsset shall be deployed. The
 NOTE: All templates start with a line like: ```{{- if .Values.etcd_encryption.enabled }}```. This allows to enable or disable configuration for specific clusters. 
 
 3. In the appropriate values files for the cluster, add you parameters. 
+

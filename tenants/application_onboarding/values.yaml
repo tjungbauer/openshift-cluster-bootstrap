@@ -1,0 +1,9 @@
+
+prefix: dev
+
+namespaces:
+  application_namspace_1:
+    enabled: true
+
+  application_namspace_2:
+    enabled: true
