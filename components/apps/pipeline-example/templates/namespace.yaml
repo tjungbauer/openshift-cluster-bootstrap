@@ -5,7 +5,3 @@ metadata:
   name: {{ .Values.demo_pipelines }}
   labels:
     openshift.io/cluster-monitoring: "true"
-  annotations:
-    operator.tekton.dev/prune.skip: false
-    operator.tekton.dev/prune.resources: "taskrun, pipelinerun"
-    operator.tekton.dev/prune.keep-since: 7200
