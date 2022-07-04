@@ -13,7 +13,7 @@ production-cluster-name: &prodclustername prod
 repourl: &repourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
 repobranch: &branch main
 
-argocd_projects: 
+argocd_projects:
   - *mgmtclustername
   - *prodclustername
 
