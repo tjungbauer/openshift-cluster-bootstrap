@@ -1,7 +1,7 @@
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: el-event-listener-zf5mwt
+  name: el-event-listener
   namespace: {{ .Values.demo_pipelines }}
 spec:
   to:
