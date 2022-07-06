@@ -1,0 +1,28 @@
+{{- range $key, $value := .Values.applications }}
+{{ if eq ($value.enabled | toString) "true" }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-wave: '5'
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  labels:
+    gitops.ownedBy: cluster-config
+  name: {{ $key | replace "_" "-" }}
+  namespace: gitops
+spec:
+  destination:
+    namespace: gitops
+    server: {{ .server }}
+  project: {{ .project }}
+  source:
+    path: {{ .source.path }}
+    repoURL: {{ .source.repourl }}
+    targetRevision: {{ .source.targetrevision }}
+  info:
+    - name: Description
+      value: '{{ .description }}'
+{{- end }}
+{{- end }}

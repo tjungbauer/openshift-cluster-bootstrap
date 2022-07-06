@@ -7,3 +7,7 @@ namespaces:
 
   application_namspace_2:
     enabled: true
+
+argocd_projects:
+  servicemesh-lab:
+    enabled: true

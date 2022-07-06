@@ -1,0 +1,29 @@
+---
+# General values
+#
+# Set cluster names ... Unfortunately the openshift-gitops operator keeps
+# removing the secret of the *mgmtclustername (local cluster),
+# therefor we switch ti list generator
+# https://issues.redhat.com/browse/GITOPS-1777
+mgmt-cluster: &mgmtcluster https://kubernetes.default.svc
+mgmt-cluster-name: &mgmtclustername in-cluster
+production-cluster: &prodcluster https://api.ocp.ispworld.at:6443
+production-cluster-name: &prodclustername prod
+
+repourl: &repourl 'https://github.com/tjungbauer/Servicemesh-Lab'
+repobranch: &branch main
+
+argocd_projects:
+  - *mgmtclustername
+  - *prodclustername
+
+applications:
+  lab.00-deploy-servicemesh-operators:
+    enabled: true
+    description: Deploy required ServiceMesh operators
+    server: *mgmtcluster
+    project: servicemesh-lab
+    source:
+      path: Lab.00_Deploy_Service_Mesh_Operators/
+      repourl: *repourl
+      targetrevision: *branch
