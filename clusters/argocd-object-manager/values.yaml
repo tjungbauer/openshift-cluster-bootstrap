@@ -20,7 +20,6 @@ argocd_projects:
 applicationsets:
   generic_clusterconfig:
     enabled: true
-    appsetname: generic-cluster-config
     path: clusters/all/clusterconfig/
     per_cluster_helm_values: true
     generatorclusters: []
@@ -28,6 +27,14 @@ applicationsets:
   install_oauth:
     enabled: true
     path: clusters/all/authentication-identityprovider/overlays/default
+    generatorlist:
+      - clustername: *mgmtclustername
+        clusterurl: *mgmtcluster
+    autosync_enabled: false  # should be disabled for operators
+
+  application_onboarding:
+    enabled: true
+    path: tenants/application_onboarding
     generatorlist:
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
