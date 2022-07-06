@@ -11,10 +11,10 @@ metadata:
   labels:
     gitops.ownedBy: cluster-config
   name: {{ $key | replace "_" "-" }}
-  namespace: gitops
+  namespace: {{ $.Values.argocd_namespace | default "openshift-gitops" }}
 spec:
   destination:
-    namespace: gitops
+    namespace: {{ $.Values.argocd_namespace | default "openshift-gitops" }}
     server: {{ .server }}
   project: {{ .project }}
   source:
