@@ -6,7 +6,7 @@ kind: AppProject
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
-  name: {{ . }}
+  name: {{ $key }}
   namespace: gitops
 spec:
   clusterResourceWhitelist:
