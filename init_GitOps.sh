@@ -1,15 +1,15 @@
 #!/bin/bash
 set -euf -o pipefail
-RED='\033[0;31m'
+RED='\033[37;41m'  # White text with red background
+CYAN_BG='\033[30;46m' # Black text with cyan background
 NC='\033[0m' # No Color
-
+TIMER=45 # Sleep timer to initially wait for the gitops-operator to be deployed before starting testing the deployments. 
 
 OPT_DRY_RUN='false'
 SECRET_MGMT=''
 OVERLAY='default'
 KUSTOMIZE="/usr/bin/env kustomize"
 HELM="/usr/bin/env helm"
-
 
 function showhelp() {
     cat <<EOF
@@ -89,7 +89,51 @@ function deploy() {
   printf "\n${RED}Deploy GITOPS${NC}\n"
   $KUSTOMIZE build bootstrap/openshift-gitops/overlays/"${OVERLAY}" | oc apply $DRY_RUN -f -
 
+  printf "\nGive the gitops-operator some time to be installed. ${RED}Waiting for $TIMER seconds...${NC}\n"
+  sleep $TIMER
+
+  printf "\n${RED}Waiting for operator to start. Chcking every 5 seconds.${NC}\n"
+  until oc get deployment gitops-operator-controller-manager -n openshift-operators
+  do
+    sleep 5;
+  done
+
+  printf "\n${RED}Waiting for openshift-gitops namespace to be created. Chcking every 5 seconds.${NC}\n"
+  until oc get ns openshift-gitops
+  do
+    sleep 5;
+  done
+
+  printf "\n${RED}Waiting for deployments to start. Chcking every 5 seconds.${NC}\n"
+  until oc get deployment cluster -n openshift-gitops
+  do
+    sleep 5;
+  done
+
+  echo "Waiting for all pods to be created"
+  deployments=(cluster kam openshift-gitops-applicationset-controller openshift-gitops-redis openshift-gitops-repo-server openshift-gitops-server)
+  for i in "${deployments[@]}";
+  do
+    printf "\n${CYAN_BG}Waiting for deployment $i ${NC}\n";
+    oc rollout status deployment $i -n openshift-gitops
+  done
+
+  echo "GitOps Operator ready"
+
+  deploy_app_of_apps
+
   verify_secret_mgmt
+}
+
+function deploy_app_of_apps() {
+
+  $HELM 2>&1 >/dev/null || error "Could not execute helm binary!"
+
+  printf "\n${RED}Deploy ArgoCD Application of Applications${NC}\n"
+  printf "This will create an ArgoCD Application of Applications which then automatically creates ArgoCD objects like ApplicationSets ad Application\n"
+
+  $HELM upgrade --install --values ./bootstrap/init_app_of_apps/values.yaml --namespace=openshift-gitops app-of-apps ./bootstrap/init_app_of_apps
+
 }
 
 # Deploy Sealed Secrets if selected
@@ -131,7 +175,7 @@ printf "This will bootstrap the GitOps operator with the ${RED}${OVERLAY}${NC} o
 If this is not what you want you can specify a different overlay via
 $0 -o <overlay name>\n\n"
 
-printf "Currently this repo supports the following overlays:\n\n"
+printf "Currently this repo supports the following overlays:\n"
 get_available_overlays
     
 printf "\nDo you wish to continue and install GitOps using the ${RED}${OVERLAY}${NC} settings?\n\n"
