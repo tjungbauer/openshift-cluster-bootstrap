@@ -29,17 +29,17 @@ rhacs:
     descr: 'Red Hat Advanced Cluster Security'
   
   central:
-    syncwave: '1'
+    syncwave: '3'
     pvc: stackrox-db
     egress:
       connectivityPolicy: Online
     scannerautoscaling: Disabled
         
   secured_cluster:
-    syncwave: '3'
+    syncwave: '4'
 
   job_init_bundle:
-    syncwave: '2'
+    syncwave: '3'
 
   consolelink:
-    syncwave: '2'
+    syncwave: '3'

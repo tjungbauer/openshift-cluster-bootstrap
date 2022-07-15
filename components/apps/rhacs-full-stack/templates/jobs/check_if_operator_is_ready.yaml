@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: check_operator-status
+  namespace: stackrox
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: '1'
+spec:
+  template:
+    spec:
+      containers:
+        - image: registry.redhat.io/ansible-automation-platform-21/ee-supported-rhel8:1.0
+          envFrom:
+          - secretRef:
+              name: central-htpasswd
+          command:
+            - /bin/bash
+            - -c
+            - |
+              #!/usr/bin/env bash
+              # Wait for central to be ready
+              attempt_counter=0
+              max_attempts=20
+              
+              echo "Waiting for central to be available..."
+              
+              until $(curl -k --output /dev/null --silent --head --fail https://central); do
+                  if [ ${attempt_counter} -eq ${max_attempts} ];then
+                    echo "Max attempts reached"
+                    exit 1
+                  fi
+                  printf '.'
+                  attempt_counter=$(($attempt_counter+1))
+                  echo "Made attempt $attempt_counter of $max_attempts, waiting..."
+                  sleep 5
+              done
+          name: init-quay
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      terminationGracePeriodSeconds: 30
+      serviceAccount: default
+      serviceAccountName: default
