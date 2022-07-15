@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: check_operator-status
+  name: check-operator-status
   namespace: stackrox
   annotations:
     argocd.argoproj.io/hook: Sync
