@@ -25,7 +25,7 @@ spec:
 
               # we assume that the operator is ready, once the CRD Central is available.
               # when this is the case ArgoCD can continue
-              until $(oc get crd/centrals.platform.stackrox.io2 &>/dev/null); do
+              until $(oc get crd/centrals.platform.stackrox.io &>/dev/null); do
                   if [ ${attempt_counter} -eq ${max_attempts} ];then
                     echo "Max attempts reached. I give up"
                     exit 1
