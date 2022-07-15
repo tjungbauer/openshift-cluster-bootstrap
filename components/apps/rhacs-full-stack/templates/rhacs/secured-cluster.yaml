@@ -3,6 +3,7 @@ kind: SecuredCluster
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: {{ .Values.rhacs.secured_cluster.syncwave | quote }}
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   name: local-cluster
   namespace: {{ .Values.rhacs.namespace.name | quote }}
 spec:
