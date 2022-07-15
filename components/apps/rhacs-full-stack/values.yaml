@@ -34,12 +34,12 @@ rhacs:
     egress:
       connectivityPolicy: Online
     scannerautoscaling: Disabled
-        
-  secured_cluster:
-    syncwave: '4'
 
   job_init_bundle:
     syncwave: '3'
 
   consolelink:
     syncwave: '3'
+        
+  secured_cluster:
+    syncwave: '4'
