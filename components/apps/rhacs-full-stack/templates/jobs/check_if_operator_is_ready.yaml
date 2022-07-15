@@ -12,9 +12,6 @@ spec:
     spec:
       containers:
         - image: registry.redhat.io/ansible-automation-platform-21/ee-supported-rhel8:1.0
-          envFrom:
-          - secretRef:
-              name: central-htpasswd
           command:
             - /bin/bash
             - -c
