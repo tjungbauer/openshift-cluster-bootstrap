@@ -4,7 +4,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
   name: create-cluster-init
-  namespace: {{ .Values.rhacs_namespace }}
+  namespace: {{ .Values.rhacs.namespace.name | quote }}
 rules:
   - apiGroups:
       - ""
@@ -30,7 +30,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: create-cluster-init
-  namespace: {{ .Values.rhacs_namespace }}
+  namespace: {{ .Values.rhacs.namespace.name | quote }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -38,10 +38,10 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: create-cluster-init
-    namespace: {{ .Values.rhacs_namespace }}
+    namespace: {{ .Values.rhacs.namespace.name | quote }}
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: create-cluster-init
-  namespace: {{ .Values.rhacs_namespace }}
+  namespace: {{ .Values.rhacs.namespace.name | quote }}
