@@ -76,7 +76,7 @@ operators:
       create: false
 
   rhacs-operator:
-    enabled: true
+    enabled: false # is deployed using "rhacs-full-stack" folder
     namespace: rhacs-operator
     subscription:
       channel: *rhacsversion

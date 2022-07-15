@@ -22,7 +22,9 @@ spec:
               # Wait for central to be ready
               attempt_counter=0
               max_attempts=20
+              
               echo "Waiting for central to be available..."
+              
               until $(curl -k --output /dev/null --silent --head --fail https://central); do
                   if [ ${attempt_counter} -eq ${max_attempts} ];then
                     echo "Max attempts reached"
@@ -33,13 +35,17 @@ spec:
                   echo "Made attempt $attempt_counter of $max_attempts, waiting..."
                   sleep 5
               done
+
               echo "Setup temporary OCP user to make ansible happy"
               echo "tempuser:x:$(id -u):$(id -g):,,,:${HOME}:/bin/bash" >> /etc/passwd
               echo "tempuser:x:$(id -G | cut -d' ' -f 2)" >> /etc/group
               id
+
               # Install community general in order to get json_query filter
               ansible-galaxy collection install community.general
+              
               git clone https://github.com/gnunn-gitops/acs-automation
+              
               cd acs-automation
               # Use available admin user with password in central-htpasswd secret, override endpoint to use service
               ansible-playbook acs.yaml -e username=admin -e password=$password -e api_endpoint=central

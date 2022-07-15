@@ -1,0 +1,40 @@
+---
+- debug:
+    msg: "Creating access set {{ item.name }} "
+
+# Retrieve the one permissionset we need to link to role
+- name: Retrieve permissionset
+  set_fact:
+    permission_set: "{{ permission_set_result.json.permissionSets | json_query(query) }}"
+  vars:
+    query: "[? name==`{{ item.permission_set }}`]"
+
+- debug:
+    msg: "{{ permission_set[0].id }}"
+
+# Retrieve the one permissionset we need to link to role
+- name: Retrieve access scope
+  set_fact:
+    access_scope: "{{ access_scope_result.json.accessScopes | json_query(query) }}"
+  vars:
+    query: "[? name==`{{ item.access_scope }}`]"
+
+- debug:
+    msg: "{{ access_scope[0].id }}"
+
+# Create role that links access set and permission set
+- name: Create role
+  uri:
+    url: "https://{{ api_endpoint }}/v1/roles/{{ item.name | urlencode }}"
+    method: POST
+    validate_certs: no
+    headers:
+        authorization: "{{ authorization }}"
+    body_format: json
+    body:
+      name: "{{ item.name }}"
+      description: "{{ item.description }}"
+      permissionSetId: "{{ permission_set[0].id}}"
+      accessScopeId: "{{ access_scope[0].id }}"
+      globalAccess: "{{ item.global_access }}"
+    status_code: [200, 409]
