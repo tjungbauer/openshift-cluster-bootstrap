@@ -1,29 +1,8 @@
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: check-operator-status
-  namespace: stackrox
-  annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
-    argocd.argoproj.io/sync-wave: '1'
-spec:
-  template:
-    spec:
-      containers:
-        - image: registry.redhat.io/ansible-automation-platform-21/ee-supported-rhel8:1.0
-          envFrom:
-          - secretRef:
-              name: central-htpasswd
-          command:
-            - /bin/bash
-            - -c
-            - |
               #!/usr/bin/env bash
               # Wait for central to be ready
               attempt_counter=0
               max_attempts=20
-
+              
               echo "Waiting for operator to be available..."
 
               # we assume that the operator is ready, once the CRD Central is available.
@@ -39,9 +18,3 @@ spec:
               done
 
               echo "Operator seeme to be ready"
-          name: init-quay
-      dnsPolicy: ClusterFirst
-      restartPolicy: Never
-      terminationGracePeriodSeconds: 30
-      serviceAccount: default
-      serviceAccountName: default
