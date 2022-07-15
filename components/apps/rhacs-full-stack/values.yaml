@@ -1,5 +1,5 @@
 ---
-override-rhacs-operator-version: &rhacsversion rhacs-3.69
+override-rhacs-operator-version: &rhacsversion rhacs-3.70
 
 # Install Operator RHACS 
 # Deploys Operator --> Subscription and Operatorgroup
@@ -11,7 +11,7 @@ operators:
     namespace: rhacs-operator
     subscription:
       channel: *rhacsversion
-      approval: Manual
+      approval: Automatic
       operatorName: rhacs-operator
       source: redhat-operators
       sourceNamespace: openshift-marketplace

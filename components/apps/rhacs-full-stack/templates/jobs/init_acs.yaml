@@ -45,10 +45,10 @@ spec:
               ansible-galaxy collection install community.general
 
               # Do a sparse checkout (nly a specific folder)
-              mkdir playboks
+              mkdir playbooks
               cd playbooks
 
-              git init                                                                                                                                                            ─╯
+              git init                                                                                                                                                            
               git remote add -f origin git@github.com:tjungbauer/openshift-cluster-bootstrap.git
               git config core.sparseCheckout true
               echo "ansible/rhacs-automation" >> .git/info/sparse-checkout
