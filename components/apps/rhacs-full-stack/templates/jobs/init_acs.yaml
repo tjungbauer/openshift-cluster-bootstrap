@@ -30,7 +30,6 @@ spec:
                     echo "Max attempts reached"
                     exit 1
                   fi
-                  printf '.'
                   attempt_counter=$(($attempt_counter+1))
                   echo "Made attempt $attempt_counter of $max_attempts, waiting..."
                   sleep 5
@@ -49,7 +48,7 @@ spec:
               cd playbooks
 
               git init                                                                                                                                                            
-              git remote add -f origin git@github.com:tjungbauer/openshift-cluster-bootstrap.git
+              git remote add -f origin https://github.com/tjungbauer/openshift-cluster-bootstrap.git
               git config core.sparseCheckout true
               echo "ansible/rhacs-automation" >> .git/info/sparse-checkout
               git pull origin main
