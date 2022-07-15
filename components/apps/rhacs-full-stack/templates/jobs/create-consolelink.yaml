@@ -40,7 +40,7 @@ spec:
               echo "Get public route of Central"
               ACS_ROUTE=`oc get route central -n stackrox -o jsonpath='{.spec.host}'`
 
-              cat <<'EOF' > consolelink.yaml
+              cat <<EOF > consolelink.yaml
               apiVersion: console.openshift.io/v1
               kind: ConsoleLink
               metadata:
