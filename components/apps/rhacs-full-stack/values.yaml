@@ -1,5 +1,5 @@
 ---
-override-rhacs-operator-version: &rhacsversion rhacs-3.69
+override-rhacs-operator-version: &rhacsversion latest
 
 # Install Operator RHACS 
 # Deploys Operator --> Subscription and Operatorgroup
@@ -39,4 +39,7 @@ rhacs:
     syncwave: '3'
 
   job_init_bundle:
+    syncwave: '2'
+
+  consolelink:
     syncwave: '2'

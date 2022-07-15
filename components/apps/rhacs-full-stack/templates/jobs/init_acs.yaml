@@ -43,10 +43,18 @@ spec:
 
               # Install community general in order to get json_query filter
               ansible-galaxy collection install community.general
+
+              # Do a sparse checkout (nly a specific folder)
+              mkdir playboks
+              cd playbooks
+
+              git init                                                                                                                                                            ─╯
+              git remote add -f origin git@github.com:tjungbauer/openshift-cluster-bootstrap.git
+              git config core.sparseCheckout true
+              echo "ansible/rhacs-automation" >> .git/info/sparse-checkout
+              git pull origin main
               
-              git clone https://github.com/gnunn-gitops/acs-automation
-              
-              cd acs-automation
+              cd ansible/rhacs-automation
               # Use available admin user with password in central-htpasswd secret, override endpoint to use service
               ansible-playbook acs.yaml -e username=admin -e password=$password -e api_endpoint=central
           name: init-quay
