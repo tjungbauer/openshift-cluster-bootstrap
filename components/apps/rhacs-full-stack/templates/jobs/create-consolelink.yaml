@@ -4,6 +4,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: {{ .Values.rhacs.consolelink.syncwave | quote }}
   name: create-cluster-link
+  namespace: {{ .Values.rhacs.namespace.name | quote }}
 spec:
   template:
     spec:
