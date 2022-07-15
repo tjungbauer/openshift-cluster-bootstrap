@@ -35,6 +35,14 @@ spec:
                   sleep 5
               done
 
+              # turned out it takes even more time until operator is ready, so lets check the deployment
+              deployments=(rhacs-operator-controller-manager)
+              for i in "${deployments[@]}";
+              do
+                printf "\nWaiting for deployment $i\n";
+                oc rollout status deployment $i -n rhacs-operator
+              done
+
               echo "Operator seems to be ready"
           name: init-quay
       dnsPolicy: ClusterFirst
