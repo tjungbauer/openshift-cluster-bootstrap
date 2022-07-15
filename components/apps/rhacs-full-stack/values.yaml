@@ -1,5 +1,5 @@
 ---
-override-rhacs-operator-version: &rhacsversion latest
+override-rhacs-operator-version: &rhacsversion rhacs-3.69
 
 # Install Operator RHACS 
 # Deploys Operator --> Subscription and Operatorgroup
