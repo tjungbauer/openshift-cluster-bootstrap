@@ -59,7 +59,6 @@ spec:
 
               oc apply -f consolelink.yaml
               echo "ConsoleLink has been created"
-              fi
           imagePullPolicy: Always
           name: create-cluster-init-bundle
       dnsPolicy: ClusterFirst
