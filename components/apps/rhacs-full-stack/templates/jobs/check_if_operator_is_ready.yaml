@@ -40,5 +40,5 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Never
       terminationGracePeriodSeconds: 30
-      serviceAccount: default
-      serviceAccountName: default
+      serviceAccount: create-cluster-init
+      serviceAccountName: create-cluster-init
