@@ -1,0 +1,42 @@
+---
+override-rhacs-operator-version: &rhacsversion rhacs-3.69
+
+# Install Operator RHACS 
+# Deploys Operator --> Subscription and Operatorgroup
+# Syncwave: 0 
+operators:
+  rhacs-operator:
+    enabled: true
+    syncwave: '0'
+    namespace: rhacs-operator
+    subscription:
+      channel: *rhacsversion
+      approval: Manual
+      operatorName: rhacs-operator
+      source: redhat-operators
+      sourceNamespace: openshift-marketplace
+    operatorgroup:
+      create: true
+      # rhacs does not support to monitor own namespace,
+      # therefor the spec in the OperatorGroup must be empty
+      notownnamespace: true
+
+
+rhacs:
+  namespace: 
+    name: stackrox
+    syncwave: '0'
+    descr: 'Red Hat Advanced Cluster Security'
+  
+  central:
+    syncwave: '1'
+    pvc: stackrox-db
+    egress:
+      connectivityPolicy: Online
+    scannerautoscaling: Disabled
+        
+  secured_cluster:
+    syncwave: '3'
+
+  job_init_bundle:
+    syncwave: '2'

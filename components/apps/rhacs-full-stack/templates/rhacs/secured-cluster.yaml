@@ -1,0 +1,18 @@
+apiVersion: platform.stackrox.io/v1alpha1
+kind: SecuredCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: {{ .Values.rhacs.secured_cluster.syncwave | quote }}
+  name: local-cluster
+  namespace: {{ .Values.rhacs.namespace.name | quote }}
+spec:
+  clusterName: local-cluster
+  admissionControl:
+    listenOnCreates: false
+    listenOnEvents: true
+    listenOnUpdates: false
+  perNode:
+    collector:
+      collection: KernelModule
+      imageFlavor: Regular
+    taintToleration: TolerateTaints
