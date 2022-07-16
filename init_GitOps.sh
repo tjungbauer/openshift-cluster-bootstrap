@@ -2,10 +2,10 @@
 set -euf -o pipefail
 RED='\033[37;41m'  # White text with red background
 CYAN_BG='\033[30;46m' # Black text with cyan background
+GREEN='\033[30;42m'  # Baclk text with green background
 NC='\033[0m' # No Color
 TIMER=45 # Sleep timer to initially wait for the gitops-operator to be deployed before starting testing the deployments. 
 
-OPT_DRY_RUN='false'
 SECRET_MGMT=''
 OVERLAY='default'
 KUSTOMIZE="/usr/bin/env kustomize"
@@ -18,7 +18,6 @@ Be sure to define at least the command line option -o
 The following options are known:
 
   -o ... Defines the OVERLAY. (i.e. -o default)
-  -d ... Defines if DRY RUN is used or not (i.e. -d=false)
 EOF
 
     exit 1
@@ -26,9 +25,6 @@ EOF
 
 while getopts ':d:o:h' 'OPTKEY'; do
     case ${OPTKEY} in
-        'd')
-            OPT_DRY_RUN='true'
-            ;;
         's')
             SECRET_MGMT=''
             ;;
@@ -52,14 +48,6 @@ while getopts ':d:o:h' 'OPTKEY'; do
             ;;
     esac
 done
-
-
-if ${OPT_DRY_RUN}; then
-    printf "${RED}DRY RUN is enabled !!!${NC}\n"
-    DRY_RUN="--dry-run=client"
-else
-    DRY_RUN=""
-fi
 
 function error() {
     echo "$1"
@@ -87,7 +75,7 @@ function verify_secret_mgmt() {
 # Deploy openshift-gitops
 function deploy() {
   printf "\n${RED}Deploy GITOPS${NC}\n"
-  $KUSTOMIZE build bootstrap/openshift-gitops/overlays/"${OVERLAY}" | oc apply $DRY_RUN -f -
+  $KUSTOMIZE build bootstrap/openshift-gitops/overlays/"${OVERLAY}" | oc apply -f -
 
   printf "\nGive the gitops-operator some time to be installed. ${RED}Waiting for $TIMER seconds...${NC}\n"
   sleep $TIMER
@@ -111,18 +99,45 @@ function deploy() {
   done
 
   echo "Waiting for all pods to be created"
+#  deployments=(cluster kam openshift-gitops-applicationset-controller openshift-gitops-redis openshift-gitops-repo-server openshift-gitops-server)
+#  for i in "${deployments[@]}";
+#  do
+#    printf "\n${CYAN_BG}Waiting for deployment $i ${NC}\n";
+#    oc rollout status deployment $i -n openshift-gitops
+#  done
+
+  waiting_for_argocd
+
+  echo "${GREEN}GitOps Operator ready${NC}"
+
+  patch_argocd
+
+  deploy_app_of_apps
+
+  verify_secret_mgmt
+}
+
+function waiting_for_argocd() {
+
   deployments=(cluster kam openshift-gitops-applicationset-controller openshift-gitops-redis openshift-gitops-repo-server openshift-gitops-server)
   for i in "${deployments[@]}";
   do
     printf "\n${CYAN_BG}Waiting for deployment $i ${NC}\n";
     oc rollout status deployment $i -n openshift-gitops
   done
+}
 
-  echo "GitOps Operator ready"
+function patch_argocd() {
+  
+  printf "\nLets use our patched ArgoCD CRD\n"
 
-  deploy_app_of_apps
+  $KUSTOMIZE build components/operators/openshift-gitops/overlays/patch-argocd | oc apply -f -
 
-  verify_secret_mgmt
+  sleep 10
+  waiting_for_argocd
+
+  echo "${GREEN}GitOps Operator ready... again${NC}"
+
 }
 
 function deploy_app_of_apps() {
@@ -139,7 +154,7 @@ function deploy_app_of_apps() {
 # Deploy Sealed Secrets if selected
 function install_sealed_secrets() {
   printf "\n${RED}Deploy Selaed Secrets${NC}\n"
-  $KUSTOMIZE build bootstrap/sealed-secrets/base | oc apply $DRY_RUN -f - 
+  $KUSTOMIZE build bootstrap/sealed-secrets/base | oc apply -f - 
 }
 
 # Deploy Hashicorp Vault if selected
