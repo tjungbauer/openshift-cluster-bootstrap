@@ -2,57 +2,17 @@
 set -euf -o pipefail
 RED='\033[37;41m'  # White text with red background
 CYAN_BG='\033[30;46m' # Black text with cyan background
-GREEN='\033[30;42m'  # Baclk text with green background
+GREEN='\033[30;42m'  # Black text with green background
 NC='\033[0m' # No Color
 TIMER=45 # Sleep timer to initially wait for the gitops-operator to be deployed before starting testing the deployments. 
+RECHECK_TIMER=10
 
-OVERLAY='default'
 KUSTOMIZE="/usr/bin/env kustomize"
 HELM="/usr/bin/env helm"
-
-function showhelp() {
-    cat <<EOF
-Be sure to define at least the command line option -o
-
-The following options are known:
-
-  -o ... Defines the OVERLAY. (i.e. -o default)
-EOF
-
-    exit 1
-}
-
-while getopts ':d:o:h' 'OPTKEY'; do
-    case ${OPTKEY} in
-        'o')
-            OVERLAY=${OPTARG}
-            ;;
-        'h')
-            showhelp
-            ;;
-        '?')
-            echo "INVALID OPTION -- ${OPTARG}" >&2
-            exit 1
-            ;;
-        ':')
-            echo "MISSING ARGUMENT for option -- ${OPTARG}" >&2
-            exit 1
-            ;;
-        *)
-            echo "UNIMPLEMENTED OPTION -- ${OPTKEY}" >&2
-            exit 1
-            ;;
-    esac
-done
 
 function error() {
     echo "$1"
     exit 1
-}
-
-# Get available overlays for openshift-gitops deployment
-function get_available_overlays() {
-    ls -1 bootstrap/openshift-gitops/overlays/
 }
 
 # Ask which Secret Manager should be installed
@@ -61,48 +21,42 @@ function verify_secret_mgmt() {
   printf "Press 1, 2, 3\n"
   select svn in "Sealed-Secrets" "Hashicorp-Vault" "None"; do
         case $svn in
-            Sealed-Secrets ) echo -e "Installing Sealed Secrets"; install_sealed_secrets; break;;
+            Sealed-Secrets ) echo "Installing Sealed Secrets"; install_sealed_secrets; break;;
             Hashicorp-Vault) echo "Installing Hashicorp Vault"; starting_vault; break;;
             None) echo "Using NO Secret Manager. Exiting"; exit;; 
         esac
     done  
 }
 
-# Deploy openshift-gitops
+# Deploy openshift-gitops-operator
 function deploy() {
-  printf "\n${RED}Deploy GITOPS${NC}\n"
-  $KUSTOMIZE build bootstrap/openshift-gitops/overlays/"${OVERLAY}" | oc apply -f -
+  printf "\n%bDeploying OpenShift GitOps Operator%b\n" "${RED}" "${NC}"
 
-  printf "\nGive the gitops-operator some time to be installed. ${RED}Waiting for $TIMER seconds...${NC}\n"
+  $HELM upgrade --install --values ./bootstrap/openshift-gitops/values.yaml --namespace=openshift-operators openshift-gitops-operator ./bootstrap/openshift-gitops
+
+  printf "\nGive the gitops-operator some time to be installed. %bWaiting for %s seconds...%b\n" "${RED}" "${TIMER}" "${NC}"
   sleep $TIMER
 
-  printf "\n${RED}Waiting for operator to start. Chcking every 5 seconds.${NC}\n"
+  printf "\n%bWaiting for operator to start. Chcking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
   until oc get deployment gitops-operator-controller-manager -n openshift-operators
   do
-    sleep 5;
+    sleep $RECHECK_TIMER;
   done
 
-  printf "\n${RED}Waiting for openshift-gitops namespace to be created. Chcking every 5 seconds.${NC}\n"
+  printf "\n%bWaiting for openshift-gitops namespace to be created. Chcking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
   until oc get ns openshift-gitops
   do
-    sleep 5;
+    sleep $RECHECK_TIMER;
   done
 
-  printf "\n${RED}Waiting for deployments to start. Chcking every 5 seconds.${NC}\n"
+  printf "\n%bWaiting for deployments to start. Chcking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
   until oc get deployment cluster -n openshift-gitops
   do
-    sleep 5;
+    sleep $RECHECK_TIMER;
   done
 
   echo "Waiting for all pods to be created"
-#  deployments=(cluster kam openshift-gitops-applicationset-controller openshift-gitops-redis openshift-gitops-repo-server openshift-gitops-server)
-#  for i in "${deployments[@]}";
-#  do
-#    printf "\n${CYAN_BG}Waiting for deployment $i ${NC}\n";
-#    oc rollout status deployment $i -n openshift-gitops
-#  done
-
-  waiting_for_argocd
+  waiting_for_argocd_pods
 
   echo "${GREEN}GitOps Operator ready${NC}"
 
@@ -113,34 +67,35 @@ function deploy() {
   verify_secret_mgmt
 }
 
-function waiting_for_argocd() {
+# Be sure that all Deployments are ready
+function waiting_for_argocd_pods() {
 
   deployments=(cluster kam openshift-gitops-applicationset-controller openshift-gitops-redis openshift-gitops-repo-server openshift-gitops-server)
   for i in "${deployments[@]}";
   do
-    printf "\n${CYAN_BG}Waiting for deployment $i ${NC}\n";
-    oc rollout status deployment $i -n openshift-gitops
+    printf "\n%bWaiting for deployment $i %b\n" "${CYAN_BG}" "${NC}"
+    oc rollout status deployment "$i" -n openshift-gitops
   done
 }
 
+# PATCH the ArgoCD Operator CRD
 function patch_argocd() {
   
   printf "\nLets use our patched ArgoCD CRD\n"
 
-  $KUSTOMIZE build components/operators/openshift-gitops/overlays/patch-argocd | oc apply -f -
+  oc apply -f bootstrap/openshift-gitops/PATCH_openshift-gitops-cr.yaml
 
-  sleep 10
-  waiting_for_argocd
+  sleep $RECHECK_TIMER
+  waiting_for_argocd_pods
 
-  echo "${GREEN}GitOps Operator ready... again${NC}"
+  printf "%bGitOps Operator ready... again%b\n" "${GREEN}" "${NC}"
 
 }
 
+# Deploy the Application of Applications
 function deploy_app_of_apps() {
 
-  $HELM 2>&1 >/dev/null || error "Could not execute helm binary!"
-
-  printf "\n${RED}Deploy ArgoCD Application of Applications${NC}\n"
+  printf "\n%bDeploy ArgoCD Application of Applications$%b\n" "${RED}" "${NC}"
   printf "This will create an ArgoCD Application of Applications which then automatically creates ArgoCD objects like ApplicationSets ad Application\n"
 
   $HELM upgrade --install --values ./bootstrap/init_app_of_apps/values.yaml --namespace=openshift-gitops app-of-apps ./bootstrap/init_app_of_apps
@@ -149,23 +104,21 @@ function deploy_app_of_apps() {
 
 # Deploy Sealed Secrets if selected
 function install_sealed_secrets() {
-  printf "\n${RED}Deploy Selaed Secrets${NC}\n"
+  printf "\n%bDeploy Selaed Secrets%b\n" "${RED}" "${NC}"
   $KUSTOMIZE build bootstrap/sealed-secrets/base | oc apply -f - 
 }
 
 # Deploy Hashicorp Vault if selected
 function starting_vault() {
 
-  $HELM 2>&1 >/dev/null || error "Could not execute helm binary!"
-
   printf "\nWhile the Helm chart automatically sets up complex resources and exposes the configuration to meet your requirements, 
-it does not automatically operate Vault. ${RED}You are still responsible for learning how to operate, monitor, backup, upgrade, etc. the Vault cluster.${NC}\n"
+it does not automatically operate Vault. %bYou are still responsible for learning how to operate, monitor, backup, upgrade, etc. the Vault cluster.%b\n" "${RED}" "${NC}"
 
   printf "\nDo you understand?\n"
 
   select vault in "Yes" "No"; do
         case $vault in
-            Yes ) echo -e "Installing Hashicorp Vault. NOTE: The values files to overwrite the settings can be found at bootstrap/vault/overwrite-values.yaml"; install_vault; break;;
+            Yes ) echo "Installing Hashicorp Vault. NOTE: The values files to overwrite the settings can be found at bootstrap/vault/overwrite-values.yaml"; install_vault; break;;
             No) echo "Exiting"; exit;;
         esac
   done 
@@ -174,26 +127,20 @@ it does not automatically operate Vault. ${RED}You are still responsible for lea
 
 function install_vault() {
 
-  printf "\n${RED}Deploy Hashicorp Vault${NC}\n"
+  printf "\n%bDeploy Hashicorp Vault%b\n" "${RED}" "${NC}"
   $HELM repo add hashicorp https://helm.releases.hashicorp.com
   $HELM repo update
   $HELM upgrade --install vault hashicorp/vault --values bootstrap/vault/overwrite-values.yaml --namespace=vault --create-namespace
 }
 
-$KUSTOMIZE 2>&1 >/dev/null || error "Could not execute kustomize binary!"
+$KUSTOMIZE >/dev/null 2>&1 || error "Could not execute kustomize binary!"
+$HELM >/dev/null 2>&1 || error "Could not execute helm binary!"
 
-printf "This will bootstrap the GitOps operator with the ${RED}${OVERLAY}${NC} overlay.
-If this is not what you want you can specify a different overlay via
-$0 -o <overlay name>\n\n"
-
-printf "Currently this repo supports the following overlays:\n"
-get_available_overlays
-    
-printf "\nDo you wish to continue and install GitOps using the ${RED}${OVERLAY}${NC} settings?\n\n"
+printf "\nDo you wish to continue and install GitOps?\n\n"
 printf "Press 1 or 2\n"
 select yn in "Yes" "No" "Skip"; do
     case $yn in
-        Yes ) echo -e "Starting Deployment"; deploy; break;;
+        Yes ) echo "Starting Deployment"; deploy; break;;
         No ) echo "Exit"; exit;;
         Skip) echo -e "${RED}Skip deployment of GitOps and continue with Secret Management${NC}"; verify_secret_mgmt; break;;
     esac
