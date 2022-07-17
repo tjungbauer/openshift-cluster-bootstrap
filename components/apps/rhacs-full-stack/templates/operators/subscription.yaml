@@ -9,7 +9,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: {{ $value.syncwave | quote }}
-    argocd.argoproj.io/hook: PreSync
 spec:
   channel: {{ $value.subscription.channel | default "stable" | quote }}
   installPlanApproval: {{ $value.subscription.approval | default "Automatic" | quote }}
