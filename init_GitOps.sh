@@ -6,7 +6,6 @@ GREEN='\033[30;42m'  # Baclk text with green background
 NC='\033[0m' # No Color
 TIMER=45 # Sleep timer to initially wait for the gitops-operator to be deployed before starting testing the deployments. 
 
-SECRET_MGMT=''
 OVERLAY='default'
 KUSTOMIZE="/usr/bin/env kustomize"
 HELM="/usr/bin/env helm"
@@ -25,9 +24,6 @@ EOF
 
 while getopts ':d:o:h' 'OPTKEY'; do
     case ${OPTKEY} in
-        's')
-            SECRET_MGMT=''
-            ;;
         'o')
             OVERLAY=${OPTARG}
             ;;
