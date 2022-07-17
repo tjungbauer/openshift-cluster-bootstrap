@@ -63,7 +63,7 @@ spec:
                   echo "ERROR: Operator is not ready"
                   exit 1
               fi
-          name: init-quay
+          name: check-operator
       dnsPolicy: ClusterFirst
       restartPolicy: Never
       terminationGracePeriodSeconds: 30

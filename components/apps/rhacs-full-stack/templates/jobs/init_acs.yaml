@@ -56,7 +56,7 @@ spec:
               cd ansible/rhacs-automation || exit
               # Use available admin user with password in central-htpasswd secret, override endpoint to use service
               ansible-playbook acs.yaml -e username=admin -e password=$password -e api_endpoint=central
-          name: init-quay
+          name: init-acs
       dnsPolicy: ClusterFirst
       restartPolicy: Never
       terminationGracePeriodSeconds: 30
