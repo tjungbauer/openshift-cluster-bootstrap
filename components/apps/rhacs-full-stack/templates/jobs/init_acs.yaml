@@ -45,7 +45,7 @@ spec:
 
               # Do a sparse checkout (nly a specific folder)
               mkdir playbooks
-              cd playbooks
+              cd playbooks || exit
 
               git init                                                                                                                                                            
               git remote add -f origin https://github.com/tjungbauer/openshift-cluster-bootstrap.git
@@ -53,7 +53,7 @@ spec:
               echo "ansible/rhacs-automation" >> .git/info/sparse-checkout
               git pull origin main
               
-              cd ansible/rhacs-automation
+              cd ansible/rhacs-automation || exit
               # Use available admin user with password in central-htpasswd secret, override endpoint to use service
               ansible-playbook acs.yaml -e username=admin -e password=$password -e api_endpoint=central
           name: init-quay
