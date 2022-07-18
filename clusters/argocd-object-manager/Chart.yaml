@@ -1,3 +1,6 @@
 apiVersion: v2
-name: root
+name: argocd_object_manager
+description: Here we are, this is the main entry point for Gitops. All Applications(Sets) in here are automatically created by the App-Of-Apps
 version: 1.0.0  
+maintainers:
+  - name: tjungbau

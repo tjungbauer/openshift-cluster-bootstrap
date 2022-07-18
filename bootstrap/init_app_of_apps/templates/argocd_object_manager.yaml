@@ -4,6 +4,7 @@ metadata:
   name: argcd-object-manager
   labels:
     gitops.ownedBy: cluster-config
+{{ include "common.labels" . | indent 4 }}
 spec:
   destination:
     namespace: argocd

@@ -1,3 +1,6 @@
 apiVersion: v2
-name: root
+name: management-gitops
+description: Deployment of a GitOps for Application Management
 version: 1.0.0  
+maintainers:
+  - name: tjungbau

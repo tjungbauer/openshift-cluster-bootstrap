@@ -1,6 +1,6 @@
 apiVersion: v2
 name: pipeline-example
-description: A Helm chart for Kubernetes
+description: Create an example Pipeline which does a linting of openshift-cluster-bootstrap using kubelinter, yamllin, yamlscore ....
 
 # A chart can be either an 'application' or a 'library' chart.
 #

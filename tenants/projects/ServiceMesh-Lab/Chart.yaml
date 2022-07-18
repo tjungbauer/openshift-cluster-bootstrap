@@ -1,3 +1,6 @@
 apiVersion: v2
-name: root
+name: servicemesh-labs
+description: Deployment of ServiceMesh Labs for Demos
 version: 1.0.0  
+maintainers:
+  - name: tjungbau
