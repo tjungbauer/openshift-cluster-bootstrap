@@ -52,5 +52,4 @@ spec:
     batchWait: 1s
     minBackoff: 1s
     batchSize: 102400
-    timestampLabel: TimeFlowEnd
   namespace: network-observability
