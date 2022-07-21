@@ -20,7 +20,7 @@ spec:
             - |
              #!/usr/bin/env bash
              # Wait for central to be ready
-             sleep_timer=20
+             sleep_timer={{ .Values.compliance.wait_time }}
              status=0
 
              echo "Waiting for operator to be available..."
