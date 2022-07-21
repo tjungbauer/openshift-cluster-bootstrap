@@ -7,4 +7,5 @@ metadata:
     openshift.io/node-selector: ''
   name: {{ .Values.rhacs.namespace.name }}
   labels:
-   openshift.io/cluster-monitoring: "true"
+    openshift.io/cluster-monitoring: "true"
+    {{- include "rhacs.labels" $ | nindent 4 }}

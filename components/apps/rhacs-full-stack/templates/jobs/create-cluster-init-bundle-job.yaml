@@ -5,6 +5,9 @@ metadata:
     argocd.argoproj.io/sync-wave: {{ .Values.rhacs.job_init_bundle.syncwave | quote }}
   name: create-cluster-init-bundle
   namespace: {{ .Values.rhacs.namespace.name | quote }}
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    {{- include "rhacs.labels" $ | nindent 4 }}
 spec:
   template:
     spec:
@@ -28,7 +31,7 @@ spec:
 
                 # Wait for central to be ready
                 attempt_counter=0
-                max_attempts=20
+                max_attempts={{ .Values.rhacs.job_vars.max_attempts | default 20 }}
                 echo "Waiting for central to be available..."
                 until $(curl -k --output /dev/null --silent --head --fail https://central); do
                     if [ ${attempt_counter} -eq ${max_attempts} ];then
@@ -61,6 +64,6 @@ spec:
           name: create-cluster-init-bundle
       dnsPolicy: ClusterFirst
       restartPolicy: Never
-      serviceAccount: create-cluster-init
-      serviceAccountName: create-cluster-init
+      serviceAccount: {{ include "rhacs.serviceAccountName" $ }}
+      serviceAccountName: {{ include "rhacs.serviceAccountName" $ }}
       terminationGracePeriodSeconds: 30

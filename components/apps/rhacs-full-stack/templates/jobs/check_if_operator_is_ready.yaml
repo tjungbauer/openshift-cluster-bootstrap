@@ -2,11 +2,14 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: check-operator-status
-  namespace: stackrox
+  namespace: {{ .Values.rhacs.namespace.name | quote }}
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
     argocd.argoproj.io/sync-wave: '1'
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    {{- include "rhacs.labels" $ | nindent 4 }}
 spec:
   template:
     spec:
@@ -19,9 +22,9 @@ spec:
              #!/usr/bin/env bash
               # Wait for central to be ready
               attempt_counter=0
-              max_attempts=20
-              sleep_timer=20
-              crd_check_time=5
+              max_attempts={{ .Values.rhacs.job_vars.max_attempts | default 20 }}
+              sleep_timer={{ .Values.rhacs.job_vars.wait_time | default 20 }}
+              crd_check_time={{ .Values.rhacs.job_vars.crd_check_time | default 5 }}
               status=0
 
               echo "Waiting for operator to be available..."
@@ -45,13 +48,13 @@ spec:
               for i in "${deployments[@]}";
               do
                 printf "\nWaiting for deployment %s\n" "$i";
-                oc get deployment/"$i" -n rhacs-operator
+                oc get deployment/"$i" -n {{ .Values.operators.rhacs_operator.namespace }}
                 depl_status=$?
                 if [ $depl_status -eq 1 ]; then
                     echo "Deployment not yet found... Give Operator $sleep_timer seconds to create the Deployment"
                     sleep $sleep_timer
                 fi
-                oc rollout status deployment "$i" -n rhacs-operator
+                oc rollout status deployment "$i" -n {{ .Values.operators.rhacs_operator.namespace }}
                 status=$?
               done
 
@@ -67,5 +70,5 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Never
       terminationGracePeriodSeconds: 30
-      serviceAccount: create-cluster-init
-      serviceAccountName: create-cluster-init
+      serviceAccount: {{ include "rhacs.serviceAccountName" $ }}
+      serviceAccountName: {{ include "rhacs.serviceAccountName" $ }}

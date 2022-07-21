@@ -2,10 +2,13 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: init-acs
-  namespace: stackrox
+  namespace: {{ .Values.rhacs.namespace.name | quote }}
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    {{- include "rhacs.labels" $ | nindent 4 }}
 spec:
   template:
     spec:
@@ -21,7 +24,7 @@ spec:
               #!/usr/bin/env bash
               # Wait for central to be ready
               attempt_counter=0
-              max_attempts=20
+              max_attempts={{ .Values.rhacs.job_vars.max_attempts | default 20 }}
               
               echo "Waiting for central to be available..."
               

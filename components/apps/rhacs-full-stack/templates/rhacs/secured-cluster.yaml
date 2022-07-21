@@ -6,6 +6,9 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   name: local-cluster
   namespace: {{ .Values.rhacs.namespace.name | quote }}
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    {{- include "rhacs.labels" $ | nindent 4 }}
 spec:
   clusterName: local-cluster
   admissionControl:

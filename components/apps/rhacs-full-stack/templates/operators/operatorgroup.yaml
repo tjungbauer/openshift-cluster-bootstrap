@@ -10,6 +10,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: {{ $value.syncwave | quote }}
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    {{- include "rhacs.labels" $ | nindent 4 }}
 {{- if $value.operatorgroup.notownnamespace }}
 spec: {}
 {{- else }}

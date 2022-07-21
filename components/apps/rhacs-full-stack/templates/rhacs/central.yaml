@@ -7,6 +7,9 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   name: central
   namespace: {{ .Values.rhacs.namespace.name | quote }}
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    {{- include "rhacs.labels" $ | nindent 4 }}
 spec:
   central:
     exposure:
