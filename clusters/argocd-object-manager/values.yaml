@@ -23,6 +23,8 @@ applicationsets:
     path: clusters/all/clusterconfig/
     per_cluster_helm_values: true
     generatorclusters: []
+#    repourl: "" # Optional
+#    targetrevision: "" # Optional
 
   install_oauth:
     enabled: true
@@ -95,8 +97,6 @@ applications:
     project: default
     source:
       path: components/apps/rhacs-full-stack
-      repourl: *repourl
-      targetrevision: *branch
 
   in-cluster-rhacs-demo-app:
     enabled: true
@@ -104,8 +104,6 @@ applications:
     project: default
     source:
       path: components/apps/rhacs-demo-applications/
-      repourl: *repourl
-      targetrevision: *branch
 
   in-cluster-pipeline-demo:
     enabled: true
@@ -113,8 +111,6 @@ applications:
     project: default
     source:
       path: components/apps/pipeline-example/
-      repourl: *repourl
-      targetrevision: *branch
 
 install_openshift_container_storage:
   appsetname: install-openshift-container-storage
@@ -124,6 +120,8 @@ install_openshift_container_storage:
       clusterurl: *mgmtcluster
   autosync_enabled: false  # should be disabled for operators
 
+# These define the default values. 
+# It is possible to overwrite repourl and targetrevision in the Applications(Sets)
 general:
   argocd_project: 'default'
   source:

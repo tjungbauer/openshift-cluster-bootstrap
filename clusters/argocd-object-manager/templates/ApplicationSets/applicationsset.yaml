@@ -8,6 +8,8 @@ metadata:
   namespace: openshift-gitops
   annotations:
     argocd.argoproj.io/sync-wave: "5"
+  labels:
+    {{- include "argo.labels" $ | nindent 4 }}
 spec:
   generators:
     {{- if .generatorlist }}
@@ -48,8 +50,8 @@ spec:
           {{ printf "{{ name }}" }}
       {{- end }}
       source:
-        repoURL: {{ $.Values.general.source.repourl }}
-        targetRevision: {{ $.Values.general.branch }}
+        repoURL: {{ .repourl | default $.Values.general.source.repourl }}
+        targetRevision: {{ .targetrevision | default $.Values.general.branch }}
         {{- if .per_cluster_helm_values }}
         helm:
           valueFiles: 

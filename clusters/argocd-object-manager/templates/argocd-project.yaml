@@ -6,6 +6,8 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
   name: {{ . }}
   namespace: openshift-gitops
+  labels:
+    {{- include "argo.labels" $ | nindent 4 }}
 spec:
   clusterResourceWhitelist:
     - group: '*'
