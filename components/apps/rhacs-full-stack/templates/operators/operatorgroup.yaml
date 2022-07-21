@@ -5,7 +5,7 @@
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  name: {{ $key | default "demo-operator-group" | quote }}
+  name: {{ $key | replace "_" "-" | default "demo-operator-group" | quote }}
   namespace: {{ $value.namespace | quote }}
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
