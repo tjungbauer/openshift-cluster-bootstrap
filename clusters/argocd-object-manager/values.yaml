@@ -81,6 +81,13 @@ applicationsets:
         clusterurl: *mgmtcluster
     autosync_enabled: false  # should be disabled for operators
 
+  # Compliance Scans should happen on ALL clusters
+  install_compliance_scans:
+    enabled: true
+    path: components/apps/complianceOperator-full-stack
+    generatorclusters: []
+    autosync_enabled: false  # should be disabled for operators
+
 applications:
   in-cluster-init-rhacs:
     enabled: true
