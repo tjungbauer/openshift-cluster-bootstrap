@@ -58,7 +58,7 @@ function deploy() {
   echo "Waiting for all pods to be created"
   waiting_for_argocd_pods
 
-  echo "${GREEN}GitOps Operator ready${NC}"
+  printf "%bGitOps Operator ready%b\n" "${GREEN}" "${NC}"
 
   patch_argocd
 
