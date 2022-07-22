@@ -43,13 +43,13 @@ function deploy() {
     sleep $RECHECK_TIMER;
   done
 
-  printf "\n%bWaiting for openshift-gitops namespace to be created. Chcking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
+  printf "\n%bWaiting for openshift-gitops namespace to be created. Checking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
   until oc get ns openshift-gitops
   do
     sleep $RECHECK_TIMER;
   done
 
-  printf "\n%bWaiting for deployments to start. Chcking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
+  printf "\n%bWaiting for deployments to start. Checking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
   until oc get deployment cluster -n openshift-gitops
   do
     sleep $RECHECK_TIMER;
@@ -104,7 +104,7 @@ function deploy_app_of_apps() {
 
 # Deploy Sealed Secrets if selected
 function install_sealed_secrets() {
-  printf "\n%bDeploy Selaed Secrets%b\n" "${RED}" "${NC}"
+  printf "\n%bDeploy Sealed Secrets%b\n" "${RED}" "${NC}"
   $KUSTOMIZE build bootstrap/sealed-secrets/base | oc apply -f - 
 }
 
