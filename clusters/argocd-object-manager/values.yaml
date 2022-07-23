@@ -86,9 +86,11 @@ applicationsets:
   # Compliance Scans should happen on ALL clusters
   install_compliance_scans:
     enabled: true
-    path: components/apps/complianceOperator-full-stack
+    path: charts/compliance-operator-full
     generatorclusters: []
     autosync_enabled: false  # should be disabled for operators
+    repourl: "https://github.com/tjungbauer/helm-charts"
+    targetrevision: "main"
 
 applications:
   in-cluster-init-rhacs:
