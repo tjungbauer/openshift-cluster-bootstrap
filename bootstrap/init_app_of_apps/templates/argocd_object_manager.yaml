@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argcd-object-manager
+  name: argocd-object-manager
   labels:
     gitops.ownedBy: cluster-config
 {{ include "common.labels" . | indent 4 }}
@@ -20,4 +20,4 @@ spec:
       selfHeal: true
   info:
     - name: Description
-      value: 'This is the starting point which will initialize all applicationsets or argcd applications'
+      value: 'This is the starting point which will initialize all applicationsets or argocd applications'
