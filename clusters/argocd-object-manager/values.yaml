@@ -99,8 +99,8 @@ applications:
     project: default
     source:
       path: charts/rhacs-full/
-    repourl: "https://github.com/tjungbauer/helm-charts"
-    targetrevision: "main"
+      repourl: "https://github.com/tjungbauer/helm-charts"
+      targetrevision: "main"
 
   in-cluster-rhacs-demo-app:
     enabled: true
