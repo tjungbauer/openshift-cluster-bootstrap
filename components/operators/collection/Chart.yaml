@@ -1,6 +1,0 @@
-apiVersion: v2
-name: collection
-description: Collection of Operators which can be deployed on Demo Systems. 
-version: 1.0.0  
-maintainers:
-  - name: tjungbau

@@ -53,26 +53,32 @@ applicationsets:
   # A Collection of operators which will be deployed on ALL clusters.
   install-operator-collection:
     enabled: true
-    path: components/operators/collection
+    path: charts/collection-operators
     generatorclusters: []
     autosync_enabled: false  # should be disabled for operators
+    repourl: "https://github.com/tjungbauer/helm-charts"
+    targetrevision: "main"
 
   # A collection of MANAGEMENT operators,
   # installed usually on the management cluster only.
   install-mgmt-operator-collection:
     enabled: true
-    path: components/operators/collection-management-operators
+    path: charts/collection-mgmt-operators
     generatorlist:
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
     autosync_enabled: false  # should be disabled for operators
+    repourl: "https://github.com/tjungbauer/helm-charts"
+    targetrevision: "main"
 
   # A Collection of OPTIONAL operators which will be deployed on ALL clusters.
   install_optional_operator_collection:
     enabled: true
-    path: components/operators/collection-optional-operators
+    path: charts/collection-optional-operators
     generatorclusters: []
     autosync_enabled: false  # should be disabled for operators
+    repourl: "https://github.com/tjungbauer/helm-charts"
+    targetrevision: "main"
 
   install_application_gitops:
     enabled: true
