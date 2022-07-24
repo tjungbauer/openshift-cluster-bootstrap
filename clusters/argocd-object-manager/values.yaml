@@ -98,7 +98,9 @@ applications:
     server: *mgmtcluster
     project: default
     source:
-      path: components/apps/rhacs-full-stack
+      path: charts/rhacs-full/
+    repourl: "https://github.com/tjungbauer/helm-charts"
+    targetrevision: "main"
 
   in-cluster-rhacs-demo-app:
     enabled: true
