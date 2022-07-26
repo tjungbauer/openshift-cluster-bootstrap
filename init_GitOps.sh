@@ -7,8 +7,8 @@ NC='\033[0m' # No Color
 TIMER=45 # Sleep timer to initially wait for the gitops-operator to be deployed before starting testing the deployments. 
 RECHECK_TIMER=10
 
-KUSTOMIZE="/usr/bin/env kustomize"
 HELM="/usr/bin/env helm"
+HELM_CHARTS="https://tjungbauer.github.io/helm-charts/"
 
 function error() {
     echo "$1"
@@ -28,11 +28,23 @@ function verify_secret_mgmt() {
     done  
 }
 
+function add_helm_repo() {
+
+  printf "\nAdding Helm Repo %s\n" "${HELM_CHARTS}"
+  $HELM repo add tjungbauer ${HELM_CHARTS}
+  $HELM repo update
+
+}
+
 # Deploy openshift-gitops-operator
 function deploy() {
   printf "\n%bDeploying OpenShift GitOps Operator%b\n" "${RED}" "${NC}"
 
-  $HELM upgrade --install --values ./bootstrap/openshift-gitops/values.yaml --namespace=openshift-operators openshift-gitops-operator ./bootstrap/openshift-gitops
+  add_helm_repo
+
+  #$HELM upgrade --install --values ./bootstrap/openshift-gitops/values.yaml --namespace=openshift-operators openshift-gitops-operator ./bootstrap/openshift-gitops
+  $HELM upgrade --install --namespace=openshift-operators openshift-gitops-operator tjungbauer/openshift-gitops
+
 
   printf "\nGive the gitops-operator some time to be installed. %bWaiting for %s seconds...%b\n" "${RED}" "${TIMER}" "${NC}"
   sleep $TIMER
@@ -105,7 +117,9 @@ function deploy_app_of_apps() {
 # Deploy Sealed Secrets if selected
 function install_sealed_secrets() {
   printf "\n%bDeploy Sealed Secrets%b\n" "${RED}" "${NC}"
-  $KUSTOMIZE build bootstrap/sealed-secrets/base | oc apply -f - 
+  
+  add_helm_repo
+  $HELM upgrade --install sealed-secrets tjungbauer/sealed-secrets --set 'sealed-secrets.enabled=true'
 }
 
 # Deploy Hashicorp Vault if selected
@@ -133,7 +147,6 @@ function install_vault() {
   $HELM upgrade --install vault hashicorp/vault --values bootstrap/vault/overwrite-values.yaml --namespace=vault --create-namespace
 }
 
-$KUSTOMIZE >/dev/null 2>&1 || error "Could not execute kustomize binary!"
 $HELM >/dev/null 2>&1 || error "Could not execute helm binary!"
 
 printf "\nDo you wish to continue and install GitOps?\n\n"

@@ -63,7 +63,7 @@ applicationsets:
   # installed usually on the management cluster only.
   install-mgmt-operator-collection:
     enabled: true
-    path: charts/collection-mgmt-operators
+    path: charts/collection-management-operators
     generatorlist:
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
@@ -92,7 +92,7 @@ applicationsets:
   # Compliance Scans should happen on ALL clusters
   install_compliance_scans:
     enabled: true
-    path: charts/compliance-operator-full
+    path: charts/compliance-operator-full-stack
     generatorclusters: []
     autosync_enabled: false  # should be disabled for operators
     repourl: "https://github.com/tjungbauer/helm-charts"
@@ -104,7 +104,7 @@ applications:
     server: *mgmtcluster
     project: default
     source:
-      path: charts/rhacs-full/
+      path: charts/rhacs-full-stack
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
 

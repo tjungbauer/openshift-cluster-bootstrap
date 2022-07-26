@@ -1,6 +1,0 @@
-apiVersion: v2
-name: openshift_gitops
-description: Installs and patches the Red Hat Openshift Gitops Operator
-version: 1.0.0  
-maintainers:
-  - name: tjungbau
