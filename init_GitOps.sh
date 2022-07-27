@@ -31,7 +31,7 @@ function verify_secret_mgmt() {
 function add_helm_repo() {
 
   printf "\nAdding Helm Repo %s\n" "${HELM_CHARTS}"
-  $HELM repo add tjungbauer ${HELM_CHARTS}
+  $HELM repo add --force-update tjungbauer ${HELM_CHARTS}
   $HELM repo update
 
 }
