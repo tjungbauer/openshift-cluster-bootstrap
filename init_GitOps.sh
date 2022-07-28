@@ -8,7 +8,7 @@ TIMER=45 # Sleep timer to initially wait for the gitops-operator to be deployed 
 RECHECK_TIMER=10
 
 HELM="/usr/bin/env helm"
-HELM_CHARTS="https://tjungbauer.github.io/helm-charts/"
+HELM_CHARTS="https://charts.stderr.at/"
 
 function error() {
     echo "$1"
