@@ -12,13 +12,14 @@ generic-cluster-config:
 
   idp:
     enabled: true
-    ldap:
-      enabled: false
-      name: LDAP
-      url: 127.0.0.1
-      insecure: true
-      binddn: xyz
-      preferredusername: sAMAccountName
-    htpasswd:
-      enabled: true
-      name: HTPASSWD
+    providers:
+      htpasswd:
+        - name: HTPASSWD
+          enabled: true
+      ldap:
+        - name: LDAP
+          enabled: false
+          url: 127.0.0.1
+          insecure: true
+          binddn: xyz
+          preferredusername: sAMAccountName
