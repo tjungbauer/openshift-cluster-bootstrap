@@ -3,6 +3,7 @@
 openshift-logging:
   loggingConfig: 
     enabled: true
+    syncwave: '3'
     es:
       retentionPolicy:
         application: 1d

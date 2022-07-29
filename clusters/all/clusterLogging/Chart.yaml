@@ -4,7 +4,7 @@ description: Installs and configures OpenShift Logging by calling the Chart open
 version: 1.0.0
 dependencies:
   - name: openshift-logging
-    version: "1.0.0"
+    version: "1.0.1"
     repository: https://charts.stderr.at/
     #repository: "file://../../../../helm-charts/charts/openshift-logging"
 maintainers:
