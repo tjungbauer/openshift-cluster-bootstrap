@@ -50,6 +50,15 @@ applicationsets:
         clusterurl: *mgmtcluster
     autosync_enabled: false
 
+  # Additional instances of GitOps, usually used for applications deployments
+  install_application_gitops:
+    enabled: true
+    path: clusters/management-cluster/management-gitops
+    generatorlist:
+      - clustername: *mgmtclustername
+        clusterurl: *mgmtcluster
+    autosync_enabled: false
+
   # A Collection of operators which will be deployed on ALL clusters.
   install-operator-collection:
     enabled: true
@@ -79,15 +88,6 @@ applicationsets:
     autosync_enabled: false  # should be disabled for operators
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
-
-  install_application_gitops:
-    enabled: true
-    appsetname: install-application-gitops
-    path: tenants/management-gitops
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    autosync_enabled: false  # should be disabled for operators
 
   # Compliance Scans should happen on ALL clusters
   install_compliance_scans:
