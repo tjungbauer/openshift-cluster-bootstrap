@@ -43,7 +43,7 @@ function deploy() {
   add_helm_repo
 
   #$HELM upgrade --install --values ./bootstrap/openshift-gitops/values.yaml --namespace=openshift-operators openshift-gitops-operator ./bootstrap/openshift-gitops
-  $HELM upgrade --install --namespace=openshift-operators openshift-gitops-operator tjungbauer/openshift-gitops
+  $HELM upgrade --install --set 'gitops.enabled=true' --set 'gitops.clusterAdmin=true' --namespace=openshift-operators openshift-gitops-operator tjungbauer/openshift-gitops
 
 
   printf "\nGive the gitops-operator some time to be installed. %bWaiting for %s seconds...%b\n" "${RED}" "${TIMER}" "${NC}"

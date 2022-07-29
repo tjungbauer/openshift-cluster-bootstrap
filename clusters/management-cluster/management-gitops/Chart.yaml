@@ -1,0 +1,11 @@
+apiVersion: v2
+name: management-gitops
+description: Deployment of a GitOps for Application Management
+version: 1.0.0
+dependencies:
+  - name: openshift-gitops
+    version: "1.0.3"
+    repository: https://charts.stderr.at/
+    #repository: "file://../../../../helm-charts/charts/openshift-gitops"
+maintainers:
+  - name: tjungbau
