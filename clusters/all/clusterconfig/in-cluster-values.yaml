@@ -85,12 +85,18 @@ generic-cluster-config:
     enabled: true
     providers:
       htpasswd:
-        - name: HTPASSWD
+        - name: htpasswd
           enabled: true
+          secretname: htpasswd-secret
+        - name: htpasswd2
+          enabled: true
+          secretname: htpasswd-secret
       ldap:
         - name: LDAP
           enabled: false
           url: 127.0.0.1
           insecure: true
           binddn: xyz
+          secretname: ldap-secret
+          cmname: ca-config-map
           preferredusername: sAMAccountName

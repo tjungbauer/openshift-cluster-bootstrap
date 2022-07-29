@@ -1,0 +1,11 @@
+---
+
+# subchart
+openshift-logging:
+  # sub subchart
+  helper-operator:
+    operators:
+      elasticsearch-operator:
+        enabled: true
+      cluster-logging-operator:
+        enabled: true

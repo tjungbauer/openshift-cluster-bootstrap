@@ -1,0 +1,18 @@
+---
+# subchart
+openshift-logging:
+  loggingConfig: 
+    enabled: true
+    es:
+      retentionPolicy:
+        application: 1d
+        infra: 1d
+        audit: 1d
+      nodes: 1
+      storageclass: gp2
+      storagesize: 200G
+      limits:
+        mem: 16Gi
+      requests:
+        mem: 16Gi
+      redundancyPolicy: ZeroRedundancy

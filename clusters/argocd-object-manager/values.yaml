@@ -26,14 +26,6 @@ applicationsets:
 #    repourl: "" # Optional
 #    targetrevision: "" # Optional
 
-  install_oauth:
-    enabled: true
-    path: clusters/all/authentication-identityprovider/overlays/default
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    autosync_enabled: false  # should be disabled for operators
-
   application_onboarding:
     enabled: true
     path: tenants/application_onboarding
@@ -97,6 +89,14 @@ applicationsets:
     autosync_enabled: false  # should be disabled for operators
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
+
+  # Install OpenShift Logging
+  install-openshift-logging:
+    enabled: true
+    per_cluster_helm_values: true
+    path: clusters/all/clusterLogging
+    generatorclusters: []
+    autosync_enabled: false  
 
 applications:
   in-cluster-init-rhacs:

@@ -93,4 +93,6 @@ generic-cluster-config:
           url: 127.0.0.1
           insecure: true
           binddn: xyz
+          secretname: ldap-secret
+          cmname: ca-config-map
           preferredusername: sAMAccountName

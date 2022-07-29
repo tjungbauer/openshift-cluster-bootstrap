@@ -1,0 +1,11 @@
+apiVersion: v2
+name: openshift-logging-deployment
+description: Installs and configures OpenShift Logging by calling the Chart openshift-logging
+version: 1.0.0
+dependencies:
+  - name: openshift-logging
+    version: "1.0.0"
+    repository: https://charts.stderr.at/
+    #repository: "file://../../../../helm-charts/charts/openshift-logging"
+maintainers:
+  - name: tjungbau

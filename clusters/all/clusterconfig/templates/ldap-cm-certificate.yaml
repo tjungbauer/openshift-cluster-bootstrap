@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ca-config-map
+  namespace: openshift-config
+data:
+  ca.crt: | {{ .Files.Get "static/ldap-ca.crt" | nindent 4 }}
