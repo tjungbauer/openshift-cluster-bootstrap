@@ -4,7 +4,8 @@ description: Installs cluster configuration which is usually valid for ALL clust
 version: 1.0.0
 dependencies:
   - name: generic-cluster-config
-    version: "1.0.2"
+    version: "1.0.3"
     repository: https://charts.stderr.at/
+    #repository: "file://../../../../helm-charts/charts/generic-cluster-config"
 maintainers:
   - name: tjungbau
