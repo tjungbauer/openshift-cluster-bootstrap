@@ -1,4 +1,6 @@
 ---
+cluster_admin_list:
+  - default
 
 generic-cluster-config:
   etcd_encryption:

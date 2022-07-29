@@ -90,6 +90,9 @@ role_mappings:
   - key: name
     value: "kube:admin"
     role_name: Admin
+  - key: name
+    value: opentlc-mgr
+    role_name: Admin
   - key: groups
     value: product-catalog-admins
     role_name: Product Catalog Admins
