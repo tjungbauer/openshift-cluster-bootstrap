@@ -1,0 +1,7 @@
+---
+# General values
+
+helper-proj-onboarding:
+  namespace: 
+    name: application_1
+    enabled: true

@@ -10,19 +10,20 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   labels:
     gitops.ownedBy: cluster-config
+    {{- include "argo.labels" $ | nindent 4 }}
   name: {{ $key | replace "_" "-" }}
-  namespace: {{ $.Values.argocd_namespace | default "openshift-gitops" }}
+  namespace: openshift-gitops
 spec:
   destination:
-    namespace: {{ $.Values.argocd_namespace | default "openshift-gitops" }}
+    namespace: openshift-gitops
     server: {{ .server }}
   project: {{ .project }}
   source:
     path: {{ .source.path }}
-    repoURL: {{ .source.repourl }}
-    targetRevision: {{ .source.targetrevision }}
+    repoURL: {{ .source.repourl | default $.Values.general.source.repourl }}
+    targetRevision: {{ .source.targetrevision | default $.Values.general.branch }}
   info:
     - name: Description
-      value: '{{ .description }}'
+      value: ''
 {{- end }}
 {{- end }}

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: argocd-onboarding-manager
+description: This is an App-of-Apps Chart which is responsible to deploy the projects and everything what is required to all clusters
+version: 1.0.0  
+maintainers:
+  - name: tjungbau

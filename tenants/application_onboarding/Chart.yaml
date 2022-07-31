@@ -1,6 +1,0 @@
-apiVersion: v2
-name: application_onboarding
-description: Deployment of Application Namespaces and Namespace-Resources (i.e. quotas)
-version: 1.0.0  
-maintainers:
-  - name: tjungbau

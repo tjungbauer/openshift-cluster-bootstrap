@@ -1,0 +1,52 @@
+---
+# General values
+#
+# Set cluster names ... Unfortunately the openshift-gitops operator keeps
+# removing the secret of the *mgmtclustername (local cluster),
+# therefor we switch ti list generator
+# https://issues.redhat.com/browse/GITOPS-1777
+mgmt-cluster: &mgmtcluster https://kubernetes.default.svc
+mgmt-cluster-name: &mgmtclustername in-cluster
+production-cluster: &prodcluster https://api.cluster-qf5g6.qf5g6.sandbox389.opentlc.com:6443
+production-cluster-name: &prodclustername prod
+
+repourl: &repourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
+repobranch: &branch main
+
+application_gitops_namespace: gitops-applications
+
+applicationsets:
+  application_1:
+    enabled: true
+    path: tenants/project_onboarding/application_1
+    per_cluster_helm_values: true
+    generatorclusters: []
+#    repourl: "" # Optional
+#    targetrevision: "" # Optional
+
+    argocd_project_setup:
+      enabled: true
+      destinations:
+        - name: *prodclustername
+          #namespace: application-1  # taking the key later in the chart template
+          server: *prodcluster
+        - name: *mgmtclustername
+          #namespace: application-1  # taking the key later in the chart template
+          server: *mgmtcluster
+      sourceRepos:
+        - 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
+      policies:
+        - 'p, proj:test:dev, applications, get, test/*, allow'
+        - 'p, proj:test:dev, applications, create, test/*, allow'
+        - 'p, proj:test:dev, applications, update, test/*, allow'
+        - 'p, proj:test:dev, applications, delete, test/*, allow'
+        - 'p, proj:test:dev, applications, sync, test/*, allow'
+        - 'p, proj:test:dev, applications, override, test/*, allow'
+
+# These define the default values. 
+# It is possible to overwrite repourl and targetrevision in the Applications(Sets)
+general:
+  argocd_project: 'default'
+  source:
+    repourl: *repourl
+  branch: *branch

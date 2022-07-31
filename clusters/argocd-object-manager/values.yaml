@@ -26,10 +26,13 @@ applicationsets:
 #    repourl: "" # Optional
 #    targetrevision: "" # Optional
 
+  # Installs an App-of-Apps for Application onboarding
   application_onboarding:
     enabled: true
-    path: tenants/application_onboarding
-    generatorclusters: []
+    path: clusters/argocd-onboarding-manager
+    generatorlist:
+      - clustername: *mgmtclustername
+        clusterurl: *mgmtcluster
     autosync_enabled: false  # should be disabled for operators
 
   install_netobserv_incl_loki_techpreview:

@@ -1,0 +1,37 @@
+{{- range $key, $value := .Values.applicationsets }}
+{{ if eq ($value.enabled | toString) "true" }}
+{{ if eq ($value.argocd_project_setup.enabled | toString) "true" }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  name: {{ $key | replace "_" "-" }}
+  namespace: {{ $.Values.application_gitops_namespace }}
+  labels:
+    {{- include "argo.labels" $ | nindent 4 }}
+spec:
+  description: {{ $key | replace "_" "-" }} GitOps Project
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  roles:
+    name: {{ $key | replace "_" "-" }}
+    polcies: 
+    {{- range $value.argocd_project_setup.policies }}
+      - '{{ . }}'
+    {{- end }}
+  sourceRepos:
+    {{- range $value.argocd_project_setup.sourceRepos }}
+      - '{{ . }}'
+    {{- end }}
+  destinations:
+    {{- range $value.argocd_project_setup.destinations }}
+      - name: {{ .name }}
+        namespace: {{ $key | replace "_" "-" }} 
+        server: {{ .server }}
+    {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
