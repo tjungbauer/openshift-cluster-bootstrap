@@ -20,7 +20,7 @@ spec:
     name: {{ $key | replace "_" "-" }}
     polcies: 
     {{- range $value.argocd_project_setup.policies }}
-      - '{{ . }}'
+      - '{{ . | quote }}'
     {{- end }}
   sourceRepos:
     {{- range $value.argocd_project_setup.sourceRepos }}
