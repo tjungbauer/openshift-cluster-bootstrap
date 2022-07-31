@@ -13,7 +13,7 @@ production-cluster-name: &prodclustername prod
 repourl: &repourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
 repobranch: &branch main
 
-application_gitops_namespace: gitops-applications
+application_gitops_namespace: gitops-application
 
 applicationsets:
   application_1:
@@ -35,13 +35,15 @@ applicationsets:
           server: *mgmtcluster
       sourceRepos:
         - 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
-      policies:
-        - "p, proj:test:dev, applications, get, test/*, allow"
-        - "p, proj:test:dev, applications, create, test/*, allow"
-        - "p, proj:test:dev, applications, update, test/*, allow"
-        - "p, proj:test:dev, applications, delete, test/*, allow"
-        - "p, proj:test:dev, applications, sync, test/*, allow"
-        - "p, proj:test:dev, applications, override, test/*, allow"
+      rbac:
+        - name: default-role
+          policies:
+            - 'p, proj:test:dev, applications, get, test/*, allow'
+            - 'p, proj:test:dev, applications, create, test/*, allow'
+            - 'p, proj:test:dev, applications, update, test/*, allow'
+            - 'p, proj:test:dev, applications, delete, test/*, allow'
+            - 'p, proj:test:dev, applications, sync, test/*, allow'
+            - 'p, proj:test:dev, applications, override, test/*, allow'
 
 # These define the default values. 
 # It is possible to overwrite repourl and targetrevision in the Applications(Sets)

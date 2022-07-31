@@ -17,10 +17,12 @@ spec:
     - group: '*'
       kind: '*'
   roles:
-    name: {{ $key | replace "_" "-" }}
-    polcies: 
-    {{- range $value.argocd_project_setup.policies }}
-      - {{ . | quote }}
+    {{- range $value.argocd_project_setup.rbac }}
+    - name: {{ .name }}
+      polcies: 
+      {{- range .policies }}
+        - '{{ . }}'
+      {{- end }}
     {{- end }}
   sourceRepos:
     {{- range $value.argocd_project_setup.sourceRepos }}
