@@ -19,7 +19,7 @@ spec:
   roles:
     {{- range $value.argocd_project_setup.rbac }}
     - name: {{ .name }}
-      polcies: 
+      policies: 
       {{- range .policies }}
         - '{{ . }}'
       {{- end }}
