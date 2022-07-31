@@ -4,6 +4,8 @@ apiVersion: operator.openshift.io/v1
 kind: Console
 metadata:
   name: cluster
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=true
 spec:
   customization:
     customLogoFile:
