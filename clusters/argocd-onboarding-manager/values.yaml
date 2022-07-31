@@ -36,12 +36,12 @@ applicationsets:
       sourceRepos:
         - 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
       policies:
-        - 'p, proj:test:dev, applications, get, test/*, allow'
-        - 'p, proj:test:dev, applications, create, test/*, allow'
-        - 'p, proj:test:dev, applications, update, test/*, allow'
-        - 'p, proj:test:dev, applications, delete, test/*, allow'
-        - 'p, proj:test:dev, applications, sync, test/*, allow'
-        - 'p, proj:test:dev, applications, override, test/*, allow'
+        - p, proj:test:dev, applications, get, test/*, allow
+        - p, proj:test:dev, applications, create, test/*, allow
+        - p, proj:test:dev, applications, update, test/*, allow
+        - p, proj:test:dev, applications, delete, test/*, allow
+        - p, proj:test:dev, applications, sync, test/*, allow
+        - p, proj:test:dev, applications, override, test/*, allow
 
 # These define the default values. 
 # It is possible to overwrite repourl and targetrevision in the Applications(Sets)
