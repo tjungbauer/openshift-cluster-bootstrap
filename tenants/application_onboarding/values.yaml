@@ -1,4 +1,6 @@
 ---
+# General values
+
 prefix: dev
 
 namespaces:
@@ -10,4 +12,4 @@ namespaces:
 
 argocd_projects:
   servicemesh-lab:
-    enabled: true
+    enabled: false

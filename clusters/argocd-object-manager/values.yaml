@@ -29,9 +29,7 @@ applicationsets:
   application_onboarding:
     enabled: true
     path: tenants/application_onboarding
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
+    generatorclusters: []
     autosync_enabled: false  # should be disabled for operators
 
   install_netobserv_incl_loki_techpreview:
