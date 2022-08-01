@@ -48,6 +48,8 @@ applicationsets:
         - 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
       rbac:
         - name: default-role
+          groups:
+           - application-1-dev
           policies:
             - 'p, proj:test:dev, applications, get, test/*, allow'
             - 'p, proj:test:dev, applications, create, test/*, allow'
