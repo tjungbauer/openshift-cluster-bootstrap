@@ -1,4 +1,5 @@
-{{- range $key, $value := .Values.gitopsinstances }}
+{{ with index .Values "openshift-gitops" }}
+{{- range $key, $value := .gitopsinstances }}
 {{ if eq ($value.enabled | toString) "true" }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -18,5 +19,6 @@ rules:
   - List
   - Watch
   - Patch
+{{- end }}
 {{- end }}
 {{- end }}
