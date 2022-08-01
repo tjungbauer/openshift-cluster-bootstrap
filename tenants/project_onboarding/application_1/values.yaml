@@ -5,4 +5,4 @@ helper-proj-onboarding:
   namespace: 
     name: application_1
     enabled: true
-    gitops_namespace: gitops-applications
+    gitops_namespace: gitops-application
