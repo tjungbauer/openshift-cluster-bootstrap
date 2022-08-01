@@ -51,12 +51,12 @@ applicationsets:
           groups:
            - application-1-dev
           policies:
-            - 'p, proj:application-1:dev, applications, get, application-1/*, allow'
-            - 'p, proj:application-1:dev, applications, create, application-1/*, allow'
-            - 'p, proj:application-1:dev, applications, update, application-1/*, allow'
-            - 'p, proj:application-1:dev, applications, delete, application-1/*, allow'
-            - 'p, proj:application-1:dev, applications, sync, application-1/*, allow'
-            - 'p, proj:application-1:dev, applications, override, application-1/*, allow'
+            - 'p, proj:application-1:default-role, applications, get, application-1/*, allow'
+            - 'p, proj:application-1:default-role, applications, create, application-1/*, allow'
+            - 'p, proj:application-1:default-role, applications, update, application-1/*, allow'
+            - 'p, proj:application-1:default-role, applications, delete, application-1/*, allow'
+            - 'p, proj:application-1:default-role, applications, sync, application-1/*, allow'
+            - 'p, proj:application-1:default-role, applications, override, application-1/*, allow'
 
 # These define the default values. 
 # It is possible to overwrite repourl and targetrevision in the Applications(Sets)

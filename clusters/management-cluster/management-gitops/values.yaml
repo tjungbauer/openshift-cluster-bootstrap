@@ -5,7 +5,7 @@ openshift-gitops:
       enabled: true
       namespace: gitops-application
       rbac:
-        defaultRoles: 'role:none'
+        defaultPolicy: 'role:none'
         policy: |-
             # Access Controll
             g, system:cluster-admins, role:admin
