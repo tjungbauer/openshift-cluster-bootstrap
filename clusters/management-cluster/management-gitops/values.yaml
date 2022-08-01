@@ -17,6 +17,11 @@ openshift-gitops:
             p, role:none, projects, get, *, deny
             p, role:none, accounts, get, *, deny
             p, role:none, gpgkeys, get, *, deny
+
+            # Adding Roles for specific group, i.e. Developers
+            #p, role:application-1-dev, applications, *, application-1/*, allow
+            #p, role:application-1-dev, clusters, get, https://kubernetes.default.svc, allow
+            #g, application-1-dev, role:application-1-dev
         scopes: '[groups]'
       resourceExclusions: |-
         # resources to be excluded

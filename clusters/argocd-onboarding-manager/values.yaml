@@ -50,6 +50,7 @@ applicationsets:
         - name: default-role
           groups:
            - application-1-dev
+          # Do not forget to add role to management-cluster/management-gitops
           policies:
             - 'p, proj:application-1:default-role, applications, get, application-1/*, allow'
             - 'p, proj:application-1:default-role, applications, create, application-1/*, allow'
