@@ -24,6 +24,17 @@ applicationsets:
 #    repourl: "" # Optional
 #    targetrevision: "" # Optional
 
+    group_dev:
+      enabled: true
+      # name: application-1-dev  # Optional, will be build using the key and "-dev" as postfix
+      users:
+        - mona
+
+    group_ops:
+      enabled: true
+      users:
+        - user1
+
     argocd_project_setup:
       enabled: true
       destinations:
