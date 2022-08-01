@@ -6,7 +6,7 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
 metadata:
   name: {{ $key | replace "_" "-" }}-rolebinding
-  namespace: {{ .namespace.name | default "openshift-operators" | quote }}
+  namespace: {{ $value.namespace | default "openshift-operators" | quote }}
   labels:
     {{- include "common.labels" $ | nindent 4 }}
 roleRef:
@@ -16,7 +16,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: gitops-application-argocd-application-controller
-  namespace: {{ .namespace.name | default "openshift-operators" | quote }} 
+  namespace: {{ .namespace | default "openshift-operators" | quote }} 
 {{- end }}
 {{- end }}
 {{- end }}
