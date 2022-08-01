@@ -47,17 +47,30 @@ applicationsets:
       sourceRepos:
         - 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
       rbac:
-        - name: default-role
+        - name: developers
+          description: "Group to developers to deploy on DEV environment"
           groups:
            - application-1-dev
           # Do not forget to add role to management-cluster/management-gitops
           policies:
-            - 'p, proj:application-1:default-role, applications, get, application-1/*, allow'
-            - 'p, proj:application-1:default-role, applications, create, application-1/*, allow'
-            - 'p, proj:application-1:default-role, applications, update, application-1/*, allow'
-            - 'p, proj:application-1:default-role, applications, delete, application-1/*, allow'
-            - 'p, proj:application-1:default-role, applications, sync, application-1/*, allow'
-            - 'p, proj:application-1:default-role, applications, override, application-1/*, allow'
+            - 'p, proj:application-1:developers, applications, get, application-1/*, allow'
+            - 'p, proj:application-1:developers, applications, create, application-1/*, allow'
+            - 'p, proj:application-1:developers, applications, update, application-1/*, allow'
+            - 'p, proj:application-1:developers, applications, delete, application-1/*, allow'
+            - 'p, proj:application-1:developers, applications, sync, application-1/*, allow'
+            - 'p, proj:application-1:developers, applications, override, application-1/*, allow'
+        - name: production-rollout
+          description: "Group for production deployment"
+          groups:
+           - application-1-ops
+          # Do not forget to add role to management-cluster/management-gitops
+          policies:
+            - 'p, proj:application-1:production-rollout, applications, get, application-1/*, allow'
+            - 'p, proj:application-1:production-rollout, applications, create, application-1/*, allow'
+            - 'p, proj:application-1:production-rollout, applications, update, application-1/*, allow'
+            - 'p, proj:application-1:production-rollout, applications, delete, application-1/*, allow'
+            - 'p, proj:application-1:production-rollout, applications, sync, application-1/*, allow'
+            - 'p, proj:application-1:production-rollout, applications, override, application-1/*, allow'
 
 # These define the default values. 
 # It is possible to overwrite repourl and targetrevision in the Applications(Sets)
