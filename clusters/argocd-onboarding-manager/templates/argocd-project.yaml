@@ -1,6 +1,8 @@
 {{- range $key, $value := .Values.applicationsets }}
 {{ if eq ($value.enabled | toString) "true" }}
-{{ if eq ($value.argocd_project_setup.enabled | toString) "true" }}
+
+{{ range $key_approject, $value_appproject := $value.argocd_project_setup }}
+{{ if eq ($value_appproject.enabled | toString) "true" }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -17,7 +19,7 @@ spec:
     - group: '*'
       kind: '*'
   roles:
-    {{- range $value.argocd_project_setup.rbac }}
+    {{- range $value_appproject.rbac }}
     - name: {{ .name }}
       description: {{ .description | quote }}
       groups:
@@ -30,15 +32,16 @@ spec:
       {{- end }}
     {{- end }}
   sourceRepos:
-    {{- range $value.argocd_project_setup.sourceRepos }}
+    {{- range $value_appproject.sourceRepos }}
       - '{{ . }}'
     {{- end }}
   destinations:
-    {{- range $value.argocd_project_setup.destinations }}
+    {{- range $value_appproject.destinations }}
       - name: {{ .name }}
         namespace: {{ $key | replace "_" "-" }} 
         server: {{ .server }}
     {{- end }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
