@@ -39,6 +39,7 @@ applicationsets:
     argocd_project_setup:
       dev_rollout:
         enabled: true
+        name: application-1-dev
         destinations:
           - name: *mgmtclustername
             #namespace: application-1  # taking the key later in the chart template
@@ -73,6 +74,7 @@ applicationsets:
 
       prod_rollout:
         enabled: true
+        name: application-1-ops
         destinations:
           - name: *prodclustername
             #namespace: application-1  # taking the key later in the chart template

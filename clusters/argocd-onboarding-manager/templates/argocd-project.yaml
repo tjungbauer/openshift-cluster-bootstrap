@@ -9,7 +9,7 @@ kind: AppProject
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
-  name: {{ $key | replace "_" "-" }}
+  name: {{ $value_appproject.name | replace "_" "-" }}
   namespace: {{ $.Values.application_gitops_namespace }}
   labels:
     {{- include "argo.labels" $ | nindent 4 }}
