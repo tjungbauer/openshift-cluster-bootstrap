@@ -1,6 +1,4 @@
 ---
-
----
 # This must be defined here, since you cannot hand over a .File to a subchart
 console:
   console_logo:
