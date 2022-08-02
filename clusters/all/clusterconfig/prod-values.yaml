@@ -13,10 +13,10 @@ generic-cluster-config:
     console_banners:
       topbanner:
         enabled: true
-        text: 'MGMT Cluster'
+        text: 'PROD Cluster'
         location: BannerTop
         color: "#FFFFFF"
-        backgroundcolor: '#0088ee'
+        backgroundcolor: '#FF0000'
       bottombanner:
         enabled: true
         text: Copyright © 2020 Sample Company, Inc. |
