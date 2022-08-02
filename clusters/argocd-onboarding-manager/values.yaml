@@ -74,7 +74,7 @@ applicationsets:
 
       prod_rollout:
         enabled: true
-        name: application-1-ops
+        name: application-1-prod
         destinations:
           - name: *prodclustername
             #namespace: application-1  # taking the key later in the chart template
