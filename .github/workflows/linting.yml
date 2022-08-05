@@ -25,6 +25,7 @@ jobs:
 
           for charts in $(find . -name 'Chart.yaml'); do
             helm_dir=$(dirname "${charts}")
+            helm dep up "${helm_dir}"
             helm lint --strict "${helm_dir}"
           done
 
