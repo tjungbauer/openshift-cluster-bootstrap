@@ -23,7 +23,7 @@ jobs:
         id: list-changed
         run: |
           ls -la 
-          yamllint
-          helm
+          yamllint -h 
+          helm version 
           kube-score
           kube-linter
