@@ -26,7 +26,9 @@ jobs:
           for charts in $(find . -name 'Chart.yaml'); do
             helm_dir=$(dirname "${charts}")
             helm dep up "${helm_dir}"
-            helm lint --strict "${helm_dir}"
+            echo "Checking $helm_dir"
+            helm lint --strict --wisth-subcharts "${helm_dir}"
+            echo "Done"
           done
 
       - name: Run yamllint on all values-files
