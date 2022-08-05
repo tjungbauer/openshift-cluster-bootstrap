@@ -20,7 +20,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run helm lint on found Charts
-        id: list-changed
         run: |
           #!/usr/bin/env bash
 
@@ -30,7 +29,6 @@ jobs:
           done
 
       - name: Run yamllint on all values-files
-        id: list-changed
         run: |
           #!/usr/bin/env bash
 
@@ -41,7 +39,6 @@ jobs:
           (exit $var)
 
       - name: Run kube-score
-        id: list-changed
         run: |
           #!/usr/bin/env bash
 
@@ -71,7 +68,6 @@ jobs:
           (exit $RC)
 
       - name: Run kube-linter
-        id: list-changed
         run: |
           #!/usr/bin/env bash
 
