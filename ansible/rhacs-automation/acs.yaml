@@ -43,7 +43,6 @@
         status_code: 200
       register: authprovider_result
 
-    # Set the default role for the authenticator, note I use Admin so change for security or comment out!
     - name: Set default role for provider
       uri:
         url: "https://{{ api_endpoint }}/v1/groupsbatch"
