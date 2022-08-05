@@ -1,0 +1,27 @@
+name: Linting
+
+on: 
+  workflow_dispatch:
+#  push:
+#    branches: 
+      - main
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+      - 'README.md'
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run chart-testing (list-changed)
+        id: list-changed
+        run: |
+          ls -la 
+          yamllint
+          helm
+          kube-score
+          kube-linter
