@@ -44,8 +44,6 @@ jobs:
       - name: Run yamllint on all values-files
         id: yamllint_test
         run: |
-          #!/usr/bin/env bash
-
           for values_files in $(find . -type f -name '*values.yaml'); do
             yamllint -c .yamllint.yaml ${values_files}; let var=var+$?
           done
