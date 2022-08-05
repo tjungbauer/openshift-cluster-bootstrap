@@ -36,6 +36,7 @@ jobs:
                 values="-f $add_val_files"
             fi
 
+            helm dep up "${helm_dir}"
             helm lint --strict --with-subcharts $values "${helm_dir}"
             echo "Done"
           done
