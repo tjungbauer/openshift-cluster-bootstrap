@@ -45,12 +45,12 @@ jobs:
         id: yamllint_test
         run: |
           for values_files in $(find . -type f -name '*values.yaml'); do
-            yamllint -f standard -c .yamllint.yaml ${values_files} 2>&1; let var=var+$?
+            yamllint -f standard -c .yamllint.yaml ${values_files} 2>&1;
           done
 
           echo "Done"
 
-          (exit $var)
+         
 
       - name: Run kube-score
         run: |
