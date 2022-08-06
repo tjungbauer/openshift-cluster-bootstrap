@@ -45,7 +45,7 @@ jobs:
         id: yamllint_test
         run: |
           get_files=$(find . -type f -name '*values.yaml')
-          yamllint -c .yamllint.conf $get_files 
+          yamllint -c .yamllint.yaml $get_files 
 
           echo "Done checking with yamllint"
 
