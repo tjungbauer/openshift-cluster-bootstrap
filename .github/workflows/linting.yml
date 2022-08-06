@@ -50,6 +50,7 @@ jobs:
           echo "Done checking with yamllint"
 
       - name: Run kube-score
+        if: always()
         run: |
           #!/usr/bin/env bash
 
@@ -79,6 +80,7 @@ jobs:
           (exit $RC)
 
       - name: Run kube-linter
+        if: always()
         run: |
           #!/usr/bin/env bash
 
