@@ -45,7 +45,7 @@ jobs:
         id: yamllint_test
         run: |
           for values_files in $(find . -type f -name '*values.yaml'); do
-            yamllint -c .yamllint.yaml ${values_files} 2>&1;
+            yamllint -f standard -c .yamllint.yaml ${values_files} 2>&1;
             echo done
           done
 
