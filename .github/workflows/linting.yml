@@ -1,7 +1,6 @@
 name: Linting
 
 on: 
-  workflow_dispatch:
   push:
     branches: 
       - main
@@ -57,48 +56,3 @@ jobs:
 
           echo "Done checking with yamllint"
 
-      - name: Run kube-score
-        if: always()
-        run: |
-          #!/usr/bin/env bash
-
-          KUBESCORE_IGNORE_TESTS="${KUBESCORE_IGNORE_TESTS:-container-image-pull-policy,pod-networkpolicy}"
-          RC=0
-
-          for charts in $(find ~+ -name 'Chart.yaml'); do
-
-            # get helm charts
-            helm_dir=$(dirname "${charts}")
-            helm_name=$(basename $helm_dir)
-
-            # create tmp output for helm charts and do a "helm template"
-            helm_output_dir=$(mktemp -d 2>/dev/null)
-            helm template $helm_dir --output-dir $helm_output_dir/$helm_name
-            [ ! -d "$helm_output_dir/$helm_name" ] && echo "Unable to resolve helm template" && exit 1
-
-            # for all files in the output folder of the helm charts, do a kube-score
-            find $helm_output_dir -name '*' -type f -exec cat {} \; | kube-score score --ignore-test ${KUBESCORE_IGNORE_TESTS} -
-            if [ $? -gt 0 ]; then
-              RC=1
-            fi
-
-            rm -rf $helm_output_dir
-          done
-
-          (exit $RC)
-
-      - name: Run kube-linter
-        if: always()
-        run: |
-          #!/usr/bin/env bash
-
-          RC=0
-          for charts in $(find . -name 'Chart.yaml'); do
-            helm_dir=$(dirname "${charts}")
-
-            kube-linter lint ${helm_dir} --config ".kube-linter.yaml"
-            if [ $? -gt 0 ]; then
-              RC=1
-            fi
-          done
-          (exit $RC)

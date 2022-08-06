@@ -27,7 +27,7 @@
   uri:
     url: "https://{{ api_endpoint }}/v1/roles/{{ item.name | urlencode }}"
     method: POST
-    validate_certs: no
+    validate_certs: false
     headers:
         authorization: "{{ authorization }}"
     body_format: json
