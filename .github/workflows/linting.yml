@@ -44,6 +44,8 @@ jobs:
       - name: Run yamllint on all values-files
         id: yamllint_test
         run: |
+          get_files=$(find . -type f -name '*values.yaml')
+          yamllint -f standard $get_files 
           for values_files in $(find . -type f -name '*values.yaml'); do
             yamllint -f standard -c .yamllint.yaml ${values_files} 2>&1;
             echo done
