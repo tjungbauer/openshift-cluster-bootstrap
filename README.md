@@ -1,3 +1,5 @@
+[![Linting](https://github.com/tjungbauer/openshift-cluster-bootstrap/actions/workflows/linting.yml/badge.svg)](https://github.com/tjungbauer/openshift-cluster-bootstrap/actions/workflows/linting.yml)
+
 # openshift-cluster-bootstrap
 
 This repository demonstrate the usage of OpenShift-GitOps and a secrets manager like Sealed Secrets or Hashicorp Vault. 
