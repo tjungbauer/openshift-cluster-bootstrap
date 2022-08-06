@@ -97,7 +97,7 @@ applicationsets:
     per_cluster_helm_values: true
     path: clusters/all/clusterLogging
     generatorclusters: []
-    autosync_enabled: false 
+    autosync_enabled: false
 
 applications:
   in-cluster-init-rhacs:
