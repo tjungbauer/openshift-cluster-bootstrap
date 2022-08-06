@@ -97,7 +97,7 @@ applicationsets:
     per_cluster_helm_values: true
     path: clusters/all/clusterLogging
     generatorclusters: []
-    autosync_enabled: false  
+    autosync_enabled: false 
 
 applications:
   in-cluster-init-rhacs:
@@ -136,7 +136,7 @@ applications:
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
 
-# These define the default values. 
+# These define the default values.
 # It is possible to overwrite repourl and targetrevision in the Applications(Sets)
 general:
   argocd_project: 'default'

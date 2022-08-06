@@ -1,7 +1,7 @@
 ---
 # subchart
 openshift-logging:
-  loggingConfig: 
+  loggingConfig:
     enabled: true
     syncwave: '3'
     es:

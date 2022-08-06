@@ -95,7 +95,7 @@ applicationsets:
               - 'p, proj:application-1-prod:production-rollout, applications, sync, application-1-prod/*, allow'
               - 'p, proj:application-1-prod:production-rollout, applications, override, application-1-prod/*, allow'
 
-# These define the default values. 
+# These define the default values.
 # It is possible to overwrite repourl and targetrevision in the Applications(Sets)
 general:
   argocd_project: 'default'
