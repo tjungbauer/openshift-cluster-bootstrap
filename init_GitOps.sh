@@ -96,7 +96,7 @@ function patch_argocd() {
   printf "\nLets use our patched ArgoCD CRD\n"
 
   oc apply -f bootstrap/openshift-gitops/PATCH_openshift-gitops-cr.yaml
-  oc apply -f bootstrap/openshit-gitops/PATCH_openshift-gitops-crb.yaml
+  oc apply -f bootstrap/openshift-gitops/PATCH_openshift-gitops-crb.yaml
 
   sleep $RECHECK_TIMER
   waiting_for_argocd_pods
