@@ -9,3 +9,4 @@ openshift-logging:
         enabled: true
       cluster-logging-operator:
         enabled: true
+        channel: stable-5.4
