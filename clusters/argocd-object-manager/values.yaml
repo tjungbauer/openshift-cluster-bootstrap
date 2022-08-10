@@ -20,6 +20,7 @@ argocd_projects:
 applicationsets:
   generic_clusterconfig:
     enabled: true
+    description: "Deploy generic cluster configuration, like banners or etcd encryption"
     path: clusters/all/clusterconfig/
     per_cluster_helm_values: true
     generatorclusters: []
@@ -29,6 +30,7 @@ applicationsets:
   # Installs an App-of-Apps for Application onboarding
   application_onboarding:
     enabled: true
+    description: "Deploy the application onboarding manager. This is the App-of-Apps which takes care of namespace creation"
     path: clusters/argocd-onboarding-manager
     generatorlist:
       - clustername: *mgmtclustername
@@ -37,6 +39,7 @@ applicationsets:
 
   install_netobserv_incl_loki_techpreview:
     enabled: true
+    description: "Deploy the Net Observer"
     path: clusters/all/network_observer
     generatorlist:
       - clustername: *mgmtclustername
@@ -46,6 +49,7 @@ applicationsets:
   # Additional instances of GitOps, usually used for applications deployments
   install_application_gitops:
     enabled: true
+    description: "Deploy a 2nd GitOps instance for application deployments"
     path: clusters/management-cluster/management-gitops
     generatorlist:
       - clustername: *mgmtclustername
@@ -55,6 +59,7 @@ applicationsets:
   # A Collection of operators which will be deployed on ALL clusters.
   install-operator-collection:
     enabled: true
+    description: "Deploy a collection of most useful Operators"
     path: charts/collection-operators
     generatorclusters: []
     autosync_enabled: false  # should be disabled for operators
@@ -65,6 +70,7 @@ applicationsets:
   # installed usually on the management cluster only.
   install-mgmt-operator-collection:
     enabled: true
+    description: "Deploy a collection of Operators which are usually installed on a management cluster only"
     path: charts/collection-management-operators
     generatorlist:
       - clustername: *mgmtclustername
@@ -76,6 +82,7 @@ applicationsets:
   # A Collection of OPTIONAL operators which will be deployed on ALL clusters.
   install_optional_operator_collection:
     enabled: true
+    description: "Install optional Operators which might be good to test"
     path: charts/collection-optional-operators
     generatorclusters: []
     autosync_enabled: false  # should be disabled for operators
@@ -85,6 +92,7 @@ applicationsets:
   # Compliance Scans should happen on ALL clusters
   install_compliance_scans:
     enabled: true
+    description: "Deploy and configure the Compliance Scan Operator"
     path: charts/compliance-operator-full-stack
     generatorclusters: []
     autosync_enabled: false  # should be disabled for operators
@@ -94,6 +102,7 @@ applicationsets:
   # Install OpenShift Logging
   install-openshift-logging:
     enabled: true
+    description: "Deploy and Configure OpenShift Logging"
     per_cluster_helm_values: true
     path: clusters/all/clusterLogging
     generatorclusters: []
@@ -104,6 +113,7 @@ applications:
     enabled: true
     server: *mgmtcluster
     project: default
+    description: "Initialize Red Hat Advanced Cluster Security and deploy Central and SecuredCluster"
     source:
       path: charts/rhacs-full-stack
       repourl: "https://github.com/tjungbauer/helm-charts"
@@ -113,6 +123,7 @@ applications:
     enabled: true
     server: *mgmtcluster
     project: default
+    description: "Deploy a vulnerable demo application to show results in RHACS"
     source:
       path: charts/rhacs-demo-applications/
       repourl: "https://github.com/tjungbauer/helm-charts"
@@ -122,6 +133,7 @@ applications:
     enabled: true
     server: *mgmtcluster
     project: default
+    description: "Deploy a demo pipeline about linting to show possibilities"
     source:
       path: charts/pipeline-example/
       repourl: "https://github.com/tjungbauer/helm-charts"
@@ -131,6 +143,7 @@ applications:
     enabled: true
     server: *mgmtcluster
     project: default
+    description: "Deploy Open Data Foundation Operator"
     source:
       path: charts/openshift-data-foundation
       repourl: "https://github.com/tjungbauer/helm-charts"

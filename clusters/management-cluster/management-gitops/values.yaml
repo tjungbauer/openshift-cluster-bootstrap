@@ -7,7 +7,7 @@ openshift-gitops:
       rbac:
         defaultRole: 'role:none'
         policy: |-
-            # Access Controll
+            # Access Control
             g, system:cluster-admins, role:admin
             g, cluster-admins, role:admin
             p, role:none, applications, get, */*, deny

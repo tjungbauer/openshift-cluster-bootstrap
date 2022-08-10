@@ -34,7 +34,7 @@ applicationsets:
     group_ops:
       enabled: true
       users:
-        - user1
+        - peter
 
     argocd_project_setup:
       dev_rollout:

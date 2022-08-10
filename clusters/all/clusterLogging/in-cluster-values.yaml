@@ -15,5 +15,5 @@ openshift-logging:
       limits:
         mem: 16Gi
       requests:
-        mem: 16Gi
+        mem: 8Gi  # For Demo environments, I do not have so big machines :)
       redundancyPolicy: ZeroRedundancy
