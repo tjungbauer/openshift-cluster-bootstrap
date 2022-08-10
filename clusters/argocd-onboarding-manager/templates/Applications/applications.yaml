@@ -24,6 +24,6 @@ spec:
     targetRevision: {{ .source.targetrevision | default $.Values.general.branch }}
   info:
     - name: Description
-      value: ''
+      value: {{ .description | default "No Description" }}
 {{- end }}
 {{- end }}
