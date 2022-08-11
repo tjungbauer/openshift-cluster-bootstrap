@@ -13,176 +13,177 @@ production-cluster-name: &prodclustername prod
 repourl: &repourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
 repobranch: &branch main
 
-argocd_projects:
-  - *mgmtclustername
-  - *prodclustername
+helper-argocd:
+  argocd_projects:
+    - *mgmtclustername
+    - *prodclustername
 
-applicationsets:
-  generic_clusterconfig:
-    enabled: true
-    description: "Deploy generic cluster configuration, like banners or etcd encryption"
-    labels:
-      category: cluster-configuration
-    path: clusters/all/clusterconfig/
-    per_cluster_helm_values: true
-    generatorclusters: []
-#    repourl: "" # Optional
-#    targetrevision: "" # Optional
+  applicationsets:
+    generic_clusterconfig:
+      enabled: true
+      description: "Deploy generic cluster configuration, like banners or etcd encryption"
+      labels:
+        category: cluster-configuration
+      path: clusters/all/clusterconfig/
+      per_cluster_helm_values: true
+      generatorclusters: []
+  #    repourl: "" # Optional
+  #    targetrevision: "" # Optional
+  
+    # Installs an App-of-Apps for Application onboarding
+    application_onboarding:
+      enabled: true
+      description: "Deploy the application onboarding manager. This is the App-of-Apps which takes care of namespace creation"
+      labels:
+        category: project
+      path: clusters/argocd-onboarding-manager
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      autosync_enabled: false  # should be disabled for operators
+  
+    install_netobserv_incl_loki_techpreview:
+      enabled: true
+      description: "Deploy the Net Observer"
+      labels:
+        category: operators
+        techpreview: true
+      path: clusters/all/network_observer
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      autosync_enabled: false
 
-  # Installs an App-of-Apps for Application onboarding
-  application_onboarding:
-    enabled: true
-    description: "Deploy the application onboarding manager. This is the App-of-Apps which takes care of namespace creation"
-    labels:
-      category: project
-    path: clusters/argocd-onboarding-manager
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    autosync_enabled: false  # should be disabled for operators
-
-  install_netobserv_incl_loki_techpreview:
-    enabled: true
-    description: "Deploy the Net Observer"
-    labels:
-      category: operators
-      techpreview: true
-    path: clusters/all/network_observer
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    autosync_enabled: false
-
-  # Additional instances of GitOps, usually used for applications deployments
-  install_application_gitops:
-    enabled: true
-    description: "Deploy a 2nd GitOps instance for application deployments"
-    labels:
-      category: project
-    path: clusters/management-cluster/management-gitops
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    autosync_enabled: false
-
-  # A Collection of operators which will be deployed on ALL clusters.
-  install-operator-collection:
-    enabled: true
-    description: "Deploy a collection of most useful Operators"
-    labels:
-      category: operators
-    path: charts/collection-operators
-    generatorclusters: []
-    autosync_enabled: false  # should be disabled for operators
-    repourl: "https://github.com/tjungbauer/helm-charts"
-    targetrevision: "main"
-
-  # A collection of MANAGEMENT operators,
-  # installed usually on the management cluster only.
-  install-mgmt-operator-collection:
-    enabled: true
-    description: "Deploy a collection of Operators which are usually installed on a management cluster only"
-    labels:
-      category: operators
-    path: charts/collection-management-operators
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    autosync_enabled: false  # should be disabled for operators
-    repourl: "https://github.com/tjungbauer/helm-charts"
-    targetrevision: "main"
-
-  # A Collection of OPTIONAL operators which will be deployed on ALL clusters.
-  install_optional_operator_collection:
-    enabled: true
-    description: "Install optional Operators which might be good to test"
-    labels:
-      category: operators
-    path: charts/collection-optional-operators
-    generatorclusters: []
-    autosync_enabled: false  # should be disabled for operators
-    repourl: "https://github.com/tjungbauer/helm-charts"
-    targetrevision: "main"
-
-  # Compliance Scans should happen on ALL clusters
-  install_compliance_scans:
-    enabled: true
-    description: "Deploy and configure the Compliance Scan Operator"
-    labels:
-      category: security
-      solution: compliance
-    path: charts/compliance-operator-full-stack
-    generatorclusters: []
-    autosync_enabled: false  # should be disabled for operators
-    repourl: "https://github.com/tjungbauer/helm-charts"
-    targetrevision: "main"
-
-  # Install OpenShift Logging
-  install-openshift-logging:
-    enabled: true
-    description: "Deploy and Configure OpenShift Logging"
-    labels:
-      category: logging
-    per_cluster_helm_values: true
-    path: clusters/all/clusterLogging
-    generatorclusters: []
-    autosync_enabled: false
-
-applications:
-  in-cluster-init-rhacs:
-    enabled: true
-    server: *mgmtcluster
-    project: default
-    description: "Initialize Red Hat Advanced Cluster Security and deploy Central and SecuredCluster"
-    labels:
-      category: security
-      solution: rhacs
-    source:
-      path: charts/rhacs-full-stack
+    # Additional instances of GitOps, usually used for applications deployments
+    install_application_gitops:
+      enabled: true
+      description: "Deploy a 2nd GitOps instance for application deployments"
+      labels:
+        category: project
+      path: clusters/management-cluster/management-gitops
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      autosync_enabled: false
+  
+    # A Collection of operators which will be deployed on ALL clusters.
+    install-operator-collection:
+      enabled: true
+      description: "Deploy a collection of most useful Operators"
+      labels:
+        category: operators
+      path: charts/collection-operators
+      generatorclusters: []
+      autosync_enabled: false  # should be disabled for operators
+      repourl: "https://github.com/tjungbauer/helm-charts"
+      targetrevision: "main"
+  
+    # A collection of MANAGEMENT operators,
+    # installed usually on the management cluster only.
+    install-mgmt-operator-collection:
+      enabled: true
+      description: "Deploy a collection of Operators which are usually installed on a management cluster only"
+      labels:
+        category: operators
+      path: charts/collection-management-operators
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      autosync_enabled: false  # should be disabled for operators
+      repourl: "https://github.com/tjungbauer/helm-charts"
+      targetrevision: "main"
+  
+    # A Collection of OPTIONAL operators which will be deployed on ALL clusters.
+    install_optional_operator_collection:
+      enabled: true
+      description: "Install optional Operators which might be good to test"
+      labels:
+        category: operators
+      path: charts/collection-optional-operators
+      generatorclusters: []
+      autosync_enabled: false  # should be disabled for operators
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
 
-  in-cluster-rhacs-demo-app:
-    enabled: true
-    server: *mgmtcluster
-    project: default
-    description: "Deploy a vulnerable demo application to show results in RHACS"
-    labels:
-      category: operators
-      solution: rhacs
-    source:
-      path: charts/rhacs-demo-applications/
+    # Compliance Scans should happen on ALL clusters
+    install_compliance_scans:
+      enabled: true
+      description: "Deploy and configure the Compliance Scan Operator"
+      labels:
+        category: security
+        solution: compliance
+      path: charts/compliance-operator-full-stack
+      generatorclusters: []
+      autosync_enabled: false  # should be disabled for operators
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
-
-  in-cluster-pipeline-demo:
-    enabled: true
-    server: *mgmtcluster
-    project: default
-    description: "Deploy a demo pipeline about linting to show possibilities"
-    labels:
-      category: cicd
+  
+    # Install OpenShift Logging
+    install-openshift-logging:
+      enabled: true
+      description: "Deploy and Configure OpenShift Logging"
+      labels:
+        category: logging
+      per_cluster_helm_values: true
+      path: clusters/all/clusterLogging
+      generatorclusters: []
+      autosync_enabled: false
+  
+  applications:
+    in-cluster-init-rhacs:
+      enabled: true
+      server: *mgmtcluster
+      project: default
+      description: "Initialize Red Hat Advanced Cluster Security and deploy Central and SecuredCluster"
+      labels:
+        category: security
+        solution: rhacs
+      source:
+        path: charts/rhacs-full-stack
+        repourl: "https://github.com/tjungbauer/helm-charts"
+        targetrevision: "main"
+  
+    in-cluster-rhacs-demo-app:
+      enabled: true
+      server: *mgmtcluster
+      project: default
+      description: "Deploy a vulnerable demo application to show results in RHACS"
+      labels:
+        category: operators
+        solution: rhacs
+      source:
+        path: charts/rhacs-demo-applications/
+        repourl: "https://github.com/tjungbauer/helm-charts"
+        targetrevision: "main"
+  
+    in-cluster-pipeline-demo:
+      enabled: true
+      server: *mgmtcluster
+      project: default
+      description: "Deploy a demo pipeline about linting to show possibilities"
+      labels:
+        category: cicd
+      source:
+        path: charts/pipeline-example/
+        repourl: "https://github.com/tjungbauer/helm-charts"
+        targetrevision: "main"
+  
+    in-cluster-odf:
+      enabled: true
+      server: *mgmtcluster
+      project: default
+      description: "Deploy Open Data Foundation Operator"
+      labels:
+        category: storage
+      source:
+        path: charts/openshift-data-foundation
+        repourl: "https://github.com/tjungbauer/helm-charts"
+        targetrevision: "main"
+  
+  # These define the default values.
+  # It is possible to overwrite repourl and targetrevision in the Applications(Sets)
+  general:
+    argocd_project: 'default'
     source:
-      path: charts/pipeline-example/
-      repourl: "https://github.com/tjungbauer/helm-charts"
-      targetrevision: "main"
-
-  in-cluster-odf:
-    enabled: true
-    server: *mgmtcluster
-    project: default
-    description: "Deploy Open Data Foundation Operator"
-    labels:
-      category: storage
-    source:
-      path: charts/openshift-data-foundation
-      repourl: "https://github.com/tjungbauer/helm-charts"
-      targetrevision: "main"
-
-# These define the default values.
-# It is possible to overwrite repourl and targetrevision in the Applications(Sets)
-general:
-  argocd_project: 'default'
-  source:
-    repourl: *repourl
-  branch: *branch
+      repourl: *repourl
+    branch: *branch

@@ -1,6 +1,10 @@
 apiVersion: v2
 name: argocd_object_manager
 description: Here we are, this is the main entry point for Gitops. All Applications(Sets) in here are automatically created by the App-Of-Apps
-version: 1.0.0  
+version: 1.0.0
+dependencies:
+  - name: helper-argocd
+    version: "1.0.0"
+    repository: https://charts.stderr.at/
 maintainers:
   - name: tjungbau
