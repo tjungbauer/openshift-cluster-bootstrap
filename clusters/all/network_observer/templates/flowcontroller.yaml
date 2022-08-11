@@ -25,9 +25,7 @@ spec:
     excludeInterfaces:
       - lo
     cacheActiveTimeout: 5s
-    interfaces: []
     image: 'quay.io/netobserv/netobserv-ebpf-agent:v0.1.2'
-    sampling: 0
   flowlogsPipeline:
     logLevel: info
     port: 2055
