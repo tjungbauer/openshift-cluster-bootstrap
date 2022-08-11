@@ -29,7 +29,7 @@ helper-argocd:
       generatorclusters: []
   #    repourl: "" # Optional
   #    targetrevision: "" # Optional
-  
+
     # Installs an App-of-Apps for Application onboarding
     application_onboarding:
       enabled: true
@@ -41,7 +41,7 @@ helper-argocd:
         - clustername: *mgmtclustername
           clusterurl: *mgmtcluster
       autosync_enabled: false  # should be disabled for operators
-  
+
     install_netobserv_incl_loki_techpreview:
       enabled: true
       description: "Deploy the Net Observer"
@@ -65,7 +65,7 @@ helper-argocd:
         - clustername: *mgmtclustername
           clusterurl: *mgmtcluster
       autosync_enabled: false
-  
+
     # A Collection of operators which will be deployed on ALL clusters.
     install-operator-collection:
       enabled: true
@@ -77,7 +77,7 @@ helper-argocd:
       autosync_enabled: false  # should be disabled for operators
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
-  
+
     # A collection of MANAGEMENT operators,
     # installed usually on the management cluster only.
     install-mgmt-operator-collection:
@@ -92,7 +92,7 @@ helper-argocd:
       autosync_enabled: false  # should be disabled for operators
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
-  
+
     # A Collection of OPTIONAL operators which will be deployed on ALL clusters.
     install_optional_operator_collection:
       enabled: true
@@ -117,7 +117,7 @@ helper-argocd:
       autosync_enabled: false  # should be disabled for operators
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
-  
+
     # Install OpenShift Logging
     install-openshift-logging:
       enabled: true
@@ -128,7 +128,7 @@ helper-argocd:
       path: clusters/all/clusterLogging
       generatorclusters: []
       autosync_enabled: false
-  
+
   applications:
     in-cluster-init-rhacs:
       enabled: true
@@ -142,7 +142,7 @@ helper-argocd:
         path: charts/rhacs-full-stack
         repourl: "https://github.com/tjungbauer/helm-charts"
         targetrevision: "main"
-  
+
     in-cluster-rhacs-demo-app:
       enabled: true
       server: *mgmtcluster
@@ -155,7 +155,7 @@ helper-argocd:
         path: charts/rhacs-demo-applications/
         repourl: "https://github.com/tjungbauer/helm-charts"
         targetrevision: "main"
-  
+
     in-cluster-pipeline-demo:
       enabled: true
       server: *mgmtcluster
@@ -167,7 +167,7 @@ helper-argocd:
         path: charts/pipeline-example/
         repourl: "https://github.com/tjungbauer/helm-charts"
         targetrevision: "main"
-  
+
     in-cluster-odf:
       enabled: true
       server: *mgmtcluster
@@ -179,7 +179,7 @@ helper-argocd:
         path: charts/openshift-data-foundation
         repourl: "https://github.com/tjungbauer/helm-charts"
         targetrevision: "main"
-  
+
   # These define the default values.
   # It is possible to overwrite repourl and targetrevision in the Applications(Sets)
   general:
