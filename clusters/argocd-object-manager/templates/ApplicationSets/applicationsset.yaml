@@ -10,6 +10,11 @@ metadata:
     argocd.argoproj.io/sync-wave: "5"
   labels:
     {{- include "argo.labels" $ | nindent 4 }}
+    {{- if $value.labels }}
+    {{- range $key_labels, $value_labels := $value.labels }}
+    {{ $key_labels }}: {{ $value_labels }}
+    {{- end }}
+    {{- end }}
 spec:
   generators:
     {{- if .generatorlist }}
