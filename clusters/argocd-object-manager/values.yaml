@@ -129,6 +129,21 @@ helper-argocd:
       generatorclusters: []
       autosync_enabled: false
 
+    # Install Vault-Config-Operator
+    install-openshift-logging:
+      enabled: true
+      description: "Deploy and Configure Vault-Config-Operator"
+      labels:
+        category: security
+        solution: vault
+      per_cluster_helm_values: false
+      path: clusters/all/management-cluster/vault-config
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      autosync_enabled: false
+      targetrevision: "main"
+
   applications:
     in-cluster-init-rhacs:
       enabled: true

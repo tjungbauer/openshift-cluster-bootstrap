@@ -1,0 +1,18 @@
+---
+helper-operator:
+
+  operators:
+    vault-config-operator:
+      enabled: true
+      namespace:
+        create: true
+        name: vault-config-operator
+      subscription:
+        channel: alpha
+        approval: Automatic
+        operatorName: vault-config-operator
+        source: community-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+        notownnamespace: true
