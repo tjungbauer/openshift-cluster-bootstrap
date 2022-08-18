@@ -130,7 +130,7 @@ helper-argocd:
       autosync_enabled: false
 
     # Install Vault-Config-Operator
-    install-vault-config:
+    install-vault-config-operator:
       enabled: true
       description: "Deploy and Configure Vault-Config-Operator"
       labels:
