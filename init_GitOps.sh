@@ -22,7 +22,7 @@ function verify_secret_mgmt() {
   select svn in "Sealed-Secrets" "Hashicorp-Vault" "None"; do
         case $svn in
             Sealed-Secrets ) echo "Installing Sealed Secrets"; install_sealed_secrets; break;;
-            Hashicorp-Vault) echo "Installing Hashicorp Vault"; starting_vault; break;;
+            Hashicorp-Vault) echo "Installing Hashicorp Vault"; install_vault; break;;
             None) echo "Using NO Secret Manager. Exiting"; exit;; 
         esac
     done  
@@ -32,6 +32,7 @@ function add_helm_repo() {
 
   printf "\nAdding Helm Repo %s\n" "${HELM_CHARTS}"
   $HELM repo add --force-update tjungbauer ${HELM_CHARTS}
+  $HELM repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
   $HELM repo update
 
 }
@@ -124,28 +125,56 @@ function install_sealed_secrets() {
 }
 
 # Deploy Hashicorp Vault if selected
-function starting_vault() {
-
-  printf "\nWhile the Helm chart automatically sets up complex resources and exposes the configuration to meet your requirements, 
-it does not automatically operate Vault. %bYou are still responsible for learning how to operate, monitor, backup, upgrade, etc. the Vault cluster.%b\n" "${RED}" "${NC}"
-
-  printf "\nDo you understand?\n"
-
-  select vault in "Yes" "No"; do
-        case $vault in
-            Yes ) echo "Installing Hashicorp Vault. NOTE: The values files to overwrite the settings can be found at bootstrap/vault/overwrite-values.yaml"; install_vault; break;;
-            No) echo "Exiting"; exit;;
-        esac
-  done 
-
-}
-
 function install_vault() {
 
-  printf "\n%bDeploy Hashicorp Vault%b\n" "${RED}" "${NC}"
-  $HELM repo add hashicorp https://helm.releases.hashicorp.com
-  $HELM repo update
-  $HELM upgrade --install vault hashicorp/vault --values bootstrap/vault/overwrite-values.yaml --namespace=vault --create-namespace
+  printf "\n%bDeploy Hashicorp Vault Application into ArgoCD%b\n" "${RED}" "${NC}"
+  
+  printf "\nCreating Secret for HashiCorp's Vault Helm Repository\n"
+  oc create --dry-run=client secret generic repo-hashicorp-vault \
+  --from-literal=name="HashiCorp Vault Helm repo" \
+  --from-literal=project=default \
+  --from-literal=type=helm \
+  --from-literal=url="https://helm.releases.hashicorp.com" \
+  -o yaml | oc apply --namespace openshift-gitops -f -
+
+  printf "\nLabel Secret\n"
+  oc label secret repo-hashicorp-vault -n openshift-gitops --overwrite=true "argocd.argoproj.io/secret-type=repository"
+
+  printf "\nCreate Application to Deploy Vault\n"
+
+
+  cat <<EOF | oc apply -n openshift-gitops -f -
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: install-hashicorp-vault
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: vault
+    server: 'https://kubernetes.default.svc'
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    chart: vault
+    helm:
+      parameters:
+        - name: global.openshift
+          value: 'true'
+        - name: server.ha.raft.enabled
+          value: 'true'
+        - name: server.ha.enabled
+          value: 'true'
+        - name: server.ha.replicas
+          value: '3'
+    repoURL: 'https://helm.releases.hashicorp.com'
+    targetRevision: 0.21.0
+---
+EOF
+
+  printf "\nHashiCorp Vault has been installed. Be sure to sync the ArgoCD Application (Auto-Sync has been disabled) and to perform any further configuration\n"
 }
 
 $HELM >/dev/null 2>&1 || error "Could not execute helm binary!"
