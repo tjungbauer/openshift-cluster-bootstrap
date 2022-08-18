@@ -137,7 +137,7 @@ helper-argocd:
         category: security
         solution: vault
       per_cluster_helm_values: false
-      path: clusters/all/management-cluster/vault-config
+      path: clusters/management-cluster/vault-config
       generatorlist:
         - clustername: *mgmtclustername
           clusterurl: *mgmtcluster
