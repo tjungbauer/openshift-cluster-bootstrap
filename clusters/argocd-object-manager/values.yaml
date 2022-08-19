@@ -207,6 +207,7 @@ helper-argocd:
 additional_applications:
   sealed-secrets:
     enabled: true
+    nameOverride: sealed-secrets
     description: "Deploy Sealed-Secrets"
     labels:
       category: security
@@ -226,6 +227,7 @@ additional_applications:
 
   hashicorp-vault:
     enabled: true
+    nameOverride: vault
     description: "Deploy HashoCorp Vault"
     labels:
       category: security
