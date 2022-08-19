@@ -202,3 +202,49 @@ helper-argocd:
     source:
       repourl: *repourl
     branch: *branch
+
+# The following Applications are triggered by the INIT script
+additional_applications:
+  sealed-secrets:
+    enabled: true
+    description: "Deploy Sealed-Secrets"
+    labels:
+      category: security
+    namespace:
+      name: sealed-secrets
+      create: true
+    server: *mgmtclustername
+    project: default
+    chartname: sealed-secrets
+    helm:
+      helmvalues:
+       - name: sealed-secrets.enabled
+         value: 'true'
+    source:
+      repourl: "https://charts.stderr.at/"
+      targetrevision: 1.0.8
+
+  hashicorp-vault:
+    enabled: true
+    description: "Deploy HashoCorp Vault"
+    labels:
+      category: security
+    namespace:
+      name: vault
+      create: true
+    server: *mgmtclustername
+    project: default
+    chartname: vault
+    helm:
+      helmvalues:
+        - name: global.openshift
+          value: 'true'
+        - name: server.ha.raft.enabled
+          value: 'true'
+        - name: server.ha.enabled
+          value: 'true'
+        - name: server.ha.replicas
+          value: '3'
+    source:
+      repourl: "https://helm.releases.hashicorp.com"
+      targetrevision: 0.21.0

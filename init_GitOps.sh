@@ -32,7 +32,6 @@ function add_helm_repo() {
 
   printf "\nAdding Helm Repo %s\n" "${HELM_CHARTS}"
   $HELM repo add --force-update tjungbauer ${HELM_CHARTS}
-  $HELM repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
   $HELM repo update
 
 }
@@ -109,9 +108,6 @@ function patch_argocd() {
 # Deploy the Application of Applications
 function deploy_app_of_apps() {
 
-  printf "\n%bDeploy ArgoCD Application of Applications$%b\n" "${RED}" "${NC}"
-  printf "This will create an ArgoCD Application of Applications which then automatically creates ArgoCD objects like ApplicationSets ad Application\n"
-
   $HELM upgrade --install --values ./bootstrap/init_app_of_apps/values.yaml --namespace=openshift-gitops app-of-apps ./bootstrap/init_app_of_apps
 
 }
@@ -120,8 +116,22 @@ function deploy_app_of_apps() {
 function install_sealed_secrets() {
   printf "\n%bDeploy Sealed Secrets%b\n" "${RED}" "${NC}"
   
-  add_helm_repo
-  $HELM upgrade --install sealed-secrets tjungbauer/sealed-secrets --set 'sealed-secrets.enabled=true'
+  #add_helm_repo
+  #$HELM upgrade --install sealed-secrets tjungbauer/sealed-secrets --set 'sealed-secrets.enabled=true'
+
+  printf "\nCreating Secret for Sealed Secrets Helm Repository\n"
+  oc create --dry-run=client secret generic repo-bitnami-sealed-secrets \
+  --from-literal=name="Sealed Secrets Helm repo" \
+  --from-literal=project=default \
+  --from-literal=type=helm \
+  --from-literal=url="https://charts.stderr.at/" \
+  -o yaml | oc apply --namespace openshift-gitops -f -
+
+  printf "\nLabel Secret\n"
+  oc label secret repo-bitnami-sealed-secrets -n openshift-gitops --overwrite=true "argocd.argoproj.io/secret-type=repository"
+
+  printf "\nCreate Application to Deploy Vault\n"
+
 }
 
 # Deploy Hashicorp Vault if selected
@@ -142,39 +152,8 @@ function install_vault() {
 
   printf "\nCreate Application to Deploy Vault\n"
 
-
-  cat <<EOF | oc apply -n openshift-gitops -f -
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: install-hashicorp-vault
-  namespace: openshift-gitops
-spec:
-  destination:
-    namespace: vault
-    server: 'https://kubernetes.default.svc'
-  project: default
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
-  source:
-    chart: vault
-    helm:
-      parameters:
-        - name: global.openshift
-          value: 'true'
-        - name: server.ha.raft.enabled
-          value: 'true'
-        - name: server.ha.enabled
-          value: 'true'
-        - name: server.ha.replicas
-          value: '3'
-    repoURL: 'https://helm.releases.hashicorp.com'
-    targetRevision: 0.21.0
----
-EOF
-
   printf "\nHashiCorp Vault has been installed. Be sure to sync the ArgoCD Application (Auto-Sync has been disabled) and to perform any further configuration\n"
+
 }
 
 $HELM >/dev/null 2>&1 || error "Could not execute helm binary!"
@@ -188,4 +167,3 @@ select yn in "Yes" "No" "Skip"; do
         Skip) echo -e "${RED}Skip deployment of GitOps and continue with Secret Management${NC}"; verify_secret_mgmt; break;;
     esac
 done
-
