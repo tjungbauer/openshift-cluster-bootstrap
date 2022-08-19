@@ -246,7 +246,7 @@ additional_applications:
         - name: server.ha.enabled
           value: 'true'
         - name: server.ha.replicas
-          value: '3'
+          value: '1'
     source:
       repourl: "https://helm.releases.hashicorp.com"
       targetrevision: 0.21.0
