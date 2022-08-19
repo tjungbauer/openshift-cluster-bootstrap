@@ -36,6 +36,9 @@ spec:
     {{- end }}
     {{- if .helm }}
     helm:
+      {{- if .helm.releasename }}
+      releaseName: {{ .helm.releasename }}
+      {{- end }}
       parameters:
     {{- range .helm.helmvalues }}
         - name: {{ .name }}

@@ -207,7 +207,6 @@ helper-argocd:
 additional_applications:
   sealed-secrets:
     enabled: true
-    nameOverride: sealed-secrets
     description: "Deploy Sealed-Secrets"
     labels:
       category: security
@@ -218,6 +217,7 @@ additional_applications:
     project: default
     chartname: sealed-secrets
     helm:
+      releasename: sealed-secrets
       helmvalues:
        - name: sealed-secrets.enabled
          value: 'true'
@@ -227,7 +227,6 @@ additional_applications:
 
   hashicorp-vault:
     enabled: true
-    nameOverride: vault
     description: "Deploy HashoCorp Vault"
     labels:
       category: security
@@ -238,6 +237,7 @@ additional_applications:
     project: default
     chartname: vault
     helm:
+      releasename: vault
       helmvalues:
         - name: global.openshift
           value: 'true'
