@@ -213,7 +213,7 @@ additional_applications:
     namespace:
       name: sealed-secrets
       create: true
-    server: *mgmtclustername
+    server: *mgmtcluster
     project: default
     chartname: sealed-secrets
     helm:
@@ -232,7 +232,7 @@ additional_applications:
     namespace:
       name: vault
       create: true
-    server: *mgmtclustername
+    server: *mgmtcluster
     project: default
     chartname: vault
     helm:
