@@ -1,0 +1,9 @@
+{{- range $key, $value := .Values.namespaces }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $value | quote }}
+  labels:
+    openshift.io/cluster-monitoring: "true"
+{{- end }}

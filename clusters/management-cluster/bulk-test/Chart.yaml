@@ -1,0 +1,6 @@
+apiVersion: v2
+name: bulk-test
+description: Deployment of huge amount of namespaces
+version: 1.0.0
+maintainers:
+  - name: tjungbau

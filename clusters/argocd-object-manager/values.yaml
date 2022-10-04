@@ -195,6 +195,16 @@ helper-argocd:
         repourl: "https://github.com/tjungbauer/helm-charts"
         targetrevision: "main"
 
+    in-cluster-bulk-test:
+      enabled: true
+      server: *mgmtcluster
+      project: default
+      description: "TEsting bulk operations"
+      labels:
+        category: test
+      source:
+        path: clusters/management-cluster/bulk-test
+
   # These define the default values.
   # It is possible to overwrite repourl and targetrevision in the Applications(Sets)
   general:
