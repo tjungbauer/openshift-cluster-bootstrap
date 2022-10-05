@@ -44,6 +44,7 @@
       register: authprovider_result
 
     - name: Set default role for provider
+      ignore_errors: yes
       uri:
         url: "https://{{ api_endpoint }}/v1/groupsbatch"
         method: POST
