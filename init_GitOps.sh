@@ -94,8 +94,8 @@ function patch_argocd() {
   
   printf "\nLets use our patched ArgoCD CRD\n"
 
-  oc apply -f bootstrap/openshift-gitops/PATCH_openshift-gitops-cr.yaml
-  oc apply -f bootstrap/openshift-gitops/PATCH_openshift-gitops-crb.yaml
+  oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops-cr.yaml
+  oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops-crb.yaml
 
   sleep $RECHECK_TIMER
   waiting_for_argocd_pods
@@ -107,7 +107,7 @@ function patch_argocd() {
 # Deploy the Application of Applications
 function deploy_app_of_apps() {
 
-  $HELM upgrade --install --values ./bootstrap/init_app_of_apps/values.yaml --namespace=openshift-gitops app-of-apps ./bootstrap/init_app_of_apps
+  $HELM upgrade --install --values ./clusters/management-cluster/init_app_of_apps/values.yaml --namespace=openshift-gitops app-of-apps ./clusters/management-cluster/init_app_of_apps
 
 }
 
