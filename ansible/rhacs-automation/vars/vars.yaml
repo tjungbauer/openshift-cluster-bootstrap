@@ -6,13 +6,12 @@ auth_provider: {name: OpenShift, type: openshift}
 default_auth_provider_role: None
 
 permission_sets:
-  - name: Namespace Adminstrator
+  - name: Namespace Administrator
     description: A user that is an administrator of one or more namespaces across various clusters
     resourceToAccess:
       APIToken: READ_WRITE_ACCESS
       Alert: READ_ACCESS
       AllComments: NO_ACCESS
-      AuthPlugin: NO_ACCESS
       AuthProvider: NO_ACCESS
       BackupPlugins: NO_ACCESS
       CVE: NO_ACCESS
