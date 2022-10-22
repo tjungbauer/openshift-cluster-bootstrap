@@ -28,6 +28,15 @@ spec:
     syncOptions:
       - CreateNamespace=true
   {{- end }}
+  {{- if eq (.namespace.create | toString) "false" }}
+  {{- if .syncOptions }}
+  syncPolicy:
+    syncOptions:
+    {{- range .syncOptions }}
+        - {{ .name }}={{ .value }}
+    {{- end }}
+  {{- end }}
+  {{- end }}
   source:
     {{- if .path }}
     path: {{.path }}

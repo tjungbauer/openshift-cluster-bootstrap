@@ -260,3 +260,21 @@ additional_applications:
     source:
       repourl: "https://helm.releases.hashicorp.com"
       targetrevision: 0.21.0
+
+  node-labelling:
+    enabled: true
+    description: "Deploy Node Labels"
+    labels:
+      category: configuration
+    namespace:
+      name: default
+      create: false
+    server: *mgmtcluster
+    project: default
+    path: clusters/management-cluster/node-labels
+    syncOptions:
+      - name: ServerSideApply
+        value: true
+    source:
+      repourl: *repourl
+      targetrevision: *branch
