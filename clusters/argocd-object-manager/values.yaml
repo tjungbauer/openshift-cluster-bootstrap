@@ -275,6 +275,8 @@ additional_applications:
     syncOptions:
       - name: ServerSideApply
         value: true
+      - name: Validate
+        value: false
     source:
       repourl: *repourl
       targetrevision: *branch
