@@ -5,7 +5,9 @@ apiVersion: v1
 metadata:
   name: {{ $value.name | quote }}
   labels:
-    gitops.ownedBy: openshift-gitops
+    {{- range $key_custom_label, $value_custom_label := $value.custom_labels }}
+    {{ $key_custom_label }}: {{ $value_custom_label }}
+    {{- end }}
   annotations:
     test: test
 {{- end }}
