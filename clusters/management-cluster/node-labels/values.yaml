@@ -4,6 +4,7 @@ nodes:
   - name: ip-10-0-160-237.us-west-1.compute.internal
     custom_labels:
       environment: 'Production'
+      gpu: 'true'
   - name: ip-10-0-183-189.us-west-1.compute.internal
     custom_labels:
       environment: 'Test'

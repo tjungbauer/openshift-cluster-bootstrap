@@ -6,7 +6,7 @@ metadata:
   name: {{ $value.name | quote }}
   labels:
     {{- range $key_custom_label, $value_custom_label := $value.custom_labels }}
-    {{ $key_custom_label }}: {{ $value_custom_label }}
+    {{ $key_custom_label }}: {{ $value_custom_label | quote }}
     {{- end }}
   annotations:
     test: test
