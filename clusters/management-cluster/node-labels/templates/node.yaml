@@ -3,7 +3,9 @@
 kind: Node
 apiVersion: v1
 metadata:
-  name: {{ $value | quote }}
+  name: {{ $value.name | quote }}
   labels:
-    myDatacenter: Vienna
+    {{- range $key_label, $value_label := $value.labels }}
+{{ indent 4 $key_label }}: {{ $value_label }}
+    {{- end }}
 {{- end }}
