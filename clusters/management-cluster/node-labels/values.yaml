@@ -5,3 +5,7 @@ nodes:
     labels:
       environment: 'Production'
       gpu: 'true'
+  - name: ip-10-0-160-237.us-west-1.compute.internal
+    labels:
+      environment: 'Test'
+      gpu: 'true'
