@@ -36,14 +36,24 @@ function add_helm_repo() {
 
 }
 
+function check_channel() {
+  printf "\nWhich channel do you want to use? stable or latest?\n\n"
+  printf "Press 1 or 2\n"
+  select sl in "Stable" "Latest"; do
+    case $sl in
+        Stable ) echo "Starting Deployment using STABLE channel"; deploy "stable"; break;;
+        Latest ) echo "Starting Deployment using LATEST channel"; deploy "latest"; break;;
+    esac
+  done
+}
+
 # Deploy openshift-gitops-operator
 function deploy() {
   printf "\n%bDeploying OpenShift GitOps Operator%b\n" "${RED}" "${NC}"
 
   add_helm_repo
 
-  $HELM upgrade --install --set 'gitops.enabled=true' --set 'gitops.clusterAdmin=true' --namespace=openshift-operators openshift-gitops-operator tjungbauer/openshift-gitops
-
+  $HELM upgrade --install --set 'gitops.subscription.channel='$1 --set 'gitops.enabled=true' --set 'gitops.clusterAdmin=true' --namespace=openshift-operators openshift-gitops-operator tjungbauer/openshift-gitops
 
   printf "\nGive the gitops-operator some time to be installed. %bWaiting for %s seconds...%b\n" "${RED}" "${TIMER}" "${NC}"
   sleep $TIMER
@@ -161,7 +171,7 @@ printf "\nDo you wish to continue and install GitOps?\n\n"
 printf "Press 1 or 2\n"
 select yn in "Yes" "No" "Skip"; do
     case $yn in
-        Yes ) echo "Starting Deployment"; deploy; break;;
+        Yes ) echo "Starting Deployment"; check_channel; break;;
         No ) echo "Exit"; exit;;
         Skip) echo -e "${RED}Skip deployment of GitOps and continue with Secret Management${NC}"; verify_secret_mgmt; break;;
     esac
