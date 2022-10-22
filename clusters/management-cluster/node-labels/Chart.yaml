@@ -2,5 +2,9 @@ apiVersion: v2
 name: node-labels
 description: Manage the labelling of the nodes using openshift-gitops 1.6+ and Server Side Apply
 version: 1.0.0
+dependencies:
+  - name: helper-server-side-apply
+    version: "1.0.0"
+    repository: https://charts.stderr.at/
 maintainers:
-  - name: tjungbau
+  - name: tjungbauer

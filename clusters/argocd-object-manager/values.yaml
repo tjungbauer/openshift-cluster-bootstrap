@@ -229,8 +229,8 @@ additional_applications:
     helm:
       releasename: sealed-secrets
       helmvalues:
-       - name: sealed-secrets.enabled
-         value: 'true'
+        - name: sealed-secrets.enabled
+          value: 'true'
     source:
       repourl: "https://charts.stderr.at/"
       targetrevision: 1.0.8

@@ -42,7 +42,7 @@ applicationsets:
         name: application-1-dev
         destinations:
           - name: *mgmtclustername
-            #namespace: application-1  # taking the key later in the chart template
+            # namespace: application-1  # taking the key later in the chart template
             server: *mgmtcluster
         sourceRepos:
           - 'https://github.com/argoproj/argocd-example-apps'
@@ -50,7 +50,7 @@ applicationsets:
           - name: developers
             description: "Group to developers to deploy on DEV environment"
             groups:
-             - application-1-dev
+              - application-1-dev
             # Do not forget to add role to management-cluster/management-gitops
             policies:
               - 'p, proj:application-1-dev:developers, applications, get, application-1-dev/*, allow'
@@ -62,7 +62,7 @@ applicationsets:
           - name: production-rollout
             description: "Group for production deployment"
             groups:
-             - application-1-ops
+              - application-1-ops
             # Do not forget to add role to management-cluster/management-gitops
             policies:
               - 'p, proj:application-1-dev:production-rollout, applications, get, application-1-dev/*, allow'
@@ -77,7 +77,7 @@ applicationsets:
         name: application-1-prod
         destinations:
           - name: *prodclustername
-            #namespace: application-1  # taking the key later in the chart template
+            # namespace: application-1  # taking the key later in the chart template
             server: *prodcluster
         sourceRepos:
           - 'https://github.com/argoproj/argocd-example-apps'
@@ -85,7 +85,7 @@ applicationsets:
           - name: production-rollout
             description: "Group for production deployment"
             groups:
-             - application-1-ops
+              - application-1-ops
             # Do not forget to add role to management-cluster/management-gitops
             policies:
               - 'p, proj:application-1-prod:production-rollout, applications, get, application-1-prod/*, allow'

@@ -6,6 +6,5 @@ dependencies:
   - name: openshift-logging
     version: "1.0.2"
     repository: https://charts.stderr.at/
-    #repository: "file://../../../../helm-charts/charts/openshift-logging"
 maintainers:
-  - name: tjungbau
+  - name: tjungbauer
