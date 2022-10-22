@@ -15,4 +15,6 @@ metadata:
     {{- range $key_custom_label, $value_custom_label := $value.custom_labels }}
     {{ $key_custom_label }}: {{ $value_custom_label }}
     {{- end }}
+  annotations:
+    test: test
 {{- end }}
