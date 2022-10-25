@@ -67,7 +67,7 @@ access_scopes:
 roles:
   - name: Namespace Admins
     description: Administrators of namespace1
-    permission_set: Namespace Adminstrator
+    permission_set: Namespace Administrator
     access_scope: namespace1
     global_access: NO_ACCESS
 
