@@ -128,7 +128,7 @@ function install_sealed_secrets() {
   #add_helm_repo
   #$HELM upgrade --install sealed-secrets tjungbauer/sealed-secrets --set 'sealed-secrets.enabled=true'
 
-  printf "\nCreating Secret for Sealed Secrets Helm Repository\n"
+  printf "\nCreating Secret in OpenShift for Sealed Secrets Helm Repository (charts.stderr.at)\n"
   oc create --dry-run=client secret generic repo-bitnami-sealed-secrets \
   --from-literal=name="Sealed Secrets Helm repo" \
   --from-literal=project=default \
@@ -139,7 +139,7 @@ function install_sealed_secrets() {
   printf "\nLabel Secret\n"
   oc label secret repo-bitnami-sealed-secrets -n openshift-gitops --overwrite=true "argocd.argoproj.io/secret-type=repository"
 
-  printf "\nCreate Application to Deploy Vault\n"
+  printf "\nNow use ArgoCD to deploy sealed-secret\n"
 
 }
 
