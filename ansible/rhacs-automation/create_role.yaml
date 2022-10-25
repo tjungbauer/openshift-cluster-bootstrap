@@ -2,12 +2,6 @@
 - debug:
     msg: "Creating access set {{ item.name }}"
 
-- debug:
-    msg: "{{ permission_set_result.json.permissionSets }}"
-
-- debug:
-    msg: "{{ item.permission_set }}"
-
 # Retrieve the one permissionset we need to link to role
 - name: Retrieve permissionset
   set_fact:

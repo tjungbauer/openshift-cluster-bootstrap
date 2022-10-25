@@ -65,7 +65,7 @@ access_scopes:
       namespaceLabelSelectors: []
 
 roles:
-  - name: Namespace Admins
+  - name: Namespace1 Admins
     description: Administrators of namespace1
     permission_set: Namespace Administrator
     access_scope: namespace1
