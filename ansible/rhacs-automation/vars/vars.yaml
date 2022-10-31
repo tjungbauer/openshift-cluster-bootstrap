@@ -14,14 +14,15 @@ permission_sets:
       AllComments: NO_ACCESS
       AuthProvider: NO_ACCESS
       BackupPlugins: NO_ACCESS
-      CVE: NO_ACCESS
-      Cluster: NO_ACCESS
+      CVE: READ_ACCESS
+      Cluster: READ_ACCESS
       Compliance: NO_ACCESS
       ComplianceRunSchedule: NO_ACCESS
       ComplianceRuns: NO_ACCESS
       Config: NO_ACCESS
       DebugLogs: NO_ACCESS
       Deployment: READ_ACCESS
+      DeploymentExtension: READ_ACCESS
       Detection: READ_ACCESS
       Group: NO_ACCESS
       Image: READ_ACCESS
@@ -37,7 +38,7 @@ permission_sets:
       NetworkGraph: READ_ACCESS
       NetworkGraphConfig: READ_ACCESS
       NetworkPolicy: READ_ACCESS
-      Node: NO_ACCESS
+      Node: READ_ACCESS
       Notifier: NO_ACCESS
       Policy: READ_ACCESS
       ProbeUpload: NO_ACCESS
@@ -52,15 +53,34 @@ permission_sets:
       ServiceIdentity: NO_ACCESS
       User: NO_ACCESS
       WatchedImage: READ_WRITE_ACCESS
+      VulnerabilityManagementRequests: READ_WRITE_ACCESS
 
 access_scopes:
   - name: namespace1
-    description: Access rights for users that can manage their namespaces
+    description: Access rights for users that can manage the namespaces namespace1
     rules:
       includedClusters: []
       includedNamespaces:
       - clusterName: local-cluster
         namespaceName: namespace1
+      clusterLabelSelectors: []
+      namespaceLabelSelectors: []
+  - name: group_backend
+    description: Access rights for users that can manage the namespace backend
+    rules:
+      includedClusters: []
+      includedNamespaces:
+      - clusterName: local-cluster
+        namespaceName: backend
+      clusterLabelSelectors: []
+      namespaceLabelSelectors: []
+  - name: group_frontend
+    description: Access rights for users that can manage the namespace frontend
+    rules:
+      includedClusters: []
+      includedNamespaces:
+      - clusterName: local-cluster
+        namespaceName: frontend
       clusterLabelSelectors: []
       namespaceLabelSelectors: []
 
@@ -69,6 +89,16 @@ roles:
     description: Administrators of namespace1
     permission_set: Namespace Administrator
     access_scope: namespace1
+    global_access: NO_ACCESS
+  - name: NS backend Admins
+    description: Administrators of backend
+    permission_set: Namespace Administrator
+    access_scope: group_backend
+    global_access: NO_ACCESS
+  - name: NS frontend Admins
+    description: Administrators of frontend
+    permission_set: Namespace Administrator
+    access_scope: group_frontend
     global_access: NO_ACCESS
 
 # Associate roles with users/groups in Provider
@@ -83,5 +113,11 @@ role_mappings:
     value: opentlc-mgr
     role_name: Admin
   - key: groups
+    value: group_backend
+    role_name: NS backend Admins
+  - key: groups
     value: namespace1
-    role_name: Namespace1 Admins
+    role_name: namespace1 Admins
+  - key: groups
+    value: group_frontend
+    role_name: NS frontend Admins

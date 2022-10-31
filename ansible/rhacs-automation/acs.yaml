@@ -16,7 +16,7 @@
 
     # Create Openshift Authenticator, will either succeed (200) or fail (400) because it already exists
     - name: Insert OpenShift Authentication Provider
-      uri:
+      ansible.builtin.uri:
         url: "https://{{ api_endpoint }}/v1/authProviders"
         method: POST
         validate_certs: false
@@ -33,7 +33,7 @@
 
     # Get OpenShift Authenticator to retrieve the ID
     - name: Get Auth Provider Id
-      uri:
+      ansible.builtin.uri:
         url: "https://{{ api_endpoint }}/v1/authProviders?name={{ auth_provider.name }}"
         method: GET
         validate_certs: false
@@ -44,8 +44,8 @@
       register: authprovider_result
 
     - name: Set default role for provider
-      ignore_errors: yes
-      uri:
+      ignore_errors: true
+      ansible.builtin.uri:
         url: "https://{{ api_endpoint }}/v1/groupsbatch"
         method: POST
         validate_certs: false
@@ -61,11 +61,11 @@
             - props:
                 authProviderId: "{{ authprovider_result.json.authProviders[0].id }}"
               roleName: "{{ default_auth_provider_role }}"
-        status_code: [200,500]
+        status_code: [200, 500]
 
     # Create the permission sets
     - name: Create Permission Sets
-      uri:
+      ansible.builtin.uri:
         url: "https://{{ api_endpoint }}/v1/permissionsets"
         method: POST
         validate_certs: false
@@ -78,7 +78,7 @@
 
     # Create the access scopes
     - name: Create Access Scopes
-      uri:
+      ansible.builtin.uri:
         url: "https://{{ api_endpoint }}/v1/simpleaccessscopes"
         method: POST
         validate_certs: false
@@ -91,7 +91,7 @@
 
     # Need to get the permission sets to get IDs for Roles
     - name: Get Permission Sets
-      uri:
+      ansible.builtin.uri:
         url: "https://{{ api_endpoint }}/v1/permissionsets"
         method: GET
         validate_certs: false
@@ -103,7 +103,7 @@
 
     # Need to get the access scopes to get IDs for Roles
     - name: Get Access Scopes
-      uri:
+      ansible.builtin.uri:
         url: "https://{{ api_endpoint }}/v1/simpleaccessscopes"
         method: GET
         validate_certs: false
@@ -118,27 +118,48 @@
       include_tasks: create_role.yaml
       with_items: "{{ roles }}"
 
+    # do NOT do this, running connections will be closed
+    # - name: Delete all mapping and start clean
+    #   ignore_errors: true
+    #   uri:
+    #     url: "https://{{ api_endpoint }}/v1/groupsbatch"
+    #     method: POST
+    #     validate_certs: false
+    #     headers:
+    #         authorization: "{{ authorization }}"
+    #     body_format: json
+    #     body:
+    #         previous_groups:
+    #         - roleName: "{{ item.role_name }}"
+    #           props:
+    #             authProviderId: "{{ authprovider_result.json.authProviders[0].id }}"
+    #             key: "{{ item.key }}"
+    #             value: "{{ item.value }}"
+    #         required_groups: []
+    #     status_code: [200,500]
+    #   with_items: "{{ role_mappings }}"
+
     # Now we need to map
     - name: Map role in Provider
-      uri:
+      ansible.builtin.uri:
         url: "https://{{ api_endpoint }}/v1/groupsbatch"
         method: POST
         validate_certs: false
         headers:
-            authorization: "{{ authorization }}"
+          authorization: "{{ authorization }}"
         body_format: json
         body:
-            previous_groups: []
-            # - roleName: "{{ item.name }}"
-            #   props:
-            #     authProviderId: "{{ authprovider_result.json.authProviders[0].id }}"
-            #     key: "{{ item.group_batch.key }}"
-            #     value: "{{ item.group_batch.value }}"
-            required_groups:
-            - roleName: "{{ item.role_name }}"
-              props:
-                authProviderId: "{{ authprovider_result.json.authProviders[0].id }}"
-                key: "{{ item.key }}"
-                value: "{{ item.value }}"
-        status_code: [200,500]
+          previous_groups: []
+          # - roleName: "{{ item.name }}"
+          #   props:
+          #     authProviderId: "{{ authprovider_result.json.authProviders[0].id }}"
+          #     key: "{{ item.group_batch.key }}"
+          #     value: "{{ item.group_batch.value }}"
+          required_groups:
+          - roleName: "{{ item.role_name }}"
+            props:
+              authProviderId: "{{ authprovider_result.json.authProviders[0].id }}"
+              key: "{{ item.key }}"
+              value: "{{ item.value }}"
+        status_code: [200, 500]
       with_items: "{{ role_mappings }}"
