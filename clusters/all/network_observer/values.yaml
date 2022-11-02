@@ -18,7 +18,7 @@ helper-operator:
         source: community-operators
         sourceNamespace: openshift-marketplace
       operatorgroup:
-        create: true
+        create: false
 
 helper-status-checker:
   enabled: true
