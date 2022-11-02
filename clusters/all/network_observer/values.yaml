@@ -29,7 +29,7 @@ helper-status-checker:
   wait_time: 60  # wait time in seconds for the check-job to verify when the deployments should be ready
 
   namespace:
-    name: netobserv
+    name: openshift-operators
 
   serviceAccount:
     create: true
