@@ -3,6 +3,9 @@ kind: FlowCollector
 metadata:
   name: cluster
   namespace: {{ .Values.namespace.name | quote }}
+  annotations:
+    argocd.argoproj.io/sync-wave: {{ .Values.syncwave | quote }}
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   agent: ebpf
   clusterNetworkOperator:

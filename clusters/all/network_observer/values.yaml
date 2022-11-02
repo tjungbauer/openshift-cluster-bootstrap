@@ -3,6 +3,8 @@ namespace:
   name: netobserv
   create: true
 
+syncwave: '3'
+
 helper-operator:
   operators:
     netobserv-operator:
