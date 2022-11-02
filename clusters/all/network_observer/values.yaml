@@ -10,7 +10,7 @@ helper-operator:
       syncwave: '0'
       namespace:
         name: openshift-operators
-        create: true
+        create: false
       subscription:
         approval: Automatic
         operatorName: netobserv-operator
