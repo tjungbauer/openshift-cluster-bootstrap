@@ -12,7 +12,7 @@ helper-operator:
         name: openshift-operators
         create: false
       subscription:
-          channel: v0.2.x
+        channel: v0.2.x
         approval: Automatic
         operatorName: netobserv-operator
         source: community-operators
