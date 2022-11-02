@@ -21,7 +21,7 @@ helper-operator:
         create: false
 
 helper-status-checker:
-  enabled: false
+  enabled: true
 
   # space separate list of deployments which shall be checked for status
   deployments: "netobserv-controller-manager"
