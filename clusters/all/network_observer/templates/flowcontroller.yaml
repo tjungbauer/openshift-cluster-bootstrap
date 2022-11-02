@@ -24,9 +24,7 @@ spec:
         - lo
       kafkaBatchSize: 10485760
       cacheActiveTimeout: 5s
-      interfaces: []
       image: 'quay.io/netobserv/netobserv-ebpf-agent:v0.2.1'
-      privileged: false
     ipfix:
       cacheActiveTimeout: 20s
       cacheMaxFlows: 400
