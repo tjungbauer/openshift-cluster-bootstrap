@@ -86,6 +86,7 @@ generic-cluster-config:
     customloginpage: 
       enabled: true
       secretname: matrix-login-template
+      secretname_providerpage: matrix-provider-template
     enable_idp_provider: true
     providers:
       htpasswd:
