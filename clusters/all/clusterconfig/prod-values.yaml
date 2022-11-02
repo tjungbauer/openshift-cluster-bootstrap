@@ -83,6 +83,10 @@ generic-cluster-config:
 
   idp:
     enabled: true
+    customloginpage: 
+      enabled: false
+      secretname: none
+    enable_idp_provider: true
     providers:
       htpasswd:
         - name: HTPASSWD
