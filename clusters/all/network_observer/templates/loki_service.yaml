@@ -4,7 +4,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: loki
-  namespace: network-observability
+  namespace: {{ .Values.namespace.name | quote }}
 spec:
   selector:
     app: loki

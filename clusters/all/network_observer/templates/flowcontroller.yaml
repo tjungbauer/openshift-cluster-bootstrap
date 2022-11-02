@@ -2,7 +2,7 @@ apiVersion: flows.netobserv.io/v1alpha1
 kind: FlowCollector
 metadata:
   name: cluster
-  namespace: network-observability
+  namespace: {{ .Values.namespace.name | quote }}
 spec:
   agent: ebpf
   clusterNetworkOperator:
@@ -46,8 +46,8 @@ spec:
     maxBackoff: 5m0s
     staticLabels:
       app: netobserv-flowcollector
-    url: 'http://loki.network-observability.svc:3100/'
+    url: 'http://loki.{{ .Values.namespace.name }}.svc:3100/'
     batchWait: 1s
     minBackoff: 1s
     batchSize: 102400
-  namespace: network-observability
+  namespace: {{ .Values.namespace.name | quote }}

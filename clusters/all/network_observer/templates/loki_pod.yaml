@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: loki
-  namespace: network-observability
+  namespace: {{ .Values.namespace.name | quote }}
   labels:
     app: loki
 spec:

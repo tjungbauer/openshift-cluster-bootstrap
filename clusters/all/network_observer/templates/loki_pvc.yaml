@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: loki-store
-  namespace: network-observability
+  namespace: {{ .Values.namespace.name | quote }}
 spec:
   resources:
     requests:
