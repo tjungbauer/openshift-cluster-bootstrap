@@ -2,3 +2,34 @@
 namespace:
   name: netobserv
   create: true
+
+helper-operator:
+  operators:
+    netobserv-operator:
+      enabled: true
+      syncwave: '0'
+      namespace:
+        name: openshift-operators
+        create: true
+      subscription:
+        approval: Automatic
+        operatorName: netobserv-operator
+        source: community-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+
+helper-status-checker:
+  enabled: true
+
+  # space separate list of deployments which shall be checked for status
+  deployments: "netobserv-operator"
+
+  wait_time: 60  # wait time in seconds for the check-job to verify when the deployments should be ready
+
+  namespace:
+    name: netobserv
+
+  serviceAccount:
+    create: true
+    name: "status-checker"
