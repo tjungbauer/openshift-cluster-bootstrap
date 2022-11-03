@@ -26,7 +26,7 @@ permission_sets:
       Detection: READ_ACCESS
       Group: NO_ACCESS
       Image: READ_ACCESS
-      ImageComponent: NO_ACCESS
+      ImageComponent: READ_ACCESS
       ImageIntegration: NO_ACCESS
       Indicator: READ_ACCESS
       K8sRole: READ_ACCESS
