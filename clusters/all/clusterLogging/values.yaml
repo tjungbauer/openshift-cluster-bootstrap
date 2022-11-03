@@ -6,7 +6,7 @@ openshift-logging:
   helper-operator:
     operators:
       elasticsearch-operator:
-        enabled: true
+        enabled: false
       cluster-logging-operator:
         enabled: true
         subscription:

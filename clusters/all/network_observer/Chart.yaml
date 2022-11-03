@@ -4,10 +4,10 @@ description: Install der Network Observer Operator along side with Loki (TechPre
 version: 1.0.0
 dependencies:
   - name: helper-operator
-    version: "1.0.11"
+    version: ~1.0.11
     repository: https://charts.stderr.at/
   - name: helper-status-checker
-    version: "1.0.6"
+    version: ~1.0.6
     repository: https://charts.stderr.at/
     condition: helper-status-checker.enabled
 maintainers:
