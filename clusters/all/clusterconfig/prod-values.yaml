@@ -83,7 +83,7 @@ generic-cluster-config:
 
   idp:
     enabled: true
-    customloginpage: 
+    customloginpage:
       enabled: false
       secretname: none
       secretname_providerpage: none
