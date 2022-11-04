@@ -4,9 +4,15 @@ helper-server-side-apply:
   nodes:
     - name: ip-10-0-160-237.us-west-1.compute.internal
       enabled: true
+      # we need to skip the default labels, since we are trying to 
+      # manage the same object from different ArgoCD Apps
+      ignore_argocd_labels: true
       custom_labels:
         gpu: 'true'
     - name: ip-10-0-183-189.us-west-1.compute.internal
       enabled: true
+      # we need to skip the default labels, since we are trying to 
+      # manage the same object from different ArgoCD Apps
+      ignore_argocd_labels: true
       custom_labels:
         gpu: 'true'
