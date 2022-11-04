@@ -4,7 +4,7 @@ description: Here we are, this is the main entry point for Gitops. All Applicati
 version: 1.0.0
 dependencies:
   - name: helper-argocd
-    version: "1.0.3"
+    version: "1.0.4"
     repository: https://charts.stderr.at/
     # repository: file://../../../helm-charts/charts/helper-argocd
 maintainers:

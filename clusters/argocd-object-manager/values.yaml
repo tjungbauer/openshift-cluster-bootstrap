@@ -159,6 +159,7 @@ helper-argocd:
     install_kyverno:
       enabled: true
       description: "Deploy Kyverno"
+      namespace: kyverno
       labels:
         category: security
       chartname: kyverno
