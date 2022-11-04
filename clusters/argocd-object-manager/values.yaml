@@ -161,7 +161,7 @@ helper-argocd:
       description: "Deploy Kyverno"
       labels:
         category: security
-      path: clusters/all/clusterconfig/
+      chartname: kyverno
       helm:
         per_cluster_helm_values: false
         releasename: kyverno-policies
