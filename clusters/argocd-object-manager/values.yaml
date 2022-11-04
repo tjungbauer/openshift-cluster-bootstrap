@@ -178,7 +178,7 @@ helper-argocd:
         syncOptions:
           - name: CreateNamespace
             value: true
-          - name: Replace
+          - name: ServerSideApply
             value: true
       generatorclusters: []
       repourl: https://kyverno.github.io/kyverno
