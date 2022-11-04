@@ -263,6 +263,9 @@ additional_applications:
 
   node-labelling:
     enabled: true
+    # we need to skip the default labels, since we are trying to 
+    # manage the same object from different ArgoCD Apps
+    ignore_argocd_labels: true
     description: "Deploy Node Labels 1"
     labels:
       category: configuration
@@ -286,6 +289,9 @@ additional_applications:
 
   node-labelling-2:
     enabled: true
+    # we need to skip the default labels, since we are trying to 
+    # manage the same object from different ArgoCD Apps
+    ignore_argocd_labels: true
     description: "Deploy Node Labels 2"
     labels:
       category: configuration
