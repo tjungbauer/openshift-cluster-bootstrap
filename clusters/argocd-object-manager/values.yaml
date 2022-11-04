@@ -169,6 +169,8 @@ helper-argocd:
         helmvalues:
           - name: securityContext
             value: null
+          - name: replicaCount
+            value: 3
       syncPolicy:
         autosync_enabled: false
         # syncpolicy_prune: false
