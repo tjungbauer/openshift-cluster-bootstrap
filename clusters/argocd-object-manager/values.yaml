@@ -25,7 +25,8 @@ helper-argocd:
       labels:
         category: cluster-configuration
       path: clusters/all/clusterconfig/
-      per_cluster_helm_values: true
+      helm:
+        per_cluster_helm_values: true
       generatorclusters: []
   #    repourl: "" # Optional
   #    targetrevision: "" # Optional
@@ -40,7 +41,8 @@ helper-argocd:
       generatorlist:
         - clustername: *mgmtclustername
           clusterurl: *mgmtcluster
-      autosync_enabled: false  # should be disabled for operators
+      syncPolicy:
+        autosync_enabled: false  # should be disabled for operators
 
     install_netobserv_incl_loki_techpreview:
       enabled: true
@@ -52,7 +54,8 @@ helper-argocd:
       generatorlist:
         - clustername: *mgmtclustername
           clusterurl: *mgmtcluster
-      autosync_enabled: false
+      syncPolicy:
+        autosync_enabled: false
 
     # Additional instances of GitOps, usually used for applications deployments
     install_application_gitops:
@@ -64,7 +67,8 @@ helper-argocd:
       generatorlist:
         - clustername: *mgmtclustername
           clusterurl: *mgmtcluster
-      autosync_enabled: false
+      syncPolicy:
+        autosync_enabled: false
 
     # A Collection of operators which will be deployed on ALL clusters.
     install-operator-collection:
@@ -74,7 +78,8 @@ helper-argocd:
         category: operators
       path: charts/collection-operators
       generatorclusters: []
-      autosync_enabled: false  # should be disabled for operators
+      syncPolicy:
+        autosync_enabled: false  # should be disabled for operators
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
 
@@ -89,7 +94,8 @@ helper-argocd:
       generatorlist:
         - clustername: *mgmtclustername
           clusterurl: *mgmtcluster
-      autosync_enabled: false  # should be disabled for operators
+      syncPolicy:
+        autosync_enabled: false  # should be disabled for operators
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
 
@@ -101,7 +107,8 @@ helper-argocd:
         category: operators
       path: charts/collection-optional-operators
       generatorclusters: []
-      autosync_enabled: false  # should be disabled for operators
+      syncPolicy:
+        autosync_enabled: false  # should be disabled for operators
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
 
@@ -114,7 +121,8 @@ helper-argocd:
         solution: compliance
       path: charts/compliance-operator-full-stack
       generatorclusters: []
-      autosync_enabled: false  # should be disabled for operators
+      syncPolicy:
+        autosync_enabled: false  # should be disabled for operators
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
 
@@ -124,10 +132,12 @@ helper-argocd:
       description: "Deploy and Configure OpenShift Logging"
       labels:
         category: logging
-      per_cluster_helm_values: true
+      helm:
+        per_cluster_helm_values: true
       path: clusters/all/clusterLogging
       generatorclusters: []
-      autosync_enabled: false
+      syncPolicy:
+        autosync_enabled: false
 
     # Install Vault-Config-Operator
     install-vault-config-operator:
@@ -136,13 +146,40 @@ helper-argocd:
       labels:
         category: security
         solution: vault
-      per_cluster_helm_values: false
+      helm:
+        per_cluster_helm_values: false
       path: clusters/management-cluster/vault-config
       generatorlist:
         - clustername: *mgmtclustername
           clusterurl: *mgmtcluster
-      autosync_enabled: false
+      syncPolicy:
+        autosync_enabled: false
       targetrevision: "main"
+
+    install_kyverno:
+      enabled: true
+      description: "Deploy Kyverno"
+      labels:
+        category: security
+      path: clusters/all/clusterconfig/
+      helm:
+        per_cluster_helm_values: false
+        releasename: kyverno-policies
+        helmvalues:
+          - name: securityContext
+            value: null
+      syncPolicy:
+        autosync_enabled: false
+        # syncpolicy_prune: false
+        # syncpolicy_selfheal: false
+        syncOptions:
+          - name: CreateNamespace
+            value: true
+          - name: Replace
+            value: true
+      generatorclusters: []
+      repourl: https://kyverno.github.io/kyverno
+      targetrevision: "2.6.1"
 
   applications:
     in-cluster-init-rhacs:
@@ -199,7 +236,7 @@ helper-argocd:
       enabled: true
       server: *mgmtcluster
       project: default
-      description: "TEsting bulk operations"
+      description: "Testing bulk operations"
       labels:
         category: test
       source:
