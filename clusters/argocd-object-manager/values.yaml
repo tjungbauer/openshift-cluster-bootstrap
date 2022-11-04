@@ -180,6 +180,8 @@ helper-argocd:
             value: true
           - name: ServerSideApply
             value: true
+          - name: Replace
+            value: true
       generatorclusters: []
       repourl: https://kyverno.github.io/kyverno
       targetrevision: "2.6.1"
