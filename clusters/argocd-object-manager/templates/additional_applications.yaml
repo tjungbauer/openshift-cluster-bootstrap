@@ -45,6 +45,12 @@ spec:
     {{- end }}
     {{- if .helm }}
     helm:
+      {{- if .helm.valuesfiles }}
+      {{- range .helm.valuesfiles }}
+      valueFiles: 
+        - {{ .name }}
+      {{- end }}
+      {{- end }}
       {{- if .helm.releasename }}
       releaseName: {{ .helm.releasename }}
       {{- end }}

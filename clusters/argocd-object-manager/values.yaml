@@ -263,7 +263,7 @@ additional_applications:
 
   node-labelling:
     enabled: true
-    description: "Deploy Node Labels"
+    description: "Deploy Node Labels 1"
     labels:
       category: configuration
     namespace:
@@ -271,6 +271,32 @@ additional_applications:
       create: false
     server: *mgmtcluster
     project: default
+    helm:
+      valuesfiles:
+        - name: values.yaml
+    path: clusters/management-cluster/node-labels
+    syncOptions:
+      - name: ServerSideApply
+        value: true
+      - name: Validate
+        value: false
+    source:
+      repourl: *repourl
+      targetrevision: *branch
+
+  node-labelling-2:
+    enabled: true
+    description: "Deploy Node Labels 2"
+    labels:
+      category: configuration
+    namespace:
+      name: default
+      create: false
+    server: *mgmtcluster
+    project: default
+    helm:
+      valuesfiles:
+        - name: values-2.yaml
     path: clusters/management-cluster/node-labels
     syncOptions:
       - name: ServerSideApply
