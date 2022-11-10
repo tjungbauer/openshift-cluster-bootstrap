@@ -56,7 +56,16 @@ function deploy() {
   $HELM upgrade --install --set 'gitops.subscription.channel='$1 --set 'gitops.enabled=true' --set 'gitops.clusterAdmin=true' --namespace=openshift-operators openshift-gitops-operator tjungbauer/openshift-gitops
 
   printf "\nGive the gitops-operator some time to be installed. %bWaiting for %s seconds...%b\n" "${RED}" "${TIMER}" "${NC}"
-  sleep $TIMER
+  TIMER_TMP=0
+  while [[ $TIMER_TMP -le $TIMER ]]
+    do 
+      #echo $TIMER_TMP
+      echo -n "."
+      sleep 1
+      let "TIMER_TMP=TIMER_TMP+1"
+    done
+  echo "Let's continue"
+  #sleep $TIMER
 
   printf "\n%bWaiting for operator to start. Chcking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
   until oc get deployment gitops-operator-controller-manager -n openshift-operators
@@ -85,7 +94,11 @@ function deploy() {
 
   deploy_app_of_apps
 
-  verify_secret_mgmt
+  #verify_secret_mgmt
+
+  install_sealed_secrets
+
+  install_vault
 }
 
 # Be sure that all Deployments are ready
@@ -123,7 +136,7 @@ function deploy_app_of_apps() {
 
 # Deploy Sealed Secrets if selected
 function install_sealed_secrets() {
-  printf "\n%bDeploy Sealed Secrets%b\n" "${RED}" "${NC}"
+  printf "\n%bDeploy Sealed Secrets Application into ArgoCD%b\n" "${RED}" "${NC}"
   
   #add_helm_repo
   #$HELM upgrade --install sealed-secrets tjungbauer/sealed-secrets --set 'sealed-secrets.enabled=true'
@@ -167,12 +180,15 @@ function install_vault() {
 
 $HELM >/dev/null 2>&1 || error "Could not execute helm binary!"
 
-printf "\nDo you wish to continue and install GitOps?\n\n"
-printf "Press 1 or 2\n"
-select yn in "Yes" "No" "Skip"; do
-    case $yn in
-        Yes ) echo "Starting Deployment"; check_channel; break;;
-        No ) echo "Exit"; exit;;
-        Skip) echo -e "${RED}Skip deployment of GitOps and continue with Secret Management${NC}"; verify_secret_mgmt; break;;
-    esac
-done
+
+check_channel
+
+#printf "\nDo you wish to continue and install GitOps?\n\n"
+#printf "Press 1 or 2\n"
+#select yn in "Yes" "No" "Skip"; do
+#    case $yn in
+#        Yes ) echo "Starting Deployment"; check_channel; break;;
+#        No ) echo "Exit"; exit;;
+#        Skip) echo -e "${RED}Skip deployment of GitOps and continue with Secret Management${NC}"; verify_secret_mgmt; break;;
+#    esac
+#done
