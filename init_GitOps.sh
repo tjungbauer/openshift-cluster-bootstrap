@@ -180,7 +180,6 @@ function install_vault() {
 
 $HELM >/dev/null 2>&1 || error "Could not execute helm binary!"
 
-
 check_channel
 
 #printf "\nDo you wish to continue and install GitOps?\n\n"
