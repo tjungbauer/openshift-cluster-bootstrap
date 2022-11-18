@@ -41,6 +41,16 @@ helper-argocd:
         per_cluster_helm_values: true
       generatorclusters: []
 
+    etcd-encryption:
+      enabled: true
+      description: "Enable Cluster ETCD Encryption"
+      labels:
+        category: security
+      path: clusters/all/etcd-encryption/
+      helm:
+        per_cluster_helm_values: false
+      generatorclusters: []
+
     # Installs an App-of-Apps for Application onboarding
     application_onboarding:
       enabled: true
