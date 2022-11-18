@@ -3,8 +3,5 @@ cluster_admin_list:
   - admin
 
 generic-cluster-config:
-  etcd_encryption:
-    enabled: true
-
   self_provisioner:
     deactivate: true
