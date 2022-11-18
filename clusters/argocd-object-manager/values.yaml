@@ -21,7 +21,7 @@ helper-argocd:
   applicationsets:
     generic_clusterconfig:
       enabled: true
-      description: "Deploy generic cluster configuration, like banners or etcd encryption"
+      description: "Deploy generic cluster configuration or etcd encryption"
       labels:
         category: cluster-configuration
       path: clusters/all/clusterconfig/
@@ -30,6 +30,16 @@ helper-argocd:
       generatorclusters: []
   #    repourl: "" # Optional
   #    targetrevision: "" # Optional
+
+    branding:
+      enabled: true
+      description: "Deploy Cluster Branding"
+      labels:
+        category: cluster-configuration
+      path: clusters/all/clusterbranding/
+      helm:
+        per_cluster_helm_values: true
+      generatorclusters: []
 
     # Installs an App-of-Apps for Application onboarding
     application_onboarding:
