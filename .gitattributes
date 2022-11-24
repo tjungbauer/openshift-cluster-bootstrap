@@ -1,0 +1,3 @@
+*.yaml linguist-language=YAML
+*.yml linguist-language=YAML
+*.tpl linguist-detectable=true

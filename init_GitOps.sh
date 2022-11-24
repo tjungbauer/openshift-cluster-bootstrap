@@ -181,13 +181,3 @@ function install_vault() {
 $HELM >/dev/null 2>&1 || error "Could not execute helm binary!"
 
 check_channel
-
-#printf "\nDo you wish to continue and install GitOps?\n\n"
-#printf "Press 1 or 2\n"
-#select yn in "Yes" "No" "Skip"; do
-#    case $yn in
-#        Yes ) echo "Starting Deployment"; check_channel; break;;
-#        No ) echo "Exit"; exit;;
-#        Skip) echo -e "${RED}Skip deployment of GitOps and continue with Secret Management${NC}"; verify_secret_mgmt; break;;
-#    esac
-#done
