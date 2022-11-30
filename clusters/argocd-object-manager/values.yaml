@@ -220,6 +220,19 @@ helper-argocd:
         repourl: "https://github.com/tjungbauer/helm-charts"
         targetrevision: "main"
 
+    in-cluster-init-rhacm:
+      enabled: true
+      server: *mgmtcluster
+      project: default
+      description: "Initialize and deploy Red Hat Advanced Cluster Management"
+      labels:
+        category: security
+        solution: rhacm
+      source:
+        path: charts/rhacm-full-stack
+        repourl: "https://github.com/tjungbauer/helm-charts"
+        targetrevision: "main"
+
     in-cluster-rhacs-demo-app:
       enabled: true
       server: *mgmtcluster
