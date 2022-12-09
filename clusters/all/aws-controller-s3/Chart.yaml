@@ -1,0 +1,10 @@
+apiVersion: v2
+name: aws-controller-s3
+description: Install AWS S3 Controller to create Buckets
+version: 1.0.0
+dependencies:
+  - name: helper-operator
+    version: "1.0.11"
+    repository: https://charts.stderr.at/
+maintainers:
+  - name: tjungbauer

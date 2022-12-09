@@ -99,6 +99,9 @@ function deploy() {
   install_sealed_secrets
 
   install_vault
+
+  printf "\n%bNow use ArgoCD to deploy sealed-secret or HashiCorp Vault%b\n" "${GREEN}" "${NC}"
+
 }
 
 # Be sure that all Deployments are ready
@@ -119,6 +122,7 @@ function patch_argocd() {
 
   oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops-cr.yaml
   oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops-crb.yaml
+  oc delete pods --all -n openshift-gitops
 
   sleep $RECHECK_TIMER
   waiting_for_argocd_pods
@@ -152,8 +156,6 @@ function install_sealed_secrets() {
   printf "\nLabel Secret\n"
   oc label secret repo-bitnami-sealed-secrets -n openshift-gitops --overwrite=true "argocd.argoproj.io/secret-type=repository"
 
-  printf "\nNow use ArgoCD to deploy sealed-secret\n"
-
 }
 
 # Deploy Hashicorp Vault if selected
@@ -172,12 +174,10 @@ function install_vault() {
   printf "\nLabel Secret\n"
   oc label secret repo-hashicorp-vault -n openshift-gitops --overwrite=true "argocd.argoproj.io/secret-type=repository"
 
-  printf "\nCreate Application to Deploy Vault\n"
-
-  printf "\nHashiCorp Vault has been installed. Be sure to sync the ArgoCD Application (Auto-Sync has been disabled) and to perform any further configuration\n"
-
 }
 
 $HELM >/dev/null 2>&1 || error "Could not execute helm binary!"
 
-check_channel
+# Let's deploy "latest" from now on, since this is the new channel to use
+# check_channel
+deploy "latest"

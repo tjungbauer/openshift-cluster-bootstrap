@@ -1,0 +1,18 @@
+---
+helper-operator:
+  operators:
+    ack-s3-controller:
+      enabled: true
+      syncwave: '0'
+      namespace:
+        name: ack-system
+        create: true
+      subscription:
+        channel: alpha
+        approval: Automatic
+        operatorName: ack-s3-controller
+        source: community-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+        notownnamespace: true

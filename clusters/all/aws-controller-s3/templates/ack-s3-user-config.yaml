@@ -1,0 +1,12 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ack-s3-user-config
+  namespace: ack-system
+data:
+  ACK_ENABLE_DEVELOPMENT_LOGGING: 'true'
+  ACK_LOG_LEVEL: debug
+  ACK_RESOURCE_TAGS: hellofromocp
+  ACK_WATCH_NAMESPACE: ''
+  AWS_ENDPOINT_URL: ''
+  AWS_REGION: eu-west-1
