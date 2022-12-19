@@ -7,12 +7,12 @@ openshift-logging:
   loggingConfig:
     enabled: true
     syncwave: '3'
+#   retentionPolicy:
+#     application: 1d
+#     infra: 1d
+#     audit: 1d
     # Only for Elasticsearch
 #    es:
-#      retentionPolicy:
-#        application: 1d
-#        infra: 1d
-#        audit: 1d
 #      nodes: 1
 #      storageclass: gp2
 #      storagesize: 200G
