@@ -2,11 +2,27 @@
 
 # subchart
 openshift-logging:
+  # Disable Elasticsearch, but enable Lokistack operator
+  elasticsearch: &es false
+  lokistack: &loki true
+
   # sub subchart
   helper-operator:
     operators:
       elasticsearch-operator:
-        enabled: false
+        enabled: *es
+      loki-operator:
+        enabled: *loki
+        syncwave: '0'
+        namespace:
+          name: openshift-operators-redhat
+          create: true
+        subscription:
+          channel: stable
+          approval: Automatic
+        operatorgroup:
+          # notownnamespace: true
+          create: false
       cluster-logging-operator:
         enabled: true
         subscription:

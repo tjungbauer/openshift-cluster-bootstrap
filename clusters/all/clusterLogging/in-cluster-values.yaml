@@ -1,19 +1,23 @@
 ---
 # subchart
 openshift-logging:
+  # Vector is not enabled by default. Enable it with this parameter.
+  vector: true
+
   loggingConfig:
     enabled: true
     syncwave: '3'
-    es:
-      retentionPolicy:
-        application: 1d
-        infra: 1d
-        audit: 1d
-      nodes: 1
-      storageclass: gp2
-      storagesize: 200G
-      limits:
-        mem: 16Gi
-      requests:
-        mem: 8Gi  # For Demo environments, I do not have so big machines :)
-      redundancyPolicy: ZeroRedundancy
+    # Only for Elasticsearch
+#    es:
+#      retentionPolicy:
+#        application: 1d
+#        infra: 1d
+#        audit: 1d
+#      nodes: 1
+#      storageclass: gp2
+#      storagesize: 200G
+#      limits:
+#        mem: 16Gi
+#      requests:
+#        mem: 8Gi  # For Demo environments, I do not have so big machines :)
+#      redundancyPolicy: ZeroRedundancy
