@@ -1,0 +1,7 @@
+apiVersion: s3.services.k8s.aws/v1alpha1
+kind: Bucket
+metadata:
+  name: logging-s3
+  namespace: openshift-config
+spec:
+  name: lokistack-1
