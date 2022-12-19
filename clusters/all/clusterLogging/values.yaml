@@ -21,7 +21,7 @@ openshift-logging:
           channel: stable
           approval: Automatic
         operatorgroup:
-          # notownnamespace: true
+          notownnamespace: true
           create: true
       cluster-logging-operator:
         enabled: true
