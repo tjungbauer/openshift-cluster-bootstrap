@@ -7,10 +7,10 @@ openshift-logging:
   loggingConfig:
     enabled: true
     syncwave: '3'
-#   retentionPolicy:
-#     application: 1d
-#     infra: 1d
-#     audit: 1d
+    retentionPolicy:
+      application: 1d
+      infra: 1d
+      audit: 1d
     # Only for Elasticsearch
 #    es:
 #      nodes: 1
