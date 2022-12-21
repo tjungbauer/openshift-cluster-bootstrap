@@ -10,10 +10,8 @@ on:
       - 'README.md'
 
 jobs:
-  lint-test:
+  ct-lint-test:
     runs-on: ubuntu-latest
-    container:
-            image: quay.io/tjungbau/linter-image:v1.0.0
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -36,6 +34,14 @@ jobs:
             for charts in `find . -name 'Chart.yaml' -type f | xargs -I{} dirname {}`; do 
               ct lint --charts $charts; done
             done
+
+  lint-test:
+    runs-on: ubuntu-latest
+    container:
+            image: quay.io/tjungbau/linter-image:v1.0.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
          
       - name: Run helm lint on found Charts
         run: |
