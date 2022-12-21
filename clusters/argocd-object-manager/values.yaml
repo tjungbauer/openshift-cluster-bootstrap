@@ -220,6 +220,7 @@ helper-argocd:
     in-cluster-init-rhacs:
       enabled: true
       server: *mgmtcluster
+      namespace: {}
       project: default
       description: "Initialize Red Hat Advanced Cluster Security and deploy Central and SecuredCluster"
       labels:
@@ -233,6 +234,7 @@ helper-argocd:
     in-cluster-init-rhacm:
       enabled: true
       server: *mgmtcluster
+      namespace: {}
       project: default
       description: "Initialize and deploy Red Hat Advanced Cluster Management"
       labels:
@@ -246,6 +248,7 @@ helper-argocd:
     in-cluster-rhacs-demo-app:
       enabled: true
       server: *mgmtcluster
+      namespace: {}
       project: default
       description: "Deploy a vulnerable demo application to show results in RHACS"
       labels:
@@ -259,6 +262,7 @@ helper-argocd:
     in-cluster-pipeline-demo:
       enabled: true
       server: *mgmtcluster
+      namespace: {}
       project: default
       description: "Deploy a demo pipeline about linting to show possibilities"
       labels:
@@ -271,6 +275,7 @@ helper-argocd:
     in-cluster-odf:
       enabled: true
       server: *mgmtcluster
+      namespace: {}
       project: default
       description: "Deploy Open Data Foundation Operator"
       labels:
@@ -283,12 +288,82 @@ helper-argocd:
     in-cluster-bulk-test:
       enabled: true
       server: *mgmtcluster
+      namespace: {}
       project: default
       description: "Testing bulk operations"
       labels:
         category: test
       source:
         path: clusters/management-cluster/bulk-test
+
+    sealed-secrets:
+      enabled: true
+      description: "Deploy Sealed-Secrets"
+      labels:
+        category: security
+      namespace:
+        name: sealed-secrets
+        create: true
+      server: *mgmtcluster
+      project: default
+      source:
+        chartname: sealed-secrets
+        helm:
+          releasename: sealed-secrets
+          helmvalues:
+            - name: sealed-secrets.enabled
+              value: 'true'
+        repourl: "https://charts.stderr.at/"
+        targetrevision: 1.0.8
+
+    hashicorp-vault:
+      enabled: true
+      description: "Deploy HashoCorp Vault"
+      labels:
+        category: security
+      namespace:
+        name: vault
+        create: true
+      server: *mgmtcluster
+      project: default
+      source:
+        chartname: vault
+        helm:
+          releasename: vault
+          helmvalues:
+            - name: global.openshift
+              value: 'true'
+            - name: server.ha.raft.enabled
+              value: 'true'
+            - name: server.ha.enabled
+              value: 'true'
+            - name: server.ha.replicas
+              value: '1'
+        repourl: "https://helm.releases.hashicorp.com"
+        targetrevision: 0.21.0
+
+    node-labelling:
+      enabled: true
+      description: "Deploy Node Labels"
+      labels:
+        category: configuration
+      namespace:
+        name: default
+        create: false
+      server: *mgmtcluster
+      project: default
+      syncOptions:
+        - name: ServerSideApply
+          value: true
+        - name: Validate
+          value: false
+      source:
+        path: clusters/management-cluster/node-labels
+        helm:
+          valuesfiles:
+            - name: values.yaml
+        repourl: *repourl
+        targetrevision: *branch
 
   # These define the default values.
   # It is possible to overwrite repourl and targetrevision in the Applications(Sets)
@@ -297,74 +372,3 @@ helper-argocd:
     source:
       repourl: *repourl
     branch: *branch
-
-# The following Applications are triggered by the INIT script
-additional_applications:
-  sealed-secrets:
-    enabled: true
-    description: "Deploy Sealed-Secrets"
-    labels:
-      category: security
-    namespace:
-      name: sealed-secrets
-      create: true
-    server: *mgmtcluster
-    project: default
-    chartname: sealed-secrets
-    helm:
-      releasename: sealed-secrets
-      helmvalues:
-        - name: sealed-secrets.enabled
-          value: 'true'
-    source:
-      repourl: "https://charts.stderr.at/"
-      targetrevision: 1.0.8
-
-  hashicorp-vault:
-    enabled: true
-    description: "Deploy HashoCorp Vault"
-    labels:
-      category: security
-    namespace:
-      name: vault
-      create: true
-    server: *mgmtcluster
-    project: default
-    chartname: vault
-    helm:
-      releasename: vault
-      helmvalues:
-        - name: global.openshift
-          value: 'true'
-        - name: server.ha.raft.enabled
-          value: 'true'
-        - name: server.ha.enabled
-          value: 'true'
-        - name: server.ha.replicas
-          value: '1'
-    source:
-      repourl: "https://helm.releases.hashicorp.com"
-      targetrevision: 0.21.0
-
-  node-labelling:
-    enabled: true
-    description: "Deploy Node Labels"
-    labels:
-      category: configuration
-    namespace:
-      name: default
-      create: false
-    server: *mgmtcluster
-    project: default
-    helm:
-      valuesfiles:
-        - name: values.yaml
-    path: clusters/management-cluster/node-labels
-    syncOptions:
-      - name: ServerSideApply
-        value: true
-      - name: Validate
-        value: false
-    source:
-      repourl: *repourl
-      targetrevision: *branch
