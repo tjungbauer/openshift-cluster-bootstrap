@@ -1,4 +1,3 @@
-*.html linguist-detectable=false
-*.yaml linguist-language=YAML
-*.yml linguist-language=YAML
+*.yml linguist-detectable
+*.yaml linguist-detectable
 *.tpl linguist-detectable=true
