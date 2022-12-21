@@ -22,7 +22,7 @@ openshift-logging:
           approval: Automatic
         operatorgroup:
           notownnamespace: true
-          create: true
+          create: false
       cluster-logging-operator:
         enabled: true
         subscription:
