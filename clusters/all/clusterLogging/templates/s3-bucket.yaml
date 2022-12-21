@@ -6,5 +6,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '1'
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    services.k8s.aws/region: eu-west-1
 spec:
   name: lokistack-1
