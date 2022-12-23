@@ -15,19 +15,6 @@ function error() {
     exit 1
 }
 
-# Ask which Secret Manager should be installed
-function verify_secret_mgmt() {
-  printf "\nPlease select one of the supported Secrets Manager.\n\n"
-  printf "Press 1, 2, 3\n"
-  select svn in "Sealed-Secrets" "Hashicorp-Vault" "None"; do
-        case $svn in
-            Sealed-Secrets ) echo "Installing Sealed Secrets"; install_sealed_secrets; break;;
-            Hashicorp-Vault) echo "Installing Hashicorp Vault"; install_vault; break;;
-            None) echo "Using NO Secret Manager. Exiting"; exit;; 
-        esac
-    done  
-}
-
 function add_helm_repo() {
 
   printf "\nAdding Helm Repo %s\n" "${HELM_CHARTS}"
@@ -94,8 +81,6 @@ function deploy() {
 
   deploy_app_of_apps
 
-  #verify_secret_mgmt
-
   install_sealed_secrets
 
   install_vault
@@ -140,11 +125,7 @@ function deploy_app_of_apps() {
 
 # Deploy Sealed Secrets if selected
 function install_sealed_secrets() {
-  printf "\n%bDeploy Sealed Secrets Application into ArgoCD%b\n" "${RED}" "${NC}"
-  
-  #add_helm_repo
-  #$HELM upgrade --install sealed-secrets tjungbauer/sealed-secrets --set 'sealed-secrets.enabled=true'
-
+  printf "\n%bDeploy Sealed Secrets Application into ArgoCD%b\n" "${RED}" "${NC}" 
   printf "\nCreating Secret in OpenShift for Sealed Secrets Helm Repository (charts.stderr.at)\n"
   oc create --dry-run=client secret generic repo-bitnami-sealed-secrets \
   --from-literal=name="Sealed Secrets Helm repo" \
@@ -155,7 +136,6 @@ function install_sealed_secrets() {
 
   printf "\nLabel Secret\n"
   oc label secret repo-bitnami-sealed-secrets -n openshift-gitops --overwrite=true "argocd.argoproj.io/secret-type=repository"
-
 }
 
 # Deploy Hashicorp Vault if selected
