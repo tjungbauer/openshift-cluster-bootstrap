@@ -34,43 +34,66 @@ function check_channel() {
   done
 }
 
+# check if operator is already installed
+function check_op_status() {
+  get_status=`oc get subscription.operators.coreos.com/openshift-gitops-operator -n openshift-operators -o jsonpath='{.status.conditions[0].reason}'`
+
+  if [ $get_status == "AllCatalogSourcesHealthy" ]; then
+      return 0
+  else
+      return 1
+  fi
+
+}
+
 # Deploy openshift-gitops-operator
 function deploy() {
-  printf "\n%bDeploying OpenShift GitOps Operator%b\n" "${RED}" "${NC}"
 
-  add_helm_repo
+  printf "\nCheck if GitOps Operator is already deployed\n"
+  check_op_status
 
-  $HELM upgrade --install --set 'gitops.subscription.channel='$1 --set 'gitops.enabled=true' --set 'gitops.clusterAdmin=true' --namespace=openshift-operators openshift-gitops-operator tjungbauer/openshift-gitops
+  local res=$?
+  if [ $res -eq "0" ]; then
+      printf "Operator is already installed. Verifying if Pods are running \n"
+  else
 
-  printf "\nGive the gitops-operator some time to be installed. %bWaiting for %s seconds...%b\n" "${RED}" "${TIMER}" "${NC}"
-  TIMER_TMP=0
-  while [[ $TIMER_TMP -le $TIMER ]]
-    do 
-      #echo $TIMER_TMP
-      echo -n "."
-      sleep 1
-      let "TIMER_TMP=TIMER_TMP+1"
+    printf "\n%bDeploying OpenShift GitOps Operator%b\n" "${RED}" "${NC}"
+
+    add_helm_repo
+
+    $HELM upgrade --install --set 'gitops.subscription.channel='$1 --set 'gitops.enabled=true' --set 'gitops.clusterAdmin=true' --namespace=openshift-operators openshift-gitops-operator tjungbauer/openshift-gitops
+
+    printf "\nGive the gitops-operator some time to be installed. %bWaiting for %s seconds...%b\n" "${RED}" "${TIMER}" "${NC}"
+    TIMER_TMP=0
+    while [[ $TIMER_TMP -le $TIMER ]]
+      do 
+        #echo $TIMER_TMP
+        echo -n "."
+        sleep 1
+        let "TIMER_TMP=TIMER_TMP+1"
+      done
+    echo "Let's continue"
+    #sleep $TIMER
+
+    printf "\n%bWaiting for operator to start. Chcking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
+    until oc get deployment gitops-operator-controller-manager -n openshift-operators
+    do
+      sleep $RECHECK_TIMER;
     done
-  echo "Let's continue"
-  #sleep $TIMER
 
-  printf "\n%bWaiting for operator to start. Chcking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
-  until oc get deployment gitops-operator-controller-manager -n openshift-operators
-  do
-    sleep $RECHECK_TIMER;
-  done
+    printf "\n%bWaiting for openshift-gitops namespace to be created. Checking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
+    until oc get ns openshift-gitops
+    do
+      sleep $RECHECK_TIMER;
+    done
 
-  printf "\n%bWaiting for openshift-gitops namespace to be created. Checking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
-  until oc get ns openshift-gitops
-  do
-    sleep $RECHECK_TIMER;
-  done
+    printf "\n%bWaiting for deployments to start. Checking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
+    until oc get deployment cluster -n openshift-gitops
+    do
+      sleep $RECHECK_TIMER;
+    done
 
-  printf "\n%bWaiting for deployments to start. Checking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
-  until oc get deployment cluster -n openshift-gitops
-  do
-    sleep $RECHECK_TIMER;
-  done
+  fi
 
   echo "Waiting for all pods to be created"
   waiting_for_argocd_pods
@@ -105,14 +128,21 @@ function patch_argocd() {
   
   printf "\nLets use our patched ArgoCD CRD\n"
 
-  oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops-cr.yaml
-  oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops-crb.yaml
-  oc delete pods --all -n openshift-gitops
+  patch_argo=`oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops-cr.yaml`
+  add_crb=`oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops-crb.yaml`
 
-  sleep $RECHECK_TIMER
-  waiting_for_argocd_pods
+  if [[ "$patch_argo" == *"unchanged"* ]] && [[ "$add_crb" == *"unchanged"* ]]; then
+    echo "ArgoCD already patched"
+  else
 
-  printf "%bGitOps Operator ready... again%b\n" "${GREEN}" "${NC}"
+    oc delete pods --all -n openshift-gitops
+
+    sleep $RECHECK_TIMER
+    waiting_for_argocd_pods
+
+    printf "%bGitOps Operator ready... again%b\n" "${GREEN}" "${NC}"
+
+  fi
 
 }
 
