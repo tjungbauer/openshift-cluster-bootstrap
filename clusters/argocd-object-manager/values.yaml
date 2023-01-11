@@ -25,6 +25,7 @@ helper-argocd:
       labels:
         category: cluster-configuration
       path: clusters/all/clusterconfig/
+      preserveResourcesOnDeletion: true
       helm:
         per_cluster_helm_values: true
       generatorclusters: []
