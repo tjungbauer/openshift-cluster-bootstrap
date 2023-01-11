@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euf -o pipefail
+#set -euf -o pipefail
 RED='\033[37;41m'  # White text with red background
 CYAN_BG='\033[30;46m' # Black text with cyan background
 GREEN='\033[30;42m'  # Black text with green background
