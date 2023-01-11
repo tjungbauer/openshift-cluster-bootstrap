@@ -1,0 +1,6 @@
+# Example
+
+namespace:
+  name: my_test_application
+  enabled: true
+  gitops_namespace: gitops-applications
