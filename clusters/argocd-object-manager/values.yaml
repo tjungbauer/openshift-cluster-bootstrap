@@ -27,7 +27,7 @@ helper-argocd:
       path: clusters/all/clusterconfig/
       # If Applications gets deleted, keep the resources
       # https://argocd-applicationset.readthedocs.io/en/stable/Application-Deletion/
-      #preserveResourcesOnDeletion: true
+      # preserveResourcesOnDeletion: true
       helm:
         per_cluster_helm_values: true
       generatorclusters: []

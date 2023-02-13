@@ -128,7 +128,7 @@ function patch_argocd() {
   
   printf "\nLets use our patched ArgoCD CRD\n"
 
-  patch_argo=`oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops-cr.yaml`
+  patch_argo=`oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops.yaml`
   add_crb=`oc apply -f https://raw.githubusercontent.com/tjungbauer/helm-charts/main/charts/openshift-gitops/PATCH_openshift-gitops-crb.yaml`
 
   if [[ "$patch_argo" == *"unchanged"* ]] && [[ "$add_crb" == *"unchanged"* ]]; then
