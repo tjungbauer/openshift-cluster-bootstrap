@@ -20,9 +20,16 @@ spec:
         name: loki-config
   containers:
     - name: loki
-      image: grafana/loki:2.5.0
+      image: grafana/loki:2.6.1
       volumeMounts:
         - mountPath: "/loki-store"
           name: loki-store
         - mountPath: "/etc/loki"
           name: loki-config
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
