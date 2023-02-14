@@ -316,7 +316,7 @@ helper-argocd:
             - name: sealed-secrets.enabled
               value: 'true'
         repourl: "https://charts.stderr.at/"
-        targetrevision: 1.0.8
+        targetrevision: 1.0.11
 
     hashicorp-vault:
       enabled: true
