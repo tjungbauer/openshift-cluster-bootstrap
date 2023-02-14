@@ -82,7 +82,6 @@ helper-argocd:
       description: "Deploy the Net Observer Operator"
       labels:
         category: operators
-        techpreview: true
       path: clusters/all/network_observer
       generatorlist:
         - clustername: *mgmtclustername
