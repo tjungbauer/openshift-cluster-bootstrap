@@ -118,7 +118,7 @@ helper-argocd:
     # A collection of MANAGEMENT operators,
     # installed usually on the management cluster only.
     install-mgmt-operator-collection:
-      enabled: true
+      enabled: false
       description: "Deploy a collection of Operators which are usually installed on a management cluster only"
       labels:
         category: operators
@@ -133,7 +133,7 @@ helper-argocd:
 
     # A Collection of OPTIONAL operators which will be deployed on ALL clusters.
     install_optional_operator_collection:
-      enabled: true
+      enabled: false
       description: "Install optional Operators which might be good to test"
       labels:
         category: operators
