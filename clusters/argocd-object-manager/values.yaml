@@ -203,6 +203,7 @@ helper-argocd:
           clusterurl: *mgmtcluster
       syncPolicy:
         autosync_enabled: false
+      repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
 
     install_kyverno:
