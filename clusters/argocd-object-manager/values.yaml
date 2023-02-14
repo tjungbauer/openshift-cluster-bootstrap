@@ -188,6 +188,23 @@ helper-argocd:
         autosync_enabled: false
       targetrevision: "main"
 
+    # init ACM
+    init-rhacm:
+      enabled: true
+      description: "Initialize and deploy Red Hat Advanced Cluster Management"
+      labels:
+        category: security
+        solution: rhacm
+      helm:
+        per_cluster_helm_values: false
+      path: charts/rhacm-full-stack
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      syncPolicy:
+        autosync_enabled: false
+      targetrevision: "main"
+
     install_kyverno:
       enabled: true
       description: "Deploy Kyverno"
@@ -218,6 +235,7 @@ helper-argocd:
       repourl: https://kyverno.github.io/kyverno
       targetrevision: "2.6.1"
 
+  # APPLICATIONS
   applications:
     in-cluster-init-rhacs:
       enabled: true
@@ -233,19 +251,19 @@ helper-argocd:
         repourl: "https://github.com/tjungbauer/helm-charts"
         targetrevision: "main"
 
-    in-cluster-init-rhacm:
-      enabled: true
-      server: *mgmtcluster
-      namespace: {}
-      project: default
-      description: "Initialize and deploy Red Hat Advanced Cluster Management"
-      labels:
-        category: security
-        solution: rhacm
-      source:
-        path: charts/rhacm-full-stack
-        repourl: "https://github.com/tjungbauer/helm-charts"
-        targetrevision: "main"
+#    in-cluster-init-rhacm:
+#      enabled: true
+#      server: *mgmtcluster
+#      namespace: {}
+#      project: default
+#      description: "Initialize and deploy Red Hat Advanced Cluster Management"
+#      labels:
+#        category: security
+#        solution: rhacm
+#      source:
+#        path: charts/rhacm-full-stack
+#        repourl: "https://github.com/tjungbauer/helm-charts"
+#        targetrevision: "main"
 
     in-cluster-rhacs-demo-app:
       enabled: true
