@@ -77,9 +77,9 @@ helper-argocd:
       syncPolicy:
         autosync_enabled: false  # should be disabled for operators
 
-    install_netobserv_incl_loki_techpreview:
+    install_netobserv:
       enabled: true
-      description: "Deploy the Net Observer"
+      description: "Deploy the Net Observer Operator"
       labels:
         category: operators
         techpreview: true
