@@ -1,1 +1,4 @@
 ---
+namespace:
+  name: dummy
+  enabled: false
