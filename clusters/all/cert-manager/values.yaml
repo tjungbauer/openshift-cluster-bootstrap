@@ -16,6 +16,7 @@ helper-operator:
         sourceNamespace: openshift-marketplace
       operatorgroup:
         create: true
+        notownnamespace: true
     cert-manager:
       enabled: true
       syncwave: '0'
@@ -26,10 +27,11 @@ helper-operator:
         channel: tech-preview
         approval: Automatic
         operatorName: openshift-cert-manager-operator
-        source: community-operators
+        source: redhat-operators
         sourceNamespace: openshift-marketplace
       operatorgroup:
         create: true
+        notownnamespace: true
 
 helper-status-checker:
   enabled: true
