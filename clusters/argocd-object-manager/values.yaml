@@ -188,6 +188,20 @@ helper-argocd:
         autosync_enabled: false
       targetrevision: "main"
 
+    # Install Cert-Manager and Cert-Utils Operators
+    install-certificate-management:
+      enabled: true
+      description: "Deploy cert-manager and cert-utils operators"
+      labels:
+        category: security
+      helm:
+        per_cluster_helm_values: true
+      path: clusters/all/cert-manager
+      generatorlist: []
+      syncPolicy:
+        autosync_enabled: false
+      targetrevision: "main"
+
     # init ACM
     init-rhacm:
       enabled: true

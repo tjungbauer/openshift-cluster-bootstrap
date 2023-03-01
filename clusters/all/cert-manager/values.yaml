@@ -1,0 +1,47 @@
+---
+
+helper-operator:
+  operators:
+    cert-utils-operator:
+      enabled: true
+      syncwave: '0'
+      namespace:
+        name: cert-utils-operator
+        create: true
+      subscription:
+        channel: alpha
+        approval: Automatic
+        operatorName: cert-utils-operator
+        source: community-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+    cert-manager:
+      enabled: true
+      syncwave: '0'
+      namespace:
+        name: openshift-cert-manager-operator
+        create: true
+      subscription:
+        channel: tech-preview
+        approval: Automatic
+        operatorName: openshift-cert-manager-operator
+        source: community-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+
+helper-status-checker:
+  enabled: true
+
+  # space separate list of deployments which shall be checked for status
+  deployments: "cert-manager-operator"
+
+  wait_time: 60  # wait time in seconds for the check-job to verify when the deployments should be ready
+
+  namespace:
+    name: openshift-cert-manager-operator
+
+  serviceAccount:
+    create: true
+    name: "status-checker-cert-manager"

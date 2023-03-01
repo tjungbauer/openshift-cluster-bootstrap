@@ -1,7 +1,7 @@
 apiVersion: v2
-name: network-observer
-description: Install the Network Observer Operator along side with Loki (TechPreview !!!)
-version: 1.0.2
+name: cert-manager
+description: Install cert-manager and cert-utils Operators
+version: 1.0.0
 dependencies:
   - name: helper-operator
     version: ~1.0.11
