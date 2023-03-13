@@ -253,9 +253,6 @@ helper-argocd:
     sealed-secrets:
       enabled: true
       description: "Deploy Sealed-Secrets"
-      #namespace:
-      #  name: sealed-secrets
-      #  create: true
       labels:
         category: security
       generatorlist: []
@@ -356,7 +353,7 @@ helper-argocd:
         path: clusters/management-cluster/bulk-test
 
     sealed-secrets-old:
-      enabled: true
+      enabled: false
       description: "Deploy Sealed-Secrets"
       labels:
         category: security
