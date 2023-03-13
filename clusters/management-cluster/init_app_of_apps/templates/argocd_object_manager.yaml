@@ -16,7 +16,7 @@ spec:
     targetRevision:  {{ .Values.revision }}
   syncPolicy:
     automated:
-      prune: false
+      prune: true
       selfHeal: true
   info:
     - name: Description

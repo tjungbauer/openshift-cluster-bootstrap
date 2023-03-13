@@ -199,7 +199,7 @@ helper-argocd:
       path: clusters/all/cert-manager
       generatorlist: []
       syncPolicy:
-        autosync_enabled: false
+        autosync_enabled: true
       targetrevision: "main"
 
     # init ACM
@@ -249,6 +249,30 @@ helper-argocd:
       generatorclusters: []
       repourl: https://kyverno.github.io/kyverno
       targetrevision: "2.6.1"
+
+    sealed-secrets:
+      enabled: true
+      description: "Deploy Sealed-Secrets"
+      namespace:
+        name: sealed-secrets
+        create: true
+      labels:
+        category: security
+      generatorlist: []
+      project: default
+      chartname: sealed-secrets
+      helm:
+        releasename: sealed-secrets
+        helmvalues:
+          - name: sealed-secrets.enabled
+            value: 'true'
+      syncPolicy:
+        autosync_enabled: true
+        syncpolicy_prune: false
+        syncpolicy_selfheal: true
+      generatorclusters: []
+      repourl: "https://charts.stderr.at/"
+      targetrevision: 1.0.11
 
   # APPLICATIONS
   applications:
@@ -331,7 +355,7 @@ helper-argocd:
       source:
         path: clusters/management-cluster/bulk-test
 
-    sealed-secrets:
+    sealed-secrets-old:
       enabled: true
       description: "Deploy Sealed-Secrets"
       labels:
