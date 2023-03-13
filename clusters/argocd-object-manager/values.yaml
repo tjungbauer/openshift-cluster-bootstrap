@@ -253,9 +253,9 @@ helper-argocd:
     sealed-secrets:
       enabled: true
       description: "Deploy Sealed-Secrets"
-      namespace:
-        name: sealed-secrets
-        create: true
+      #namespace:
+      #  name: sealed-secrets
+      #  create: true
       labels:
         category: security
       generatorlist: []
