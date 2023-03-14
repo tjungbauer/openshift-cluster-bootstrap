@@ -36,7 +36,7 @@ helper-operator:
 helper-status-checker:
   enabled: true
 
-  operatorName: openshift-cert-manager-operator
+  operatorName: openshift-cert-manager
 
   # where operator is installed
   namespace:
