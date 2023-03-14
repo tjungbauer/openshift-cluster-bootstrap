@@ -4,7 +4,7 @@ description: Installs and configures OpenShift Logging by calling the Chart open
 version: 1.0.0
 dependencies:
   - name: openshift-logging
-    version: "1.0.16"
+    version: "1.0.17"
     repository: https://charts.stderr.at/
 maintainers:
   - name: tjungbauer
