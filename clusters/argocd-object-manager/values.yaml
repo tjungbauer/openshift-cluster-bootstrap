@@ -352,25 +352,26 @@ helper-argocd:
       source:
         path: clusters/management-cluster/bulk-test
 
-    sealed-secrets-old:
-      enabled: false
-      description: "Deploy Sealed-Secrets"
-      labels:
-        category: security
-      namespace:
-        name: sealed-secrets
-        create: true
-      server: *mgmtcluster
-      project: default
-      source:
-        chartname: sealed-secrets
-        helm:
-          releasename: sealed-secrets
-          helmvalues:
-            - name: sealed-secrets.enabled
-              value: 'true'
-        repourl: "https://charts.stderr.at/"
-        targetrevision: 1.0.11
+# moved to applicationset
+#    sealed-secrets-old:
+#      enabled: false
+#      description: "Deploy Sealed-Secrets"
+#      labels:
+#        category: security
+#      namespace:
+#        name: sealed-secrets
+#        create: true
+#      server: *mgmtcluster
+#      project: default
+#      source:
+#        chartname: sealed-secrets
+#        helm:
+#          releasename: sealed-secrets
+#          helmvalues:
+#            - name: sealed-secrets.enabled
+#              value: 'true'
+#        repourl: "https://charts.stderr.at/"
+#        targetrevision: 1.0.11
 
     hashicorp-vault:
       enabled: true
