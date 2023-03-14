@@ -36,6 +36,7 @@ helper-operator:
 helper-status-checker:
   enabled: true
 
+  # use the value of the currentCSV (packagemanifest) but WITHOUT the version !!
   operatorName: openshift-cert-manager
 
   # where operator is installed
