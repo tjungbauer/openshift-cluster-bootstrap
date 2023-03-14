@@ -10,14 +10,11 @@ permission_sets:
     description: A user that is an administrator of one or more namespaces across various clusters
     resourceToAccess:
       Access: NO_ACCESS
+      Administration: NO_ACCESS
       Alert: READ_ACCESS
-      AllComments: NO_ACCESS
       CVE: READ_ACCESS
       Cluster: READ_ACCESS
       Compliance: NO_ACCESS
-      ComplianceRuns: NO_ACCESS
-      Config: NO_ACCESS
-      DebugLogs: NO_ACCESS
       Deployment: READ_ACCESS
       DeploymentExtension: READ_ACCESS
       Detection: READ_ACCESS
@@ -28,19 +25,13 @@ permission_sets:
       K8sSubject: READ_ACCESS
       Namespace: READ_ACCESS
       NetworkGraph: READ_ACCESS
-      NetworkGraphConfig: READ_ACCESS
       NetworkPolicy: READ_ACCESS
       Node: READ_ACCESS
-      Policy: READ_ACCESS
-      ProbeUpload: NO_ACCESS
       Role: NO_ACCESS
-      ScannerBundle: NO_ACCESS
-      ScannerDefinitions: NO_ACCESS
       Secret: READ_ACCESS
-      SensorUpgradeConfig: NO_ACCESS
       ServiceAccount: READ_ACCESS
-      ServiceIdentity: NO_ACCESS
       WatchedImage: READ_WRITE_ACCESS
+      WorkflowAdministration: READ_ACCESS
       VulnerabilityManagementRequests: READ_WRITE_ACCESS
 
 access_scopes:
