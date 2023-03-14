@@ -36,14 +36,12 @@ helper-operator:
 helper-status-checker:
   enabled: true
 
-  # space separate list of deployments which shall be checked for status
-  deployments: "cert-manager-operator"
+  operatorName: openshift-cert-manager-operator
 
-  wait_time: 60  # wait time in seconds for the check-job to verify when the deployments should be ready
-
+  # where operator is installed
   namespace:
     name: openshift-cert-manager-operator
 
   serviceAccount:
     create: true
-    name: "status-checker-cert-manager"
+    name: "status-checker-cert-manager-operator"
