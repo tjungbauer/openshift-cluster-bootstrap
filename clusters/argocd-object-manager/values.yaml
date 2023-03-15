@@ -238,8 +238,8 @@ helper-argocd:
       path: charts/rhacs-full-stack
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
-      
-    # Install RHACS Demo 
+
+    # Install RHACS Demo
     rhacs-demo-app:
       enabled: true
       description: "Deploy a vulnerable demo application to show results in RHACS"
@@ -255,7 +255,7 @@ helper-argocd:
         autosync_enabled: false
       path: charts/rhacs-demo-applications/
       repourl: "https://github.com/tjungbauer/helm-charts"
-      targetrevision: "main"      
+      targetrevision: "main"
 
     # Install Pipeline Demo
     pipeline-demo:
@@ -272,7 +272,7 @@ helper-argocd:
         autosync_enabled: false
       path: charts/pipeline-example/
       repourl: "https://github.com/tjungbauer/helm-charts"
-      targetrevision: "main"    
+      targetrevision: "main"
 
     # Install ODF
     odf:
@@ -289,7 +289,7 @@ helper-argocd:
         autosync_enabled: false
       path: charts/openshift-data-foundation
       repourl: "https://github.com/tjungbauer/helm-charts"
-      targetrevision: "main" 
+      targetrevision: "main"
 
     install_kyverno:
       enabled: true
@@ -344,74 +344,6 @@ helper-argocd:
 
   # APPLICATIONS
   applications:
-#    in-cluster-init-rhacs:
-#      enabled: true
-#      server: *mgmtcluster
-#      namespace: {}
-#      project: default
-#      description: "Initialize Red Hat Advanced Cluster Security and deploy Central and SecuredCluster"
-#      labels:
-#        category: security
-#        solution: rhacs
-#      source:
-#        path: charts/rhacs-full-stack
-#        repourl: "https://github.com/tjungbauer/helm-charts"
-#        targetrevision: "main"
-
-#    in-cluster-init-rhacm:
-#      enabled: true
-#      server: *mgmtcluster
-#      namespace: {}
-#      project: default
-#      description: "Initialize and deploy Red Hat Advanced Cluster Management"
-#      labels:
-#        category: security
-#        solution: rhacm
-#      source:
-#        path: charts/rhacm-full-stack
-#        repourl: "https://github.com/tjungbauer/helm-charts"
-#        targetrevision: "main"
-
-#    in-cluster-rhacs-demo-app:
-#      enabled: true
-#      server: *mgmtcluster
-#      namespace: {}
-#      project: default
-#      description: "Deploy a vulnerable demo application to show results in RHACS"
-#      labels:
-#        category: operators
-#        solution: rhacs
-#      source:
-#        path: charts/rhacs-demo-applications/
-#        repourl: "https://github.com/tjungbauer/helm-charts"
-#        targetrevision: "main"
-
-#    in-cluster-pipeline-demo:
-#      enabled: true
-#      server: *mgmtcluster
-#      namespace: {}
-#      project: default
-#      description: "Deploy a demo pipeline about linting to show possibilities"
-#      labels:
-#        category: cicd
-#      source:
-#        path: charts/pipeline-example/
-#        repourl: "https://github.com/tjungbauer/helm-charts"
-#        targetrevision: "main"
-
-#    in-cluster-odf:
-#      enabled: true
-#      server: *mgmtcluster
-#      namespace: {}
-#      project: default
-#      description: "Deploy Open Data Foundation Operator"
-#      labels:
-#        category: storage
-#      source:
-#        path: charts/openshift-data-foundation
-#        repourl: "https://github.com/tjungbauer/helm-charts"
-#        targetrevision: "main"
-
     in-cluster-bulk-test:
       enabled: true
       server: *mgmtcluster
@@ -422,27 +354,6 @@ helper-argocd:
         category: test
       source:
         path: clusters/management-cluster/bulk-test
-
-# moved to applicationset
-#    sealed-secrets:
-#      enabled: false
-#      description: "Deploy Sealed-Secrets"
-#      labels:
-#        category: security
-#      namespace:
-#        name: sealed-secrets
-#        create: true
-#      server: *mgmtcluster
-#      project: default
-#      source:
-#        chartname: sealed-secrets
-#        helm:
-#          releasename: sealed-secrets
-#          helmvalues:
-#            - name: sealed-secrets.enabled
-#              value: 'true'
-#        repourl: "https://charts.stderr.at/"
-#        targetrevision: 1.0.11
 
     hashicorp-vault:
       enabled: true
