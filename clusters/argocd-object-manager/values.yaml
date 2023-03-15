@@ -167,6 +167,7 @@ helper-argocd:
       helm:
         per_cluster_helm_values: true
       path: clusters/all/clusterLogging
+      omitClustername: true
       generatorclusters: []
       syncPolicy:
         autosync_enabled: false
@@ -255,7 +256,6 @@ helper-argocd:
       description: "Deploy Sealed-Secrets"
       labels:
         category: security
-      omitClustername: true
       generatorlist: []
       project: default
       chartname: sealed-secrets
