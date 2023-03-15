@@ -167,7 +167,7 @@ helper-argocd:
       helm:
         per_cluster_helm_values: true
       path: clusters/all/clusterLogging
-      omitClustername: true
+      # omitClustername: true
       generatorclusters: []
       syncPolicy:
         autosync_enabled: false
@@ -220,6 +220,76 @@ helper-argocd:
         autosync_enabled: false
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
+
+    # Install ACS
+    init-rhacs:
+      enabled: true
+      description: "Initialize Red Hat Advanced Cluster Security and deploy Central and SecuredCluster"
+      labels:
+        category: security
+        solution: rhacs
+      helm:
+        per_cluster_helm_values: false
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      syncPolicy:
+        autosync_enabled: false
+      path: charts/rhacs-full-stack
+      repourl: "https://github.com/tjungbauer/helm-charts"
+      targetrevision: "main"
+      
+    # Install RHACS Demo 
+    rhacs-demo-app:
+      enabled: true
+      description: "Deploy a vulnerable demo application to show results in RHACS"
+      labels:
+        category: security
+        solution: rhacs
+      helm:
+        per_cluster_helm_values: false
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      syncPolicy:
+        autosync_enabled: false
+      path: charts/rhacs-demo-applications/
+      repourl: "https://github.com/tjungbauer/helm-charts"
+      targetrevision: "main"      
+
+    # Install Pipeline Demo
+    pipeline-demo:
+      enabled: true
+      description: "Deploy a demo pipeline about linting to show possibilities"
+      labels:
+        category: cicd
+      helm:
+        per_cluster_helm_values: false
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      syncPolicy:
+        autosync_enabled: false
+      path: charts/pipeline-example/
+      repourl: "https://github.com/tjungbauer/helm-charts"
+      targetrevision: "main"    
+
+    # Install ODF
+    odf:
+      enabled: true
+      description: "Deploy Open Data Foundation Operator"
+      labels:
+        category: storage
+      helm:
+        per_cluster_helm_values: false
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      syncPolicy:
+        autosync_enabled: false
+      path: charts/openshift-data-foundation
+      repourl: "https://github.com/tjungbauer/helm-charts"
+      targetrevision: "main" 
 
     install_kyverno:
       enabled: true
@@ -274,19 +344,19 @@ helper-argocd:
 
   # APPLICATIONS
   applications:
-    in-cluster-init-rhacs:
-      enabled: true
-      server: *mgmtcluster
-      namespace: {}
-      project: default
-      description: "Initialize Red Hat Advanced Cluster Security and deploy Central and SecuredCluster"
-      labels:
-        category: security
-        solution: rhacs
-      source:
-        path: charts/rhacs-full-stack
-        repourl: "https://github.com/tjungbauer/helm-charts"
-        targetrevision: "main"
+#    in-cluster-init-rhacs:
+#      enabled: true
+#      server: *mgmtcluster
+#      namespace: {}
+#      project: default
+#      description: "Initialize Red Hat Advanced Cluster Security and deploy Central and SecuredCluster"
+#      labels:
+#        category: security
+#        solution: rhacs
+#      source:
+#        path: charts/rhacs-full-stack
+#        repourl: "https://github.com/tjungbauer/helm-charts"
+#        targetrevision: "main"
 
 #    in-cluster-init-rhacm:
 #      enabled: true
@@ -302,45 +372,45 @@ helper-argocd:
 #        repourl: "https://github.com/tjungbauer/helm-charts"
 #        targetrevision: "main"
 
-    in-cluster-rhacs-demo-app:
-      enabled: true
-      server: *mgmtcluster
-      namespace: {}
-      project: default
-      description: "Deploy a vulnerable demo application to show results in RHACS"
-      labels:
-        category: operators
-        solution: rhacs
-      source:
-        path: charts/rhacs-demo-applications/
-        repourl: "https://github.com/tjungbauer/helm-charts"
-        targetrevision: "main"
+#    in-cluster-rhacs-demo-app:
+#      enabled: true
+#      server: *mgmtcluster
+#      namespace: {}
+#      project: default
+#      description: "Deploy a vulnerable demo application to show results in RHACS"
+#      labels:
+#        category: operators
+#        solution: rhacs
+#      source:
+#        path: charts/rhacs-demo-applications/
+#        repourl: "https://github.com/tjungbauer/helm-charts"
+#        targetrevision: "main"
 
-    in-cluster-pipeline-demo:
-      enabled: true
-      server: *mgmtcluster
-      namespace: {}
-      project: default
-      description: "Deploy a demo pipeline about linting to show possibilities"
-      labels:
-        category: cicd
-      source:
-        path: charts/pipeline-example/
-        repourl: "https://github.com/tjungbauer/helm-charts"
-        targetrevision: "main"
+#    in-cluster-pipeline-demo:
+#      enabled: true
+#      server: *mgmtcluster
+#      namespace: {}
+#      project: default
+#      description: "Deploy a demo pipeline about linting to show possibilities"
+#      labels:
+#        category: cicd
+#      source:
+#        path: charts/pipeline-example/
+#        repourl: "https://github.com/tjungbauer/helm-charts"
+#        targetrevision: "main"
 
-    in-cluster-odf:
-      enabled: true
-      server: *mgmtcluster
-      namespace: {}
-      project: default
-      description: "Deploy Open Data Foundation Operator"
-      labels:
-        category: storage
-      source:
-        path: charts/openshift-data-foundation
-        repourl: "https://github.com/tjungbauer/helm-charts"
-        targetrevision: "main"
+#    in-cluster-odf:
+#      enabled: true
+#      server: *mgmtcluster
+#      namespace: {}
+#      project: default
+#      description: "Deploy Open Data Foundation Operator"
+#      labels:
+#        category: storage
+#      source:
+#        path: charts/openshift-data-foundation
+#        repourl: "https://github.com/tjungbauer/helm-charts"
+#        targetrevision: "main"
 
     in-cluster-bulk-test:
       enabled: true
@@ -354,7 +424,7 @@ helper-argocd:
         path: clusters/management-cluster/bulk-test
 
 # moved to applicationset
-#    sealed-secrets-old:
+#    sealed-secrets:
 #      enabled: false
 #      description: "Deploy Sealed-Secrets"
 #      labels:
