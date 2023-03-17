@@ -75,7 +75,7 @@ function deploy() {
     echo "Let's continue"
     #sleep $TIMER
 
-    printf "\n%bWaiting for operator to start. Chcking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
+    printf "\n%bWaiting for operator to start. Checking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
     until oc get deployment gitops-operator-controller-manager -n openshift-operators
     do
       sleep $RECHECK_TIMER;
