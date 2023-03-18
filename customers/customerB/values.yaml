@@ -2,7 +2,7 @@
 
 
 name: customerB
-namenormalized: customerb
+name.normalized: customerb # name for ArgoCD must be in lower case
 
 helper-proj-onboarding:
   namespace:
