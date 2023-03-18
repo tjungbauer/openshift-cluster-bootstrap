@@ -1,5 +1,9 @@
 # Example
 
+customer:
+  name: customerA
+  name_normalized: customera
+
 namespace:
   name: my_test_application
   enabled: true
