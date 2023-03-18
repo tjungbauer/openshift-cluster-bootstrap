@@ -1,0 +1,11 @@
+# Example
+
+
+name: customerA
+name.normalized: customera # name for ArgoCD must be in lower case
+
+helper-proj-onboarding:
+  namespace:
+    name: my_test_application2
+    enabled: true
+    #gitops_namespace: gitops-applications
