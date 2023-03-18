@@ -4,7 +4,8 @@
 name: customerA
 namenormalized: customera
 
-namespace:
-  name: my_test_application
-  enabled: true
-  #gitops_namespace: gitops-applications
+helper-proj-onboarding:
+  namespace:
+    name: my_test_application
+    enabled: true
+    #gitops_namespace: gitops-applications
