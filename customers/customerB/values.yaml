@@ -1,8 +1,8 @@
 # Example
 
-customer:
-  name: customerB
-  namenormalized: customerb
+
+name: customerB
+namenormalized: customerb
 
 namespace:
   name: my_test_application_2
