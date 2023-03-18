@@ -2,7 +2,7 @@
 
 customer:
   name: customerB
-  name.normalized: customerb
+  namenormalized: customerb
 
 namespace:
   name: my_test_application_2
