@@ -7,4 +7,4 @@ namenormalized: customera
 namespace:
   name: my_test_application
   enabled: true
-  gitops_namespace: gitops-applications
+  #gitops_namespace: gitops-applications
