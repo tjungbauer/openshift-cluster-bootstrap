@@ -3,11 +3,11 @@
 
 customer.name: customerA
 customer.normalized: customera # name for ArgoCD must be in lower case
-cluster: 1
-environment: in-cluster
+environment: prod
+
 
 helper-proj-onboarding:
   namespace:
-    name: my_test_application
+    name: my_test_application2
     enabled: true
     #gitops_namespace: gitops-applications
