@@ -1,9 +1,11 @@
 # Example
 
 
-name: customerA
+namex: customerA
 name.normalized: customera # name for ArgoCD must be in lower case
 cluster: 2
+environment: prod
+
 
 helper-proj-onboarding:
   namespace:
