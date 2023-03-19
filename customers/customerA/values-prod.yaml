@@ -1,13 +1,22 @@
-# Example
+# Example values files for a customer onboarding
 
-
+# Name of the custoemrs. This must be the path.basename.
 customer.name: customerA
+
+# Normalized name of the customer. This must be LOWER case, otherwise ArgoCD will fail
 customer.normalized: customera # name for ArgoCD must be in lower case
+
+# Environment to which these values are valid
 environment: prod
 
-
+# Parameters handed over to sub-chart helper-proj-onboarding
 helper-proj-onboarding:
+
+  # Namespace configuration
   namespace:
+
+    # name of the namespace
     name: my_test_application2
+
+    # shall namespace be created of not
     enabled: true
-    #gitops_namespace: gitops-applications
