@@ -8,7 +8,7 @@
 mgmt-cluster: &mgmtcluster https://kubernetes.default.svc
 mgmt-cluster-name: &mgmtclustername in-cluster
 production-cluster: &prodcluster https://api.ocp.ispworld.at:6443
-production-cluster-name: &prodclustername prod
+production-cluster-name: &prodclustername aws
 
 repourl: &repourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
 repobranch: &branch main
