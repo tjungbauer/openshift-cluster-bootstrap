@@ -1,7 +1,7 @@
 ---
 # General values
 #
-# Set cluster names ... 
+# Set cluster names ...
 # https://issues.redhat.com/browse/GITOPS-1777
 # The issue that the in-cluster cannot be renamed has been resolved
 mgmt-cluster: &mgmtcluster https://kubernetes.default.svc
