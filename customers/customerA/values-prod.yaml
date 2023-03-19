@@ -16,7 +16,7 @@ helper-proj-onboarding:
   namespace:
 
     # name of the namespace
-    name: my_test_application2
+    name: my_test_application
 
     # shall namespace be created of not
     enabled: true
