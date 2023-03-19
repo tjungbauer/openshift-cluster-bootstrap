@@ -1,8 +1,8 @@
 # Example
 
 
-namex: customerA
-name.normalized: customera # name for ArgoCD must be in lower case
+customer.name: customerA
+customer.normalized: customera # name for ArgoCD must be in lower case
 cluster: 1
 environment: in-cluster
 
