@@ -77,5 +77,5 @@ helper-proj-onboarding:
         # add here a list of your storage classes you would like to limit as well.
         storageclasses:
           # for example: Storageclass "bronze" has a request limit and a limit ov max. PVCs.
-          bronze.storageclass.storage.k8s.io/requests.storage: "0" 
-          bronze.storageclass.storage.k8s.io/persistentvolumeclaims: "0" 
+          bronze.storageclass.storage.k8s.io/requests.storage: "10Gi" 
+          bronze.storageclass.storage.k8s.io/persistentvolumeclaims: "10" 
