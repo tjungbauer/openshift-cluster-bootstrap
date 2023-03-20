@@ -21,8 +21,61 @@ helper-proj-onboarding:
       # shall namespace be created of not
       enabled: true
 
+      # Additional labels for Podsecurity and Monitoring
+      additional_settings:
+        # Pod Security Standards
+        # https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted
+        # Possible values: Privileged, Baseline, Restricted
+        # Privileged: Unrestricted policy, providing the widest possible level of permissions. This policy allows for known privilege escalations.
+        # Baseline: Minimally restrictive policy which prevents known privilege escalations. Allows the default (minimally specified) Pod configuration.
+        # Restricted: Heavily restricted policy, following current Pod hardening best practices.
+
+        # Policy violations will trigger the addition of an audit annotation to the event recorded in the audit log, but are otherwise allowed.
+        podsecurity_audit: restricted
+        # Policy violations will trigger a user-facing warning, but are otherwise allowed.
+        podsecurity_warn: restricted
+        # Policy violations will cause the pod to be rejected.
+        podsecurity_enforce: restricted
+        cluster_monitoring: true
+
+      # list of labels that should be passed
+      labels:
+        my_additional_label: my_label
+        another_label: another_label
+
     # name of second namespace
     - name: customera-project-2
 
       # shall namespace be created of not
       enabled: true
+
+      # Configure resourceQuotas
+      # Here are a lot of examples, typically, you do not need all of these. cpu/memory is a good start in usually use cases.
+      resourceQuotas:
+        enabled: true
+        # limits of Pods, CPU, Memory, storage, secrets... etc. etc.
+        # Byte values will be replace: gi -> Gi, mi -> Mi
+        pods: 4
+        cpu: 1
+        memory: 2Gi
+        ephemeral_storage: 4Gi
+        replicationcontrollers: 20
+        resourcequotas: 20
+        services: 100
+        secrets: 100
+        configmaps: 100
+        persistentvolumeclaims: 10
+        limits:
+          cpu: 1
+          memory: 1gi # will be automatically replaced
+          ephemeral_storage: 4mi # will be automatically replaced
+        requests:
+          cpu: 1
+          memory: 2Gi
+          storage: 50Gi
+          ephemeral_storage: 2Gi
+        # add here a list of your storage classes you would like to limit as well.
+        storageclasses:
+          # for example: Storageclass "bronze" has a request limit and a limit ov max. PVCs.
+          bronze.storageclass.storage.k8s.io/requests.storage: "0" 
+          bronze.storageclass.storage.k8s.io/persistentvolumeclaims: "0" 
