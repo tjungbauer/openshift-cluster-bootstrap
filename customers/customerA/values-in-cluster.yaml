@@ -1,4 +1,5 @@
 # Example values files for a customer onboarding
+# It is huge, especially the NetworkPolicy part ... however, you do not need to use everything. I tried to make it is configurable as possible. 
 
 # Name of the custoemrs. This must be the path.basename.
 customer.name: customerA
@@ -79,3 +80,114 @@ helper-proj-onboarding:
           # for example: Storageclass "bronze" has a request limit and a limit ov max. PVCs.
           bronze.storageclass.storage.k8s.io/requests.storage: "10Gi" 
           bronze.storageclass.storage.k8s.io/persistentvolumeclaims: "10" 
+
+      # Limit Ranges, are optional, if not set here, then default (very small ones) are used
+      limitRanges:
+        enabled: true
+        pod:
+          max:
+            cpu: 4
+            memory: 100Gi
+          min:
+            cpu: 1
+            memory: 10Gi
+        container:
+          max:
+            cpu: 4
+            memory: 100Gi
+          min:
+            cpu: 1
+            memory: 10Gi
+          default:
+            cpu: 1
+            memory: 10Gi
+          defaultRequest:
+            cpu: 1
+            memory: 10Gi
+        pvc:
+          min:
+            storage: 1Gi
+          max:
+            storage: 20Gi
+
+      # Network Policies ... these are a bit more complex, when you want to keep them fully configurable.
+      # Maybe the following is too much to manage, anyway, let's start
+
+      # 5 default network policies will be created everytime, unless you overwrite this here
+      # You can remove this whole block to have the policies created or you can select specific policies
+      # which shall be disabled.
+      # The 5 policies are:
+      #    - Allow Ingress traffic from the OpenShift Router
+      #    - Allow OpenShift Monitoring to access and fetch metrics
+      #    - Allow inner namespace communication (pod to pod of the same Namespace)
+      #    - Allow Kube API Server
+      #    - Forbid ANY Egress traffic
+
+      # For example: I would like to disallow Ingress traffic per default. 
+      default_policies:
+        disable_allow_from_ingress: true
+        # disable_allow_from_monitoring: false
+        # disable_allow_from_same_namespace: false
+        # disable_allow_kube_apiserver: false
+        # disable_deny_all_egress: false
+
+      networkpolicies:
+          # List of NetworkPolicies to create with name and switch if active or not
+        - name: netpol1
+          active: true
+
+          # The PodSelect based on matchLabels. Could be empty as well
+          podSelector:
+            matchLabels:
+              app: myapplication
+              app2: myapplication2
+
+          # Incoming Rules, based on Port and Selectors
+          ingressRules:
+            - selectors:
+                  - podSelector:
+                      matchLabels:
+                        app: myapplication
+                        version: '1.0'
+                  - namespaceSelector:
+                      matchLabels:
+                        testnamespace: "true"
+              ports:
+                - protocol: TCP
+                  port: 443
+
+          # Outgoing Rules, based on Port and Selectors
+          egressRules:
+            - selectors: []
+              ports:
+                - port: 2
+                  protocol: UDP
+            - ports:
+                - port: 443
+                  protocol: TCP
+              selectors:
+                - podSelector:
+                    matchLabels:
+                      app: myapplication
+                      version: '1.0'
+
+          # 2nd example
+        - name: netpol2
+          active: true
+
+          podSelector: {}
+
+          # Incoming Rules, based on ipBlock and Selectors
+          ingressRules:
+            - selectors:
+                  - podSelector: {}
+                  - namespaceSelector:
+                      matchLabels:
+                        testnamespace: "testnamespace"
+                  - ipBlock:
+                      cidr: 127.0.0.1/24
+                      except:
+                        - 127.0.0.2/32
+              ports:
+                - protocol: TCP
+                  port: 443
