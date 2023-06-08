@@ -199,7 +199,7 @@ helper-argocd:
       path: clusters/all/cert-manager
       generatorlist: []
       syncPolicy:
-        autosync_enabled: true
+        autosync_enabled: false
       targetrevision: "main"
 
     # init ACM
@@ -334,7 +334,7 @@ helper-argocd:
           - name: sealed-secrets.enabled
             value: 'true'
       syncPolicy:
-        autosync_enabled: true
+        autosync_enabled: false
         syncpolicy_prune: false
         syncpolicy_selfheal: true
       generatorclusters: []
