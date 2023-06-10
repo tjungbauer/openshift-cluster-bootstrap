@@ -157,6 +157,19 @@ helper-argocd:
       repourl: "https://github.com/tjungbauer/helm-charts"
       targetrevision: "main"
 
+    # Install Container Security Operator
+    install_container_security_operator:
+      enabled: true
+      description: "Deploy Container Security Operator"
+      labels:
+        category: security
+      path: charts/setup-container-security-operator
+      generatorclusters: []
+      syncPolicy:
+        autosync_enabled: false  # should be disabled for operators
+      repourl: "https://github.com/tjungbauer/helm-charts"
+      targetrevision: "main"
+
     # Install OpenShift Logging
     install-openshift-logging:
       enabled: true
