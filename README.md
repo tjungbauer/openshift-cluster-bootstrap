@@ -2,7 +2,7 @@
 
 # openshift-cluster-bootstrap
 
-This repository demonstrate the usage of OpenShift-GitOps and a secrets manager like Sealed Secrets or Hashicorp Vault. 
+This repository demonstrate the usage of OpenShift-GitOps and a secrets manager like Sealed Secrets or Hashicorp Vault.  
 The focus lies on main cluster configuration.
 
 This repository is never to be considered as finished ever, since new cluster configuration may happen at any time. 

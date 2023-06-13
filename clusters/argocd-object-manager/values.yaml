@@ -184,6 +184,20 @@ helper-argocd:
       syncPolicy:
         autosync_enabled: false
 
+    # Configure Allowed Registries
+    configure-allowed-registries:
+      enabled: true
+      description: "Configure Registries which are allowed"
+      labels:
+        category: security
+      helm:
+        per_cluster_helm_values: true
+      path: clusters/all/allowed-registries
+      # omitClustername: true
+      generatorclusters: []
+      syncPolicy:
+        autosync_enabled: false
+
     # Install Vault-Config-Operator
     install-vault-config-operator:
       enabled: true
