@@ -192,7 +192,7 @@ helper-argocd:
         category: security
       helm:
         per_cluster_helm_values: true
-      path: clusters/all/allowed-registries
+      path: clusters/all/allowed_registries
       # omitClustername: true
       generatorclusters: []
       syncPolicy:
