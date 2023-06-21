@@ -1,0 +1,16 @@
+namespace:
+  name: sonarqube
+  create: true
+
+# Sonarqube Settings
+OpenShift:
+    enabled: true
+persistence:
+    enabled: true
+networkPolicy:
+    enabled: true
+ingress:
+    enabled: true
+    hosts:
+      - name: sonarqube.apps.ocp.aws.ispworld.at
+        path: /

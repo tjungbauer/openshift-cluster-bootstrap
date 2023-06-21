@@ -101,6 +101,19 @@ helper-argocd:
       syncPolicy:
         autosync_enabled: false
 
+    # Install Sonarqube
+    install_application_gitops:
+      enabled: true
+      description: "Install Sonarqube"
+      labels:
+        category: project
+      path: clusters/management-cluster/sonarqube
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      syncPolicy:
+        autosync_enabled: false
+
     # A Collection of operators which will be deployed on ALL clusters.
     install-operator-collection:
       enabled: true
