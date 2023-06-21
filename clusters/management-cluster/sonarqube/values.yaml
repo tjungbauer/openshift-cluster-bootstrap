@@ -6,6 +6,7 @@ namespace:
 sonarqube:
   OpenShift:
     enabled: true
+    createSCC: true
   persistence:
     enabled: true
   networkPolicy:
