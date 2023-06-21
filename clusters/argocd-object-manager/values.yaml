@@ -102,7 +102,7 @@ helper-argocd:
         autosync_enabled: false
 
     # Install Sonarqube
-    install_application_gitops:
+    install_sonarqube:
       enabled: true
       description: "Install Sonarqube"
       labels:
