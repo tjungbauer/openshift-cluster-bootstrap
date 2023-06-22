@@ -105,6 +105,7 @@ helper-argocd:
     install_sonarqube:
       enabled: true
       description: "Install Sonarqube"
+      namespace: sonarqube
       labels:
         category: project
       path: clusters/management-cluster/sonarqube
