@@ -1,4 +1,4 @@
-endpoint: &endpoint sonarqube.apps.ocp.aws.ispworld.at
+ep: &endpoint sonarqube.apps.ocp.aws.ispworld.at
 
 namespace:
   name: sonarqube
