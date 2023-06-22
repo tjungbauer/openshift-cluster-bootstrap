@@ -4,9 +4,10 @@ namespace:
 
 # Sonarqube Settings
 sonarqube:
+  # Did not work with ArgoCD
   OpenShift:
-    enabled: true
-    createSCC: true
+    enabled: false
+    createSCC: false
   persistence:
     enabled: true
   networkPolicy:
