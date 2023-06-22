@@ -19,8 +19,8 @@ spec:
           - name: PASSWORD
             valueFrom:
               secretKeyRef:
-                key: credentials
-                name: adminpass
+                key: adminpass
+                name: credentials
           command:
             - /bin/bash
             - -c
