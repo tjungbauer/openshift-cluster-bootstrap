@@ -1,6 +1,10 @@
+endpoint: &endpoint sonarqube.apps.ocp.aws.ispworld.at
+
 namespace:
   name: sonarqube
   create: true
+
+endpoint: *endpoint
 
 # Sonarqube Settings
 sonarqube:
@@ -14,5 +18,5 @@ sonarqube:
   ingress:
     enabled: true
     hosts:
-      - name: sonarqube.apps.ocp.aws.ispworld.at
+      - name: *endpoint
         path: /
