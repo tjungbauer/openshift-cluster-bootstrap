@@ -10,7 +10,7 @@ sonarqube:
   persistence:
     enabled: true
   networkPolicy:
-    enabled: true
+    enabled: false
   ingress:
     enabled: true
     hosts:
