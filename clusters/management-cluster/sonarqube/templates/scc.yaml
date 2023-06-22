@@ -1,37 +1,39 @@
- allowHostDirVolumePlugin: false
- allowHostIPC: false
- allowHostNetwork: false
- allowHostPID: false
- allowHostPorts: false
- allowPrivilegeEscalation: true
- allowPrivilegedContainer: true
- allowedCapabilities: []
- apiVersion: security.openshift.io/v1
- defaultAddCapabilities: []
- defaultAllowPrivilegeEscalation: true
- fsGroup:
-   type: RunAsAny
- groups: []
- kind: SecurityContextConstraints
- metadata:
-   name: sonarqube-privileged-scc
- priority: 11
- readOnlyRootFilesystem: false
- requiredDropCapabilities:
- - KILL
- - MKNOD
- - SETUID
- - SETGID
- runAsUser:
-   type: RunAsAny
- seLinuxContext:
-   type: MustRunAs
- supplementalGroups:
-   type: RunAsAny
- users:
+---
+apiVersion: security.openshift.io/v1
+kind: SecurityContextConstraints
+metadata:
+  name: sonarqube-privileged-scc
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+allowHostNetwork: false
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegeEscalation: true
+allowPrivilegedContainer: true
+allowedCapabilities: []
+apiVersion: security.openshift.io/v1
+defaultAddCapabilities: []
+defaultAllowPrivilegeEscalation: true
+fsGroup:
+  type: RunAsAny
+groups: []
+priority: 11
+readOnlyRootFilesystem: false
+requiredDropCapabilities:
+- KILL
+- MKNOD
+- SETUID
+- SETGID
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: MustRunAs
+supplementalGroups:
+  type: RunAsAny
+users:
  - system:serviceaccount:sonarqube:sonarqube-sonarqube
  - system:serviceaccount:sonarqube:sonarqube-postgresql
- volumes:
+volumes:
  - configMap
  - downwardAPI
  - emptyDir
