@@ -114,9 +114,9 @@
       register: access_scope_result
 
     # Create all of the roles
-    - name: Create Roles
-      include_tasks: create_role.yaml
-      with_items: "{{ roles }}"
+    #- name: Create Roles
+    #  include_tasks: create_role.yaml
+    #  with_items: "{{ roles }}"
 
     # do NOT do this, running connections will be closed
     # - name: Delete all mapping and start clean
