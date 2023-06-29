@@ -79,7 +79,7 @@ permission_sets:
 #    access_scope: group_frontend
 #    global_access: NO_ACCESS
 
-# Associate roles with users/groups in Provider
+# Associate roles with users/groups in Provider#
 role_mappings:
 #  - key: name
 #    value: admin
