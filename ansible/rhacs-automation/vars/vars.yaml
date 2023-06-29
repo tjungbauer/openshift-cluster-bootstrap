@@ -33,69 +33,69 @@ permission_sets:
       WorkflowAdministration: READ_ACCESS
       VulnerabilityManagementRequests: READ_WRITE_ACCESS
 
-access_scopes:
-  - name: namespace1
-    description: Access rights for users that can manage the namespaces namespace1
-    rules:
-      includedClusters: []
-      includedNamespaces:
-      - clusterName: local-cluster
-        namespaceName: namespace1
-      clusterLabelSelectors: []
-      namespaceLabelSelectors: []
-  - name: group_backend
-    description: Access rights for users that can manage the namespace backend
-    rules:
-      includedClusters: []
-      includedNamespaces:
-      - clusterName: local-cluster
-        namespaceName: backend
-      clusterLabelSelectors: []
-      namespaceLabelSelectors: []
-  - name: group_frontend
-    description: Access rights for users that can manage the namespace frontend
-    rules:
-      includedClusters: []
-      includedNamespaces:
-      - clusterName: local-cluster
-        namespaceName: frontend
-      clusterLabelSelectors: []
-      namespaceLabelSelectors: []
+#access_scopes:
+#  - name: namespace1
+#    description: Access rights for users that can manage the namespaces namespace1
+#    rules:
+#      includedClusters: []
+#      includedNamespaces:
+#      - clusterName: local-cluster
+#        namespaceName: namespace1
+#      clusterLabelSelectors: []
+#      namespaceLabelSelectors: []
+#  - name: group_backend
+#    description: Access rights for users that can manage the namespace backend
+#    rules:
+#      includedClusters: []
+#      includedNamespaces:
+#      - clusterName: local-cluster
+#        namespaceName: backend
+#      clusterLabelSelectors: []
+#      namespaceLabelSelectors: []
+#  - name: group_frontend
+#    description: Access rights for users that can manage the namespace frontend
+#    rules:
+#      includedClusters: []
+#      includedNamespaces:
+#      - clusterName: local-cluster
+#        namespaceName: frontend
+#      clusterLabelSelectors: []
+#      namespaceLabelSelectors: []
 
-roles:
-  - name: Namespace1 Admins
-    description: Administrators of namespace1
-    permission_set: Namespace Administrator
-    access_scope: namespace1
-    global_access: NO_ACCESS
-  - name: NS backend Admins
-    description: Administrators of backend
-    permission_set: Namespace Administrator
-    access_scope: group_backend
-    global_access: NO_ACCESS
-  - name: NS frontend Admins
-    description: Administrators of frontend
-    permission_set: Namespace Administrator
-    access_scope: group_frontend
-    global_access: NO_ACCESS
+#roles:
+#  - name: Namespace1 Admins
+#    description: Administrators of namespace1
+#    permission_set: Namespace Administrator
+#    access_scope: namespace1
+#    global_access: NO_ACCESS
+#  - name: NS backend Admins
+#    description: Administrators of backend
+#    permission_set: Namespace Administrator
+#    access_scope: group_backend
+#    global_access: NO_ACCESS
+#  - name: NS frontend Admins
+#    description: Administrators of frontend
+#    permission_set: Namespace Administrator
+#    access_scope: group_frontend
+#    global_access: NO_ACCESS
 
 # Associate roles with users/groups in Provider
 role_mappings:
-  - key: name
-    value: admin
-    role_name: Admin
-  - key: name
+#  - key: name
+#    value: admin
+#    role_name: Admin
+#  - key: name
     value: "kube:admin"
     role_name: Admin
-  - key: name
-    value: opentlc-mgr
-    role_name: Admin
-  - key: groups
-    value: group_backend
-    role_name: NS backend Admins
-  - key: groups
-    value: namespace1
-    role_name: namespace1 Admins
-  - key: groups
-    value: group_frontend
-    role_name: NS frontend Admins
+#  - key: name
+#    value: opentlc-mgr
+#    role_name: Admin
+#  - key: groups
+#    value: group_backend
+#    role_name: NS backend Admins
+#  - key: groups
+#    value: namespace1
+#    role_name: namespace1 Admins
+#  - key: groups
+#    value: group_frontend
+#    role_name: NS frontend Admins
