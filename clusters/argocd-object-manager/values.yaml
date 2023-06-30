@@ -117,6 +117,19 @@ helper-argocd:
       syncPolicy:
         autosync_enabled: false
 
+    install_cyclonedx:
+      enabled: true
+      description: "Install CycloneDX SBOM Repository"
+      namespace: cyclonedx
+      labels:
+        catagory: security
+      path: clusters/management-cluster/cyclonedx
+      generatorlist:
+        - clustername: *mgmtclustername
+          clusterurl: *mgmtcluster
+      syncPolicy:
+        autosync_enabled: false
+
     # A Collection of operators which will be deployed on ALL clusters.
     install-operator-collection:
       enabled: true

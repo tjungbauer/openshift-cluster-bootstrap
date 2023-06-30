@@ -1,0 +1,10 @@
+apiVersion: v2
+name: cyclonedx
+description: A Helm chart to deploy CycloneDX to generate SBOM
+type: application
+version: 1.0.0
+appVersion: 1.0.0
+icon: https://github.com/tjungbauer/helm-charts/raw/gh-pages/images/sonarqube.png
+maintainers:
+  - name: tjungbauer
+    email: tjungbau@redhat.com
