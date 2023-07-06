@@ -2,7 +2,7 @@
 
 helper-server-side-apply:
   nodes:
-    - name: ip-10-0-198-144.us-west-1.compute.internal
+    - name: ip-10-0-248-44.us-west-1.compute.internal
       enabled: true
       custom_labels:
         environment: 'Production'
