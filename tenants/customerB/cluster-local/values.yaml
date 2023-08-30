@@ -8,6 +8,7 @@ customer.normalized: customerb # name for ArgoCD must be in lower case
 
 # Environment to which these values are valid
 environment: in-cluster
+cluster-api: https://kubernetes.default.svc
 
 # Parameters handed over to sub-chart helper-proj-onboarding
 helper-proj-onboarding:
