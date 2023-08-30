@@ -18,7 +18,7 @@ applicationsets:
   application_1:
     enabled: true
     name: &appname application-1
-    path: tenants-old/project_onboarding/application_1
+    path: tenants/project_onboarding/application_1
     per_cluster_helm_values: true
     generatorclusters: []
 #    repourl: "" # Optional
