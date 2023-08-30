@@ -2,10 +2,10 @@
 # It is huge, especially the NetworkPolicy part ... however, you do not need to use everything. I tried to make it is configurable as possible. 
 
 # Name of the custoemrs. This must be the path.basename.
-customer.name: customerA
+customer.name: my-main-app
 
 # Normalized name of the customer. This must be LOWER case, otherwise ArgoCD will fail
-customer.normalized: customera # name for ArgoCD must be in lower case
+customer.normalized: my-main-app # name for ArgoCD must be in lower case
 
 # Environment to which these values are valid
 environment: in-cluster
