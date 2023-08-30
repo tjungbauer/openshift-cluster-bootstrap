@@ -1,0 +1,11 @@
+{{ if eq (.Values.local_admin_group.enabled | toString) "true" }}
+---
+kind: Group
+apiVersion: user.openshift.io/v1
+metadata:
+  name: {{ if .Values.local_admin_group.group_name }}{{ .Values.local_admin_group.group_name }}{{- else }}{{ .Values.customer.normalized }}-ops{{- end }}
+users:
+  {{- range .Values.local_admin_group.users }}
+  - {{ . }}
+  {{- end }}
+{{- end }}

@@ -10,6 +10,13 @@ customer.normalized: my-main-app # name for ArgoCD must be in lower case
 # Environment to which these values are valid, this should be the cluster name as visible in ArgoCD
 environment: in-cluster
 
+local_admin_group:
+  enabled: yes
+  #group_name: test
+  users:
+    - mona
+    - peter
+
 # Parameters handed over to sub-chart helper-proj-onboarding
 helper-proj-onboarding:
 
