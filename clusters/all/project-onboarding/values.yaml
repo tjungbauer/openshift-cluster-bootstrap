@@ -26,7 +26,7 @@ helper-proj-onboarding:
       # Create a local group with Admin users and the required rolebinding
       # If other systems, like LDAP Group sync is used, you will probaably not need this.
       local_admin_group:
-        enabled: false
+        enabled: true
         users:
           - user1
           - user2
