@@ -5,7 +5,7 @@
 customer.name: my-main-app
 
 # Normalized name of the customer. This must be LOWER case, otherwise ArgoCD will fail
-customerNormalized: my-main-app # name for ArgoCD must be in lower case
+customer-normalized: my-main-app # name for ArgoCD must be in lower case
 
 # Environment to which these values are valid, this should be the cluster name as visible in ArgoCD
 environment: in-cluster
