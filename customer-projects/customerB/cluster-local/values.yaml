@@ -18,6 +18,14 @@ helper-proj-onboarding:
     # name of first namespace
     - name: customerb-project-1
 
+      # Create a local group with Admin users and the required rolebinding
+      # If other systems, like LDAP Group sync is used, you will probaably not need this.
+      local_admin_group:
+        enabled: true
+        users:
+          - mona
+          - peter
+
       # shall namespace be created of not
       enabled: true
 
