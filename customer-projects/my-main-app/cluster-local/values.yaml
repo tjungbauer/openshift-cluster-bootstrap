@@ -12,7 +12,6 @@ environment: in-cluster
 
 local_admin_group:
   enabled: yes
-  #group_name: test
   users:
     - mona
     - peter
