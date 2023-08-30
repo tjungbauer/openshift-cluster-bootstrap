@@ -1,5 +1,5 @@
 # Example values files for a customer onboarding
-# It is huge, especially the NetworkPolicy part ... however, you do not need to use everything. I tried to make it is configurable as possible. 
+# It is huge, especially the NetworkPolicy part ... however, you do not need to use everything. I tried to make it is configurable as possible.
 
 # Name of the custoemrs. This must be the path.basename.
 customer.name: my-main-app
@@ -7,7 +7,7 @@ customer.name: my-main-app
 # Normalized name of the customer. This must be LOWER case, otherwise ArgoCD will fail
 customer.normalized: my-main-app # name for ArgoCD must be in lower case
 
-# Environment to which these values are valid, this should be the cluster name as visible in ArgoCD 
+# Environment to which these values are valid, this should be the cluster name as visible in ArgoCD
 environment: in-cluster
 
 # Parameters handed over to sub-chart helper-proj-onboarding
@@ -78,8 +78,8 @@ helper-proj-onboarding:
         # add here a list of your storage classes you would like to limit as well.
         storageclasses:
           # for example: Storageclass "bronze" has a request limit and a limit ov max. PVCs.
-          bronze.storageclass.storage.k8s.io/requests.storage: "10Gi" 
-          bronze.storageclass.storage.k8s.io/persistentvolumeclaims: "10" 
+          bronze.storageclass.storage.k8s.io/requests.storage: "10Gi"
+          bronze.storageclass.storage.k8s.io/persistentvolumeclaims: "10"
 
       # Limit Ranges, are optional, if not set here, then default (very small ones) are used
       limitRanges:
@@ -123,7 +123,7 @@ helper-proj-onboarding:
       #    - Allow Kube API Server
       #    - Forbid ANY Egress traffic
 
-      # For example: I would like to disallow Ingress traffic per default. 
+      # For example: I would like to disallow Ingress traffic per default.
       default_policies:
         disable_allow_from_ingress: true
         # disable_allow_from_monitoring: false

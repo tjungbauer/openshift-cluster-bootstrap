@@ -6,7 +6,7 @@ customer.name: customerB
 # Normalized name of the customer. This must be LOWER case, otherwise ArgoCD will fail
 customer.normalized: customerb # name for ArgoCD must be in lower case
 
-# Environment to which these values are valid, this should be the cluster name as visible in ArgoCD 
+# Environment to which these values are valid, this should be the cluster name as visible in ArgoCD
 environment: in-cluster
 
 # Parameters handed over to sub-chart helper-proj-onboarding
