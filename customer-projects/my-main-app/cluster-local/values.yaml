@@ -106,7 +106,7 @@ helper-proj-onboarding:
     - name: customera-project-2
 
       # shall namespace be created of not
-      enabled: false
+      enabled: true
 
       # Configure resourceQuotas
       # Here are a lot of examples, typically, you do not need all of these. cpu/memory is a good start in usually use cases.
