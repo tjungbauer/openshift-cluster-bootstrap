@@ -8,7 +8,10 @@ customer.name: my-main-app
 customer.normalized: my-main-app # name for ArgoCD must be in lower case
 
 # Environment to which these values are valid, this should be the cluster name as visible in ArgoCD
-environment: in-cluster
+environment: &environment in-cluster
+
+mgmt-cluster: &mgmtcluster https://kubernetes.default.svc
+mgmt-cluster-name: &mgmtclustername in-cluster
 
 # Parameters handed over to sub-chart helper-proj-onboarding
 helper-proj-onboarding:
@@ -17,7 +20,7 @@ helper-proj-onboarding:
   namespaces:
 
     # name of first namespace
-    - name: customera-project-1
+    - name: &name customera-project-1
 
       # shall namespace be created of not
       enabled: true
@@ -29,6 +32,53 @@ helper-proj-onboarding:
         users:
           - mona
           - peter
+
+      argocd_rbac_setup:
+        argocd_project_1:
+          enabled: true
+          name: *name
+          destinations:
+            - name: *mgmtclustername
+              server: *mgmtcluster
+          sourceRepos:
+            - 'https://github.com/argoproj/argocd-example-apps'
+          rbac:
+              # Name of the RBAC rule
+            - name: write
+              # Description of the RBAC rule
+              description: "Group to deploy on DEV environment"
+              # List of OCP groups that is allowed to manage objects in this project
+              oidc_groups:
+                - customera-project-1-admins
+              # Project policies
+              policies:
+                - action: get # get, create, update, delete, sync, override
+                  permission: allow # allow or deny
+                  object: '*' # which kind of objects can be managed, default "*" (all) inside the namespace
+                - action: create
+                  permission: allow
+                - action: update
+                  permission: allow
+                - action: delete
+                  permission: allow
+                - action: sync
+                  permission: allow
+                - action: override
+                  permission: allow
+          # Sync Windows - when application can be synced or not. Typically used to prevent automatic synchronization during specific time frames
+          # but can be used to limit the allowed syncs as well.
+          syncWindows:
+            - applications:
+                - '*'
+              clusters:
+                - *environment # the cluster we care currently configuring
+              namespaces:
+                - *name # the namespace of this application
+              timezone: 'Europe/Amsterdam' # timezone, default Europe/Amsterdam
+              duration: 1h # duration, for example "30m" or "1h" (default 1h)
+              kind: allow # allow or deny (default allow)
+              manualSync: true # is manual sync allowed ot not (default true)
+              schedule: '* * * * *' # cronjob like schedule: Min, Hour, Day, Month, Weekday (default '55 0 1 12 *' )
 
       # Additional labels for Podsecurity and Monitoring
       additional_settings:
@@ -56,7 +106,7 @@ helper-proj-onboarding:
     - name: customera-project-2
 
       # shall namespace be created of not
-      enabled: true
+      enabled: false
 
       # Configure resourceQuotas
       # Here are a lot of examples, typically, you do not need all of these. cpu/memory is a good start in usually use cases.

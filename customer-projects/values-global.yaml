@@ -1,4 +1,5 @@
 ---
 
-# Namespace of 2nd ArgoCD instance, that is responsible to deploy workload onto the clusters
-application_gitops_namespace: gitops-application
+global:
+  # Namespace of 2nd ArgoCD instance, that is responsible to deploy workload onto the clusters
+  application_gitops_namespace: gitops-application
