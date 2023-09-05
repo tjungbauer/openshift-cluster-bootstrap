@@ -162,72 +162,6 @@ helper-proj-onboarding:
           max:
             storage: 20Gi
 
-    # name of second namespace
-    - name: customera-project-2
-
-      # shall namespace be created of not
-      enabled: true
-
-      # Configure resourceQuotas
-      # Here are a lot of examples, typically, you do not need all of these. cpu/memory is a good start in usually use cases.
-      resourceQuotas:
-        enabled: true
-        # limits of Pods, CPU, Memory, storage, secrets... etc. etc.
-        # Byte values will be replace: gi -> Gi, mi -> Mi
-        pods: 4
-        cpu: 1
-        memory: 2Gi
-        ephemeral_storage: 4Gi
-        replicationcontrollers: 20
-        resourcequotas: 20
-        services: 100
-        secrets: 100
-        configmaps: 100
-        persistentvolumeclaims: 10
-        limits:
-          cpu: 1
-          memory: 1gi # will be automatically replaced
-          ephemeral_storage: 4mi # will be automatically replaced
-        requests:
-          cpu: 1
-          memory: 2Gi
-          storage: 50Gi
-          ephemeral_storage: 2Gi
-        # add here a list of your storage classes you would like to limit as well.
-        storageclasses:
-          # for example: Storageclass "bronze" has a request limit and a limit ov max. PVCs.
-          bronze.storageclass.storage.k8s.io/requests.storage: "10Gi"
-          bronze.storageclass.storage.k8s.io/persistentvolumeclaims: "10"
-
-      # Limit Ranges, are optional, if not set here, then default (very small ones) are used
-      limitRanges:
-        enabled: true
-        pod:
-          max:
-            cpu: 4
-            memory: 100Gi
-          min:
-            cpu: 1
-            memory: 10Gi
-        container:
-          max:
-            cpu: 4
-            memory: 100Gi
-          min:
-            cpu: 1
-            memory: 10Gi
-          default:
-            cpu: 1
-            memory: 10Gi
-          defaultRequest:
-            cpu: 1
-            memory: 10Gi
-        pvc:
-          min:
-            storage: 1Gi
-          max:
-            storage: 20Gi
-
       # Network Policies ... these are a bit more complex, when you want to keep them fully configurable.
       # Maybe the following is too much to manage, anyway, let's start
 
@@ -243,7 +177,7 @@ helper-proj-onboarding:
 
       # For example: I would like to disallow Ingress traffic per default.
       default_policies:
-        disable_allow_from_ingress: true
+        # disable_allow_from_ingress: true
         # disable_allow_from_monitoring: false
         # disable_allow_from_same_namespace: false
         # disable_allow_kube_apiserver: false
@@ -309,3 +243,10 @@ helper-proj-onboarding:
               ports:
                 - protocol: TCP
                   port: 443
+
+
+    # name of second namespace
+    - name: customera-project-2
+
+      # shall namespace be created of not
+      enabled: true
