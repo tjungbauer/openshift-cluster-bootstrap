@@ -142,7 +142,7 @@ helper-proj-onboarding:
             memory: 4Gi
           min:
             cpu: 1
-            memory: 20Gi
+            memory: 2Gi
         container:
           max:
             cpu: 4
