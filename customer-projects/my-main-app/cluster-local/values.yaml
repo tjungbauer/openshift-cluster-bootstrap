@@ -181,7 +181,7 @@ helper-proj-onboarding:
         # disable_allow_from_monitoring: false
         # disable_allow_from_same_namespace: false
         # disable_allow_kube_apiserver: false
-        # disable_deny_all_egress: false
+        disable_deny_all_egress: false
 
       networkpolicies:
           # List of NetworkPolicies to create with name and switch if active or not
