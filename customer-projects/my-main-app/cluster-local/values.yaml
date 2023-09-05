@@ -119,8 +119,8 @@ helper-proj-onboarding:
         configmaps: 100
         persistentvolumeclaims: 10
         limits:
-          cpu: 1
-          memory: 1gi # will be automatically replaced
+          cpu: 4
+          memory: 4gi # will be automatically replaced
           ephemeral_storage: 4mi # will be automatically replaced
         requests:
           cpu: 1
