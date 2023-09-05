@@ -41,7 +41,7 @@ helper-proj-onboarding:
             - name: *mgmtclustername
               server: *mgmtcluster
           sourceRepos:
-            - 'https://github.com/argoproj/argocd-example-apps'
+            - 'https://github.com/tjungbauer/book-import/'
           rbac:
               # Name of the RBAC rule
             - name: write
