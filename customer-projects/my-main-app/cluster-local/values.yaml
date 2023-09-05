@@ -175,13 +175,13 @@ helper-proj-onboarding:
       #    - Allow Kube API Server
       #    - Forbid ANY Egress traffic
 
-      # For example: I would like to disallow Ingress traffic per default.
+      # For example: I would like to disallow "deny all egress" (which means the Pods can reach any external destination).
       default_policies:
-        disable_allow_from_ingress: true
+        # disable_allow_from_ingress: false
         # disable_allow_from_monitoring: false
         # disable_allow_from_same_namespace: false
         # disable_allow_kube_apiserver: false
-        # disable_deny_all_egress: false
+        disable_deny_all_egress: true
 
       networkpolicies:
           # List of NetworkPolicies to create with name and switch if active or not
