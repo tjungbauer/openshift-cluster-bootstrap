@@ -20,6 +20,9 @@ customer.name: my-main-app
 # This will be part the name the Argo CD ApplicationSet will use to create the Application.
 customer.normalized: my-main-app # name for ArgoCD must be in lower case
 
+# Group that is allowed in RBAC. This group can either be created using this Helm Chart (will be named as <namespace>-admin) or must be known (for example synced via LDAP Group Sync)
+oidc_groups: &oidc-group my-main-app-project-1-admins
+
 # Environment to which these values are valid, this should be the cluster name as visible in Argo CD
 # In best case the same is equal to the folder we are currntly in, but this is optional.
 environment: &environment in-cluster
@@ -68,7 +71,7 @@ helper-proj-onboarding:
               description: "Group to deploy on DEV environment"
               # List of OCP groups that is allowed to manage objects in this project
               oidc_groups:
-                - my-main-app-project-1-admins
+                - *oidc-group
               # Project policies
               # This will limit a project to specific actions
               # Parameters:
