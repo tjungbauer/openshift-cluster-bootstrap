@@ -1,36 +1,86 @@
-# Example values files for a customer onboarding
+# see full example at ../my-main-app
 
-# Name of the custoemrs. This must be the path.basename.
-customer.name: customerB
+customer.normalized: customer-b
 
-# Normalized name of the customer. This must be LOWER case, otherwise ArgoCD will fail
-customer.normalized: customerb # name for ArgoCD must be in lower case
+environment: &environment in-cluster
+# URL to cluster-API
+environment-cluster-api: &environment-api https://kubernetes.default.svc
 
-# Environment to which these values are valid, this should be the cluster name as visible in ArgoCD
-environment: in-cluster
-
-# Parameters handed over to sub-chart helper-proj-onboarding
+# Parameters handed over to Sub-Chart helper-proj-onboarding
 helper-proj-onboarding:
 
-  # List of namespaces this customer shall have. Namespace configuration
+  # List of namespaces this customer shall manage.
+  # A customer or project may consist of multiple namespace
   namespaces:
 
-    # name of first namespace
-    - name: customerb-project-1
+    # Name of the first Namespace
+    - name: &name customerb-project-1
 
-      # Create a local group with Admin users and the required rolebinding
-      # If other systems, like LDAP Group sync is used, you will probaably not need this.
+      # Is this Namespace enabled or not
+      enabled: true
+
+      # Create a local Group with Admin users and the required rolebinding
+      # If other systems, like LDAP Group sync is used, you will probaably not need this and can either disable it or remove the whole block.
       local_admin_group:
         enabled: true
         users:
           - mona
-          - peter
 
-      # shall namespace be created of not
-      enabled: true
+      # Creation of Argo CD Project
+      argocd_rbac_setup:
+        # This is required to build the rbac rules correctly. Theoretically, you can create multiple RBAC rules, but usually you create one per project/customer
+        argocd_project_1:
+          enabled: true
+          # Name of the AppProject is set to the customers Namespace. Which means, each Namespace will get it's own AppProject
+          name: *name
+          # Destination clusters. They are defined above. Since we split the values file per environment (cluster) here usually one cluster should be listed.
+          destinations:
+            - name: *environment
+              server: *environment-api
+          # List of allowed repositories. If the customer tries to use a different repo, Argo CD will deny it.
+          sourceRepos:
+            - 'https://github.com/tjungbauer/book-import/'
+          rbac:
+              # Name of the RBAC rule
+            - name: write
+              # Description of the RBAC rule
+              description: "Group to deploy on DEV environment"
+              # List of OCP groups that is allowed to manage objects in this project
+              oidc_groups:
+                - customera-project-1-admins
+              # Project policies
+              # This will limit a project to specific actions
+              # Parameters:
+              #   - action: Mandatory, either get, create, update, delete, sync or override
+              #   - permissions: allow or deny (Default: deny)
+              #   - resource: i.e applications (Default: applications)
+              #   - object: Which kind of objects can be managed, default "*" (all) inside the namespace
+              policies:
+                - action: get # get, create, update, delete, sync, override
+                  permission: allow # allow or deny
+                  object: '*' # which kind of objects can be managed, default "*" (all) inside the namespace
+                - action: create
+                  permission: allow
+                - action: update
+                  permission: allow
+                - action: delete
+                  permission: allow
+                - action: sync
+                  permission: allow
+                - action: override
+                  permission: allow
+          # Sync Windows - when application can be synced or not. Typically used to prevent automatic synchronization during specific time frames
+          # but can be used to limit the allowed syncs as well.
+          syncWindows:
+            - applications:
+                - '*'
+              clusters:
+                - *environment # the cluster we care currently configuring
+              namespaces:
+                - *name # the namespace of this application
+              timezone: 'Europe/Amsterdam' # timezone, default Europe/Amsterdam
+              duration: 1h # duration, for example "30m" or "1h" (default 1h)
+              kind: allow # allow or deny (default allow)
+              manualSync: true # is manual sync allowed ot not (default true)
+              schedule: '* * * * *' # cronjob like schedule: Min, Hour, Day, Month, Weekday (default '55 0 1 12 *' )
 
-    # name of second namespace
-    - name: customerb-project-2
-
-      # shall namespace be created of not
-      enabled: true
