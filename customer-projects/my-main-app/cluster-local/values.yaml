@@ -21,7 +21,7 @@ customer.name: my-main-app
 customer.normalized: my-main-app # name for ArgoCD must be in lower case
 
 # Environment to which these values are valid, this should be the cluster name as visible in Argo CD
-# In best case the same is equal to the folder we are currntly in, but this is optional. 
+# In best case the same is equal to the folder we are currntly in, but this is optional.
 environment: &environment in-cluster
 # URL to cluster-API
 environment-cluster-api: &environment-api https://kubernetes.default.svc
@@ -212,8 +212,8 @@ helper-proj-onboarding:
 
       # Additional custom Network Policies
       # I created this to be able to create Policies using a Helm chart. It might look complex but it is actually quite straight forward.
-      # 
-      # 1. Defaine a PodsSelect (or use all pods see example 2) 
+      #
+      # 1. Defaine a PodsSelect (or use all pods see example 2)
       # 2. Define Ingress rules with selectors and ports or IP addresses
       # 3. Optionally define egress Rules
       networkpolicies:
@@ -278,7 +278,7 @@ helper-proj-onboarding:
                   port: 443
 
 ################################
-    #  Name of the 2nd Namespace, with only Namespace creation 
+    #  Name of the 2nd Namespace, with only Namespace creation
     - name: my-main-app-project-2
 
       # shall namespace be created of not
