@@ -69,18 +69,5 @@ helper-proj-onboarding:
                   permission: allow
                 - action: override
                   permission: allow
-          # Sync Windows - when application can be synced or not. Typically used to prevent automatic synchronization during specific time frames
-          # but can be used to limit the allowed syncs as well.
-          syncWindows:
-            - applications:
-                - '*'
-              clusters:
-                - *environment # the cluster we care currently configuring
-              namespaces:
-                - *name # the namespace of this application
-              timezone: 'Europe/Amsterdam' # timezone, default Europe/Amsterdam
-              duration: 1h # duration, for example "30m" or "1h" (default 1h)
-              kind: allow # allow or deny (default allow)
-              manualSync: true # is manual sync allowed ot not (default true)
-              schedule: '* * * * *' # cronjob like schedule: Min, Hour, Day, Month, Weekday (default '55 0 1 12 *' )
+
 
