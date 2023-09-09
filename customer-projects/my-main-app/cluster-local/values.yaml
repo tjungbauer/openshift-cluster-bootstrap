@@ -42,6 +42,28 @@ helper-proj-onboarding:
       # Is this Namespace enabled or not
       enabled: true
 
+      # Additional labels for Podsecurity and Monitoring for the Namespace
+      additional_settings:
+        # Pod Security Standards
+        # https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted
+        # Possible values: Privileged, Baseline, Restricted
+        # Privileged: Unrestricted policy, providing the widest possible level of permissions. This policy allows for known privilege escalations.
+        # Baseline: Minimally restrictive policy which prevents known privilege escalations. Allows the default (minimally specified) Pod configuration.
+        # Restricted: Heavily restricted policy, following current Pod hardening best practices.
+
+        # Policy violations will trigger the addition of an audit annotation to the event recorded in the audit log, but are otherwise allowed.
+        podsecurity_audit: restricted
+        # Policy violations will trigger a user-facing warning, but are otherwise allowed.
+        podsecurity_warn: restricted
+        # Policy violations will cause the pod to be rejected.
+        podsecurity_enforce: restricted
+        cluster_monitoring: true
+
+      # List of Labels that should be added to the Namespace
+      labels:
+        my_additional_label: my_label
+        another_label: another_label
+
       # Create a local Group with Admin users and the required rolebinding
       # If other systems, like LDAP Group sync is used, you will probaably not need this and can either disable it or remove the whole block.
       local_admin_group:
@@ -107,28 +129,6 @@ helper-proj-onboarding:
               kind: allow # allow or deny (default allow)
               manualSync: true # is manual sync allowed ot not (default true)
               schedule: '* * * * *' # cronjob like schedule: Min, Hour, Day, Month, Weekday (default '55 0 1 12 *' )
-
-      # Additional labels for Podsecurity and Monitoring for the Namespace
-      additional_settings:
-        # Pod Security Standards
-        # https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted
-        # Possible values: Privileged, Baseline, Restricted
-        # Privileged: Unrestricted policy, providing the widest possible level of permissions. This policy allows for known privilege escalations.
-        # Baseline: Minimally restrictive policy which prevents known privilege escalations. Allows the default (minimally specified) Pod configuration.
-        # Restricted: Heavily restricted policy, following current Pod hardening best practices.
-
-        # Policy violations will trigger the addition of an audit annotation to the event recorded in the audit log, but are otherwise allowed.
-        podsecurity_audit: restricted
-        # Policy violations will trigger a user-facing warning, but are otherwise allowed.
-        podsecurity_warn: restricted
-        # Policy violations will cause the pod to be rejected.
-        podsecurity_enforce: restricted
-        cluster_monitoring: true
-
-      # List of Labels that should be added to the Namespace
-      labels:
-        my_additional_label: my_label
-        another_label: another_label
 
       # Configure ResourceQuotas
       # Here are a lot of examples, typically, you do not need all of these. cpu/memory is a good start for most use cases.
@@ -286,3 +286,12 @@ helper-proj-onboarding:
 
       # shall namespace be created of not
       enabled: true
+
+      # Configure ResourceQuotas
+      # Here are a lot of examples, typically, you do not need all of these. cpu/memory is a good start for most use cases.
+      resourceQuotas:
+        # Enable Quotas or not. You can either disable it or remove the whole block
+        enabled: true
+        # limits of Pods, CPU, Memory, storage, secrets... etc. etc.
+        # Byte values will be replace: gi -> Gi, mi -> Mi
+        pods: 4
