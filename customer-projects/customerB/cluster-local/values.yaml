@@ -47,7 +47,7 @@ helper-proj-onboarding:
               description: "Group to deploy on DEV environment"
               # List of OCP groups that is allowed to manage objects in this project
               oidc_groups:
-                - customera-project-1-admins
+                - customerb-project-1-admins
               # Project policies
               # This will limit a project to specific actions
               # Parameters:
