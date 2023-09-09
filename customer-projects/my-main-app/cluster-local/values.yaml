@@ -68,6 +68,9 @@ helper-proj-onboarding:
       # If other systems, like LDAP Group sync is used, you will probaably not need this and can either disable it or remove the whole block.
       local_admin_group:
         enabled: true
+        # optional parameter, default would be "admin"
+        clusterrole: admin
+        # List of users
         users:
           - mona
           - peter
@@ -286,12 +289,3 @@ helper-proj-onboarding:
 
       # shall namespace be created of not
       enabled: true
-
-      # Configure ResourceQuotas
-      # Here are a lot of examples, typically, you do not need all of these. cpu/memory is a good start for most use cases.
-      resourceQuotas:
-        # Enable Quotas or not. You can either disable it or remove the whole block
-        enabled: true
-        # limits of Pods, CPU, Memory, storage, secrets... etc. etc.
-        # Byte values will be replace: gi -> Gi, mi -> Mi
-        pods: 4
