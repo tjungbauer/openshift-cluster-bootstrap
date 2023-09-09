@@ -34,7 +34,7 @@ helper-proj-onboarding:
   namespaces:
 
     # Name of the first Namespace
-    - name: &name customera-project-1
+    - name: &name my-main-app-project-1
 
       # Is this Namespace enabled or not
       enabled: true
@@ -68,7 +68,7 @@ helper-proj-onboarding:
               description: "Group to deploy on DEV environment"
               # List of OCP groups that is allowed to manage objects in this project
               oidc_groups:
-                - customera-project-1-admins
+                - my-main-app-project-1-admins
               # Project policies
               # This will limit a project to specific actions
               # Parameters:
@@ -279,7 +279,7 @@ helper-proj-onboarding:
 
 ################################
     #  Name of the 2nd Namespace, with only Namespace creation 
-    - name: customera-project-2
+    - name: my-main-app-project-2
 
       # shall namespace be created of not
       enabled: true
