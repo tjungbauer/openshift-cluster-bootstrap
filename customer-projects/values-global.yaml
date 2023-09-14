@@ -3,3 +3,11 @@
 global:
   # Namespace of 2nd ArgoCD instance, that is responsible to deploy workload onto the clusters
   application_gitops_namespace: gitops-application
+
+  # cluster environments. A list of clusters that are known in Argo CD
+  # name and url must be equal to what is defined in Argo CD
+  envs:
+    - name: in-cluster
+      url: https://kubernetes.default.svc
+    - name: prod-cluster
+      url: https://production.cluster

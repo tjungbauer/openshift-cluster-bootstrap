@@ -2,12 +2,14 @@
 
 customer.normalized: my-second-app
 
-environment: &environment in-cluster
-# URL to cluster-API
-environment-cluster-api: &environment-api https://kubernetes.default.svc
+# Environment to which these values are valid, this should be the cluster name as defined in the values-global.yaml
+# In best case the same is equal to the folder we are currntly in, but this is optional.
+environment: &environment prod-cluster
 
 # Parameters handed over to Sub-Chart helper-proj-onboarding
 helper-proj-onboarding:
+
+  environment: *environment
 
   # List of namespaces this customer shall manage.
   # A customer or project may consist of multiple namespace
