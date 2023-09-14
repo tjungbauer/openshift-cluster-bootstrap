@@ -35,10 +35,6 @@ helper-proj-onboarding:
           enabled: true
           # Name of the AppProject is set to the customers Namespace. Which means, each Namespace will get it's own AppProject
           name: *name
-          # Destination clusters. They are defined above. Since we split the values file per environment (cluster) here usually one cluster should be listed.
-          destinations:
-            - name: *environment
-              server: *environment-api
           # List of allowed repositories. If the customer tries to use a different repo, Argo CD will deny it.
           sourceRepos:
             - 'https://github.com/tjungbauer/book-import/'
