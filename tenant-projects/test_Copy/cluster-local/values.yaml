@@ -13,15 +13,8 @@
 #
 # Most variables are handed over to the Sub-Chart: helper-proj-onboarding https://github.com/tjungbauer/helm-charts/tree/main/charts/helper-proj-onboarding
 
-# Name of the custoemr or project. This must be the path.basename.
-tenant.name: my-main-app2
-
-# Normalized name of the tenant or project. This must be LOWER case, otherwise Argo CD will fail
-# This will be part the name the Argo CD ApplicationSet will use to create the Application.
-tenant.normalized: my-main-app-2 # name for ArgoCD must be in lower case
-
 # Group that is allowed in RBAC. This group can either be created using this Helm Chart (will be named as <namespace>-admin) or must be known (for example synced via LDAP Group Sync)
-oidc_groups: &oidc-group my-main-app-project-1-admins
+oidc_groups: &oidc-group my-test-app-2-admins
 
 # Environment to which these values are valid, this should be the cluster name as defined in the values-global.yaml
 # In best case the same is equal to the folder we are currntly in, but this is optional.
@@ -37,7 +30,7 @@ helper-proj-onboarding:
   namespaces:
 
     # Name of the first Namespace
-    - name: &name my-main-app-project-1
+    - name: &name my-test-app-2
 
       # Is this Namespace enabled or not
       enabled: true

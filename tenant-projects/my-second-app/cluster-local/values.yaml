@@ -1,7 +1,5 @@
 # see full example at ../my-main-app
 
-tenant.normalized: my-second-app
-
 # Environment to which these values are valid, this should be the cluster name as defined in the values-global.yaml
 # In best case the same is equal to the folder we are currntly in, but this is optional.
 environment: &environment in-cluster
