@@ -1,6 +1,6 @@
 # see full example at ../my-main-app
 
-customer.normalized: my-second-app
+tenant.normalized: my-second-app
 
 # Environment to which these values are valid, this should be the cluster name as defined in the values-global.yaml
 # In best case the same is equal to the folder we are currntly in, but this is optional.
@@ -11,8 +11,8 @@ helper-proj-onboarding:
 
   environment: *environment
 
-  # List of namespaces this customer shall manage.
-  # A customer or project may consist of multiple namespace
+  # List of namespaces this tenant shall manage.
+  # A tenant or project may consist of multiple namespace
   namespaces:
 
     # Name of the first Namespace
@@ -30,12 +30,12 @@ helper-proj-onboarding:
 
       # Creation of Argo CD Project
       argocd_rbac_setup:
-        # This is required to build the rbac rules correctly. Theoretically, you can create multiple RBAC rules, but usually you create one per project/customer
+        # This is required to build the rbac rules correctly. Theoretically, you can create multiple RBAC rules, but usually you create one per project/tenant
         argocd_project_1:
           enabled: true
-          # Name of the AppProject is set to the customers Namespace. Which means, each Namespace will get it's own AppProject
+          # Name of the AppProject is set to the tenants Namespace. Which means, each Namespace will get it's own AppProject
           name: *name
-          # List of allowed repositories. If the customer tries to use a different repo, Argo CD will deny it.
+          # List of allowed repositories. If the tenant tries to use a different repo, Argo CD will deny it.
           sourceRepos:
             - 'https://github.com/tjungbauer/book-import/'
           rbac:

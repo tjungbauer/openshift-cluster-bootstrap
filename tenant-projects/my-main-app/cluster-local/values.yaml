@@ -1,4 +1,4 @@
-# Example values files for a customer onboarding
+# Example values files for a tenant onboarding
 # It is a huge file and can help you creating:
 #   - one or more namespaces including labels etc.
 #   - local project admin group (in case groups are not created by other mechnics like LDAP Group Sync)
@@ -14,11 +14,11 @@
 # Most variables are handed over to the Sub-Chart: helper-proj-onboarding https://github.com/tjungbauer/helm-charts/tree/main/charts/helper-proj-onboarding
 
 # Name of the custoemr or project. This must be the path.basename.
-customer.name: my-main-app
+tenant.name: my-main-app
 
-# Normalized name of the customer or project. This must be LOWER case, otherwise Argo CD will fail
+# Normalized name of the tenant or project. This must be LOWER case, otherwise Argo CD will fail
 # This will be part the name the Argo CD ApplicationSet will use to create the Application.
-customer.normalized: my-main-app # name for ArgoCD must be in lower case
+tenant.normalized: my-main-app # name for ArgoCD must be in lower case
 
 # Group that is allowed in RBAC. This group can either be created using this Helm Chart (will be named as <namespace>-admin) or must be known (for example synced via LDAP Group Sync)
 oidc_groups: &oidc-group my-main-app-project-1-admins
@@ -32,8 +32,8 @@ helper-proj-onboarding:
 
   environment: *environment
 
-  # List of namespaces this customer shall manage.
-  # A customer or project may consist of multiple namespace
+  # List of namespaces this tenant shall manage.
+  # A tenant or project may consist of multiple namespace
   namespaces:
 
     # Name of the first Namespace
@@ -78,12 +78,12 @@ helper-proj-onboarding:
 
       # Creation of Argo CD Project
       argocd_rbac_setup:
-        # This is required to build the rbac rules correctly. Theoretically, you can create multiple RBAC rules, but usually you create one per project/customer
+        # This is required to build the rbac rules correctly. Theoretically, you can create multiple RBAC rules, but usually you create one per project/tenant
         argocd_project_1:
           enabled: true
-          # Name of the AppProject is set to the customers Namespace. Which means, each Namespace will get it's own AppProject
+          # Name of the AppProject is set to the tenants Namespace. Which means, each Namespace will get it's own AppProject
           name: *name
-          # List of allowed repositories. If the customer tries to use a different repo, Argo CD will deny it. * can be used to allow all.
+          # List of allowed repositories. If the tenant tries to use a different repo, Argo CD will deny it. * can be used to allow all.
           sourceRepos:
             - 'https://github.com/tjungbauer/book-import/'
           rbac:

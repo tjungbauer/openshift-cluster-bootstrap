@@ -1,0 +1,45 @@
+# Example values files for a tenant onboarding
+# It is a huge file and can help you creating:
+#   - one or more namespaces including labels etc.
+#   - local project admin group (in case groups are not created by other mechnics like LDAP Group Sync)
+#   - GitOps (ArgoCD) Project, that limits allowed repos, clusters, permissions etc.
+#   - Resource Quotas
+#   - Limit Ranges
+#   - Creation of default Network Policies (same namespace, OpenShift Monitoring & API Server, OpenShift Ingress, Egress Deny All)
+#   - Creation of custom Network Policies
+#
+# This values file shows all possible settings. Most probably, you do not need to use everything.
+# I tried to make is as configuratble as possible and most settings are working with defaults values and all can be disabled by setting "enabled" to false
+#
+# Most variables are handed over to the Sub-Chart: helper-proj-onboarding https://github.com/tjungbauer/helm-charts/tree/main/charts/helper-proj-onboarding
+
+# Name of the custoemr or project. This must be the path.basename.
+tenant.name: my-main-app
+
+# Normalized name of the tenant or project. This must be LOWER case, otherwise Argo CD will fail
+# This will be part the name the Argo CD ApplicationSet will use to create the Application.
+tenant.normalized: my-main-app # name for ArgoCD must be in lower case
+
+# Group that is allowed in RBAC. This group can either be created using this Helm Chart (will be named as <namespace>-admin) or must be known (for example synced via LDAP Group Sync)
+oidc_groups: &oidc-group my-main-app-project-1-admins
+
+# Environment to which these values are valid, this should be the cluster name as defined in the values-global.yaml
+# In best case the same is equal to the folder we are currntly in, but this is optional.
+environment: &environment in-cluster
+
+# Parameters handed over to Sub-Chart helper-proj-onboarding
+helper-proj-onboarding:
+
+  environment: *environment
+
+  # List of namespaces this tenant shall manage.
+  # A tenant or project may consist of multiple namespace
+  namespaces:
+
+    # Name of the first Namespace
+    - name: &name my-main-app-project-1
+
+      # Is this Namespace enabled or not
+      enabled: true
+
+      tshirt_sizes: "XL"

@@ -11,3 +11,9 @@ global:
       url: https://kubernetes.default.svc
     - name: prod-cluster
       url: https://production.cluster
+
+  tshirt_sizes:
+    - name: XL
+      quota: "hard"
+    - name: L
+      quota: L
