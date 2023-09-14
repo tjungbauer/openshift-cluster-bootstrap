@@ -4,7 +4,7 @@ tenant.normalized: my-second-app
 
 # Environment to which these values are valid, this should be the cluster name as defined in the values-global.yaml
 # In best case the same is equal to the folder we are currntly in, but this is optional.
-environment: &environment prod-cluster
+environment: &environment in-cluster
 
 # Parameters handed over to Sub-Chart helper-proj-onboarding
 helper-proj-onboarding:
