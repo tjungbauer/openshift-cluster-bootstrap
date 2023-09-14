@@ -1,7 +1,7 @@
 ---
 
 global:
-  # Namespace of 2nd ArgoCD instance, that is responsible to deploy workload onto the clusters
+  # Namespace of application scoped GitOps instance, that is responsible to deploy workload onto the clusters
   application_gitops_namespace: gitops-application
 
   # cluster environments. A list of clusters that are known in Argo CD
