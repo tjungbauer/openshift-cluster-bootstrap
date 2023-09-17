@@ -30,9 +30,33 @@ helper-proj-onboarding:
   namespaces:
 
     # Name of the first Namespace
-    - name: &name my-test-app2
+    - name: &name my-tshirt-size-app
 
       # Is this Namespace enabled or not
       enabled: true
 
-      tshirt_sizes: "XL"
+      project_size: "S"
+
+      # Override specific quota settings individually
+      resourceQuotas:
+        limits:
+          cpu: 10
+
+      local_admin_group:
+        enabled: true
+        # group_name: my_group_name
+        # optional parameter, default would be "admin"
+        clusterrole: admin
+        # List of users
+        users:
+          - mona
+          - peter
+
+      # overwrite whatever default policy you would like
+      # per default the following 5 are set
+      default_policies:
+      #  disable_allow_from_ingress: false
+      #  disable_allow_from_monitoring: false
+      #  disable_allow_from_same_namespace: false
+      #  disable_allow_kube_apiserver: false
+        disable_deny_all_egress: true # This default policy will not be created, while the others will be.          

@@ -35,4 +35,4 @@ helper-proj-onboarding:
       # Is this Namespace enabled or not
       enabled: true
 
-      tshirt_sizes: "XL"
+      project_size: "XL"

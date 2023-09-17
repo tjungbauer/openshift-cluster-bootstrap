@@ -14,6 +14,27 @@ global:
 
   tshirt_sizes:
     - name: XL
-      quota: "hard"
+      quota:
+        pods: 100
+        limits:
+          cpu: 4
+          memory: 4Gi
+        requests:
+          cpu: 1
+          memory: 2Gi     
     - name: L
-      quota: L
+      quota:
+        limits:
+          cpu: 2
+          memory: 2Gi
+        requests:
+          cpu: 1
+          memory: 1Gi 
+    - name: S
+      quota:
+        limits:
+          cpu: 1
+          memory: 1Gi
+        requests:
+          cpu: 500m
+          memory: 1Gi 
