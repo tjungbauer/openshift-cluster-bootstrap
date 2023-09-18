@@ -53,7 +53,7 @@ helper-proj-onboarding:
           - peter
 
       # Allowed repositories for this project, overwrites the default settings.
-      # allowed_source_repos: 
+      # allowed_source_repos:
       #  - "https://my-personal-repo"
       #  - "https://my-second-personal-repo"
 
