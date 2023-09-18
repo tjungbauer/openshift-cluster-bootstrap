@@ -14,7 +14,7 @@
 # Most variables are handed over to the Sub-Chart: helper-proj-onboarding https://github.com/tjungbauer/helm-charts/tree/main/charts/helper-proj-onboarding
 
 # Group that is allowed in RBAC. This group can either be created using this Helm Chart (will be named as <namespace>-admin) or must be known (for example synced via LDAP Group Sync)
-oidc_groups: &oidc-group my-test-app2-admins
+oidc_groups: &oidc-group my-tshirt-size-app-admins
 
 # Environment to which these values are valid, this should be the cluster name as defined in the values-global.yaml
 # In best case the same is equal to the folder we are currntly in, but this is optional.
@@ -52,6 +52,11 @@ helper-proj-onboarding:
           - mona
           - peter
 
+      # Allowed repositories for this project, overwrites the default settings.
+      # allowed_source_repos: 
+      #  - "https://my-personal-repo"
+      #  - "https://my-second-personal-repo"
+
       # overwrite whatever default policy you would like
       # per default the following 5 are set
       default_policies:
@@ -60,3 +65,14 @@ helper-proj-onboarding:
       #  disable_allow_from_same_namespace: false
       #  disable_allow_kube_apiserver: false
         disable_deny_all_egress: true  # This default policy will not be created, while the others will be.
+
+      # Overwrite LimitRanges per project
+      limitRanges:
+        enabled: true
+        container:
+          max:
+            cpu: 4
+            memory: 10Gi
+          min:
+            cpu: 1
+            memory: 100Mi

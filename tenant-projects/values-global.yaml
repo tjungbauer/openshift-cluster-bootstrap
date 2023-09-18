@@ -12,6 +12,12 @@ global:
     - name: prod-cluster
       url: https://production.cluster
 
+  # Repositories projects are allowed to use. These are configured on a global level and used if not specified in a _T-Shirt_ project. 
+  # Can be overwritten for projects in their specific values-file
+  allowed_source_repos: 
+    - "https://myrepo"
+    - "https://the-second-repo"
+
   tshirt_sizes:
     - name: XL
       quota:
@@ -37,4 +43,12 @@ global:
           memory: 1Gi
         requests:
           cpu: 500m
-          memory: 1Gi 
+          memory: 1Gi
+      limitRanges:
+        container:
+          default:
+            cpu: 1
+            memory: 4Gi
+          defaultRequest:
+            cpu: 1
+            memory: 2Gi
