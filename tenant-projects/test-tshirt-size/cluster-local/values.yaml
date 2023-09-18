@@ -59,4 +59,4 @@ helper-proj-onboarding:
       #  disable_allow_from_monitoring: false
       #  disable_allow_from_same_namespace: false
       #  disable_allow_kube_apiserver: false
-        disable_deny_all_egress: true # This default policy will not be created, while the others will be.          
+        disable_deny_all_egress: true  # This default policy will not be created, while the others will be.          
