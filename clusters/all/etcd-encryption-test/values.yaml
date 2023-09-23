@@ -1,6 +1,5 @@
 ---
-generic-cluster-config:
-  etcd_encryption:
-    enabled: true
-    namespace: kube-system
-    serviceAccount: etcd-encryption-checker
+etcd_encryption:
+  enabled: true
+  namespace: kube-system
+  serviceAccount: etcd-encryption-checker
