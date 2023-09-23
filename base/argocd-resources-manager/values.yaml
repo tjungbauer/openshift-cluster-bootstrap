@@ -107,7 +107,7 @@ applicationsets:
         clusterurl: *mgmtcluster
     syncPolicy:
       autosync_enabled: false  # should be disabled for operators
- 
+
   install_netobserv:
     enabled: true
     description: "Deploy the Net Observer Operator"
@@ -119,7 +119,7 @@ applicationsets:
         clusterurl: *mgmtcluster
     syncPolicy:
       autosync_enabled: false
- 
+
   # Additional instances of GitOps, usually used for applications deployments
   install_application_gitops:
     enabled: true
@@ -132,7 +132,7 @@ applicationsets:
         clusterurl: *mgmtcluster
     syncPolicy:
       autosync_enabled: false
- 
+
   # Install Sonarqube
   install_sonarqube:
     enabled: true
@@ -148,7 +148,7 @@ applicationsets:
         clusterurl: *mgmtcluster
     syncPolicy:
       autosync_enabled: false
-  
+
   install_cyclonedx:
     enabled: true
     description: "Install CycloneDX SBOM Repository"
@@ -161,7 +161,7 @@ applicationsets:
         clusterurl: *mgmtcluster
     syncPolicy:
       autosync_enabled: false
- 
+
   # A Collection of operators which will be deployed on ALL clusters.
   install-operator-collection:
     enabled: true
@@ -174,7 +174,7 @@ applicationsets:
       autosync_enabled: false  # should be disabled for operators
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
- 
+
   # A collection of MANAGEMENT operators,
   # installed usually on the management cluster only.
   install-mgmt-operator-collection:
@@ -190,7 +190,7 @@ applicationsets:
       autosync_enabled: false  # should be disabled for operators
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
- 
+
   # A Collection of OPTIONAL operators which will be deployed on ALL clusters.
   install_optional_operator_collection:
     enabled: false
@@ -203,7 +203,7 @@ applicationsets:
       autosync_enabled: false  # should be disabled for operators
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
-  
+
   # Compliance Scans should happen on ALL clusters
   install_compliance_scans:
     enabled: true
@@ -217,7 +217,7 @@ applicationsets:
       autosync_enabled: false  # should be disabled for operators
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
- 
+
   # Install Container Security Operator
   install_container_security_operator:
     enabled: true
@@ -230,7 +230,7 @@ applicationsets:
       autosync_enabled: false  # should be disabled for operators
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
-  
+
   # Install OpenShift Logging
   install-openshift-logging:
     enabled: true
@@ -244,7 +244,7 @@ applicationsets:
     generatorclusters: []
     syncPolicy:
       autosync_enabled: false
-  
+
   # Configure Allowed Registries
   configure-allowed-registries:
     enabled: true
@@ -258,7 +258,7 @@ applicationsets:
     generatorclusters: []
     syncPolicy:
       autosync_enabled: false
-  
+
   # Install Vault-Config-Operator
   install-vault-config-operator:
     enabled: true
@@ -275,7 +275,7 @@ applicationsets:
     syncPolicy:
       autosync_enabled: false
     targetrevision: "main"
-  
+
   # Install Cert-Manager and Cert-Utils Operators
   install-certificate-management:
     enabled: true
@@ -289,7 +289,7 @@ applicationsets:
     syncPolicy:
       autosync_enabled: false
     targetrevision: "main"
- 
+
   # init ACM
   init-rhacm:
     enabled: true
@@ -307,7 +307,7 @@ applicationsets:
       autosync_enabled: false
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
-  
+
   # Install ACS
   init-rhacs:
     enabled: true
@@ -325,7 +325,7 @@ applicationsets:
     path: charts/rhacs-full-stack
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
- 
+
   # Install RHACS Demo
   rhacs-demo-app:
     enabled: true
@@ -343,7 +343,7 @@ applicationsets:
     path: charts/rhacs-demo-applications/
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
-  
+
   # Install Pipeline Demo
   pipeline-demo:
     enabled: true
@@ -360,7 +360,7 @@ applicationsets:
     path: charts/pipeline-example/
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
- 
+
   # Install ODF
   odf:
     enabled: true
@@ -377,7 +377,7 @@ applicationsets:
     path: charts/openshift-data-foundation
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
-  
+
   install_kyverno:
     enabled: true
     description: "Deploy Kyverno"
@@ -407,7 +407,7 @@ applicationsets:
     generatorclusters: []
     repourl: https://kyverno.github.io/kyverno
     targetrevision: "2.6.1"
-  
+
   sealed-secrets:
     enabled: true
     description: "Deploy Sealed-Secrets"
@@ -442,7 +442,7 @@ applications:
       category: test
     source:
       path: clusters/management-cluster/bulk-test
-  
+
   hashicorp-vault:
     enabled: true
     description: "Deploy HashoCorp Vault"
@@ -468,7 +468,7 @@ applications:
             value: '1'
       repourl: "https://helm.releases.hashicorp.com"
       targetrevision: 0.21.0
-  
+
   node-labelling:
     enabled: true
     description: "Deploy Node Labels"
