@@ -29,14 +29,14 @@ helper-argocd:
       generatorclusters: []
       multiple_sources:
         - repoUrl: https://github.com/tjungbauer/openshift-cluster-bootstrap
-          path: clusters/all/etcd-encryption/
+          path: clusters/all/etcd-encryption-test/
           targetRevision: main 
           ref: values 
         - repoUrl: "https://charts.stderr.at/"
           chart: generic-cluster-config
           targetRevision: 1.0.16
           helm:
-            default_values_file: $values/clusters/all/etcd-encryption/values.yaml
+            default_values_file: $values/clusters/all/etcd-encryption-test/values.yaml
             # additional_values_files:
             #  - example1.yaml
             #  - exampl2.yaml
