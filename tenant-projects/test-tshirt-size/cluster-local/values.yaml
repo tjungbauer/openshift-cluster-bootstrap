@@ -57,8 +57,20 @@ helper-proj-onboarding:
       #  - "https://my-personal-repo"
       #  - "https://my-second-personal-repo"
 
-      # overwrite whatever default policy you would like
-      # per default the following 5 are set
+      # Network Policies ... these are a bit more complex, when you want to keep them fully configurable.
+      # Maybe the following is too much to manage, anyway, let's start
+
+      # 5 default network policies will be created everytime, unless you overwrite them here
+      # You can remove this whole block to have the policies created or you can select specific policies
+      # which shall be disabled.
+      # The 5 policies are:
+      #    - Allow Ingress traffic from the OpenShift Router
+      #    - Allow OpenShift Monitoring to access and fetch metrics
+      #    - Allow inner namespace communication (pod to pod of the same Namespace)
+      #    - Allow Kube API Server
+      #    - Forbid ANY Egress traffic
+
+      # For example: I would like to disable "deny all egress" (which means the Pods can reach any external destination).
       default_policies:
       #  disable_allow_from_ingress: false
       #  disable_allow_from_monitoring: false

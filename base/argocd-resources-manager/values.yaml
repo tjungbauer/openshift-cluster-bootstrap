@@ -1,0 +1,55 @@
+---
+# General values
+#
+# Set cluster names ...
+# https://issues.redhat.com/browse/GITOPS-1777
+# The issue that the in-cluster cannot be renamed has been resolved
+mgmt-cluster: &mgmtcluster https://kubernetes.default.svc
+mgmt-cluster-name: &mgmtclustername in-cluster
+production-cluster: &prodcluster https://api.ocp.ispworld.at:6443
+production-cluster-name: &prodclustername prod
+
+repourl: &repourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
+repobranch: &branch main
+
+helper-argocd:
+  argocd_projects:
+    - *mgmtclustername
+    - *prodclustername
+
+  applicationsets:
+
+    test:
+      enabled: true
+      description: "Enable Cluster ETCD Encryption"
+      labels:
+        category: security
+      helm:
+        per_cluster_helm_values: false
+      generatorclusters: []
+      multiple_sources:
+        - repoUrl: https://github.com/tjungbauer/openshift-cluster-bootstrap
+          path: clusters/all/etcd-encryption/
+          targetRevision: main 
+          ref: values 
+        - repoUrl: "https://charts.stderr.at/"
+          chart: generic-cluster-config
+          targetRevision: 1.0.13
+          helm:
+            default_values_file: $values/clusters/all/etcd-encryption/values.yaml
+            # additional_values_files:
+            #  - example1.yaml
+            #  - exampl2.yaml
+            #helmvalues:
+            #  - name: example
+            #    value: values
+            #releaseName: example
+
+
+  # These define the default values.
+  # It is possible to overwrite repourl and targetrevision in the Applications(Sets)
+  general:
+    argocd_project: 'default'
+    source:
+      repourl: *repourl
+    branch: *branch
