@@ -29,7 +29,6 @@ helper-argocd:
       generatorclusters: []
       multiple_sources:
         - repoUrl: https://github.com/tjungbauer/openshift-cluster-bootstrap
-          path: clusters/all/etcd-encryption-test/
           targetRevision: main 
           ref: values 
         - repoUrl: "https://charts.stderr.at/"
