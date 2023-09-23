@@ -149,7 +149,7 @@ function patch_argocd() {
 # Deploy the Application of Applications
 function deploy_app_of_apps() {
 
-  $HELM upgrade --install --values ./clusters/management-cluster/init_app_of_apps/values.yaml --namespace=openshift-gitops app-of-apps ./clusters/management-cluster/init_app_of_apps
+  $HELM upgrade --install --values ./base/init_app_of_apps/values.yaml --namespace=openshift-gitops app-of-apps ./base/init_app_of_apps
 
 }
 
