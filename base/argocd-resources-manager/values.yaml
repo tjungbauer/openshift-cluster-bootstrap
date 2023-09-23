@@ -39,10 +39,10 @@ helper-argocd:
             # additional_values_files:
             #  - example1.yaml
             #  - exampl2.yaml
-            #helmvalues:
+            # helmvalues:
             #  - name: example
             #    value: values
-            #releaseName: example
+            # releaseName: example
 
 
   # These define the default values.
