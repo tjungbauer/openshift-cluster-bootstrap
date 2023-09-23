@@ -29,8 +29,8 @@ helper-argocd:
       generatorclusters: []
       multiple_sources:
         - repoUrl: https://github.com/tjungbauer/openshift-cluster-bootstrap
-          targetRevision: main 
-          ref: values 
+          targetRevision: main
+          ref: values
         - repoUrl: "https://charts.stderr.at/"
           chart: generic-cluster-config
           #targetRevision: 1.0.13
