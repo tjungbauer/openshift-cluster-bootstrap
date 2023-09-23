@@ -4,6 +4,10 @@
 
 server: https://kubernetes.default.svc
 argocd_project: 'default'
-repourl: 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
-revision: main
-path: clusters/argocd-object-manager
+repourl_configuration: 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
+revision_configuration: main
+path_configurations: 
+  - base/argocd-resources-manager/values.yaml
+repoURL_chart: https://charts.stderr.at/
+chart_name: helper-argocd
+chart_version: 2.0.x

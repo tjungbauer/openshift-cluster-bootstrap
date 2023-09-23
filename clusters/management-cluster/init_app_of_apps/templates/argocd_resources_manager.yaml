@@ -1,7 +1,8 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-object-manager
+  name: argocd-resources-manager
   labels:
     gitops.ownedBy: cluster-config
 {{ include "common.labels" . | indent 4 }}
@@ -10,10 +11,18 @@ spec:
     namespace: openshift-gitops
     server: {{ .Values.server }}
   project: {{ .Values.argocd_project }}
-  source:
-    path: {{ .Values.path }}
-    repoURL: {{ .Values.repourl }}
-    targetRevision:  {{ .Values.revision }}
+  sources:
+    - repoURL: https://github.com/tjungbauer/openshift-cluster-bootstrap
+      targetRevision: main
+      ref: values
+    - repoURL: {{ .Values.repoURL_chart }}
+      chart: {{ .Values.chart_name }}
+      targetRevision: {{ .Values.chart_version }}
+      helm:
+        valueFiles:
+          {{- range .Values.path_configurations }}
+          - $values/{{ . }}
+          {{- end }}
   syncPolicy:
     automated:
       prune: true
