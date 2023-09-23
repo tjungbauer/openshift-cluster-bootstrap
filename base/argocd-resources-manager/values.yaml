@@ -33,7 +33,7 @@ helper-argocd:
           ref: values 
         - repoUrl: "https://charts.stderr.at/"
           chart: generic-cluster-config
-          targetRevision: 1.0.13
+          #targetRevision: 1.0.13
           helm:
             default_values_file: $values/clusters/all/etcd-encryption-test/values.yaml
             # additional_values_files:
