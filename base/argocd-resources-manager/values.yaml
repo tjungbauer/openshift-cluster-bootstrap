@@ -46,19 +46,19 @@ applicationsets:
     # preserveResourcesOnDeletion: true
 
     # Helm settings
-    # These settings are used for single sources MAINLY. 
+    # These settings are used for single sources MAINLY.
     #
     # "per_cluster_helm_values" (bool, optional): Defines if every cluster known in Argo CD is using a spearate values-file. This values-file must be named <cluster-name>-values.yaml
     # "releasename" (string, optional): Overwrites the releasename of the chart
     # "paramters" (array, optional): Sets custom parameters for this chart. The list looks like:
     #      - name: Name/key of the parameter
-    #      - value: value of the parameter    
+    #      - value: value of the parameter
     helm:
       per_cluster_helm_values: true
 
     # Generator: currently list and cluster are possible.
-    # either "generatorlist" or "generatorclusters" when using Helm releases, list generator is recommended, 
-    # since the cluster generator is currently mainly used to deploy the same configuration on ALL clusters.    
+    # either "generatorlist" or "generatorclusters" when using Helm releases, list generator is recommended,
+    # since the cluster generator is currently mainly used to deploy the same configuration on ALL clusters.
     generatorclusters: []
 
   ##################################
@@ -75,18 +75,18 @@ applicationsets:
 
     # Description - always usful
     description: "Install Sonarqube"
-    
+
     # Any specific namespace to be used
     namespace: sonarqube
 
     # Helm settings
-    # These settings are used for single sources MAINLY. 
+    # These settings are used for single sources MAINLY.
     #
     # "per_cluster_helm_values" (bool, optional): Defines if every cluster known in Argo CD is using a spearate values-file. This values-file must be named <cluster-name>-values.yaml
     # "releasename" (string, optional): Overwrites the releasename of the chart
     # "paramters" (array, optional): Sets custom parameters for this chart. The list looks like:
     #      - name: Name/key of the parameter
-    #      - value: value of the parameter     
+    #      - value: value of the parameter
     helm:
       releasename: sonarqube
 
@@ -98,7 +98,7 @@ applicationsets:
     # List of clusters
     # "clustername" (string): Is the name of the cluster a defined in Argo CD
     # "clusterurl" (string): Is the URL of the cluster API
-    # "chart_version" (string, optional): Defines which chart version shall be deployed on each cluster. 
+    # "chart_version" (string, optional): Defines which chart version shall be deployed on each cluster.
     generatorlist:
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
@@ -128,7 +128,7 @@ applicationsets:
       category: security
 
     # Helm settings
-    # These settings are used for single sources MAINLY. 
+    # These settings are used for single sources MAINLY.
     #
     # "per_cluster_helm_values" (bool, optional): Defines if every cluster known in Argo CD is using a spearate values-file. This values-file must be named <cluster-name>-values.yaml
     # "releasename" (string, optional): Overwrites the releasename of the chart
@@ -139,13 +139,13 @@ applicationsets:
       per_cluster_helm_values: false
 
     # Generator: currently list and cluster are possible.
-    # either "generatorlist" or "generatorclusters" when using Helm releases, list generator is recommended, 
+    # either "generatorlist" or "generatorclusters" when using Helm releases, list generator is recommended,
     # since the cluster generator is currently mainly used to deploy the same configuration on ALL clusters.
     generatorlist:
         # List of clusters
         # "clustername" (string): Is the name of the cluster a defined in Argo CD
         # "clusterurl" (string): Is the URL of the cluster API
-        # "chart_version" (string, optional): Defines which chart version shall be deployed on each cluster. 
+        # "chart_version" (string, optional): Defines which chart version shall be deployed on each cluster.
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
         chart_version: 1.0.16
@@ -169,7 +169,7 @@ applicationsets:
         # Only set default_version, when it is not set in generatorlist
         # This is the version that will be used on all clusters
         # default_version: x.x.x
-        
+
         # Path to the values file
         helm:
           default_values_file: $values/clusters/all/etcd-encryption/values.yaml
@@ -249,22 +249,6 @@ applicationsets:
     labels:
       category: project
     path: clusters/management-cluster/management-gitops
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    syncPolicy:
-      autosync_enabled: false
-
-  # Install Sonarqube
-  install_sonarqube:
-    enabled: true
-    description: "Install Sonarqube"
-    namespace: sonarqube
-    helm:
-      releasename: sonarqube
-    labels:
-      category: project
-    path: clusters/management-cluster/sonarqube
     generatorlist:
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
