@@ -21,6 +21,21 @@ argocd_projects:
   - *prodclustername
 
 applicationsets:
+
+  # Configure Allowed Registries
+  xconfigure-allowed-registries:
+    enabled: true
+    description: "Configure Registries which are allowed"
+    labels:
+      category: security
+    helm:
+      per_cluster_helm_values: true
+    path: clusters/all/allowed_registries-test
+    # omitClustername: true
+    generatorclusters: []
+    syncPolicy:
+      autosync_enabled: false
+
   generic_clusterconfig:
     enabled: true
     description: "Deploy generic cluster configuration or etcd encryption"
