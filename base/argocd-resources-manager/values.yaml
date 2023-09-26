@@ -43,7 +43,7 @@ applicationsets:
     targetrevision: main
 
     # Using go text template. See: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/GoTemplate/
-    goTemplate: true 
+    goTemplate: true
 
     # Helm configuration. A list of helm values files
     helm:
@@ -60,7 +60,7 @@ applicationsets:
         targetrevision: main
         files:
           - tenant-projects/**/values.yaml
-    
+
     # preserve all resources when the application get deleted. This is useful to keep that workload even if Argo CD is removed or severely changed.
     preserveResourcesOnDeletion: true
 
