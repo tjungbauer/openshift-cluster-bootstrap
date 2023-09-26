@@ -140,7 +140,9 @@ applicationsets:
     # Any labels you would like to add to the Application. Good to filter it in the Argo CD UI.
     labels:
       category: project
-    path: clusters/management-cluster/sonarqube
+    chartname: sonarqube
+    repourl: "https://charts.stderr.at/"
+    targetrevision: 1.0.0
 
     # List of clusters
     # "clustername" (string): Is the name of the cluster a defined in Argo CD
