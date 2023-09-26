@@ -261,7 +261,9 @@ applicationsets:
     namespace: cyclonedx
     labels:
       catagory: security
-    path: clusters/management-cluster/cyclonedx
+    chartname: cyclonedx
+    repourl: "https://charts.stderr.at/"
+    targetrevision: 1.0.0
     generatorlist:
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
