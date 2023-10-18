@@ -198,9 +198,9 @@ applicationsets:
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
         chart_version: 1.0.17
-      - clustername: *prodclustername
-        clusterurl: *prodcluster
-        chart_version: 1.0.13
+        #    - clustername: *prodclustername
+        #clusterurl: *prodcluster
+        #chart_version: 1.0.13
 
     # multiple_sources defines if multiple sources shall be used.
     # Currently this feature is TechPreview and lacks support on the CLI or UI. However, it is a nice way to define a Helm Chart and use the values-file stored in a different repository.
