@@ -479,7 +479,7 @@ applicationsets:
         clusterurl: *mgmtcluster
     syncPolicy:
       autosync_enabled: false
-    path: charts/rhacs-full-stack
+    path: charts/rhacs-setup
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
 
