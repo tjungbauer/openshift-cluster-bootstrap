@@ -335,7 +335,7 @@ applicationsets:
   # A collection of MANAGEMENT operators,
   # installed usually on the management cluster only.
   install-mgmt-operator-collection:
-    enabled: false
+    enabled: true
     description: "Deploy a collection of Operators which are usually installed on a management cluster only"
     labels:
       category: operators
