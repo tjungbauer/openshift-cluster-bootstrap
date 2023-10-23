@@ -52,7 +52,7 @@ helper-operator:
         source: redhat-operators
         sourceNamespace: openshift-marketplace
       operatorgroup:
-        create: false
+        create: true
         notownnamespace: true
 
     ####################
