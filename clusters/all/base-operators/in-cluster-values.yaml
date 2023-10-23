@@ -1,5 +1,15 @@
 ---
 
+# Set channels/versions for the different operators
+pipelines: &channel-pipelines latest
+loki: &channel-loki stable
+logging: &channel-logging stable
+netobserv: &channel-netobserv stable
+cert-utils: &channel-cert-utils alpha
+cert-manager: &channel-cert-manager stable-v12
+quay: &channel-quay stable-3.9
+odf: &channel-odf stable-4.13
+
 # The sub-chart helper-operator performs the actual isntallation of the operator.
 helper-operator:
 
@@ -19,7 +29,7 @@ helper-operator:
       # Information about the subscription
       subscription:
         # Version that shall be used
-        channel: latest
+        channel: *channel-pipelines
         # Automatic of manual approval to update the Operator
         # Default: Automatic
         approval: Automatic
@@ -46,7 +56,7 @@ helper-operator:
         name: openshift-operators-redhat
         create: true
       subscription:
-        channel: stable
+        channel: *channel-loki
         approval: Automatic
         operatorName: loki-operator
         source: redhat-operators
@@ -64,7 +74,7 @@ helper-operator:
         name: openshift-logging
         create: true
       subscription:
-        channel: stable
+        channel: *channel-logging
         approval: Automatic
         operatorName: cluster-logging
         source: redhat-operators
@@ -82,7 +92,7 @@ helper-operator:
         name: openshift-netobserv-operator
         create: true
       subscription:
-        channel: stable
+        channel: *channel-netobserv
         approval: Automatic
         operatorName: netobserv-operator
         source: redhat-operators
@@ -100,7 +110,7 @@ helper-operator:
         name: cert-utils-operator
         create: true
       subscription:
-        channel: alpha
+        channel: *channel-cert-utils
         approval: Automatic
         operatorName: cert-utils-operator
         source: community-operators
@@ -118,7 +128,7 @@ helper-operator:
         name: cert-manager-operator
         create: true
       subscription:
-        channel: stable-v1
+        channel: *channel-cert-manager
         approval: Automatic
         operatorName: openshift-cert-manager-operator
         source: redhat-operators
@@ -136,7 +146,7 @@ helper-operator:
         name: openshift-operators
         create: false
       subscription:
-        channel: stable-3.9
+        channel: *channel-quay
         approval: Automatic
         operatorName: quay-operator
         source: redhat-operators
@@ -155,7 +165,7 @@ helper-operator:
         name: openshift-storage
         create: true
       subscription:
-        channel: stable-4.13
+        channel: *channel-odf
         approval: Automatic
         operatorName: odf-operator
         source: redhat-operators
