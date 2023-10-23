@@ -388,6 +388,29 @@ applicationsets:
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
 
+  # Install Quay Enterprise Registry
+  install_quay_registry:
+    enabled: true
+    description: "Deploy Quay Registry"
+    labels:
+      category: registry
+    path: charts/quay-registry-setup
+    syncPolicy:
+      autosync_enabled: false  # should be disabled for operators
+    helm:
+      per_cluster_helm_values: false
+    generatorlist:
+      - clustername: *mgmtclustername
+        clusterurl: *mgmtcluster
+    multiple_sources:
+      - repoUrl: https://github.com/tjungbauer/openshift-cluster-bootstrap
+        targetRevision: main
+        ref: values
+      - repoUrl: "https://charts.stderr.at/"
+        chart: quay-registry-setup
+        helm:
+          default_values_file: $values/clusters/management-cluster/quay-registry/values.yaml
+
   # Install OpenShift Logging
   install-openshift-logging:
     enabled: true
