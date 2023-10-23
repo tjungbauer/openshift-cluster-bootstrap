@@ -3,7 +3,7 @@
 quay:
   enabled: false
   config_bundle: config-bundle-secret
-  syncwave: 3
+  syncwave: 5
   public_route: quay.apps.chvk8mgmt.lonzagroup.net
 
   namespace:
@@ -15,9 +15,10 @@ quay:
     clair:
       overrides:
         replicas: 1
+    clairpostgres: {}
     postgres: {}
     objectstore:
-      managed: "false"
+      managed: "flase"
     redis: {}
     hpa:
       managed: "false"
@@ -28,17 +29,17 @@ quay:
     monitoring: {}
     tls:
       managed: "false"
+    postgres: {}
     quay:
       overrides:
         replicas: 1
-    clairpostgres: {}
 
   job_init_quay:
     enabled: false
     syncwave: 5
     serviceAccount: quay-initiator
 
-# Install Operator Compliance Operator
+# Install Quay Operator
 # Deploys Operator --> Subscription and Operatorgroup
 # Syncwave: 0
 helper-operator:

@@ -480,7 +480,7 @@ applicationsets:
       solution: rhacm
     helm:
       per_cluster_helm_values: false
-    path: charts/rhacm-full-stack
+    path: charts/rhacm-setup
     generatorlist:
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
