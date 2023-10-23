@@ -320,7 +320,7 @@ applicationsets:
       autosync_enabled: false
 
   # A Collection of operators which will be deployed on ALL clusters.
-  install-operator-collection:
+  install-management-operator-collection:
     enabled: true
     description: "Deploy a collection of most useful Operators"
     labels:
@@ -332,7 +332,7 @@ applicationsets:
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
 
-  install-operator-collection:
+  install-management-operator:
     enabled: true
     description: "Deploy a collection of most useful Operators"
     labels:
