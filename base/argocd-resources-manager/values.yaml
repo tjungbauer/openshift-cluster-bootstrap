@@ -352,7 +352,7 @@ applicationsets:
         helm:
           default_values_file: $values/clusters/all/base-operators/values.yaml
           additional_values_files:
-            - in-cluster-values.yaml
+            - $values/clusters/all/base-operators/in-cluster-values.yaml
 
   # A Collection of OPTIONAL operators which will be deployed on ALL clusters.
   install_optional_operator_collection:
