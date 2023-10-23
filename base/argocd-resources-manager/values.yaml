@@ -186,6 +186,8 @@ applicationsets:
     #      - value: value of the parameter
     helm:
       per_cluster_helm_values: false
+      # Mandatory path
+      per_cluster_helm_values_path: "Path to cluster specific values-file"
 
     # Generator: currently list and cluster are possible.
     # either "generatorlist" or "generatorclusters" when using Helm releases, list generator is recommended,
@@ -339,6 +341,7 @@ applicationsets:
       category: operators
     helm:
       per_cluster_helm_values: true
+      per_cluster_helm_values_path: $values/clusters/all/base-operators/
     generatorlist:
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
@@ -351,8 +354,6 @@ applicationsets:
         chart: collection-management-operators
         helm:
           default_values_file: $values/clusters/all/base-operators/values.yaml
-          #additional_values_files:
-          #  - $values/clusters/all/base-operators/in-cluster-values.yaml
 
   # A Collection of OPTIONAL operators which will be deployed on ALL clusters.
   install_optional_operator_collection:
