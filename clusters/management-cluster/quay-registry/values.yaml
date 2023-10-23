@@ -16,7 +16,6 @@ quay:
       overrides:
         replicas: 1
     clairpostgres: {}
-    postgres: {}
     objectstore:
       managed: "flase"
     redis: {}
