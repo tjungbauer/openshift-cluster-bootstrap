@@ -408,6 +408,7 @@ applicationsets:
         ref: values
       - repoUrl: "https://charts.stderr.at/"
         chart: quay-registry-setup
+        targetrevision: 1.0.0
         helm:
           default_values_file: $values/clusters/management-cluster/quay-registry/values.yaml
 
