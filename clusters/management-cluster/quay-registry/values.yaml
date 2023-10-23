@@ -43,7 +43,7 @@ quay:
 # Syncwave: 0
 helper-operator:
   operators:
-    compliance-operator:
+    quay-operator:
       enabled: true
       syncwave: '0'
       namespace:
@@ -51,7 +51,7 @@ helper-operator:
         create: false
       subscription:
         channel: stable-3.9
-        approval: Manual
+        approval: Automatic
         operatorName: quay-operator
         source: redhat-operators
         sourceNamespace: openshift-marketplace
