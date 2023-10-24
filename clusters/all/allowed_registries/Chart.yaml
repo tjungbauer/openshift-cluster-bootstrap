@@ -1,6 +1,6 @@
 apiVersion: v2
-name: openshift-logging-deployment
-description: Installs and configures OpenShift Logging by calling the Chart openshift-logging
+name: allows-registries
+description: Allow Registries
 version: 1.0.0
 dependencies:
   - name: generic-cluster-config

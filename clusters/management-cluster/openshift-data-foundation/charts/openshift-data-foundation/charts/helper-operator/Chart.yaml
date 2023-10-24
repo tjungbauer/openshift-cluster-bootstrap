@@ -1,0 +1,23 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: fixed
+      description: Signing Chart
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/signKey: |
+    fingerprint: B677CB52F8358FA091044E375D24D6846DBA8F8A
+    url: https://keys.openpgp.org/vks/v1/by-fingerprint/B677CB52F8358FA091044E375D24D6846DBA8F8A
+apiVersion: v2
+description: A helper Chart to reduce code repetition. This Chart should be called
+  as a dependency by other charts in order to install Operators
+home: https://github.com/tjungbauer/helm-charts/tree/main/charts/helper-operator
+icon: https://github.com/tjungbauer/helm-charts/raw/gh-pages/images/helping.png
+keywords:
+- helper
+- subchart
+maintainers:
+- email: tjungbau@redhat.com
+  name: tjungbauer
+name: helper-operator
+sources:
+- https://github.com/tjungbauer/helm-charts
+version: 1.0.17
