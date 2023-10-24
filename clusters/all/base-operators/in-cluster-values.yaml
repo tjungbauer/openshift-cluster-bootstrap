@@ -16,7 +16,7 @@ helper-operator:
   # Enable the Console Plugins for the following Operators
   console_plugins:
     - logging-plugin
-    - odf-plugin
+    - odf-console
     - netobserv-plugin
 
   operators:
