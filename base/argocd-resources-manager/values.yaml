@@ -345,7 +345,7 @@ applicationsets:
     generatorlist:
       - clustername: *mgmtclustername
         clusterurl: *mgmtcluster
-        chart_version: 1.0.28
+        chart_version: 1.0.29
     multiple_sources:
       - repoUrl: https://github.com/tjungbauer/openshift-cluster-bootstrap
         targetRevision: main
