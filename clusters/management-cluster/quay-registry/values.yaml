@@ -19,11 +19,12 @@ quay:
     # Default: 2
     syncwave: 2
 
-setup-quay:
-  namespace:
-    create: true
-    name: *namespace
-    syncwave: 1
+quay-registry-setup:
+  quay:
+    namespace:
+      create: true
+      name: *namespace
+      syncwave: 1
 
 quay_deprecated:
   enabled: false
