@@ -1,4 +1,5 @@
 ---
+---
 
 # Set channels/versions for the different operators
 pipelines: &channel-pipelines latest
@@ -160,21 +161,3 @@ helper-operator:
       operatorgroup:
         create: false
         notownnamespace: true
-
-    ######################
-    # Open Data Foundation
-    ######################
-    odf-operator:
-      enabled: true
-      syncwave: '0'
-      namespace:
-        name: openshift-storage
-        create: true
-      subscription:
-        channel: *channel-odf
-        approval: Automatic
-        operatorName: odf-operator
-        source: redhat-operators
-        sourceNamespace: openshift-marketplace
-      operatorgroup:
-        create: true

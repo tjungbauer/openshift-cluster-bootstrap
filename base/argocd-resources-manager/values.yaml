@@ -378,26 +378,26 @@ applicationsets:
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
 
-  install-management-operator:
-    enabled: true
-    description: "Deploy a collection of most useful Operators"
-    labels:
-      category: operators
-    helm:
-      per_cluster_helm_values: true
-      per_cluster_helm_values_path: $values/clusters/all/base-operators/
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-        chart_version: 1.0.30
-    multiple_sources:
-      - repoUrl: https://github.com/tjungbauer/openshift-cluster-bootstrap
-        targetRevision: main
-        ref: values
-      - repoUrl: "https://charts.stderr.at/"
-        chart: collection-management-operators
-        helm:
-          default_values_file: $values/clusters/all/base-operators/values.yaml
+#  install-management-operator:
+#    enabled: true
+#    description: "Deploy a collection of most useful Operators"
+#    labels:
+#      category: operators
+#    helm:
+#      per_cluster_helm_values: true
+#      per_cluster_helm_values_path: $values/clusters/all/base-operators/
+#    generatorlist:
+#      - clustername: *mgmtclustername
+#        clusterurl: *mgmtcluster
+#        chart_version: 1.0.30
+#    multiple_sources:
+#      - repoUrl: https://github.com/tjungbauer/openshift-cluster-bootstrap
+#        targetRevision: main
+#        ref: values
+#      - repoUrl: "https://charts.stderr.at/"
+#        chart: collection-management-operators
+#        helm:
+#          default_values_file: $values/clusters/all/base-operators/values.yaml
 
   # A Collection of OPTIONAL operators which will be deployed on ALL clusters.
   install_optional_operator_collection:
@@ -477,37 +477,37 @@ applicationsets:
     syncPolicy:
       autosync_enabled: false
 
-  # Configure Allowed Registries
-  configure-allowed-registries:
-    enabled: true
-    description: "Configure Registries which are allowed"
-    labels:
-      category: security
-    helm:
-      per_cluster_helm_values: true
-    path: clusters/all/allowed_registries
-    # omitClustername: true
-    generatorclusters: []
-    syncPolicy:
-      autosync_enabled: false
-
-
-#  # Install Vault-Config-Operator
-#  install-vault-config-operator:
+#  # Configure Allowed Registries
+#  configure-allowed-registries:
 #    enabled: true
-#    description: "Deploy and Configure Vault-Config-Operator"
+#    description: "Configure Registries which are allowed"
 #    labels:
 #      category: security
-#      solution: vault
 #    helm:
-#      per_cluster_helm_values: false
-#    path: clusters/management-cluster/vault-config
-#    generatorlist:
-#      - clustername: *mgmtclustername
-#        clusterurl: *mgmtcluster
+#      per_cluster_helm_values: true
+#    path: clusters/all/allowed_registries
+#    # omitClustername: true
+#    generatorclusters: []
 #    syncPolicy:
 #      autosync_enabled: false
-#    targetrevision: "main"
+
+
+  # Install Vault-Config-Operator
+  install-vault-config-operator:
+    enabled: false
+    description: "Deploy and Configure Vault-Config-Operator"
+    labels:
+      category: security
+      solution: vault
+    helm:
+      per_cluster_helm_values: false
+    path: clusters/management-cluster/vault-config
+    generatorlist:
+      - clustername: *mgmtclustername
+        clusterurl: *mgmtcluster
+    syncPolicy:
+      autosync_enabled: false
+    targetrevision: "main"
 
   # Install Cert-Manager and Cert-Utils Operators
   install-certificate-management:
