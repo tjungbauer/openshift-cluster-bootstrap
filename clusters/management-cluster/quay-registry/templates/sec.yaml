@@ -1,9 +1,11 @@
-{{ range $index, $namespace := (lookup "v1" "Namespace" "" "").items }}
-kind: Secret
+
+{{- $rootPasswordValue := (randAlpha 16) | b64enc | quote }}
+{{- $secret := (lookup "v1" "Secret" "quay-enterprise" "quay-bucket") }}
 apiVersion: v1
+kind: Secret
 metadata:
-  name: xxxx
+  name: db-keys
   namespace: quay-enterprise
-stringData:
-  xxx: {{ $namespace.metadata.name }}
-{{- end }}
+type: Opaque
+data:
+  root-password: {{ $secret }}
