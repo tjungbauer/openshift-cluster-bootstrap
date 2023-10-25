@@ -1,6 +1,4 @@
 ---
----
-
 # Set channels/versions for the different operators
 pipelines: &channel-pipelines latest
 loki: &channel-loki stable

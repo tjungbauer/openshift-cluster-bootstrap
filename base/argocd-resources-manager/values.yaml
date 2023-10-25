@@ -494,7 +494,7 @@ applicationsets:
 
   # Install Vault-Config-Operator
   install-vault-config-operator:
-    enabled: false
+    enabled: true
     description: "Deploy and Configure Vault-Config-Operator"
     labels:
       category: security
