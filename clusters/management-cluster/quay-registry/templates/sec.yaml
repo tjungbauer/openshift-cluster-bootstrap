@@ -1,9 +1,7 @@
 
-{{- $rootPasswordValue := (randAlpha 16) | b64enc | quote }}
-{{- $secret := (lookup "v1" "Secret" "quay-enterprise" "quay-bucket") }}
-{{- if $secret }}
-{{- $rootPasswordValue = "root-password" }}
-{{- end -}}
+{{ range $index, $service := (lookup "v1" "Service" "quay-enterprise" "").items }}
+
+
 apiVersion: v1
 kind: Secret
 metadata:
@@ -11,4 +9,5 @@ metadata:
   namespace: quay-enterprise
 type: Opaque
 stringData:
-  root-password: {{ $secret }}
+  root-password: {{ $service }}
+{{ end }}
