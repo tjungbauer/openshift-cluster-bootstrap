@@ -2,7 +2,7 @@
 # This must be defined here, since you cannot hand over a .File to a subchart
 console:
   console_logo:
-    enabled: true
+    enabled: false
     image:
       name: console-custom-logo.png
       console_logo: images/custom-logo.png
@@ -59,3 +59,23 @@ generic-cluster-config:
         applicationMenu:
           section: My Subscriptions
           imageURL: https://raw.githubusercontent.com/tjungbauer/helm-charts/gh-pages/images/configuration.png
+
+generic-cluster-config:
+  console:
+    yamlsamples:
+      secret-yaml-sample:
+        enabled: true
+        targetResource:
+          apiv: "v1"
+          kind: Secret
+        title: "Secret based on cleartext values"
+        descr: "This is an example to create a Secret based on clear-text values"
+        yamlDef: |+
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: example
+              type: Opaque
+              stringData:
+                email: youremail@address.com
+                password: YourSuperPassword

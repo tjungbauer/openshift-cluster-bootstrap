@@ -305,26 +305,6 @@ applicationsets:
     syncPolicy:
       autosync_enabled: false  # should be disabled for operators
 
-  aws-s3-controller:
-    enabled: false
-    description: "Deploy AWS S3 Controller"
-    labels:
-      category: cluster-configuration
-    path: clusters/all/aws-controller-s3/
-    helm:
-      per_cluster_helm_values: true
-    generatorclusters: []
-
-  branding:
-    enabled: true
-    description: "Deploy Cluster Branding"
-    labels:
-      category: cluster-configuration
-    path: clusters/all/clusterbranding/
-    helm:
-      per_cluster_helm_values: true
-    generatorclusters: []
-
   install_netobserv:
     enabled: true
     description: "Deploy the Net Observer Operator"
