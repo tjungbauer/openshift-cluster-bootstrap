@@ -2,7 +2,7 @@
 kind: Secret
 apiVersion: v1
 metadata:
-  name: logging-loki-s3
+  name: xxxx
   namespace: quay-enterprise
 stringData:
   xxx: {{ (lookup "v1" "Namespace" "" "") }}
