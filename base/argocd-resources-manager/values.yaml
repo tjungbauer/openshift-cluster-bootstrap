@@ -271,16 +271,6 @@ applicationsets:
       per_cluster_helm_values: true
     generatorclusters: []
 
-  etcd-encryption-deprecated:
-    enabled: true
-    description: "Enable Cluster ETCD Encryption"
-    labels:
-      category: security
-    path: clusters-deprecated/all/etcd-encryption/
-    helm:
-      per_cluster_helm_values: false
-    generatorclusters: []
-
   install_netobserv:
     enabled: true
     description: "Deploy the Net Observer Operator"
@@ -293,18 +283,18 @@ applicationsets:
     syncPolicy:
       autosync_enabled: false
 
-  # Additional instances of GitOps, usually used for applications deployments
-  install_application_gitops:
-    enabled: true
-    description: "Deploy a 2nd GitOps instance for application deployments"
-    labels:
-      category: project
-    path: clusters/management-cluster/management-gitops
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    syncPolicy:
-      autosync_enabled: false
+#  # Additional instances of GitOps, usually used for applications deployments
+#  install_application_gitops:
+#    enabled: true
+#    description: "Deploy a 2nd GitOps instance for application deployments"
+#    labels:
+#      category: project
+#    path: clusters/management-cluster/management-gitops
+#    generatorlist:
+#      - clustername: *mgmtclustername
+#        clusterurl: *mgmtcluster
+#    syncPolicy:
+#      autosync_enabled: false
 
   install_cyclonedx:
     enabled: true
@@ -395,29 +385,29 @@ applicationsets:
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
 
-  # Install Quay Enterprise Registry
-  install_quay_registry:
-    enabled: true
-    description: "Deploy Quay Registry"
-    labels:
-      category: registry
-    path: charts/quay-registry-setup
-    syncPolicy:
-      autosync_enabled: false  # should be disabled for operators
-    helm:
-      per_cluster_helm_values: false
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    multiple_sources:
-      - repoUrl: https://github.com/tjungbauer/openshift-cluster-bootstrap
-        targetRevision: main
-        ref: values
-      - repoUrl: "https://charts.stderr.at/"
-        chart: quay-registry-setup
-        targetRevision: 1.0.0
-        helm:
-          default_values_file: $values/clusters/management-cluster/quay-registry/values.yaml
+#  # Install Quay Enterprise Registry
+#  install_quay_registry:
+#    enabled: true
+#    description: "Deploy Quay Registry"
+#    labels:
+#      category: registry
+#    path: charts/quay-registry-setup
+#    syncPolicy:
+#      autosync_enabled: false  # should be disabled for operators
+#    helm:
+#      per_cluster_helm_values: false
+#    generatorlist:
+#      - clustername: *mgmtclustername
+#        clusterurl: *mgmtcluster
+#    multiple_sources:
+#      - repoUrl: https://github.com/tjungbauer/openshift-cluster-bootstrap
+#        targetRevision: main
+#        ref: values
+#      - repoUrl: "https://charts.stderr.at/"
+#        chart: quay-registry-setup
+#        targetRevision: 1.0.0
+#        helm:
+#          default_values_file: $values/clusters/management-cluster/quay-registry/values.yaml
 
   # Install OpenShift Logging
   install-openshift-logging:
@@ -447,22 +437,22 @@ applicationsets:
     syncPolicy:
       autosync_enabled: false
 
-  # Install Vault-Config-Operator
-  install-vault-config-operator:
-    enabled: true
-    description: "Deploy and Configure Vault-Config-Operator"
-    labels:
-      category: security
-      solution: vault
-    helm:
-      per_cluster_helm_values: false
-    path: clusters/management-cluster/vault-config
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    syncPolicy:
-      autosync_enabled: false
-    targetrevision: "main"
+#  # Install Vault-Config-Operator
+#  install-vault-config-operator:
+#    enabled: true
+#    description: "Deploy and Configure Vault-Config-Operator"
+#    labels:
+#      category: security
+#      solution: vault
+#    helm:
+#      per_cluster_helm_values: false
+#    path: clusters/management-cluster/vault-config
+#    generatorlist:
+#      - clustername: *mgmtclustername
+#        clusterurl: *mgmtcluster
+#    syncPolicy:
+#      autosync_enabled: false
+#    targetrevision: "main"
 
   # Install Cert-Manager and Cert-Utils Operators
   install-certificate-management:
@@ -549,22 +539,22 @@ applicationsets:
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
 
-  # Install ODF
-  odf:
-    enabled: true
-    description: "Deploy Open Data Foundation Operator"
-    labels:
-      category: storage
-    helm:
-      per_cluster_helm_values: false
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    syncPolicy:
-      autosync_enabled: false
-    path: charts/openshift-data-foundation
-    repourl: "https://github.com/tjungbauer/helm-charts"
-    targetrevision: "main"
+#  # Install ODF
+#  odf:
+#    enabled: true
+#    description: "Deploy Open Data Foundation Operator"
+#    labels:
+#      category: storage
+#    helm:
+#      per_cluster_helm_values: false
+#    generatorlist:
+#      - clustername: *mgmtclustername
+#        clusterurl: *mgmtcluster
+#    syncPolicy:
+#      autosync_enabled: false
+#    path: charts/openshift-data-foundation
+#    repourl: "https://github.com/tjungbauer/helm-charts"
+#    targetrevision: "main"
 
   install_kyverno:
     enabled: true
@@ -619,17 +609,17 @@ applicationsets:
 
 
 # APPLICATIONS
-applications:
-  in-cluster-bulk-test:
-    enabled: true
-    server: *mgmtcluster
-    namespace: {}
-    project: default
-    description: "Testing bulk operations"
-    labels:
-      category: test
-    source:
-      path: clusters/management-cluster/bulk-test
+#applications:
+#  in-cluster-bulk-test:
+#    enabled: true
+#    server: *mgmtcluster
+#    namespace: {}
+#    project: default
+#    description: "Testing bulk operations"
+#    labels:
+#      category: test
+#    source:
+#      path: clusters/management-cluster/bulk-test
 
   hashicorp-vault:
     enabled: true
@@ -657,28 +647,28 @@ applications:
       repourl: "https://helm.releases.hashicorp.com"
       targetrevision: 0.21.0
 
-  node-labelling:
-    enabled: true
-    description: "Deploy Node Labels"
-    labels:
-      category: configuration
-    namespace:
-      name: default
-      create: false
-    server: *mgmtcluster
-    project: default
-    syncOptions:
-      - name: ServerSideApply
-        value: true
-      - name: Validate
-        value: false
-    source:
-      path: clusters/management-cluster/node-labels
-      helm:
-        valuesfiles:
-          - name: values.yaml
-      repourl: *repourl
-      targetrevision: *branch
+#  node-labelling:
+#    enabled: true
+#    description: "Deploy Node Labels"
+#    labels:
+#      category: configuration
+#    namespace:
+#      name: default
+#      create: false
+#    server: *mgmtcluster
+#    project: default
+#    syncOptions:
+#      - name: ServerSideApply
+#        value: true
+#      - name: Validate
+#        value: false
+#    source:
+#      path: clusters/management-cluster/node-labels
+#      helm:
+#        valuesfiles:
+#          - name: values.yaml
+#      repourl: *repourl
+#      targetrevision: *branch
 
 # These define the default values.
 # It is possible to overwrite repourl and targetrevision in the Applications(Sets)
