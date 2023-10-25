@@ -1,5 +1,5 @@
 
-{{ range $index, $service := (lookup "v1" "Secrets" "quay-enterprise" "").items }}
+{{ range $index, $service := (lookup "v1" "Secret" "quay-enterprise" "").items }}
 apiVersion: v1
 kind: Secret
 metadata:
