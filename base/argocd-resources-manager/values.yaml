@@ -491,6 +491,7 @@ applicationsets:
     syncPolicy:
       autosync_enabled: false
 
+
 #  # Install Vault-Config-Operator
 #  install-vault-config-operator:
 #    enabled: true
