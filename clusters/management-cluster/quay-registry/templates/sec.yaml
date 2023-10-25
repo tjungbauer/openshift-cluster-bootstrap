@@ -7,5 +7,5 @@ metadata:
   name: db-keys
   namespace: quay-enterprise
 type: Opaque
-data:
+stringData:
   root-password: {{ $secret }}
