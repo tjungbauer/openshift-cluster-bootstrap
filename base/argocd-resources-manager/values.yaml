@@ -306,7 +306,7 @@ applicationsets:
       autosync_enabled: false  # should be disabled for operators
 
   aws-s3-controller:
-    enabled: true
+    enabled: false
     description: "Deploy AWS S3 Controller"
     labels:
       category: cluster-configuration

@@ -23,24 +23,25 @@ openshift-logging:
 #        mem: 8Gi  # For Demo environments, I do not have so big machines :)
 #      redundancyPolicy: ZeroRedundancy
 
-  # sub subchart
-  helper-operator:
-    operators:
-      elasticsearch-operator:
-        enabled: *es
-      loki-operator:
-        enabled: *loki
-        syncwave: '0'
-        namespace:
-          name: openshift-operators-redhat
-          create: true
-        subscription:
-          channel: stable
-          approval: Automatic
-        operatorgroup:
-          notownnamespace: true
-          create: false
-      cluster-logging-operator:
-        enabled: true
-        subscription:
-          channel: stable
+# The operators are installed in a separate way in this case.
+#  # sub subchart
+#  helper-operator:
+#    operators:
+#      elasticsearch-operator:
+#        enabled: *es
+#      loki-operator:
+#        enabled: *loki
+#        syncwave: '0'
+#        namespace:
+#          name: openshift-operators-redhat
+#          create: true
+#        subscription:
+#          channel: stable
+#          approval: Automatic
+#        operatorgroup:
+#          notownnamespace: true
+#          create: false
+#      cluster-logging-operator:
+#        enabled: true
+#        subscription:
+#          channel: stable
