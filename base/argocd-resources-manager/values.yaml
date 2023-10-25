@@ -494,7 +494,7 @@ applicationsets:
 
   # Install Vault-Config-Operator
   install-vault-config-operator:
-    enabled: true
+    enabled: false
     description: "Deploy and Configure Vault-Config-Operator"
     labels:
       category: security
@@ -664,7 +664,7 @@ applicationsets:
 
 
 # APPLICATIONS
-#applications:
+applications:
 #  in-cluster-bulk-test:
 #    enabled: true
 #    server: *mgmtcluster

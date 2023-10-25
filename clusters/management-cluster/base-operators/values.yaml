@@ -142,20 +142,3 @@ helper-operator:
         create: true
         notownnamespace: false
 
-    ###############
-    # Quay Registry
-    ###############
-    quay-operator:
-      enabled: true
-      namespace:
-        name: openshift-operators
-        create: false
-      subscription:
-        channel: *channel-quay
-        approval: Automatic
-        operatorName: quay-operator
-        source: redhat-operators
-        sourceNamespace: openshift-marketplace
-      operatorgroup:
-        create: false
-        notownnamespace: true
