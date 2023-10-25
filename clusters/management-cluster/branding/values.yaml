@@ -60,8 +60,6 @@ generic-cluster-config:
           section: My Subscriptions
           imageURL: https://raw.githubusercontent.com/tjungbauer/helm-charts/gh-pages/images/configuration.png
 
-generic-cluster-config:
-  console:
     yamlsamples:
       secret-yaml-sample:
         enabled: true
