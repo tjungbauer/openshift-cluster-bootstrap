@@ -1,8 +1,9 @@
-
+{{ range $index, $namespace := (lookup "v1" "Namespace" "" "").items }}
 kind: Secret
 apiVersion: v1
 metadata:
   name: xxxx
   namespace: quay-enterprise
 stringData:
-  xxx: {{ (lookup "v1" "Namespace" "" "").items }}
+  xxx: {{ $namespace.metadata.name }}
+{{- end }}
