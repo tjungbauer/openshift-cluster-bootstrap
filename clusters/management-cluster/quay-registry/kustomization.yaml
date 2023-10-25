@@ -1,8 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-helmCharts:
-- name: quay-registry-setup
-  # version: x.x.x
-  repo: https://charts.stderr.at
-  valuesFile: values.yaml
-

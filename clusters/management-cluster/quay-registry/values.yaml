@@ -1,5 +1,21 @@
 ---
 
+quay_registry:
+  enabled: true
+
+  # Bucket that shall be created
+  bucket:
+    name: quay-bucket
+
+    # Name of the storageclass
+    # Default: openshift-storage.noobaa.io
+    storageclass: openshift-storage.noobaa.io
+
+    # Syncwave for bucketclaim creation. This should be done very early, but it depends on ODF.
+    # Default: 1
+    syncwave: 1
+
+
 quay:
   enabled: false
   config_bundle: config-bundle-secret
