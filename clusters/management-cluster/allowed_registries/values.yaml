@@ -13,3 +13,4 @@ config_allowed_registries:
     insecure: false
   - domain: registry.connect.redhat.com
   - domain: registry.redhat.io
+

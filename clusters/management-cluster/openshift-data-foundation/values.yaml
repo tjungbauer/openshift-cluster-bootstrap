@@ -13,14 +13,14 @@ storagecluster:
     # Name of the stroageclass
     # The class must exist upfront and is currently not created by this chart.
     storageclass: gp3-csi
-    
-  # Second option is a full deployment, which will provide Block, File and Object Storage  
+
+  # Second option is a full deployment, which will provide Block, File and Object Storage
   full_deployment:
     enabled: true
 
     # Enable NFS or not
     nfs: enabled
-    
+
     # The label the nodes should have to allow hosting of ODF services
     # Default: cluster.ocs.openshift.io/openshift-storage
     # default_node_label: cluster.ocs.openshift.io/openshift-storage
@@ -52,7 +52,7 @@ storagecluster:
             resources:
               requests:
                 storage: 512Gi
-            
+
             # Name of the stroageclass
             # The class must exist upfront and is currently not created by this chart.
             storageClassName: gp3-csi
@@ -64,7 +64,7 @@ storagecluster:
     # ONLY set this if you know what you are doing.
     # For every component Limits and Requests can be set.
 
-    # For testing request settings might be reduced. 
+    # For testing request settings might be reduced.
     # compontent_resources:
       # MDS Defaults
       #   Limits: cpu 3, memory: 8Gi
@@ -136,3 +136,4 @@ helper-status-checker:
   serviceAccount:
     create: true
     name: "status-checker-odf"
+

@@ -25,11 +25,11 @@ applicationsets:
   # MATRIX GENERATOR EXAMPLE #
   ############################
   # Matrix Generator: The idea here is to walk over a folder, for example /clusters/management-cluster
-  # and take all settings from there. 
+  # and take all settings from there.
   # This way you see what is installed on which cluster and you do not need to configure the application here
   # Instead, you just add a new configuretion to clusters/management-cluster and it will automatically takes from there.
   #
-  # The generator config here is bypassed 1:1 to the applicationset. It uses Git and list. 
+  # The generator config here is bypassed 1:1 to the applicationset. It uses Git and list.
   #   Git: Walking through the specified path
   #   List: simply defines the target cluster. This is important so that we know where to deploy :)
   #
@@ -64,7 +64,7 @@ applicationsets:
           # List: simply define the targetCluster. The name of the cluster must be known by Argo CD
           - list:
               elements:
-                  # targetCluster is important, this will define on which cluster it will be rolled out. 
+                  # targetCluster is important, this will define on which cluster it will be rolled out.
                   # The cluster name must be known in Argo CD
                 - targetCluster: *mgmtclustername
     syncPolicy:
