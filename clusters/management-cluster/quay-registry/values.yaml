@@ -1,12 +1,11 @@
 ---
+quay_namespace: &namespace quay-enterprise
 
 quay:
   enabled: true
 
   namespace:
-    create: true
-    name: quay-enterprise
-    syncwave: 1
+    name: *namespace
 
   # Bucket that shall be created
   bucket:
@@ -20,6 +19,11 @@ quay:
     # Default: 2
     syncwave: 2
 
+setup-quay:
+  namespace:
+    create: true
+    name: *namespace
+    syncwave: 1
 
 quay_deprecated:
   enabled: false
