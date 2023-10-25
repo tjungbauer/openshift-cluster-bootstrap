@@ -4,4 +4,3 @@ helmCharts:
 - name: openshift-data-foundation
   repo: https://charts.stderr.at
   valuesFile: values.yaml
-
