@@ -511,7 +511,7 @@ applicationsets:
 
   # Install Cert-Manager and Cert-Utils Operators
   install-certificate-management:
-    enabled: true
+    enabled: false
     description: "Deploy cert-manager and cert-utils operators"
     labels:
       category: security
