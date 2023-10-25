@@ -5,4 +5,4 @@ metadata:
   name: xxxx
   namespace: quay-enterprise
 stringData:
-  xxx: {{ (lookup "v1" "Namespace" "" "") }}
+  xxx: {{ (lookup "v1" "Namespace" "" "").items }}
