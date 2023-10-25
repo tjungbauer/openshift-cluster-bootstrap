@@ -5,7 +5,7 @@ loki: &channel-loki stable
 logging: &channel-logging stable
 netobserv: &channel-netobserv stable
 cert-utils: &channel-cert-utils alpha
-cert-manager: &channel-cert-manager stable-v12
+cert-manager: &channel-cert-manager stable-v1.12
 quay: &channel-quay stable-3.9
 odf: &channel-odf stable-4.13
 
