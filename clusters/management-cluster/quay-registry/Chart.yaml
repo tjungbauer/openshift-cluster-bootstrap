@@ -6,6 +6,14 @@ dependencies:
   - name: quay-registry-setup
     version: ~1.0.0
     repository: https://charts.stderr.at/
+  - name: helper-operator
+    version: ~1.0.0
+    repository: file://../helper-operator
+  - name: helper-status-checker
+    version: ~3.0.0
+    repository: file://../helper-status-checker
+    condition: helper-status-checker.enabled
+maintainers:
 maintainers:
   - name: tjungbauer
     email: tjungbau@redhat.com
