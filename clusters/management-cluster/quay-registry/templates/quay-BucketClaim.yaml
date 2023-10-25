@@ -1,15 +1,15 @@
-{{- if eq ( .Values.quay_registry.enabled | toString) "true" }}
-{{- with .Values.quay_registry }}
+{{- if eq ( .Values.quay.enabled | toString) "true" }}
+{{- with .Values.quay }}
 {{- if .bucket }}
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
   name: {{ .bucket.name }}
-  namespace: quay-enterprise
+  namespace: {{ .namespace.name }}
   labels:
     {{- include "common.labels" $ | nindent 4 }}
   annotations:
-    argocd.argoproj.io/sync-wave: {{ .bucket.syncwave | default "1" | quote }}
+    argocd.argoproj.io/sync-wave: {{ .bucket.syncwave | default "2" | quote }}
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   generateBucketName: {{ .bucket.name }}

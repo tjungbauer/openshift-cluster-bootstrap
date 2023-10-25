@@ -1,0 +1,8 @@
+
+kind: Secret
+apiVersion: v1
+metadata:
+  name: logging-loki-s3
+  namespace: quay-enterprise
+stringData:
+  xxx: {{ (lookup "v1" "Secret" "quay-enterprise" "quay-bucket").data }}

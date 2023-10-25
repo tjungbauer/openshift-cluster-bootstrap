@@ -1,7 +1,12 @@
 ---
 
-quay_registry:
+quay:
   enabled: true
+
+  namespace:
+    create: true
+    name: quay-enterprise
+    syncwave: 1
 
   # Bucket that shall be created
   bucket:
@@ -12,18 +17,18 @@ quay_registry:
     storageclass: openshift-storage.noobaa.io
 
     # Syncwave for bucketclaim creation. This should be done very early, but it depends on ODF.
-    # Default: 1
-    syncwave: 1
+    # Default: 2
+    syncwave: 2
 
 
-quay:
+quay_deprecated:
   enabled: false
   config_bundle: config-bundle-secret
   syncwave: 5
   public_route: quay.apps.chvk8mgmt.lonzagroup.net
 
   namespace:
-    create: true
+    create: false
     name: quay-enterprise
     syncwave: 1
 
