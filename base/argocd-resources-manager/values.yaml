@@ -463,34 +463,6 @@ applicationsets:
 #        helm:
 #          default_values_file: $values/clusters/management-cluster/quay-registry/values.yaml
 
-  # Install OpenShift Logging
-  install-openshift-logging:
-    enabled: true
-    description: "Deploy and Configure OpenShift Logging"
-    labels:
-      category: logging
-    helm:
-      per_cluster_helm_values: true
-    path: clusters/all/clusterLogging
-    # omitClustername: true
-    generatorclusters: []
-    syncPolicy:
-      autosync_enabled: false
-
-#  # Configure Allowed Registries
-#  configure-allowed-registries:
-#    enabled: true
-#    description: "Configure Registries which are allowed"
-#    labels:
-#      category: security
-#    helm:
-#      per_cluster_helm_values: true
-#    path: clusters/all/allowed_registries
-#    # omitClustername: true
-#    generatorclusters: []
-#    syncPolicy:
-#      autosync_enabled: false
-
 
   # Install Vault-Config-Operator
   install-vault-config-operator:
@@ -593,23 +565,6 @@ applicationsets:
     path: charts/pipeline-example/
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
-
-#  # Install ODF
-#  odf:
-#    enabled: true
-#    description: "Deploy Open Data Foundation Operator"
-#    labels:
-#      category: storage
-#    helm:
-#      per_cluster_helm_values: false
-#    generatorlist:
-#      - clustername: *mgmtclustername
-#        clusterurl: *mgmtcluster
-#    syncPolicy:
-#      autosync_enabled: false
-#    path: charts/openshift-data-foundation
-#    repourl: "https://github.com/tjungbauer/helm-charts"
-#    targetrevision: "main"
 
   install_kyverno:
     enabled: true

@@ -6,6 +6,23 @@ openshift-logging:
   elasticsearch: &es false
   lokistack: &loki true
 
+  # Vector is not enabled by default. Enable it with this parameter.
+  vector: true
+
+  loggingConfig:
+    enabled: true
+    syncwave: '3'
+    # Only for Elasticsearch
+#    es:
+#      nodes: 1
+#      storageclass: gp2
+#      storagesize: 200G
+#      limits:
+#        mem: 16Gi
+#      requests:
+#        mem: 8Gi  # For Demo environments, I do not have so big machines :)
+#      redundancyPolicy: ZeroRedundancy
+
   # sub subchart
   helper-operator:
     operators:
