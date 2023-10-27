@@ -8,7 +8,7 @@ storagecluster:
   # There are two options:
   # Either install the multigateway only. This is useful if you just need S3 for Quay registry for example.
   multigateway_only:
-    enabled: false
+    enabled: true
 
     # Name of the stroageclass
     # The class must exist upfront and is currently not created by this chart.
@@ -16,7 +16,7 @@ storagecluster:
 
   # Second option is a full deployment, which will provide Block, File and Object Storage
   full_deployment:
-    enabled: true
+    enabled: false
 
     # Enable NFS or not
     nfs: enabled
