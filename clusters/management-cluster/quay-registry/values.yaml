@@ -55,8 +55,8 @@ quay-registry-setup:
           replicas: 1
   
     job_init_quay:
-      enabled: false
-      syncwave: 5
+      enabled: true
+      syncwave: 200
       serviceAccount: quay-initiator
 
 # Install Quay Operator
