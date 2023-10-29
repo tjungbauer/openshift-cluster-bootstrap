@@ -27,6 +27,7 @@ quay-registry-setup:
   quay:
     enabled: true
     syncwave: 10
+    config_bundle: quay-generated-configuration
 
     namespace:
       create: true
