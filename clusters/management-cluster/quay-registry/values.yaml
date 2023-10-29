@@ -18,51 +18,45 @@ quay:
     # Syncwave for bucketclaim creation. This should be done very early, but it depends on ODF.
     # Default: 2
     syncwave: 2
+  
+  create_config_secret:
+    enabled: true
+    syncwave: 3
 
 quay-registry-setup:
   quay:
+    enabled: true
+    syncwave: 10
+
     namespace:
       create: true
       name: *namespace
       syncwave: 1
 
-quay_deprecated:
-  enabled: false
-  config_bundle: config-bundle-secret
-  syncwave: 5
-  public_route: quay.apps.chvk8mgmt.lonzagroup.net
-
-  namespace:
-    create: false
-    name: quay-enterprise
-    syncwave: 1
-
-  components:
-    clair:
-      overrides:
-        replicas: 1
-    clairpostgres: {}
-    objectstore:
-      managed: "flase"
-    redis: {}
-    hpa:
-      managed: "false"
-    route: {}
-    mirror:
-      overrides:
-        replicas: 1
-    monitoring: {}
-    tls:
-      managed: "false"
-    postgres: {}
-    quay:
-      overrides:
-        replicas: 1
-
-  job_init_quay:
-    enabled: false
-    syncwave: 5
-    serviceAccount: quay-initiator
+    components:
+      clair:
+        overrides:
+          replicas: 1
+      clairpostgres: {}
+      objectstore:
+        managed: "false"
+      redis: {}
+      hpa:
+        managed: "false"
+      route: {}
+      mirror:
+        managed: "false"
+      monitoring: {}
+      tls: {}
+      postgres: {}
+      quay:
+        overrides:
+          replicas: 1
+  
+    job_init_quay:
+      enabled: false
+      syncwave: 5
+      serviceAccount: quay-initiator
 
 # Install Quay Operator
 # Deploys Operator --> Subscription and Operatorgroup
