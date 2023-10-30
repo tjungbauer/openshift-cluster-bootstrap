@@ -286,7 +286,7 @@ quay:
     # Default: Red Hat Quay
     # registry_title: Red Hat Quay
 
-    # If specified, the short-form title for the registry. Title is displayed on various pages of your organization, 
+    # If specified, the short-form title for the registry. Title is displayed on various pages of your organization,
     # for example, as the title of the tutorial on your organization’s Tutorial page.
     # Default: Red Hat Quay
     # registry_title_short: Red Hat Quay
