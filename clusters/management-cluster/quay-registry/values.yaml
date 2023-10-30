@@ -73,7 +73,7 @@ quay:
       # To create the first user, users need to set the FEATURE_USER_INITIALIZE parameter to true
       # Default: false
       user_initialize: true
-      
+
       # Enabling log rotation and archival will move all logs older than 30 days to storage.
       # Default: false
       # action_log_rotation: false
@@ -89,176 +89,176 @@ quay:
       # When set, allows users to try the beta UI environment.
       # Default: true
       # ui_v2: false
- 
+
       # If enabled, users can create tokens for use by the Docker CLI
       # Default: true
       # app_specific_tokens: true
-  
+
       # Whether to support Bitbucket build triggers.
       # Default: false
       # bitbucket_build: false
-  
+
       # If set to true, no new User accounts may be created if their email domain is blacklisted
       # Default: false
       # blacklisted_emails: false
-  
+
       # Whether to support Dockerfile build.
       # Default: false
       # build_support: false
-  
+
       # Whether users and organizations are allowed to change the tag expiration for tags in their namespace.
       # Default: true
       # change_tag_expiration: true
-  
+
       # Whether users can directly login to the UI
       # Default: true
       # direct_login: true
-  
+
       # Enable support for nested repositories
       # Default: true
       # extended_repository_names: true
-  
+
       # If set to true, Red Hat Quay will run using FIPS-compliant hash functions
       # Default: false
       # fips: false
-  
+
       # Whether garbage collection of repositories is enabled.
       # Default: true
       # garbage_collection: true
-  
+
       # Enable support for OCI artifacts.
       # Default: true
       # general_oci_support: true
-  
+
       # Whether to support GitHub build triggers.
       # Default: false
       # github_build: false
-  
+
       # Whether GitHub login is supported
       # Default: false
       # github_login: false
-  
+
       # Whether to support GitLab build triggers.
       # Default: false
       # gitlab_build: false
-  
+
       # Whether Google login is supported.
       # Default: false
       # google_login: false
-  
+
       # Enable support for Helm artifacts.
       # Default: false
       helm_oci_support: true
-  
+
       # Whethe users being created must be invited by another user
       # Default: false
       # invite_only_user_creation: false
-  
+
       # Whether to allow for "namespace-less" repositories when pulling and pushing from Docker
       # Default: true
       # library_support: true
-  
+
       # Whether to allow exporting of action logs.
       # Default: true
       # log_export: true
-  
+
       # Whether emails are enabled
       # Default: false
       # mailing: false
-  
+
       # If enabled, non-superusers can setup syncing on teams using LDAP.
       # Default: false
       # nonsuperuser_team_syncing_setup: false
-  
+
       # If set to true, autocompletion will apply to partial usernames
       # Default: true
       # partial_user_autocomplete: true
-  
+
       # Whether to proxy all direct download URLs in storage through NGINX.
       # Default: false
       proxy_storage: true
-  
+
       # If set to true, the _catalog endpoint returns public repositories. Otherwise, only private repositories can be returned.
       # Default: false
       # public_catalog: false
-  
+
       # Enables configuration, caching, and validation for quota management feature.
       # Default: false
       # quota_management: false
-  
+
       # Whether to enable rate limits on API and registry endpoints. Setting FEATURE_RATE_LIMITS to true causes nginx to 
       # limit certain API calls to 30 per second. If that feature is not set, API calls are limited to 300 per second (effectively unlimited).
       # Default: false
       # rate_limits: false
-  
+
       # If set to true, build logs can be read by those with read access to the repository, rather than only write access or admin access.
       # Default: false
       # reader_build_logs: false
-  
+
       # Whether Recaptcha is necessary for user login and recovery
       # Default: false
       # recaptcha: false
-  
+
       # If set to true, enables repository mirroring.
       # Default: true
       # repo_mirror: true
-  
+
       # If set to true, only namespaces listed in V1_PUSH_WHITELIST support V1 push
       # Default: true
       # restricted_v1_push: true
-  
+
       # If the security scanner is enabled, turn on or turn off security notifications
       # Default: false
       security_notifications: true
-  
+
       # Whether to automatically replicate between storage engines.
       # Default: false
       # storage_replication: false
-  
+
       # Whether superusers are supported
       # Default: true
       # super_users: true
-  
+
       # Whether to allow for team membership to be synced from a backing group in the authentication engine (LDAP or Keystone).
       # Default: true
       # team_syncing: true
-  
+
       # When set, allows users to try the beta UI environment.
       # Default: true
       # ui_v2: true
-  
+
       # Enables repository settings in the beta UI Environment
       # Default: false
       # ui_v2_repo_settings: false
-  
+
       # Whether users can be created (by non-superusers)
       # Default: true
       user_creation: false
-  
+
       # Whether to record the last time a user was accessed
       # Default: true
       # user_last_accessed: true
-  
+
       # If set to true, users will have access to audit logs for their namespace
       # Default: false
       # user_log_access: false
-  
+
       # Whether to collect and support user metadata
       # Default: false
       # user_metadata: false
-  
+
       # If set to true, users can rename their own namespace
       # Default: false
       # user_rename: false
-  
+
       # If set to true, users can confirm and modify their initial usernames when logging in via OpenID Connect (OIDC) or a non-database internal authentication provider like LDAP.
       # Default: true
       username_confirmation: false
-  
+
       # Whether garbage collection is enabled for repositories.
       # Defaults to true.
       # repository_garbage_collection: true
-  
+
       # Whether to support signing
       # Default: false
       # signing: false
