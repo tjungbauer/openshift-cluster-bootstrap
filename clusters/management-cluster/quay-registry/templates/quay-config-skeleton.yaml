@@ -15,7 +15,7 @@ data:
     BROWSER_API_CALLS_XHR_ONLY: {{ .browser_api_calls_xhr_only | quote | default "false" | trimAll "\"" }}
     CREATE_PRIVATE_REPO_ON_PUSH: {{ .create_private_repo_on_push | quote | default "true" | trimAll "\"" }}
     DEFAULT_SYSTEM_REJECT_QUOTA_BYTES: {{ .default_system_reject_quota_bytes | quote | default "1.073741824e+11" | trimAll "\"" }}
-    DEFAULT_TAG_EXPIRATION: {{ .default_tag_expiration | quote | default "20w" | trimAll "\"" }}
+    DEFAULT_TAG_EXPIRATION: {{ .default_tag_expiration | quote | default "2w" | trimAll "\"" }}
     DISTRIBUTED_STORAGE_CONFIG:
         default:
             - RadosGWStorage
