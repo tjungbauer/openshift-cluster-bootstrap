@@ -186,7 +186,7 @@ quay:
       # Default: false
       # quota_management: false
 
-      # Whether to enable rate limits on API and registry endpoints. Setting FEATURE_RATE_LIMITS to true causes nginx to 
+      # Whether to enable rate limits on API and registry endpoints. Setting FEATURE_RATE_LIMITS to true causes nginx to
       # limit certain API calls to 30 per second. If that feature is not set, API calls are limited to 300 per second (effectively unlimited).
       # Default: false
       # rate_limits: false
@@ -272,7 +272,7 @@ quay:
     # Default: 20G
     # maximum_layer_size: 20G
 
-    # One of http or https. Note that users only set their PREFERRED_URL_SCHEME to http 
+    # One of http or https. Note that users only set their PREFERRED_URL_SCHEME to http
     # when there is no TLS encryption in the communication path from the client to Quay.
     # Default: http
     preferred_url_scheme: https
@@ -281,7 +281,7 @@ quay:
     # Either: normal or read-only
     # registry_state: normal
 
-    # If specified, the long-form title for the registry. Displayed in frontend of your Red Hat Quay deployment, 
+    # If specified, the long-form title for the registry. Displayed in frontend of your Red Hat Quay deployment,
     # for example, at the sign in page of your organization. Should not exceed 35 characters.
     # Default: Red Hat Quay
     # registry_title: Red Hat Quay
@@ -316,7 +316,7 @@ quay:
     # Default: false
     # session_cookie_secure: false
 
-    # If specified, nginx is configured to enabled a list of SSL protocols defined in the list. 
+    # If specified, nginx is configured to enabled a list of SSL protocols defined in the list.
     # Removing an SSL protocol from the list disables the protocol during Red Hat Quay startup.
     # ['TLSv1','TLSv1.1','TLSv1.2', `TLSv1.3]
     # Default: TLSv1.3
@@ -354,7 +354,7 @@ quay:
     # If enabled, the options that users can select for expiration of tags in their namespace.
     # ^[0-9]+(w|m|d|h|s)$
     #
-    # Default: 
+    # Default:
     #  - 0s
     #  - 1d
     #  - 1w
@@ -372,7 +372,7 @@ quay:
     # Default: 2w
     # default_tag_expiration: 2w
 
-    # If true, pulls will still succeed even if the pull audit log entry cannot be written . 
+    # If true, pulls will still succeed even if the pull audit log entry cannot be written.
     # This is useful if the database is in a read-only state and it is desired for pulls to continue during that time.
     # Default: false
     # allow_pulls_without_strict_logging: false
