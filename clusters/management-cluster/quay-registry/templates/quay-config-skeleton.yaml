@@ -124,6 +124,8 @@ data:
         - 2w
         - 4w
     TEAM_RESYNC_STALE_TIME: 60m
+    SUPER_USERS:
+     -  admin
     TEAM_SYNC_WORKER_FREQUENCY: 60
     TESTING: false
     USER_RECOVERY_TOKEN_LIFETIME: 30m
