@@ -7,6 +7,12 @@ quay:
   namespace:
     name: *namespace
 
+  # Creating initial admin account.
+  # The password for this user will be GENERATED and can be found in the secret "init-user"
+  init_user:
+    username: admin2
+    mail: test@test.com
+
   # Bucket that shall be created
   bucket:
     name: quay-bucket
