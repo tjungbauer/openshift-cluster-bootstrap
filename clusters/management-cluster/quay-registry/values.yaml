@@ -28,7 +28,7 @@ quay:
     # Syncwave for bucketclaim creation. This should be done very early, but it depends on ODF.
     # Default: 2
     syncwave: 2
-  
+
   create_config_secret:
     enabled: true
     syncwave: 3
@@ -64,7 +64,7 @@ quay-registry-setup:
       quay:
         overrides:
           replicas: 1
-  
+
     job_init_quay:
       enabled: true
       syncwave: 200
