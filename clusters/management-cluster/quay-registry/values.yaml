@@ -1,5 +1,6 @@
 ---
 quay_namespace: &namespace quay-enterprise
+quay_route: &publicroute quay-registry-quay-quay-enterprise.apps.ocp.aws.ispworld.at
 
 quay:
   enabled: true
@@ -9,8 +10,11 @@ quay:
 
   # Creating initial admin account.
   # The password for this user will be GENERATED and can be found in the secret "init-user"
+  # Defaults for username and mail:
+  #   - username: admin
+  #   - mail: admin@company.com
   init_user:
-    username: admin2
+    username: admin
     mail: test@test.com
 
   # Bucket that shall be created
@@ -34,6 +38,7 @@ quay-registry-setup:
     enabled: true
     syncwave: 10
     config_bundle: quay-generated-configuration
+    public_route: *publicroute
 
     namespace:
       create: true
