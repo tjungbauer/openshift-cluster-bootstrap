@@ -70,6 +70,14 @@ applicationsets:
     syncPolicy:
       autosync_enabled: false
 
+    # Ignore specific differences in obhects. For example: the randomly generated password string in the secret for Quay.
+    ignoreDifferences:
+      - kind: Secret
+        jsonPointers:
+          - /data/password
+        name: init-user
+        namespace: quay-enterprise
+
   ################################
   # END MATRIX GENERATOR EXAMPLE #
   ################################

@@ -75,12 +75,6 @@ function deploy() {
     echo "Let's continue"
     #sleep $TIMER
 
-#    printf "\n%bWaiting for operator to start. Checking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
-#    until oc get deployment gitops-operator-controller-manager -n openshift-operators
-#    do
-#      sleep $RECHECK_TIMER;
-#    done
-
     printf "\n%bWaiting for openshift-gitops namespace to be created. Checking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
     until oc get ns openshift-gitops
     do
@@ -104,9 +98,9 @@ function deploy() {
 
   deploy_app_of_apps
 
-  install_sealed_secrets
+  # install_sealed_secrets
 
-  install_vault
+  # install_vault
 
   printf "\n%bNow use ArgoCD to deploy sealed-secret or HashiCorp Vault%b\n" "${GREEN}" "${NC}"
 
