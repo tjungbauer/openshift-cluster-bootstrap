@@ -98,10 +98,6 @@ function deploy() {
 
   deploy_app_of_apps
 
-  # install_sealed_secrets
-
-  # install_vault
-
   printf "\n%bNow use ArgoCD to deploy sealed-secret or HashiCorp Vault%b\n" "${GREEN}" "${NC}"
 
 }
@@ -144,39 +140,6 @@ function patch_argocd() {
 function deploy_app_of_apps() {
 
   $HELM upgrade --install --values ./base/init_app_of_apps/values.yaml --namespace=openshift-gitops app-of-apps ./base/init_app_of_apps
-
-}
-
-# Deploy Sealed Secrets if selected
-function install_sealed_secrets() {
-  printf "\n%bDeploy Sealed Secrets Application into ArgoCD%b\n" "${RED}" "${NC}" 
-  printf "\nCreating Secret in OpenShift for Sealed Secrets Helm Repository (charts.stderr.at)\n"
-  oc create --dry-run=client secret generic repo-bitnami-sealed-secrets \
-  --from-literal=name="Sealed Secrets Helm repo" \
-  --from-literal=project=default \
-  --from-literal=type=helm \
-  --from-literal=url="https://charts.stderr.at/" \
-  -o yaml | oc apply --namespace openshift-gitops -f -
-
-  printf "\nLabel Secret\n"
-  oc label secret repo-bitnami-sealed-secrets -n openshift-gitops --overwrite=true "argocd.argoproj.io/secret-type=repository"
-}
-
-# Deploy Hashicorp Vault if selected
-function install_vault() {
-
-  printf "\n%bDeploy Hashicorp Vault Application into ArgoCD%b\n" "${RED}" "${NC}"
-  
-  printf "\nCreating Secret for HashiCorp's Vault Helm Repository\n"
-  oc create --dry-run=client secret generic repo-hashicorp-vault \
-  --from-literal=name="HashiCorp Vault Helm repo" \
-  --from-literal=project=default \
-  --from-literal=type=helm \
-  --from-literal=url="https://helm.releases.hashicorp.com" \
-  -o yaml | oc apply --namespace openshift-gitops -f -
-
-  printf "\nLabel Secret\n"
-  oc label secret repo-hashicorp-vault -n openshift-gitops --overwrite=true "argocd.argoproj.io/secret-type=repository"
 
 }
 
