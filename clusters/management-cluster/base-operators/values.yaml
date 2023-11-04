@@ -6,7 +6,6 @@ logging: &channel-logging stable
 netobserv: &channel-netobserv stable
 cert-utils: &channel-cert-utils alpha
 cert-manager: &channel-cert-manager stable-v1.12
-quay: &channel-quay stable-3.9
 odf: &channel-odf stable-4.13
 
 # The sub-chart helper-operator performs the actual isntallation of the operator.
@@ -15,7 +14,6 @@ helper-operator:
   # Enable the Console Plugins for the following Operators
   console_plugins:
     - logging-view-plugin
-    - odf-console
     - netobserv-plugin
 
   operators:

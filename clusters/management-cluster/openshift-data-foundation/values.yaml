@@ -108,6 +108,10 @@ storagecluster:
 # Deploys Operator --> Subscription and Operatorgroup
 # Syncwave: 0
 helper-operator:
+
+  console_plugins:
+    - odf-console
+
   operators:
     odf-operator:
       enabled: true
