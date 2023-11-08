@@ -23,17 +23,6 @@ function add_helm_repo() {
 
 }
 
-function check_channel() {
-  printf "\nWhich channel do you want to use? stable or latest?\n\n"
-  printf "Press 1 or 2\n"
-  select sl in "Stable" "Latest"; do
-    case $sl in
-        Stable ) echo "Starting Deployment using STABLE channel"; deploy "stable"; break;;
-        Latest ) echo "Starting Deployment using LATEST channel"; deploy "latest"; break;;
-    esac
-  done
-}
-
 # check if operator is already installed
 function check_op_status() {
   get_status=`oc get subscription.operators.coreos.com/openshift-gitops-operator -n openshift-operators -o jsonpath='{.status.conditions[0].reason}'`
@@ -146,5 +135,4 @@ function deploy_app_of_apps() {
 $HELM >/dev/null 2>&1 || error "Could not execute helm binary!"
 
 # Let's deploy "latest" from now on, since this is the new channel to use
-# check_channel
 deploy "latest"
