@@ -424,23 +424,23 @@ applicationsets:
       autosync_enabled: false
     targetrevision: "main"
 
-  # init ACM
-  init-rhacm:
-    enabled: true
-    description: "Initialize and deploy Red Hat Advanced Cluster Management"
-    labels:
-      category: security
-      solution: rhacm
-    helm:
-      per_cluster_helm_values: false
-    path: charts/rhacm-setup
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    syncPolicy:
-      autosync_enabled: false
-    repourl: "https://github.com/tjungbauer/helm-charts"
-    targetrevision: "main"
+#  # init ACM
+#  init-rhacm:
+#    enabled: true
+#    description: "Initialize and deploy Red Hat Advanced Cluster Management"
+#    labels:
+#      category: security
+#      solution: rhacm
+#    helm:
+#      per_cluster_helm_values: false
+#    path: charts/rhacm-setup
+#    generatorlist:
+#      - clustername: *mgmtclustername
+#        clusterurl: *mgmtcluster
+#    syncPolicy:
+#      autosync_enabled: false
+#    repourl: "https://github.com/tjungbauer/helm-charts"
+#    targetrevision: "main"
 
 #  # Install ACS
 #  init-rhacs:
