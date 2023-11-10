@@ -31,7 +31,7 @@ applications:
         - name: ApplyOutOfSyncOnly
           value: true
     source:
-      path: clusters/management-cluster/waves/sec-tools/allowed-registries
+      path: clusters/management-cluster/waves/sec-tools/allowed_registries
 
   wave-10-sec-compliance-in-cluster:
     enabled: true
