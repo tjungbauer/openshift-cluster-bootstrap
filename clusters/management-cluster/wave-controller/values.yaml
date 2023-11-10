@@ -32,4 +32,3 @@ helper-argocd:
         path: gitops-waves/waves/wave-0-loki-operator
         # repourl: 'https://github.com/tjungbauer/test-app-of-apps'
         # targetrevision: main
-
