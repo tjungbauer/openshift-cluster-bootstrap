@@ -19,7 +19,7 @@ function add_helm_repo() {
 
   printf "\nAdding Helm Repo %s\n" "${HELM_CHARTS}"
   $HELM repo add --force-update tjungbauer ${HELM_CHARTS}
-  $HELM repo update
+  $HELM repo update > /dev/null
 
 }
 
@@ -50,19 +50,23 @@ function deploy() {
 
     add_helm_repo
 
-    $HELM upgrade --install --set 'gitops.subscription.channel='$1 --set 'gitops.enabled=true' --set 'gitops.clusterAdmin=true' --namespace=openshift-operators openshift-gitops-operator tjungbauer/openshift-gitops
+    oc adm new-project openshift-gitops-operator
+    $HELM upgrade --install \
+        --set 'gitops.subscription.channel='$1 \
+        --set 'gitops.enabled=true' \
+        --set 'gitops.clusterAdmin=true' \
+        --set 'gitops.namespace.name=openshift-gitops-operator' \
+        --create-namespace openshift-gitops-operator tjungbauer/openshift-gitops
 
     printf "\nGive the gitops-operator some time to be installed. %bWaiting for %s seconds...%b\n" "${RED}" "${TIMER}" "${NC}"
     TIMER_TMP=0
     while [[ $TIMER_TMP -le $TIMER ]]
       do 
-        #echo $TIMER_TMP
         echo -n "."
         sleep 1
         let "TIMER_TMP=TIMER_TMP+1"
       done
-    echo "Let's continue"
-    #sleep $TIMER
+    printf "\nLet's continue\n"
 
     printf "\n%bWaiting for openshift-gitops namespace to be created. Checking every %s seconds.%b\n" "${RED}" "${RECHECK_TIMER}" "${NC}"
     until oc get ns openshift-gitops
@@ -78,7 +82,7 @@ function deploy() {
 
   fi
 
-  echo "Waiting for all pods to be created"
+  printf "\nWaiting for all pods to be created"
   waiting_for_argocd_pods
 
   printf "%bGitOps Operator ready%b\n" "${GREEN}" "${NC}"
@@ -87,7 +91,7 @@ function deploy() {
 
   deploy_app_of_apps
 
-  printf "\n%bNow use ArgoCD to deploy sealed-secret or HashiCorp Vault%b\n" "${GREEN}" "${NC}"
+  printf "\n%bArgo CD for cluster configuration has been deployed. You can now use it to synchronize required configurations.%b\n" "${GREEN}" "${NC}"
 
 }
 
@@ -119,7 +123,7 @@ function patch_argocd() {
     sleep $RECHECK_TIMER
     waiting_for_argocd_pods
 
-    printf "%bGitOps Operator ready... again%b\n" "${GREEN}" "${NC}"
+    printf "%bGitOps Operator ready... again%b\n" "${GREEN}" "${NC}\n"
 
   fi
 
