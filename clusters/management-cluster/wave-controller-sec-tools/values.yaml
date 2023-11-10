@@ -25,7 +25,7 @@ applications:
     # project: default
     syncPolicy:
       autosync_enabled: true
-      syncpolicy_selfheal: false
+      syncpolicy_selfheal: true
 #       syncpolicy_prune: false
       syncOptions:
         - name: ApplyOutOfSyncOnly
@@ -43,7 +43,7 @@ applications:
     # project: default
     syncPolicy:
       autosync_enabled: true
-      syncpolicy_selfheal: false
+      syncpolicy_selfheal: true
 #       syncpolicy_prune: false
       syncOptions:
         - name: ApplyOutOfSyncOnly
@@ -59,7 +59,7 @@ applications:
     description: "Wave 20 installing and configuraing Advanced Cluster Security"
     syncPolicy:
       autosync_enabled: true
-      syncpolicy_selfheal: false
+      syncpolicy_selfheal: true
       syncOptions:
         - name: ApplyOutOfSyncOnly
           value: true
