@@ -3,7 +3,7 @@
 # WAVE CONTROLLER
 #
 # The purpose of this wave controller is to create an App-of-Apps
-# that is able to rollout specified Argo CD Application in (sync)waves. 
+# that is able to rollout specified Argo CD Application in (sync)waves.
 # This is currently not possible with ApplicationSet (end 2023)
 #
 # Applications that are dependent to each other, or form some kind of
