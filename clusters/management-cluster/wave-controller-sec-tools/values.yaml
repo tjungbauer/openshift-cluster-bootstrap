@@ -33,7 +33,7 @@ applications:
     source:
       path: clusters/management-cluster/waves/sec-tools/allowed-registries
 
-  wave-10-sec-tools-in-cluster:
+  wave-10-sec-compliance-in-cluster:
     enabled: true
     syncwave: '10'
     description: "Wave 10 installing and configuring the Compliance Operator"
@@ -49,10 +49,11 @@ applications:
         - name: ApplyOutOfSyncOnly
           value: true
     source:
-      path: charts/compliance-operator-full-stack
-      repourl: 'https://github.com/tjungbauer/helm-charts'
-      # targetrevision: main        
-  wave-20-sec-tools-in-cluster:
+      path: clusters/management-cluster/waves/sec-tools/setup-compliance-operator
+      # repourl: 'https://github.com/tjungbauer/helm-charts'
+      # targetrevision: main
+      
+  wave-20-sec-acs-in-cluster:
     enabled: true
     syncwave: '20'
     description: "Wave 20 installing and configuraing Advanced Cluster Security"
