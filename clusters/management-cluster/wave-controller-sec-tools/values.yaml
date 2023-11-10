@@ -52,7 +52,7 @@ applications:
       path: clusters/management-cluster/waves/sec-tools/setup-compliance-operator
       # repourl: 'https://github.com/tjungbauer/helm-charts'
       # targetrevision: main
-      
+
   wave-20-sec-acs-in-cluster:
     enabled: true
     syncwave: '20'
