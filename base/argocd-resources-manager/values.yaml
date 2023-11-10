@@ -59,6 +59,8 @@ applicationsets:
           - git:
               directories:
                 - path: clusters/management-cluster/*
+                - path: clusters/management-cluster/waves
+                  exclude: true
               repoURL: *repourl
               revision: *branch
           # List: simply define the targetCluster. The name of the cluster must be known by Argo CD
@@ -366,19 +368,19 @@ applicationsets:
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
 
-  # Compliance Scans should happen on ALL clusters
-  install_compliance_scans:
-    enabled: true
-    description: "Deploy and configure the Compliance Scan Operator"
-    labels:
-      category: security
-      solution: compliance
-    path: charts/compliance-operator-full-stack
-    generatorclusters: []
-    syncPolicy:
-      autosync_enabled: false  # should be disabled for operators
-    repourl: "https://github.com/tjungbauer/helm-charts"
-    targetrevision: "main"
+#  # Compliance Scans should happen on ALL clusters
+#  install_compliance_scans:
+#    enabled: true
+#    description: "Deploy and configure the Compliance Scan Operator"
+#    labels:
+#      category: security
+#      solution: compliance
+#    path: charts/compliance-operator-full-stack
+#    generatorclusters: []
+#    syncPolicy:
+#      autosync_enabled: false  # should be disabled for operators
+#    repourl: "https://github.com/tjungbauer/helm-charts"
+#    targetrevision: "main"
 
   # Install Container Security Operator
   install_container_security_operator:
