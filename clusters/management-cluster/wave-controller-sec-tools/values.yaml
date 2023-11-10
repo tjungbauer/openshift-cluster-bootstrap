@@ -38,7 +38,7 @@ helper-argocd:
 
     wave-2-sec-tools-in-cluster:
       enabled: true
-      syncwave: '1'
+      syncwave: '2'
       description: "Wave 2 installing and configuraing Advanced Cluster Security"
       syncPolicy:
         autosync_enabled: true
