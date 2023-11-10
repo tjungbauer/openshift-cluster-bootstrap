@@ -1,0 +1,30 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: fixed
+      description: Signing Chart
+    - kind: added
+      description: redefined the management operators that shall be installed.
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/signKey: |
+    fingerprint: B677CB52F8358FA091044E375D24D6846DBA8F8A
+    url: https://keys.openpgp.org/vks/v1/by-fingerprint/B677CB52F8358FA091044E375D24D6846DBA8F8A
+apiVersion: v2
+dependencies:
+- name: helper-operator
+  repository: https://charts.stderr.at/
+  version: ~1.0.18
+description: Collection of management Operators which are required as a dependency
+  for other services, such as Logging, Loki, NetObserv etc. It simply calls helper-operator
+  to deploy all required operators.
+home: https://github.com/tjungbauer/helm-charts/tree/main/charts/collection-management-operators
+icon: https://github.com/tjungbauer/helm-charts/raw/gh-pages/images/operatorframework-icon-color.png
+keywords:
+- operator
+- deployment
+maintainers:
+- email: tjungbau@redhat.com
+  name: tjungbauer
+name: collection-management-operators
+sources:
+- https://github.com/tjungbauer/helm-charts
+version: 1.0.31

@@ -1,0 +1,168 @@
+---
+
+# The sub-chart helper-operator performs the actual isntallation of the operator.
+helper-operator:
+
+  # enable Console Plugins. You need to know the name of it
+  # It will start a Job in openshift-gitops, that will enable the plugins
+  # console_plugins: []
+
+  operators:
+    #####################
+    # OpenShift Pipelines
+    #####################
+    # Name of the operator (This name will be used as name of the Application in Argo CD)
+    openshift-pipelines-operator-rh:
+      enabled: false
+      # Namespace where the operator shall be installed into
+      namespace:
+        name: openshift-operators
+        # Only create if it is a non-existing namespace. i.e. openshift-operators must not be created
+        create: false
+
+      # Information about the subscription
+      subscription:
+        # Version that shall be used
+        channel: latest
+        # Automatic of manual approval to update the Operator
+        # Default: Automatic
+        approval: Automatic
+        # The operator Name
+        operatorName: openshift-pipelines-operator-rh
+        # Source of the Operator
+        source: redhat-operators
+        # Source Namespace, typically openshift-marketplace
+        sourceNamespace: openshift-marketplace
+      # Crete an Operator group of not
+      operatorgroup:
+        create: false
+        # Watch own namespace or not.
+        # Only makes sense when operatorgroup is created
+        # AllNamespaces InstallModeType not supported, cannot configure to watch all namespaces
+        notownnamespace: true
+
+    #######
+    # Loki
+    #######
+    loki-operator:
+      enabled: false
+      namespace:
+        name: openshift-operators-redhat
+        create: true
+      subscription:
+        channel: stable
+        approval: Automatic
+        operatorName: loki-operator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+        notownnamespace: true
+
+    ####################
+    # OpenShift Logging
+    ####################
+    openshift-logging:
+      enabled: false
+      namespace:
+        name: openshift-logging
+        create: true
+      subscription:
+        channel: stable
+        approval: Automatic
+        operatorName: cluster-logging
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+        notownnamespace: false
+
+    ############
+    # NetObserv
+    ############
+    netobserv-operator:
+      enabled: false
+      namespace:
+        name: openshift-netobserv-operator
+        create: true
+      subscription:
+        channel: stable
+        approval: Automatic
+        operatorName: netobserv-operator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+        notownnamespace: true
+
+    ############
+    # Cert-Utils
+    ############
+    cert-utils-operator:
+      enabled: false
+      namespace:
+        name: cert-utils-operator
+        create: true
+      subscription:
+        channel: alpha
+        approval: Automatic
+        operatorName: cert-utils-operator
+        source: community-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+        notownnamespace: true
+
+    ##############
+    # Cert-Manager
+    ##############
+    openshift-cert-manager-operator:
+      enabled: false
+      namespace:
+        name: cert-manager-operator
+        create: true
+      subscription:
+        channel: stable-v1
+        approval: Automatic
+        operatorName: openshift-cert-manager-operator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+        notownnamespace: false
+
+    ###############
+    # Quay Registry
+    ###############
+    quay-operator:
+      enabled: false
+      namespace:
+        name: openshift-operators
+        create: false
+      subscription:
+        channel: stable-3.9
+        approval: Automatic
+        operatorName: quay-operator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: false
+        notownnamespace: true
+
+    ######################
+    # Open Data Foundation
+    ######################
+    odf-operator:
+      enabled: false
+      syncwave: '0'
+      namespace:
+        name: openshift-storage
+        create: true
+      subscription:
+        channel: stable-4.13
+        approval: Automatic
+        operatorName: odf-operator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
