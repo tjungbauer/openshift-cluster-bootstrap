@@ -15,7 +15,7 @@ general:
 
 # APPLICATIONS
 applications:
-  in-cluster-wave-1-sec-allowed-registries:
+  xin-cluster-wave-1-sec-allowed-registries:
     enabled: true
     syncwave: '1'
     description: "Wave 1 set allowed registries"
