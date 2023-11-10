@@ -1,58 +1,107 @@
 ---
-# General values
+#############################################################################
+# WAVE CONTROLLER
 #
+# The purpose of this wave controller is to create an App-of-Apps
+# that is able to rollout specified Argo CD Application in (sync)waves. 
+# This is currently not possible with ApplicationSet (end 2023)
+#
+# Applications that are dependent to each other, or form some kind of
+# group should be defined this was.
+#
+# In this example Secuity Tools are deployed in the following order:
+#    1. Configure Allowed Registries
+#    2. Deploy and configure Compliance Operator
+#    3. Deploy and configure Advanced Cluster Security
+#
+# The syntax to define the Applications, that shall be managed by
+# the App-of-Apps is defined in the helm chart "helper-argocd"
+#
+# NOTE: It makes sense that the managed Applications are automatically
+#       synced.
+#############################################################################
+
+
+# Anchors ... because I am lazy.
 mgmt-cluster: &mgmtcluster https://kubernetes.default.svc
-#repourl: &repourl 'https://github.com/tjungbauer/helm-charts'
 repourl: &repourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
 repobranch: &branch main
 
-
+# Generic default values, they might be overwritten in the Application specification
 general:
   source:
     repourl: *repourl
   branch: *branch
   server: *mgmtcluster
 
-# APPLICATIONS
+# Argo CD Applications
 applications:
+
+  # Name of the Application in Argo CD --> this key will be used as name
+  # WAVE 1: Allowed Registries
   wave-1-sec-allowed-registries-in-cluster:
+
+    # Enabled yes/no
     enabled: true
+
+    # Syncwave: Since we are working with Application dependencies, syncwaves are very important
+    # Default: 0
     syncwave: '1'
+
+    # Description of the Application
     description: "Wave 1 set allowed registries"
+
+    # Namespace for this Application
+    # Default: openshift-gitops
     # namespace:
     #   name: openshift-gitops
+
+    # Target service for this Application
+    # Default: in-cluster (local Argo CD)
     # server: *mgmtcluster
+
+    # Argo CD Project that should be used.
+    # Default: "default"
     # project: default
+
+    # SyncPolicies
     syncPolicy:
+      # Enable Automatic Sync
       autosync_enabled: true
+
+      # Enable Selfhealing
+      # Default: false
       syncpolicy_selfheal: true
-#       syncpolicy_prune: false
+
+      # Enable automatic pruning
+      # Default: false
+      # syncpolicy_prune: false
+
+      # Sync Options for this Application
       syncOptions:
         - name: ApplyOutOfSyncOnly
           value: true
+
+    # Source ... here only the path is defined, the rest is taken from the
+    # generic values defined at the top.
     source:
       path: clusters/management-cluster/waves/sec-tools/allowed_registries
 
+  # WAVE 10: Compliance Operator
   wave-10-sec-compliance-in-cluster:
     enabled: true
     syncwave: '10'
     description: "Wave 10 installing and configuring the Compliance Operator"
-    # namespace:
-    #   name: openshift-gitops
-    # server: *mgmtcluster
-    # project: default
     syncPolicy:
       autosync_enabled: true
       syncpolicy_selfheal: true
-#       syncpolicy_prune: false
       syncOptions:
         - name: ApplyOutOfSyncOnly
           value: true
     source:
       path: clusters/management-cluster/waves/sec-tools/setup-compliance-operator
-      # repourl: 'https://github.com/tjungbauer/helm-charts'
-      # targetrevision: main
 
+  # WAVE 20: Advanced Cluster Security
   wave-20-sec-acs-in-cluster:
     enabled: true
     syncwave: '20'
