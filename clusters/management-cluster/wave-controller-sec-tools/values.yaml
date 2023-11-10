@@ -6,67 +6,60 @@ mgmt-cluster: &mgmtcluster https://kubernetes.default.svc
 repourl: &repourl 'https://github.com/tjungbauer/openshift-cluster-bootstrap'
 repobranch: &branch main
 
-helper-argocd:
 
-  general:
+general:
+  source:
+    repourl: *repourl
+  branch: *branch
+  server: *mgmtcluster
+
+# APPLICATIONS
+applications:
+  wave-1-sec-tools-in-cluster:
+    enabled: true
+    syncwave: '1'
+    description: "Wave 1 set allowed registries"
+    # namespace:
+    #   name: openshift-gitops
+    # server: *mgmtcluster
+    # project: default
+    syncPolicy:
+      autosync_enabled: true
+      syncpolicy_selfheal: false
+#       syncpolicy_prune: false
+      syncOptions:
+        - name: ApplyOutOfSyncOnly
+          value: true
     source:
-      repourl: *repourl
-    branch: *branch
-    server: *mgmtcluster
-
-  # APPLICATIONS
-  applications:
-
-    wave-1-sec-tools-in-cluster:
-      enabled: true
-      syncwave: '1'
-      description: "Wave 1 set allowed registries"
-      # namespace:
-      #   name: openshift-gitops
-      # server: *mgmtcluster
-      # project: default
-      syncPolicy:
-        autosync_enabled: true
-        syncpolicy_selfheal: false
-#        syncpolicy_prune: false
-        syncOptions:
-          - name: ApplyOutOfSyncOnly
-            value: true
-      source:
-        path: clusters/management-cluster/waves/sec-tools/allowed-registries
-
-
-
-    wave-10-sec-tools-in-cluster:
-      enabled: true
-      syncwave: '10'
-      description: "Wave 10 installing and configuring the Compliance Operator"
-      # namespace:
-      #   name: openshift-gitops
-      # server: *mgmtcluster
-      # project: default
-      syncPolicy:
-        autosync_enabled: true
-        syncpolicy_selfheal: false
-#        syncpolicy_prune: false
-        syncOptions:
-          - name: ApplyOutOfSyncOnly
-            value: true
-      source:
-        path: charts/compliance-operator-full-stack
-        repourl: 'https://github.com/tjungbauer/helm-charts'
-        # targetrevision: main        
-
-    wave-20-sec-tools-in-cluster:
-      enabled: true
-      syncwave: '20'
-      description: "Wave 20 installing and configuraing Advanced Cluster Security"
-      syncPolicy:
-        autosync_enabled: true
-        syncpolicy_selfheal: false
-        syncOptions:
-          - name: ApplyOutOfSyncOnly
-            value: true
-      source:
-        path: clusters/management-cluster/waves/sec-tools/setup-acs
-
+      path: clusters/management-cluster/waves/sec-tools/allowed-registries
+  wave-10-sec-tools-in-cluster:
+    enabled: true
+    syncwave: '10'
+    description: "Wave 10 installing and configuring the Compliance Operator"
+    # namespace:
+    #   name: openshift-gitops
+    # server: *mgmtcluster
+    # project: default
+    syncPolicy:
+      autosync_enabled: true
+      syncpolicy_selfheal: false
+#       syncpolicy_prune: false
+      syncOptions:
+        - name: ApplyOutOfSyncOnly
+          value: true
+    source:
+      path: charts/compliance-operator-full-stack
+      repourl: 'https://github.com/tjungbauer/helm-charts'
+      # targetrevision: main        
+  wave-20-sec-tools-in-cluster:
+    enabled: true
+    syncwave: '20'
+    description: "Wave 20 installing and configuraing Advanced Cluster Security"
+    syncPolicy:
+      autosync_enabled: true
+      syncpolicy_selfheal: false
+      syncOptions:
+        - name: ApplyOutOfSyncOnly
+          value: true
+    source:
+      path: clusters/management-cluster/waves/sec-tools/setup-acs
