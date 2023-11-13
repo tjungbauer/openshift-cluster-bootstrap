@@ -368,20 +368,6 @@ applicationsets:
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
 
-#  # Compliance Scans should happen on ALL clusters
-#  install_compliance_scans:
-#    enabled: true
-#    description: "Deploy and configure the Compliance Scan Operator"
-#    labels:
-#      category: security
-#      solution: compliance
-#    path: charts/compliance-operator-full-stack
-#    generatorclusters: []
-#    syncPolicy:
-#      autosync_enabled: false  # should be disabled for operators
-#    repourl: "https://github.com/tjungbauer/helm-charts"
-#    targetrevision: "main"
-
   # Install Container Security Operator
   install_container_security_operator:
     enabled: true
@@ -425,42 +411,6 @@ applicationsets:
     syncPolicy:
       autosync_enabled: false
     targetrevision: "main"
-
-#  # init ACM
-#  init-rhacm:
-#    enabled: true
-#    description: "Initialize and deploy Red Hat Advanced Cluster Management"
-#    labels:
-#      category: security
-#      solution: rhacm
-#    helm:
-#      per_cluster_helm_values: false
-#    path: charts/rhacm-setup
-#    generatorlist:
-#      - clustername: *mgmtclustername
-#        clusterurl: *mgmtcluster
-#    syncPolicy:
-#      autosync_enabled: false
-#    repourl: "https://github.com/tjungbauer/helm-charts"
-#    targetrevision: "main"
-
-#  # Install ACS
-#  init-rhacs:
-#    enabled: true
-#    description: "Initialize Red Hat Advanced Cluster Security and deploy Central and SecuredCluster"
-#    labels:
-#      category: security
-#      solution: rhacs
-#    helm:
-#      per_cluster_helm_values: false
-#    generatorlist:
-#      - clustername: *mgmtclustername
-#        clusterurl: *mgmtcluster
-#    syncPolicy:
-#      autosync_enabled: false
-#    path: charts/rhacs-setup
-#    repourl: "https://github.com/tjungbauer/helm-charts"
-#    targetrevision: "main"
 
   # Install RHACS Demo
   rhacs-demo-app:
