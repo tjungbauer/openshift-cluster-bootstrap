@@ -1,0 +1,33 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: console-customizations
+placementBindingDefaults:
+  name: "placementbinding-console-customizations"
+policyDefaults:
+  namespace: policies-hub
+  consolidateManifests: false
+  categories:
+  - CM Configuration Management
+  controls:
+  - CM Console Customizations
+  standards:
+  - Baseline 2023v1
+  remediationAction: inform
+  complianceType: musthave
+  pruneObjectBehavior: "DeleteIfCreated"
+policies:
+
+- name: console-banner
+  manifests:
+  - path: console-banner/
+  remediationAction: enforce
+
+policySets:
+- name: "console-customizations"
+  description: "Contains console customizations"
+  policies:
+  - console-banner
+  placement:
+    placementPath: placement.yaml

@@ -1,0 +1,10 @@
+---
+# Black text
+- op: replace
+  path: /spec/color
+  value: '#000000'
+
+# Gray background
+- op: replace
+  path: /spec/backgroundColor
+  value: '#CCCCCC'
