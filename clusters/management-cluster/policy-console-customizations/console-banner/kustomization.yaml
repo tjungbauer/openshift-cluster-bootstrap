@@ -2,7 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ../base/console-customizations/console-banner/
+- ../../../../base/kustomize/console-customizations/console-banner/
 
 # Modify the colors
 patches:
@@ -10,5 +10,5 @@ patches:
   target:
     group: console.openshift.io
     kind: ConsoleNotification
-    name: home-banner
+    name: consolebanner
     version: v1
