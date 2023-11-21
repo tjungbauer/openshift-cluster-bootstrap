@@ -4,7 +4,7 @@ kind: ConsoleNotification
 metadata:
   name: consolebanner
 spec:
-  text: 'Name: {{ fromClusterClaim "name" }}, Environment: {{ if (fromClusterClaim "env") }}xxx{{ else }} Not Defined{{ end }}, Version: {{ fromClusterClaim "version.openshift.io" }}'
+  text: 'Name: {{ fromClusterClaim "name" }}, Environment: {{ if ne (fromClusterClaim "env") "" }}xxx{{ else }} Not Defined{{ end }}, Version: {{ fromClusterClaim "version.openshift.io" }}'
   location: BannerTop
   color: '#FFFFFF'
   backgroundColor: '#0066CC'
