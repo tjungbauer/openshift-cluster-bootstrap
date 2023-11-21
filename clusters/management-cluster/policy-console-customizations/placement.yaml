@@ -9,7 +9,7 @@ spec:
   - requiredClusterSelector:
       labelSelector:
         matchExpressions:
-        - key: env
+        - key: name
           operator: In
           values:
-          - hub
+          - local-cluster
