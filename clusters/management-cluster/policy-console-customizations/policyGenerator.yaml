@@ -24,10 +24,16 @@ policies:
   - path: console-banner/
   remediationAction: enforce
 
+- name: console-links
+  manifests:
+  - path: console-links/
+  remediationAction: enforce
+
 policySets:
 - name: "console-customizations"
   description: "Contains console customizations"
   policies:
   - console-banner
+  - console-links
   placement:
     placementPath: placement.yaml
