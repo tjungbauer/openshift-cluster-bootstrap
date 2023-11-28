@@ -37,3 +37,10 @@ policySets:
   - console-links
   placement:
     placementPath: placement.yaml
+- name: "console-customizationss"
+  description: "Contains console customizations"
+  policies:
+  - console-banner
+  - console-links
+  placement:
+    placementPath: placement.yaml
