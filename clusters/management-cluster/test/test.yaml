@@ -1,0 +1,360 @@
+
+---
+# Source: helm-policy-generator/templates/placement.yaml
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
+metadata:
+  name: console-plugins-placement
+  namespace: policies-hub
+  labels:
+    helm.sh/chart: helm-policy-generator-1.0.2
+    app.kubernetes.io/name: helm-policy-generator
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+spec:
+  predicates:
+  - requiredClusterSelector:
+      labelSelector:
+        matchExpressions:
+        - key: name
+          operator: In
+          values:
+          - local-cluster
+---
+# Source: helm-policy-generator/templates/placement.yaml
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
+metadata:
+  name: console-banner-placement
+  namespace: policies-hub
+  labels:
+    helm.sh/chart: helm-policy-generator-1.0.2
+    app.kubernetes.io/name: helm-policy-generator
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+spec:
+  predicates:
+  - requiredClusterSelector:
+      labelSelector:
+        matchExpressions:
+        - key: name
+          operator: In
+          values:
+          - local-cluster
+---
+# Source: helm-policy-generator/templates/placement.yaml
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
+metadata:
+  name: console-links-placement
+  namespace: policies-hub
+  labels:
+    helm.sh/chart: helm-policy-generator-1.0.2
+    app.kubernetes.io/name: helm-policy-generator
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+spec:
+  predicates:
+  - requiredClusterSelector:
+      labelSelector:
+        matchExpressions:
+        - key: name
+          operator: In
+          values:
+          - local-cluster
+---
+# Source: helm-policy-generator/templates/placementBinding.yaml
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: console-plugins-placementbinding
+  namespace: policies-hub
+  labels:
+    helm.sh/chart: helm-policy-generator-1.0.2
+    app.kubernetes.io/name: helm-policy-generator
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+placementRef:
+  apiGroup: cluster.open-cluster-management.io
+  kind: Placement
+  name: console-plugins-placement
+subjects:
+- apiGroup: policy.open-cluster-management.io
+  kind: PolicySet
+  name: console-customizations
+---
+# Source: helm-policy-generator/templates/placementBinding.yaml
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: console-banner-placementbinding
+  namespace: policies-hub
+  labels:
+    helm.sh/chart: helm-policy-generator-1.0.2
+    app.kubernetes.io/name: helm-policy-generator
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+placementRef:
+  apiGroup: cluster.open-cluster-management.io
+  kind: Placement
+  name: console-banner-placement
+subjects:
+- apiGroup: policy.open-cluster-management.io
+  kind: PolicySet
+  name: console-customizations
+---
+# Source: helm-policy-generator/templates/placementBinding.yaml
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: console-links-placementbinding
+  namespace: policies-hub
+  labels:
+    helm.sh/chart: helm-policy-generator-1.0.2
+    app.kubernetes.io/name: helm-policy-generator
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+placementRef:
+  apiGroup: cluster.open-cluster-management.io
+  kind: Placement
+  name: console-links-placement
+subjects:
+- apiGroup: policy.open-cluster-management.io
+  kind: PolicySet
+  name: console-customizations
+---
+# Source: helm-policy-generator/templates/policy.yaml
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  annotations:
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM Console Customizations
+    policy.open-cluster-management.io/standards: Baseline 2023v1
+    policy.open-cluster-management.io/description: Console Customizations
+  name: console-plugins
+  namespace: policies-hub
+  labels:
+    helm.sh/chart: helm-policy-generator-1.0.2
+    app.kubernetes.io/name: helm-policy-generator
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+spec:
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: console-plugins
+        spec:
+          object-templates:
+            - objectDefinition:              
+                apiVersion: operator.openshift.io/v1
+                kind: Console
+                metadata:
+                  name: cluster
+                spec:
+                  logLevel: Normal
+                  plugins:
+                  - acm
+                  - mce
+                  - odf-console
+                  - gitops-plugin
+                  - logging-view-plugin
+              complianceType: musthave 
+          pruneObjectBehavior: DeleteIfCreated
+          remediationAction: enforce
+          severity: low
+  remediationAction: enforce
+---
+# Source: helm-policy-generator/templates/policy.yaml
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  annotations:
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM Console Customizations
+    policy.open-cluster-management.io/standards: Baseline 2023v1
+    policy.open-cluster-management.io/description: Console Customizations
+  name: console-banner
+  namespace: policies-hub
+  labels:
+    helm.sh/chart: helm-policy-generator-1.0.2
+    app.kubernetes.io/name: helm-policy-generator
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+spec:
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: console-banner
+        spec:
+          object-templates:
+            - objectDefinition:              
+                apiVersion: console.openshift.io/v1
+                kind: ConsoleNotification
+                metadata:
+                  name: consolebanner
+                spec:
+                  backgroundColor: "#CCCCCC"
+                  color: "#000000"
+                  link:
+                    href: 'https://console.redhat.com/openshift/details/{{fromClusterClaim "id.openshift.io" }}'
+                    text: RedHat Console
+                  location: BannerTop
+                  text: 'Name: {{ fromClusterClaim "name" }}, Version: {{ fromClusterClaim "version.openshift.io"}}'
+              complianceType: musthave 
+          pruneObjectBehavior: DeleteIfCreated
+          remediationAction: enforce
+          severity: low
+  remediationAction: enforce
+---
+# Source: helm-policy-generator/templates/policy.yaml
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  annotations:
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM Console Customizations
+    policy.open-cluster-management.io/standards: Baseline 2023v1
+    policy.open-cluster-management.io/description: Console Customizations
+  name: console-links
+  namespace: policies-hub
+  labels:
+    helm.sh/chart: helm-policy-generator-1.0.2
+    app.kubernetes.io/name: helm-policy-generator
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+spec:
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: console-links-pot9
+        spec:
+          object-templates:
+            - objectDefinition:              
+                apiVersion: console.openshift.io/v1
+                kind: ConsoleLink
+                metadata:
+                  name: "namespacedlink-all-namespaces"
+                spec:
+                  text: "Report Violations"
+                  location: "NamespaceDashboard"
+                  href: "https://report"
+              complianceType: musthave 
+          pruneObjectBehavior: DeleteIfCreated
+          remediationAction: enforce
+          severity: low
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: console-links-fozv
+        spec:
+          object-templates:
+            - objectDefinition:              
+                apiVersion: console.openshift.io/v1
+                kind: ConsoleLink
+                metadata:
+                  name: "applicationlink"
+                spec:
+                  text: "Red Hat Subscription Management"
+                  location: "ApplicationMenu"
+                  href: "https://access.redhat.com/management"
+                  applicationMenu:
+                    section: "My Subscriptions"
+                    imageURL: "https://raw.githubusercontent.com/tjungbauer/helm-charts/gh-pages/images/configuration.png"
+              complianceType: musthave 
+          pruneObjectBehavior: DeleteIfCreated
+          remediationAction: enforce
+          severity: low
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: console-links-rdig
+        spec:
+          object-templates:
+            - objectDefinition:              
+                apiVersion: console.openshift.io/v1
+                kind: ConsoleLink
+                metadata:
+                  name: "helplink"
+                spec:
+                  text: "Red Hat CVE Database"
+                  location: "HelpMenu"
+                  href: "https://access.redhat.com/security/security-updates/#/cve"
+              complianceType: musthave 
+          pruneObjectBehavior: DeleteIfCreated
+          remediationAction: enforce
+          severity: low
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: console-links-3feo
+        spec:
+          object-templates:
+            - objectDefinition:              
+                apiVersion: console.openshift.io/v1
+                kind: ConsoleLink
+                metadata:
+                  name: "namespacedlink"
+                spec:
+                  text: "Link valid for selected namespace only"
+                  location: "NamespaceDashboard"
+                  href: "https://report"
+                  namespaceDashboard:
+                    namespaces:
+                      - default
+                      - openshift-gitops
+              complianceType: musthave 
+          pruneObjectBehavior: DeleteIfCreated
+          remediationAction: enforce
+          severity: low
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: console-links-prnn
+        spec:
+          object-templates:
+            - objectDefinition:              
+                apiVersion: console.openshift.io/v1
+                kind: ConsoleLink
+                metadata:
+                  name: "userlink"
+                spec:
+                  text: "Intranet"
+                  location: "UserMenu"
+                  href: "https://intranet"
+              complianceType: musthave 
+          pruneObjectBehavior: DeleteIfCreated
+          remediationAction: enforce
+          severity: low
+  remediationAction: enforce
+---
+# Source: helm-policy-generator/templates/policySet.yaml
+apiVersion: policy.open-cluster-management.io/v1beta1
+kind: PolicySet
+metadata:
+  name: console-customizations
+  namespace: policies-hub
+  labels:
+    helm.sh/chart: helm-policy-generator-1.0.2
+    app.kubernetes.io/name: helm-policy-generator
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/managed-by: Helm
+spec:
+  description: Contains console customizations
+  policies:
+  - console-plugins
+  - console-banner
+  - console-links
