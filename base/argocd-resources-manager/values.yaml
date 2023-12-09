@@ -381,22 +381,22 @@ applicationsets:
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
 
-  # Install Vault-Config-Operator
-  install-vault-config-operator:
-    enabled: false
-    description: "Deploy and Configure Vault-Config-Operator"
-    labels:
-      category: security
-      solution: vault
-    helm:
-      per_cluster_helm_values: false
-    path: clusters/management-cluster/vault-config
-    generatorlist:
-      - clustername: *mgmtclustername
-        clusterurl: *mgmtcluster
-    syncPolicy:
-      autosync_enabled: false
-    targetrevision: "main"
+#  # Install Vault-Config-Operator
+#  install-vault-config-operator:
+#    enabled: false
+#    description: "Deploy and Configure Vault-Config-Operator"
+#    labels:
+#      category: security
+#      solution: vault
+#    helm:
+#      per_cluster_helm_values: false
+#    path: clusters/management-cluster/vault-config
+#    generatorlist:
+#      - clustername: *mgmtclustername
+#        clusterurl: *mgmtcluster
+#    syncPolicy:
+#      autosync_enabled: false
+#    targetrevision: "main"
 
   # Install Cert-Manager and Cert-Utils Operators
   install-certificate-management:
@@ -447,35 +447,35 @@ applicationsets:
     repourl: "https://github.com/tjungbauer/helm-charts"
     targetrevision: "main"
 
-  install_kyverno:
-    enabled: true
-    description: "Deploy Kyverno"
-    namespace: kyverno
-    labels:
-      category: security
-    chartname: kyverno
-    helm:
-      per_cluster_helm_values: false
-      releasename: kyverno-policies
-      helmvalues:
-        - name: securityContext
-          value: null
-        - name: replicaCount
-          value: 3
-    syncPolicy:
-      autosync_enabled: false
-      # syncpolicy_prune: false
-      # syncpolicy_selfheal: false
-      syncOptions:
-        - name: CreateNamespace
-          value: true
-        - name: ServerSideApply
-          value: true
-        - name: Replace
-          value: true
-    generatorclusters: []
-    repourl: https://kyverno.github.io/kyverno
-    targetrevision: "2.6.1"
+#  install_kyverno:
+#    enabled: true
+#    description: "Deploy Kyverno"
+#    namespace: kyverno
+#    labels:
+#      category: security
+#    chartname: kyverno
+#    helm:
+#      per_cluster_helm_values: false
+#      releasename: kyverno-policies
+#      helmvalues:
+#        - name: securityContext
+#          value: null
+#        - name: replicaCount
+#          value: 3
+#    syncPolicy:
+#      autosync_enabled: false
+#      # syncpolicy_prune: false
+#      # syncpolicy_selfheal: false
+#      syncOptions:
+#        - name: CreateNamespace
+#          value: true
+#        - name: ServerSideApply
+#          value: true
+#        - name: Replace
+#          value: true
+#    generatorclusters: []
+#    repourl: https://kyverno.github.io/kyverno
+#    targetrevision: "2.6.1"
 
   sealed-secrets:
     enabled: true
