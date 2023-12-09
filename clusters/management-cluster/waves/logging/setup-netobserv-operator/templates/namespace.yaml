@@ -1,0 +1,15 @@
+---
+{{- if eq ( .Values.netobserv.enabled | toString) "true" }}
+{{- with .Values.netobserv }}
+{{- if eq ( .namespace.create | toString) "true" }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .namespace.name | quote }}
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    {{- include "common.labels" $ | nindent 4 }}
+{{- end }}
+{{- end }}
+{{- end }}

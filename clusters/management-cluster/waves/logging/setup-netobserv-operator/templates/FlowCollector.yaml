@@ -1,0 +1,77 @@
+{{- if eq ( .Values.netobserv.enabled | toString) "true" }}
+{{- with .Values.netobserv }}
+---
+apiVersion: flows.netobserv.io/v1beta1
+kind: FlowCollector
+metadata:
+  name: cluster
+  labels:
+    {{- include "common.labels" $ | nindent 4 }}
+  annotations:
+    argocd.argoproj.io/sync-wave: {{ .syncwave | default "5" | quote }}
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  namespace: {{ .namespace.name }}
+  deploymentModel: DIRECT
+  agent:
+    type: EBPF                                
+    ebpf:
+      sampling: 50                            
+      logLevel: info
+      privileged: false
+      resources:
+        requests:
+          memory: 50Mi
+          cpu: 100m
+        limits:
+          memory: 800Mi
+  processor:
+    logLevel: info
+    resources:
+      requests:
+        memory: 100Mi
+        cpu: 100m
+      limits:
+        memory: 800Mi
+    conversationEndTimeout: 10s
+    logTypes: FLOWS                            
+    conversationHeartbeatInterval: 30s
+  loki:                                       
+    url: 'https://{{ .lokistack.name }}-gateway-http.netobserv.svc:8080/api/logs/v1/network'
+    statusUrl: 'https://{{ .lokistack.name }}-query-frontend-http.netobserv.svc:3100/'
+    authToken: FORWARD
+    tls:
+      enable: true
+      caCert:
+        type: configmap
+        name: {{ .lokistack.name }}-gateway-ca-bundle
+        certFile: service-ca.crt
+        # namespace: loki-namespace
+  consolePlugin:
+    register: true
+    logLevel: info
+    portNaming:
+      enable: true
+      portNames:
+        "3100": loki
+    # standard filters
+    quickFilters:                             
+    - name: Applications
+      filter:
+        src_namespace!: 'openshift-,netobserv'
+        dst_namespace!: 'openshift-,netobserv'
+      default: true
+    - name: Infrastructure
+      filter:
+        src_namespace: 'openshift-,netobserv'
+        dst_namespace: 'openshift-,netobserv'
+    - name: Pods network
+      filter:
+        src_kind: 'Pod'
+        dst_kind: 'Pod'
+      default: true
+    - name: Services network
+      filter:
+        dst_kind: 'Service'
+{{- end }}
+{{- end }}
