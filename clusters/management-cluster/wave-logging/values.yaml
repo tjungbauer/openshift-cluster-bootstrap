@@ -66,7 +66,7 @@ applications:
     source:
       path: clusters/management-cluster/waves/logging/loki-operator
 
-  # WAVE 10: Compliance Operator
+  # WAVE 10: Logging Operator
   wave-10-openshift-logging-in-cluster:
     enabled: true
     syncwave: '10'
@@ -79,3 +79,17 @@ applications:
           value: true
     source:
       path: clusters/management-cluster/waves/logging/setup-openshift-logging
+
+  # WAVE 20: Network Observability Operator
+  wave-20-netobserv-operator-in-cluster:
+    enabled: true
+    syncwave: '20'
+    description: "Wave 20 installing and configuring the Network Observability Operator"
+    syncPolicy:
+      autosync_enabled: true
+      syncpolicy_selfheal: true
+      syncOptions:
+        - name: ApplyOutOfSyncOnly
+          value: true
+    source:
+      path: clusters/management-cluster/waves/logging/setup-netobserv-operator
