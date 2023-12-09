@@ -1,0 +1,26 @@
+---
+# Set channels/versions for the different operators
+loki: &channel-loki stable
+
+
+# The sub-chart helper-operator performs the actual isntallation of the operator.
+helper-operator:
+
+  operators:
+    #######
+    # Loki
+    #######
+    loki-operator:
+      enabled: true
+      namespace:
+        name: openshift-operators-redhat
+        create: true
+      subscription:
+        channel: *channel-loki
+        approval: Automatic
+        operatorName: loki-operator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+      operatorgroup:
+        create: true
+        notownnamespace: true
