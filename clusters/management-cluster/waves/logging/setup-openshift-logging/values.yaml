@@ -29,7 +29,7 @@ helper-loki-bucket-secret:
   # Namespace for logging
   namespace: *log-namespace
 
-  # Secretname that shall be created 
+  # Secretname that shall be created
   secretname: *loki-secret-name
 
   # Name of the bucket
@@ -39,8 +39,8 @@ helper-loki-bucket-secret:
 # Local values.
 logging:
   enabled: true
-  namespace: 
-    name: *log-namespace 
+  namespace:
+    name: *log-namespace
 
   # Bucket that shall be created
   bucket:
@@ -110,7 +110,7 @@ logging:
     #   - openshift-logging
     #   - openshift-network
     mode: openshift-logging
- 
+
  # subchart
 openshift-logging:
 

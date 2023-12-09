@@ -78,4 +78,4 @@ applications:
         - name: ApplyOutOfSyncOnly
           value: true
     source:
-      path: clusters/management-cluster/waves/logging/setup-openshift-operator
+      path: clusters/management-cluster/waves/logging/setup-openshift-logging
