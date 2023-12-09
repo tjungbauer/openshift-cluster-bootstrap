@@ -6,15 +6,15 @@ lokisecret: &loki-secret-name logging-loki-s3
 # The operators are installed in a separate way in this case.
 # sub subchart
 helper-operator:
-    console_plugins:
-      - logging-view-plugin
+  console_plugins:
+    - logging-view-plugin
 
-    operators:
-      cluster-logging-operator:
-        enabled: true
-        syncwave: '0'
-        subscription:
-          channel: stable
+  operators:
+    cluster-logging-operator:
+      enabled: true
+      syncwave: '0'
+      subscription:
+        channel: stable
 
 # SubChart to create the loki secret if required.
 # The Secret must contain all required bucket information, while ODF creates a secret and a configmap for example.
@@ -86,7 +86,7 @@ logging:
         #  - s3 (default)
         #  - alibabacloud
         #  - gcs
-        #type: s3
+        # type: s3
 
       # Schemas for reading and writing logs.
       # schemas:
