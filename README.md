@@ -1,6 +1,12 @@
-[![Linting](https://github.com/tjungbauer/openshift-cluster-bootstrap/actions/workflows/linting.yml/badge.svg)](https://github.com/tjungbauer/openshift-cluster-bootstrap/actions/workflows/linting.yml)
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
-# openshift-cluster-bootstrap
+
+# DEPRECATED 
+
+This repository was replaced by https://github.com/tjungbauer/openshift-clusterconfig-gitops please use the new repo.
+
+
+## openshift-cluster-bootstrap
 
 This repository demonstrate the usage of OpenShift-GitOps and a secrets manager like Sealed Secrets or Hashicorp Vault.  
 The focus lies on main cluster configuration.
